@@ -3,7 +3,7 @@ using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 15f;
+    [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 1.5f;
     [SerializeField] float _minLookAngle = -25f, _maxLookAngle = 40f;
     [SerializeField] float _modelRotateSpeed = 15f;
     [SerializeField] CharacterController _characterController;
