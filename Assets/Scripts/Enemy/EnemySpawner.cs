@@ -27,6 +27,10 @@ public class EnemySpawner : MonoBehaviour
             _spawnTimer -= Time.deltaTime;
             return;
         }
+        else
+        {
+            _spawnTimer = 0;
+        }
 
         if(_waves[_waveIndex].Enemies.Length < _enemyIndex)
         {
@@ -52,5 +56,11 @@ public class EnemySpawner : MonoBehaviour
                 _spawnTimer += Random.Range(_minSpawnTime, _maxSpawnTime);
             }
         }
+    }
+
+    public void BeginSpawning()
+    {
+        _enemyIndex = 0;
+        _isSpawning = true;
     }
 }
