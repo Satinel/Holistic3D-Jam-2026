@@ -9,7 +9,6 @@ public class Health : MonoBehaviour
     public event Action<Health> OnDeath;
     public event Action<int, int> OnHealthChanged;
 
-    [field:SerializeField] public Transform TargetPoint { get; private set; }
     [field:SerializeField] public Collider Collider { get; private set; }
     [field:SerializeField] public bool IsEnemy { get; private set; }
     [field:SerializeField] public bool IsPlayer { get; private set; }
