@@ -235,14 +235,9 @@ MonoBehaviour:
   - {fileID: 5327245957179508442}
   - {fileID: 5952620541440358417}
   - {fileID: 6347672809404365264}
-  _waypoints:
-  - {fileID: 3445227299789012267}
-  - {fileID: 1000745579974064127}
-  - {fileID: 6003432359895348982}
-  - {fileID: 6153126863085982228}
-  - {fileID: 2752144700717192230}
-  _minSpawnTime: 0.35
-  _maxSpawnTime: 0.85
+  _waypoints: []
+  _minSpawnTime: 0.75
+  _maxSpawnTime: 1.85
 --- !u!1 &5084439064697539088
 GameObject:
   m_ObjectHideFlags: 0

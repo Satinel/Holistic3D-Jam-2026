@@ -10,7 +10,8 @@ public class EnemySpawner : MonoBehaviour
     }
 
     [SerializeField] Wave[] _waves;
-    [SerializeField] Transform[] _spawnPoints, _waypoints;
+    [SerializeField] Transform[] _spawnPoints;
+    [SerializeField] Waypoint[] _waypoints;
     [SerializeField] float _minSpawnTime = 0.35f, _maxSpawnTime = 0.85f;
 
     int _waveIndex, _enemyIndex;
@@ -34,8 +35,8 @@ public class EnemySpawner : MonoBehaviour
 
         if(_enemyIndex < _waves[_waveIndex].Enemies.Length)
         {
-            Enemy enemy = Instantiate(_waves[_waveIndex].Enemies[_enemyIndex], _spawnPoints[Random.Range(0, _spawnPoints.Length)].position, Quaternion.identity, transform);
-            enemy.SetDestination(_waypoints[Random.Range(0, _waypoints.Length)]);   // TODO : _waypoints should be their own class which set the next waypoint when reached
+            Enemy enemy = Instantiate(_waves[_waveIndex].Enemies[_enemyIndex], _spawnPoints[Random.Range(0, _spawnPoints.Length)].position, transform.rotation, transform);
+            enemy.SetDestination(_waypoints[Random.Range(0, _waypoints.Length)].transform);
 
             _enemyIndex++;
 

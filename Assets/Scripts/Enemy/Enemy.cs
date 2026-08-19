@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f;
+    [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _deceleration = 5f, _turnSpeed = 7.5f;
     [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
     [SerializeField] Health _health;
     [SerializeField] Collider _mainCollider;
@@ -50,14 +50,27 @@ public class Enemy : MonoBehaviour
     {
         if(!_destination) { return; }
 
+        RotateTowardDestination();
+
+        float forwardVelocity = Vector3.Dot(_mainRigidbody.linearVelocity, transform.forward);
+
+        if(forwardVelocity < _moveSpeed)
+        {
+            _mainRigidbody.AddForce(transform.forward * _acceleration, ForceMode.Force);
+        }
+        else if(forwardVelocity > _moveSpeed)
+        {
+            _mainRigidbody.AddForce(-transform.forward * _deceleration, ForceMode.Force);
+        }
+    }
+
+    void RotateTowardDestination()
+    {
+        if(!_destination) { return; }
+
         Vector3 direction = _destination.position - transform.position;
         direction.y = 0;
-
         Vector3 rotationToFace = direction.normalized;
-        Vector3 velocity = rotationToFace * _moveSpeed;
-        Vector3 velocityChange = velocity - new Vector3(_mainRigidbody.linearVelocity.x, 0f, _mainRigidbody.linearVelocity.y);
-
-        _mainRigidbody.AddForce(velocityChange * _acceleration, ForceMode.Acceleration);
 
         if(rotationToFace.sqrMagnitude > 0.001f)
         {

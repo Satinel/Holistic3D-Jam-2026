@@ -9091,7 +9091,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _moveSpeed: 2.25
-  _acceleration: 3
+  _acceleration: 10
+  _deceleration: 5
   _turnSpeed: 7.5
   _ragdollRecoveryTime: 5
   _falloffFadeOut: 3
