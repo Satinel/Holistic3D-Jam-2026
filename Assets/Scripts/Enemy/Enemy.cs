@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f;
     [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
     [SerializeField] Health _health;
     [SerializeField] Collider _mainCollider;
     [SerializeField] Rigidbody _mainRigidbody;
     [SerializeField] Animator _animator;
 
+    [SerializeField] Rigidbody _ragdoll;
     [SerializeField] Rigidbody[] _rigidbodies;
     bool _isRagdolled;
     float _ragddollTimer, _ragdollDuration;
+    Transform _destination;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -25,7 +28,7 @@ public class Enemy : MonoBehaviour
         Ragdoll(collision.contacts[0], collision.relativeVelocity * mass);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(_health.IsDead) { return; }
 
@@ -36,6 +39,7 @@ public class Enemy : MonoBehaviour
             if(_ragddollTimer >= _ragdollDuration)
             {
                 RecoverFromRagdoll();
+                return;
             }
         }
 
@@ -44,7 +48,21 @@ public class Enemy : MonoBehaviour
 
     void Move()
     {
-        // TODO Move using _mainRigidbody
+        if(!_destination) { return; }
+
+        Vector3 direction = _destination.position - transform.position;
+        direction.y = 0;
+
+        Vector3 rotationToFace = direction.normalized;
+        Vector3 velocity = rotationToFace * _moveSpeed;
+        Vector3 velocityChange = velocity - new Vector3(_mainRigidbody.linearVelocity.x, 0f, _mainRigidbody.linearVelocity.y);
+
+        _mainRigidbody.AddForce(velocityChange * _acceleration, ForceMode.Acceleration);
+
+        if(rotationToFace.sqrMagnitude > 0.001f)
+        {
+            _mainRigidbody.MoveRotation(Quaternion.Slerp(_mainRigidbody.rotation, Quaternion.LookRotation(rotationToFace, Vector3.up), _turnSpeed * Time.deltaTime));
+        }
     }
 
     void Ragdoll(ContactPoint contactPoint, Vector3 force)
@@ -53,6 +71,8 @@ public class Enemy : MonoBehaviour
 
         _isRagdolled = true;
         _animator.enabled = false;
+        _mainCollider.enabled = false;
+        _mainRigidbody.isKinematic = true;
 
         Rigidbody closestBone = null;
         float smallestDistance = Mathf.Infinity;
@@ -82,14 +102,25 @@ public class Enemy : MonoBehaviour
 
     void RecoverFromRagdoll()
     {
+        Vector3 ragdollPosition = _ragdoll.position;
         foreach(Rigidbody rigidbody in _rigidbodies)
         {
             rigidbody.isKinematic = true;
         }
+        _mainRigidbody.position = ragdollPosition;
+        _mainCollider.enabled = true;
+        _mainRigidbody.isKinematic = false;
+
         _animator.enabled = true;
-        // TODO : Set to idle animation with a long blend (if possible) to hopefully have a somewhat natural standing up kind of animation
+        // TODO (but probably won't have time in a game jam) : Set to a stand up animation based on supine/prone position
+
         _isRagdolled = false;
         _ragdollDuration = 0;
         _ragddollTimer = 0;
+    }
+
+    public void SetDestination(Transform destination)
+    {
+        _destination = destination;
     }
 }

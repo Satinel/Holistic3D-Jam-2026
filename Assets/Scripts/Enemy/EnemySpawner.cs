@@ -10,12 +10,12 @@ public class EnemySpawner : MonoBehaviour
     }
 
     [SerializeField] Wave[] _waves;
-    [SerializeField] Transform[] _spawnPoints;
+    [SerializeField] Transform[] _spawnPoints, _waypoints;
     [SerializeField] float _minSpawnTime = 0.35f, _maxSpawnTime = 0.85f;
 
     int _waveIndex, _enemyIndex;
     float _spawnTimer = 1f;
-    bool _isSpawning, _isFinished;
+    bool _isSpawning =  true, _isFinished;
 
     void Update()
     {
@@ -32,18 +32,19 @@ public class EnemySpawner : MonoBehaviour
             _spawnTimer = 0;
         }
 
-        if(_waves[_waveIndex].Enemies.Length < _enemyIndex)
+        if(_enemyIndex < _waves[_waveIndex].Enemies.Length)
         {
             Enemy enemy = Instantiate(_waves[_waveIndex].Enemies[_enemyIndex], _spawnPoints[Random.Range(0, _spawnPoints.Length)].position, Quaternion.identity, transform);
-            // TODO : Initialize enemy
+            enemy.SetDestination(_waypoints[Random.Range(0, _waypoints.Length)]);   // TODO : _waypoints should be their own class which set the next waypoint when reached
 
             _enemyIndex++;
 
-            if(_waves[_waveIndex].Enemies.Length >= _enemyIndex)
+            if(_enemyIndex >= _waves[_waveIndex].Enemies.Length)
             {
-                _isSpawning = false;
+                // _isSpawning = false;
                 _enemyIndex = 0;
                 _waveIndex++;
+_spawnTimer = 30f;  // TODO : Player triggers the next wave through input when they choose
 
                 if(_waveIndex >= _waves.Length)
                 {
