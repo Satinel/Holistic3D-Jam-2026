@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [field:SerializeField] public int CoreValue { get; private set; } = 1;
+
     [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _deceleration = 5f, _turnSpeed = 7.5f;
     [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
     [SerializeField] Health _health;

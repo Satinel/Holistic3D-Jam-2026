@@ -1,0 +1,49 @@
+using System;
+using UnityEngine;
+
+public class Core : MonoBehaviour
+{
+    public static event Action<int> OnCoreValueChanged;
+    public static event Action OnCoreValueLowered;
+    public static event Action OnCoreDestroyed; // TODO : Something ends the level when this happens
+
+    [SerializeField] int _maxCharge;
+    [SerializeField] float _enemyDestructionDelay = 1.25f;
+    [SerializeField] Collider _collider;
+
+    int _currentCharge;
+    bool _coreDestroyed;
+
+    void Start()
+    {
+        _currentCharge = _maxCharge;
+        OnCoreValueChanged?.Invoke(_currentCharge);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(_coreDestroyed) { return; }
+
+        if(other.TryGetComponent(out Enemy enemy))
+        {
+            LowerCoreCharge(enemy.CoreValue);
+            Destroy(enemy.gameObject, _enemyDestructionDelay);
+        }
+    }
+
+    void LowerCoreCharge(int amount)    // TODO ? If the player can die, call this on player death with an amount of ~5
+    {
+            _currentCharge -= amount;
+            _currentCharge = _currentCharge < 0 ? 0 : _currentCharge;
+
+            OnCoreValueLowered?.Invoke();
+            OnCoreValueChanged?.Invoke(_currentCharge);
+
+            if(_currentCharge == 0)
+            {
+                _coreDestroyed = true;
+                _collider.isTrigger = false;
+                OnCoreDestroyed?.Invoke();
+            }
+    }
+}

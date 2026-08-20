@@ -9093,7 +9093,7 @@ MonoBehaviour:
   _moveSpeed: 2.25
   _acceleration: 10
   _deceleration: 5
-  _turnSpeed: 7.5
+  _turnSpeed: 2.5
   _ragdollRecoveryTime: 5
   _falloffFadeOut: 3
   _health: {fileID: 4128515336638853484}

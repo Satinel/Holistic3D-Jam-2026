@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerHUD : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText;
+    [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText, _coreText;
     [SerializeField] Slider _healthSlider, _manaSlider;
     [SerializeField] PlayerController _player;
     Health _playerHealth;
@@ -20,6 +20,7 @@ public class PlayerHUD : MonoBehaviour
         _playerHealth.OnHealthChanged += PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged += PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged += PlayerWallet_OnMoneyChanged;
+        Core.OnCoreValueChanged += Core_OnCoreValueChanged;
     }
 
     void OnDestroy()
@@ -27,6 +28,7 @@ public class PlayerHUD : MonoBehaviour
         _playerHealth.OnHealthChanged -= PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged -= PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged -= PlayerWallet_OnMoneyChanged;
+        Core.OnCoreValueChanged -= Core_OnCoreValueChanged;
     }
 
     void PlayerHealth_OnHealthChanged(int currentHealth, int maxHealth)
@@ -46,5 +48,10 @@ public class PlayerHUD : MonoBehaviour
     void PlayerWallet_OnMoneyChanged(int money)
     {
         _moneyText.text = $"Money : {money}";
+    }
+
+    void Core_OnCoreValueChanged(int value)
+    {
+        _coreText.text = value.ToString();
     }
 }
