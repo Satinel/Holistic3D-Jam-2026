@@ -44,6 +44,8 @@ public class Wallet : MonoBehaviour
 
     void Health_OnAnyHealthDeath(Health health)
     {
+        if(health.IsPlayer) { return; } // No earning money through player deaths!
+
         GainMoney(health.MoneyValue);
     }
 }

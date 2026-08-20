@@ -120,6 +120,8 @@ MonoBehaviour:
   _cinemachineThirdPersonAim: {fileID: 4089820210516653131}
   _myHealth: {fileID: 4957972843577305603}
   _myMana: {fileID: 7547382341503483922}
+  _animator: {fileID: 0}
+  _cannonballPrefab: {fileID: 0}
 --- !u!114 &4957972843577305603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,11 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bf296e6de2e12438fed4bf86619b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  <TargetPoint>k__BackingField: {fileID: 7063671883976396300}
   <Collider>k__BackingField: {fileID: 8051295987283848619}
   <IsEnemy>k__BackingField: 0
   <IsPlayer>k__BackingField: 1
-  <MoneyValue>k__BackingField: 10
+  <MoneyValue>k__BackingField: 0
   _maxHealth: 100
   _healthPerSecond: 0
 --- !u!114 &7547382341503483922
