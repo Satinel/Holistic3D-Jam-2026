@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [field:SerializeField] public int CoreValue { get; private set; } = 1;
 
-    [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _deceleration = 5f, _turnSpeed = 7.5f;
+    [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _deceleration = 5f, _turnSpeed = 7.5f, _destroyDelay = 3f;
     [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
     [SerializeField] Health _health;
     [SerializeField] Collider _mainCollider;
@@ -30,13 +30,37 @@ public class Enemy : MonoBehaviour
         _health.OnDeath -= OnDeath;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)  // Note : Once Ragdoll() is called, _mainCollider (and thus this method) is disabled
     {
         if(!collision.gameObject.CompareTag("Trap")) { return; }
-        // TODO : Have an component which specifically causes ragdolling and supplies a RecoveryTime as well
-        _ragdollDuration += _ragdollRecoveryTime;
 
-        if(_isRagdolled) { return; }
+        if(collision.gameObject.TryGetComponent(out Trap trap))
+        {
+            if(trap.Damage > 0)
+            {
+                _health.LoseHealth(trap.Damage);
+            }
+
+            if(!trap.UsesPhysics)
+            {
+                trap.TrapAction(this);
+                return;
+            }
+
+            _ragdollDuration += trap.RagdollDuration;
+        }
+        else
+        {
+            _ragdollDuration += _ragdollRecoveryTime;
+        }
+
+        if(_isRagdolled) { return; }    // Note : This entire method will never be called while isRagdolled == true because the collider is disabled, so...
+
+        if(trap && trap.OverridesPhysics)   // TODO : Overriding physics while isRagdolled requires code attached to each collider in the ragdoll itself, it can't be done here
+        {
+            Ragdoll(collision.contacts[0], collision.relativeVelocity * trap.ForceOverride, trap.ForceMode);
+            return;
+        }
 
         float mass = collision.rigidbody ? collision.rigidbody.mass : 1;
 
@@ -93,7 +117,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Ragdoll(ContactPoint contactPoint, Vector3 force)
+    void Ragdoll(ContactPoint contactPoint, Vector3 force, ForceMode forceMode = ForceMode.Impulse)
     {
         if(_isRagdolled) { return; }
 
@@ -115,7 +139,7 @@ public class Enemy : MonoBehaviour
 
         if(closestBone != null)
         {
-            closestBone.AddForceAtPosition(force, contactPoint.point, ForceMode.Impulse);
+            closestBone.AddForceAtPosition(force, contactPoint.point, forceMode);
 
             foreach(Rigidbody rigidbody in _rigidbodies)
             {
@@ -123,7 +147,7 @@ public class Enemy : MonoBehaviour
 
                 float distance = Vector3.Distance(rigidbody.worldCenterOfMass, contactPoint.point);
                 float falloff = Mathf.Clamp01(1f - distance / _falloffFadeOut);
-                rigidbody.AddForceAtPosition(force * falloff, contactPoint.point, ForceMode.Impulse);
+                rigidbody.AddForceAtPosition(force * falloff, contactPoint.point, forceMode);
             }
         }
     }
@@ -136,6 +160,7 @@ public class Enemy : MonoBehaviour
             rigidbody.isKinematic = true;
         }
         _mainRigidbody.position = ragdollPosition;
+        // TODO : Check if this position is inside a non-trigger collider and move it out if so (otherwise Enemies get sucked through walls)
         _mainCollider.enabled = true;
         _mainRigidbody.isKinematic = false;
 
@@ -147,6 +172,14 @@ public class Enemy : MonoBehaviour
         _ragddollTimer = 0;
     }
 
+    public void ChangeRagdollGravity(bool enabled)
+    {
+        foreach(Rigidbody rigidbody in _rigidbodies)
+        {
+            rigidbody.useGravity = enabled;
+        }
+    }
+
     public void SetDestination(Transform destination)
     {
         _destination = destination;
@@ -154,14 +187,12 @@ public class Enemy : MonoBehaviour
 
     void OnDeath()
     {
-        if(_isRagdolled)
-        {
-            // A really fancy shader should make the model disintegrate or something!!!
-            Destroy(gameObject, 1f);
-        }
-        else
+        if(!_isRagdolled)
         {
             _animator.SetTrigger(DEATH_HASH);
         }
+
+        // A really fancy shader should make the model disintegrate or something!!!
+        Destroy(gameObject, _destroyDelay);
     }
 }

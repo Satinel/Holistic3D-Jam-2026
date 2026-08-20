@@ -46,7 +46,23 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void LoseHealth(int lostAmount, FloatingText floatingTextPrefab, Vector3 textPosition, Color textColor)
+    public void LoseHealth(int lostAmount)
+    {
+        if(_isDead || lostAmount <= 0) { return; }
+
+        _currentHealth = _currentHealth - lostAmount < 0 ? 0 : _currentHealth - lostAmount;
+
+        OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
+
+        OnLoseHealth?.Invoke();
+
+        if(_currentHealth <= 0)
+        {
+            HandleDeath();
+        }
+    }
+
+    public void LoseHealthWithDisplay(int lostAmount, FloatingText floatingTextPrefab, Vector3 textPosition, Color textColor)
     {
         if(_isDead) { return; }
 
