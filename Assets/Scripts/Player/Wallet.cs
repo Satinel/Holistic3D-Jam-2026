@@ -7,6 +7,16 @@ public class Wallet : MonoBehaviour
 
     int _money;
 
+    void Awake()
+    {
+        Health.OnAnyHealthDeath += Health_OnAnyHealthDeath;
+    }
+
+    void OnDestroy()
+    {
+        Health.OnAnyHealthDeath -= Health_OnAnyHealthDeath;
+    }
+
     void Start()
     {
         OnMoneyChanged?.Invoke(_money);
@@ -30,5 +40,10 @@ public class Wallet : MonoBehaviour
 
         OnMoneyChanged?.Invoke(_money);
         // TODO Buy things
+    }
+
+    void Health_OnAnyHealthDeath(Health health)
+    {
+        GainMoney(health.MoneyValue);
     }
 }

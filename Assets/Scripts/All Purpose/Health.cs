@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
     public static event Action<Health> OnAnyHealthDeath;
     public event Action OnLoseHealth;
     public event Action<Vector3, float> OnKnockBack;
-    public event Action<Health> OnDeath;
+    public event Action OnDeath;
     public event Action<int, int> OnHealthChanged;
 
     [field:SerializeField] public Collider Collider { get; private set; }
@@ -55,8 +55,6 @@ public class Health : MonoBehaviour
             lostAmount = 0;
         }
 
-        // TODO ? Alter lostAmount via defense (and offense??) calculations?
-
         FloatingText floatingText = Instantiate(floatingTextPrefab, textPosition, Quaternion.identity);
         floatingText.SetUp(lostAmount.ToString(), textColor);
 
@@ -96,12 +94,19 @@ public class Health : MonoBehaviour
 
         _isDead = true;
 
-        OnDeath?.Invoke(this);
         OnAnyHealthDeath?.Invoke(this);
+        OnDeath?.Invoke();
     }
 
     public void SetInvincibility(bool isInvincible)
     {
         _isInvincible = isInvincible;
+    }
+
+    public void Kill()
+    {
+        if(IsPlayer) { return; }    // This should only be called by things which instantly kill enemies, never the player
+
+        HandleDeath();
     }
 }

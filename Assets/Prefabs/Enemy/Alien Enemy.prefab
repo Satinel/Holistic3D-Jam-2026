@@ -1304,6 +1304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1905935744250674287}
   - component: {fileID: 4889558895641657395}
+  - component: {fileID: 8520355316149715777}
   m_Layer: 9
   m_Name: Model Ragdoll
   m_TagString: Untagged
@@ -1408,6 +1409,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8520355316149715777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476162838390876890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a95ca168d6f6d428b37ae5da4cf92e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ModelAnimator
+  _parent: {fileID: 1609761779367920086}
 --- !u!1 &487321483670189399
 GameObject:
   m_ObjectHideFlags: 0
@@ -9090,6 +9104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c75b01c55dcd24499cab21f1220c61f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  <CoreValue>k__BackingField: 1
   _moveSpeed: 2.25
   _acceleration: 10
   _deceleration: 5

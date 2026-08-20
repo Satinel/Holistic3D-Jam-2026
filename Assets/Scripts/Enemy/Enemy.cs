@@ -17,6 +17,19 @@ public class Enemy : MonoBehaviour
     float _ragddollTimer, _ragdollDuration;
     Transform _destination;
 
+    static readonly int DEATH_HASH = Animator.StringToHash("Death");
+
+
+    void Awake()
+    {
+        _health.OnDeath += OnDeath;
+    }
+
+    void OnDestroy()
+    {
+        _health.OnDeath -= OnDeath;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if(!collision.gameObject.CompareTag("Trap")) { return; }
@@ -137,5 +150,18 @@ public class Enemy : MonoBehaviour
     public void SetDestination(Transform destination)
     {
         _destination = destination;
+    }
+
+    void OnDeath()
+    {
+        if(_isRagdolled)
+        {
+            // A really fancy shader should make the model disintegrate or something!!!
+            Destroy(gameObject, 1f);
+        }
+        else
+        {
+            _animator.SetTrigger(DEATH_HASH);
+        }
     }
 }

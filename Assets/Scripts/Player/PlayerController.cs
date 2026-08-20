@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CinemachineThirdPersonAim _cinemachineThirdPersonAim;
     [SerializeField] Health _myHealth;
     [SerializeField] Mana _myMana;
+    [SerializeField] Animator _animator;
 
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
     float _currentXAngle = 0f;
     bool _isDead;
+
+    static readonly int DEATH_HASH = Animator.StringToHash("Death");
 
     void Awake()
     {
@@ -139,13 +142,17 @@ Vector3 _spawnPosition = new(0f, 1f, 0f);
         // Do a secondary action like cast a knockback spell or something
     }
 
-    void MyHealth_OnDeath(Health health)
+    void MyHealth_OnDeath()
     {
         if(!_isDead)
         {
             _isDead = true;
             _moveInputValue = Vector2.zero;
-            // TODO : Animator triggering a death animation, etc.
+            if(_animator)
+            {
+                _animator.SetTrigger(DEATH_HASH);
+                // TODO : Attach an animator and have a death animation (and a model, etc.)
+            }
         }
     }
 }
