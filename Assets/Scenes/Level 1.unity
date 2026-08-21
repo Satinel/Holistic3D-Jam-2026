@@ -2356,6 +2356,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564474e4aee394647958e865ea17d811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
+--- !u!1 &952957494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 952957495}
+  - component: {fileID: 952957496}
+  m_Layer: 0
+  m_Name: Test Trap 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &952957495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952957494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 527485788012095054}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &952957496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952957494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+  <IsTrap>k__BackingField: 1
+  <BuyPrice>k__BackingField: 100
+  <TrapPosition>k__BackingField: 1
+  <PreviewPrefab>k__BackingField: {fileID: 562670957820120424, guid: 1b9fc0f525b802342871835e02c5f4d6, type: 3}
+  _size: {x: 1, y: 1}
+  _trapPrefab: {fileID: 7374095726659422914, guid: 3fb0bd66527b9d542963219d82303ebe, type: 3}
 --- !u!1 &958353514
 GameObject:
   m_ObjectHideFlags: 0
@@ -3752,6 +3802,17 @@ Transform:
   - {fileID: 873074553}
   m_Father: {fileID: 1355062779}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1597773338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8212515531238699994, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+  m_PrefabInstance: {fileID: 527485788012095053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
 --- !u!1 &1630345604
 GameObject:
   m_ObjectHideFlags: 0
@@ -4663,11 +4724,31 @@ PrefabInstance:
       propertyPath: _cannonballPrefab
       value: 
       objectReference: {fileID: 4076351397142989828, guid: 6970ff7eb8d28644fb2d32590b9fe487, type: 3}
+    - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      propertyPath: _items.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      propertyPath: '_items.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1597773338}
+    - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      propertyPath: '_items.Array.data[1]'
+      value: 
+      objectReference: {fileID: 952957496}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3731261836584538087, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 952957495}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+--- !u!4 &527485788012095054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3731261836584538087, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+  m_PrefabInstance: {fileID: 527485788012095053}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1489140830151265598
 PrefabInstance:
   m_ObjectHideFlags: 0

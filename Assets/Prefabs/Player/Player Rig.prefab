@@ -80,7 +80,6 @@ MonoBehaviour:
   <PreviewPrefab>k__BackingField: {fileID: 562670957820120424, guid: 1b9fc0f525b802342871835e02c5f4d6, type: 3}
   _size: {x: 1, y: 1}
   _trapPrefab: {fileID: 2055251873432864748, guid: 3838bed2de6051e4f8c6c38e90b6f4e1, type: 3}
-  _wallet: {fileID: 0}
 --- !u!1 &2020367325111526498
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6d1cc13cf0ac479a020f3e288055a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wallet
+  _startingMoney: 500
 --- !u!1 &2470330770946953402
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3731261836584538087}
   m_Layer: 0
-  m_Name: Abilities
+  m_Name: Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

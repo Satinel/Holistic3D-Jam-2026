@@ -13,13 +13,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Mana _myMana;
     [SerializeField] Wallet _wallet;
     [SerializeField] Animator _animator;
-    [SerializeField] BuyableTrap _testTrap; // TODO : Replace with BuyableTrap[] and switch between active traps
+    [SerializeField] Item[] _items;
     [SerializeField] LayerMask _socketLayer;
     [SerializeField] Material _buyMaterial, _poorMaterial;
 
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
     float _currentXAngle = 0f;
     bool _isDead, _inSellMode, _canBuyTrap, _canSellTrap;
+    int _itemIndex = 0;
+    Item _activeItem;
     BuyableTrap _activeTrap;
     TrapSocket _activeSocket;
     GameObject _previewModel;
@@ -42,6 +44,10 @@ public class PlayerController : MonoBehaviour
         InputManager.OnLookAction += InputManager_OnLookAction;
         InputManager.OnMainPressed += InputManager_OnMainPressed;
         InputManager.OnSecondaryPressed += InputManager_OnSecondaryPressed;
+        InputManager.OnSellPressed += InputManager_OnSellPressed;
+        InputManager.OnScroll += InputManager_OnScroll;
+        InputManager.OnPreviousPressed += InputManager_OnPreviousPressed;
+        InputManager.OnNextPressed += InputManager_OnNextPressed;
     }
 
     void OnDisable()
@@ -50,6 +56,19 @@ public class PlayerController : MonoBehaviour
         InputManager.OnLookAction -= InputManager_OnLookAction;
         InputManager.OnMainPressed -= InputManager_OnMainPressed;
         InputManager.OnSecondaryPressed -= InputManager_OnSecondaryPressed;
+        InputManager.OnSellPressed -= InputManager_OnSellPressed;
+        InputManager.OnScroll -= InputManager_OnScroll;
+        InputManager.OnPreviousPressed -= InputManager_OnPreviousPressed;
+        InputManager.OnNextPressed -= InputManager_OnNextPressed;
+    }
+
+    void Start()
+    {
+        if(_items.Length > 0)
+        {
+            _activeItem = _items[_itemIndex];
+            _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
+        }
     }
 
     void Update()
@@ -153,8 +172,14 @@ public class PlayerController : MonoBehaviour
                     return;
                 }
 
-                if(_activeSocket.HasTrap && _inSellMode)
+                if(_activeSocket.HasTrap)
                 {
+                    if(!_inSellMode)
+                    {
+                        CancelTrapCommerce();
+                        return;
+                    }
+
                     RemoveTrapPreview();
                     _canBuyTrap = false;
                     _activeSocket.HighlightTrap(true);
@@ -195,9 +220,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SetActiveTrap(BuyableTrap trap)    // TODO : Use this via input (number keys and/or Mouse Scroll and controller buttons of some type)
+    public void SetActiveItemByIndex(int index)    // TODO : Use this via number keys input
     {
-        _activeTrap = trap;
+        if(index > _items.Length - 1) { return; }
+
+        CancelTrapCommerce();
+        _itemIndex = index;
+        _activeItem = _items[_itemIndex];
+        _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
     }
 
     void InputManager_OnMoveAction(Vector2 value)
@@ -252,6 +282,41 @@ Vector3 _spawnPosition = new(0f, 1f, 0f);
         if(!_activeSocket) { return; }
 
         _activeSocket.SellTrap();
+    }
+
+    void InputManager_OnScroll(Vector2 value)
+    {
+        if(value.y < 0)
+        {
+            InputManager_OnNextPressed();
+        }
+
+        if(value.y > 0)
+        {
+            InputManager_OnPreviousPressed();
+        }
+    }
+
+    void InputManager_OnPreviousPressed()
+    {
+        if(_items.Length <= 0) { return; }
+
+        CancelTrapCommerce();
+        _itemIndex = (_itemIndex + 1) % _items.Length;
+
+        _activeItem = _items[_itemIndex];
+        _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
+    }
+
+    void InputManager_OnNextPressed()
+    {
+        if(_items.Length <= 0) { return; }
+
+        CancelTrapCommerce();
+        _itemIndex = (_itemIndex - 1 + _items.Length) % _items.Length;
+
+        _activeItem = _items[_itemIndex];
+        _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
     }
 
     void MyHealth_OnDeath()

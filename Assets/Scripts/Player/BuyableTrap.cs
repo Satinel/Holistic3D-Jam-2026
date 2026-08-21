@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BuyableTrap : MonoBehaviour
+public class BuyableTrap : Item
 {
     [field:SerializeField] public int BuyPrice { get; protected set; } = 100;
     [field:SerializeField] public TrapPosition TrapPosition { get; protected set; } = TrapPosition.Floor;
@@ -8,6 +8,11 @@ public class BuyableTrap : MonoBehaviour
     
     [SerializeField] Vector2 _size = Vector2.one;
     [SerializeField] Trap _trapPrefab;
+
+    void Awake()
+    {
+        IsTrap = true;
+    }
 
     public bool CanPlaceTrap(TrapSocket activeSocket)
     {
