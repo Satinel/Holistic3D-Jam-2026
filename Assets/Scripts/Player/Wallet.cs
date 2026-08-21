@@ -5,20 +5,25 @@ public class Wallet : MonoBehaviour
 {
     public event Action<int> OnMoneyChanged;
 
+    [SerializeField] int _startingMoney = 500;
+
     int _money;
 
     void Awake()
     {
         Health.OnAnyHealthDeath += Health_OnAnyHealthDeath;
+        TrapSocket.OnAnyTrapSold += TrapSocket_OnAnyTrapSold;
     }
 
     void OnDestroy()
     {
         Health.OnAnyHealthDeath -= Health_OnAnyHealthDeath;
+        TrapSocket.OnAnyTrapSold -= TrapSocket_OnAnyTrapSold;
     }
 
     void Start()
     {
+        _money = _startingMoney;
         OnMoneyChanged?.Invoke(_money);
     }
 
@@ -47,5 +52,10 @@ public class Wallet : MonoBehaviour
         if(health.IsPlayer) { return; } // No earning money through player deaths!
 
         GainMoney(health.MoneyValue);
+    }
+
+    void TrapSocket_OnAnyTrapSold(int soldPrice)
+    {
+        GainMoney(soldPrice);
     }
 }

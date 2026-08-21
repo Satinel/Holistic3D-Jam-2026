@@ -11,11 +11,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CinemachineThirdPersonAim _cinemachineThirdPersonAim;
     [SerializeField] Health _myHealth;
     [SerializeField] Mana _myMana;
+    [SerializeField] Wallet _wallet;
     [SerializeField] Animator _animator;
+    [SerializeField] BuyableTrap _testTrap; // TODO : Replace with BuyableTrap[] and switch between active traps
+    [SerializeField] LayerMask _socketLayer;
+    [SerializeField] Material _buyMaterial, _poorMaterial;
 
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
     float _currentXAngle = 0f;
-    bool _isDead;
+    bool _isDead, _inSellMode, _canBuyTrap, _canSellTrap;
+    BuyableTrap _activeTrap;
+    TrapSocket _activeSocket;
+    GameObject _previewModel;
 
     static readonly int DEATH_HASH = Animator.StringToHash("Death");
 
@@ -54,6 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         RotateCameraTarget();
         _aimPositionMarker.position = _cinemachineThirdPersonAim.AimTarget;
+        CheckSocket();
     }
 
     void MovePlayer()
@@ -105,6 +113,93 @@ public class PlayerController : MonoBehaviour
         _lookAccumulation = Vector2.zero;
     }
 
+    void CheckSocket()
+    {
+        if(Time.deltaTime == 0) { return; }
+
+        if(!_inSellMode && _activeTrap == null)
+        {
+            CancelTrapCommerce();
+            return;
+        }
+
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, Mathf.Infinity, _socketLayer))
+        {
+            if(hit.collider.TryGetComponent(out TrapSocket socket))
+            {
+                _activeSocket = socket;
+
+                if(_activeTrap.CanPlaceTrap(_activeSocket))
+                {
+                    _activeSocket.HighlightTrap(false);
+                    _canSellTrap = false;
+                    _canBuyTrap = _wallet.CanAfford(_activeTrap.BuyPrice);
+
+                    if(_previewModel == null)
+                    {
+                        _previewModel = Instantiate(_activeTrap.PreviewPrefab);;
+                    }
+
+                    _previewModel.transform.SetPositionAndRotation(socket.transform.position, socket.transform.rotation);
+
+                    if(_canBuyTrap)
+                    {
+                        _previewModel.GetComponent<Renderer>().material = _buyMaterial;
+                    }
+                    else
+                    {
+                        _previewModel.GetComponent<Renderer>().material = _poorMaterial;
+                    }
+                    return;
+                }
+
+                if(_activeSocket.HasTrap && _inSellMode)
+                {
+                    RemoveTrapPreview();
+                    _canBuyTrap = false;
+                    _activeSocket.HighlightTrap(true);
+                    _canSellTrap = true;
+                    // TODO : Activate UI prompt for selling
+                }
+            }
+            else
+            {
+                CancelTrapCommerce();
+            }
+        }
+        else
+        {
+            CancelTrapCommerce();
+        }
+    }
+
+    void CancelTrapCommerce()
+    {
+        // TODO : Deactivate UI prompt for selling
+        _canBuyTrap = false;
+        _canSellTrap = false;
+        if(_activeSocket != null)
+        {
+            _activeSocket.HighlightTrap(false);
+            _activeSocket = null;
+        }
+        RemoveTrapPreview();
+    }
+
+    void RemoveTrapPreview()
+    {
+        if(_previewModel != null)
+        {
+            Destroy(_previewModel);
+            _previewModel = null;
+        }
+    }
+
+    void SetActiveTrap(BuyableTrap trap)    // TODO : Use this via input (number keys and/or Mouse Scroll and controller buttons of some type)
+    {
+        _activeTrap = trap;
+    }
+
     void InputManager_OnMoveAction(Vector2 value)
     {
         if(_isDead) { return; }
@@ -126,6 +221,14 @@ Vector3 _spawnPosition = new(0f, 1f, 0f);
         if(_isDead) { return; }
         if(Time.timeScale == 0) { return; }
 
+        if(_canBuyTrap && _activeTrap && _activeSocket)
+        {
+            _wallet.SpendMoney(_activeTrap.BuyPrice);
+            _activeTrap.CompletePurchase(_activeSocket);
+            // TODO : Add an animation (and a cool shader to make the trap appear through magical science)
+            return;
+        }
+
         RotateModelInstantly();
         // Do an action like attack/place tower/trap/thing
         Rigidbody cannonball = Instantiate(_cannonballPrefab, transform.position + _spawnPosition, Quaternion.identity);
@@ -140,6 +243,15 @@ Vector3 _spawnPosition = new(0f, 1f, 0f);
 
         RotateModelInstantly();
         // Do a secondary action like cast a knockback spell or something
+    }
+
+    void InputManager_OnSellPressed()   // TODO : Keybind for Sell (probably E)
+    {
+        if(!_inSellMode) { return; }
+        if(!_canSellTrap) { return; }
+        if(!_activeSocket) { return; }
+
+        _activeSocket.SellTrap();
     }
 
     void MyHealth_OnDeath()

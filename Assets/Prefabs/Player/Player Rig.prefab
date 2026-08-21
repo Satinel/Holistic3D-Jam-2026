@@ -31,6 +31,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4635078013370466054}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1947754627779257413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7162693873742941381}
+  - component: {fileID: 8212515531238699994}
+  m_Layer: 0
+  m_Name: Test Trap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7162693873742941381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947754627779257413}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3731261836584538087}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8212515531238699994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947754627779257413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+  <BuyPrice>k__BackingField: 100
+  <TrapPosition>k__BackingField: 0
+  <PreviewPrefab>k__BackingField: {fileID: 562670957820120424, guid: 1b9fc0f525b802342871835e02c5f4d6, type: 3}
+  _size: {x: 1, y: 1}
+  _trapPrefab: {fileID: 2055251873432864748, guid: 3838bed2de6051e4f8c6c38e90b6f4e1, type: 3}
+  _wallet: {fileID: 0}
 --- !u!1 &2020367325111526498
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +170,14 @@ MonoBehaviour:
   _cinemachineThirdPersonAim: {fileID: 4089820210516653131}
   _myHealth: {fileID: 4957972843577305603}
   _myMana: {fileID: 7547382341503483922}
+  _wallet: {fileID: 836837881902065178}
   _animator: {fileID: 0}
+  _testTrap: {fileID: 8212515531238699994}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _buyMaterial: {fileID: 2100000, guid: c77619660647838459141f47a56579cb, type: 2}
+  _poorMaterial: {fileID: 2100000, guid: aa86592759fe5254e842916363800b18, type: 2}
   _cannonballPrefab: {fileID: 0}
 --- !u!114 &4957972843577305603
 MonoBehaviour:
@@ -350,7 +407,40 @@ Transform:
   - {fileID: 4635078013370466054}
   - {fileID: 4082996769198193809}
   - {fileID: 5990338084189694260}
+  - {fileID: 3731261836584538087}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4787445760137352739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3731261836584538087}
+  m_Layer: 0
+  m_Name: Abilities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3731261836584538087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4787445760137352739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7162693873742941381}
+  m_Father: {fileID: 7278810624925462545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5744292068002008500
 GameObject:
