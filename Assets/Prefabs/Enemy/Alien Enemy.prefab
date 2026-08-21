@@ -2326,7 +2326,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097401372419688804}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9b2c63c7aa6ff1e45b7bf67b0d30ff49, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2490,7 +2490,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274067775163831680}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9b2c63c7aa6ff1e45b7bf67b0d30ff49, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4404,7 +4404,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2734877759487422852}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9b2c63c7aa6ff1e45b7bf67b0d30ff49, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -7221,7 +7221,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4373525944036908840}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9b2c63c7aa6ff1e45b7bf67b0d30ff49, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -9162,7 +9162,7 @@ GameObject:
   - component: {fileID: 1177097325106653104}
   m_Layer: 7
   m_Name: Alien Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9200,6 +9200,7 @@ MonoBehaviour:
   _acceleration: 10
   _deceleration: 5
   _turnSpeed: 2.5
+  _destroyDelay: 3
   _ragdollRecoveryTime: 5
   _falloffFadeOut: 3
   _health: {fileID: 4128515336638853484}
@@ -11909,7 +11910,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9149315039180010668}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9b2c63c7aa6ff1e45b7bf67b0d30ff49, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

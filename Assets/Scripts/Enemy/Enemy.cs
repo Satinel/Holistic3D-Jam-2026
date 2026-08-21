@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
 
         if(trap && trap.OverridesPhysics)   // TODO : Overriding physics while isRagdolled requires code attached to each collider in the ragdoll itself, it can't be done here
         {
-            Ragdoll(collision.contacts[0], collision.relativeVelocity * trap.ForceOverride, trap.ForceMode);
+            Ragdoll(collision.contacts[0], trap.DirectionOverride * trap.ForceOverride, trap.ForceMode);
             return;
         }
 
