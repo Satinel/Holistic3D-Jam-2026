@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+  <IsTrap>k__BackingField: 0
   <BuyPrice>k__BackingField: 100
   <TrapPosition>k__BackingField: 0
   <PreviewPrefab>k__BackingField: {fileID: 562670957820120424, guid: 1b9fc0f525b802342871835e02c5f4d6, type: 3}
@@ -118,6 +119,7 @@ Transform:
   - {fileID: 529067122796502576}
   - {fileID: 789783013123403271}
   - {fileID: 7063671883976396300}
+  - {fileID: 1074038391351336449}
   m_Father: {fileID: 7278810624925462545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &8051295987283848619
@@ -171,13 +173,15 @@ MonoBehaviour:
   _myMana: {fileID: 7547382341503483922}
   _wallet: {fileID: 836837881902065178}
   _animator: {fileID: 0}
-  _testTrap: {fileID: 8212515531238699994}
+  _items:
+  - {fileID: 5655566831911952000}
+  - {fileID: 8212515531238699994}
+  - {fileID: 7952293838711724501}
   _socketLayer:
     serializedVersion: 2
     m_Bits: 4096
   _buyMaterial: {fileID: 2100000, guid: c77619660647838459141f47a56579cb, type: 2}
   _poorMaterial: {fileID: 2100000, guid: aa86592759fe5254e842916363800b18, type: 2}
-  _cannonballPrefab: {fileID: 0}
 --- !u!114 &4957972843577305603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,9 +443,60 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2264376328042916735}
   - {fileID: 7162693873742941381}
+  - {fileID: 199585906568999915}
   m_Father: {fileID: 7278810624925462545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5354036191806772627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2264376328042916735}
+  - component: {fileID: 5655566831911952000}
+  m_Layer: 0
+  m_Name: Shove Item
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2264376328042916735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354036191806772627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3731261836584538087}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5655566831911952000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354036191806772627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bb846c65cb0f441b36680582a43d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shove
+  <IsTrap>k__BackingField: 0
+  _damage: 0
+  _forceMultiplyer: 25
+  _spawnPoint: {fileID: 1074038391351336449}
+  _cannonballPrefab: {fileID: -7536709174669590218, guid: ded973ce211ffd942ba157059a5ff4d1, type: 3}
 --- !u!1 &5744292068002008500
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +587,87 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5833635987429462672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 199585906568999915}
+  - component: {fileID: 7952293838711724501}
+  m_Layer: 0
+  m_Name: Test Trap 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &199585906568999915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5833635987429462672}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3731261836584538087}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7952293838711724501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5833635987429462672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+  <IsTrap>k__BackingField: 1
+  <BuyPrice>k__BackingField: 100
+  <TrapPosition>k__BackingField: 1
+  <PreviewPrefab>k__BackingField: {fileID: 562670957820120424, guid: 1b9fc0f525b802342871835e02c5f4d6, type: 3}
+  _size: {x: 1, y: 1}
+  _trapPrefab: {fileID: 7374095726659422914, guid: 3fb0bd66527b9d542963219d82303ebe, type: 3}
+--- !u!1 &6308799473111567811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1074038391351336449}
+  m_Layer: 6
+  m_Name: Projectile Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1074038391351336449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6308799473111567811}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4635078013370466054}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7030831784017530010
 GameObject:
   m_ObjectHideFlags: 0

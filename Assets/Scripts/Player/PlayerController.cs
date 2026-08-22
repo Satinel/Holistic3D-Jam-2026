@@ -244,8 +244,7 @@ public class PlayerController : MonoBehaviour
 
         _lookAccumulation += value;
     }
-[SerializeField] Rigidbody _cannonballPrefab;   // TODO : Remove, this is for testing
-Vector3 _spawnPosition = new(0f, 1f, 0f);
+
     void InputManager_OnMainPressed()
     {
         if(_isDead) { return; }
@@ -259,11 +258,11 @@ Vector3 _spawnPosition = new(0f, 1f, 0f);
             return;
         }
 
-        RotateModelInstantly();
-        // Do an action like attack/place tower/trap/thing
-        Rigidbody cannonball = Instantiate(_cannonballPrefab, transform.position + _spawnPosition, Quaternion.identity);
-        cannonball.transform.forward = _aimPositionMarker.position - cannonball.transform.position;
-        cannonball.AddForce(cannonball.transform.forward * 25f, ForceMode.Impulse);
+        if(!_activeItem.IsTrap)
+        {
+            RotateModelInstantly();
+            _activeItem.PrimaryAction(_aimPositionMarker.position);
+        }
     }
 
     void InputManager_OnSecondaryPressed()
@@ -271,8 +270,11 @@ Vector3 _spawnPosition = new(0f, 1f, 0f);
         if(_isDead) { return; }
         if(Time.timeScale == 0) { return; }
 
-        RotateModelInstantly();
-        // Do a secondary action like cast a knockback spell or something
+        if(!_activeItem.IsTrap)
+        {
+            RotateModelInstantly();
+            _activeItem.SecondaryAction();
+        }
     }
 
     void InputManager_OnSellPressed()   // TODO : Keybind for Sell (probably E)

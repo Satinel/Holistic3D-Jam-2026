@@ -739,7 +739,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0023016396
   m_Height: 0.011508198
@@ -2336,7 +2336,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0017638681
   m_Height: 0.0070554726
@@ -2500,7 +2500,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.0065607, y: 0.010199707, z: 0.006560701}
   m_Center: {x: 0.00328035, y: 0.00575, z: -0.00073343515}
@@ -4414,7 +4414,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.003
   m_Center: {x: 0, y: 0.00325, z: 0.01}
@@ -5167,7 +5167,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0015
   m_Height: 0.0075
@@ -5742,7 +5742,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0014341135
   m_Height: 0.004780378
@@ -6053,7 +6053,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0015
   m_Height: 0.0075
@@ -7231,7 +7231,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0017638685
   m_Height: 0.007055474
@@ -7954,7 +7954,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0023016403
   m_Height: 0.011508201
@@ -9208,6 +9208,18 @@ MonoBehaviour:
   _mainRigidbody: {fileID: 1177097325106653104}
   _animator: {fileID: 4889558895641657395}
   _ragdoll: {fileID: 4820830033733442918}
+  _colliders:
+  - {fileID: 492191918292376147}
+  - {fileID: 4033192807561138583}
+  - {fileID: 1039425236788446950}
+  - {fileID: 836590534771837932}
+  - {fileID: 7323015220311347561}
+  - {fileID: 268623043811094278}
+  - {fileID: 5262408574580656797}
+  - {fileID: 6123876960072916860}
+  - {fileID: 7641754026187657112}
+  - {fileID: 8276798374664778324}
+  - {fileID: 2011916298980094264}
   _rigidbodies:
   - {fileID: 4820830033733442918}
   - {fileID: 8371927875929161472}
@@ -9767,7 +9779,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.001434114
   m_Height: 0.0047803796
@@ -11920,7 +11932,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.006560703, y: 0.01010045, z: 0.006560701}
   m_Center: {x: -0.0032803514, y: 0.009, z: -0.0032}

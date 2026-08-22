@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Animator _animator;
 
     [SerializeField] Rigidbody _ragdoll;
+    [SerializeField] Collider[] _colliders;
     [SerializeField] Rigidbody[] _rigidbodies;
     bool _isRagdolled;
     float _ragddollTimer, _ragdollDuration;
@@ -150,6 +151,11 @@ public class Enemy : MonoBehaviour
                 rigidbody.AddForceAtPosition(force * falloff, contactPoint.point, forceMode);
             }
         }
+
+        foreach(Collider collider in _colliders)
+        {
+            collider.enabled = true;
+        }
     }
 
     void RecoverFromRagdoll()
@@ -158,6 +164,10 @@ public class Enemy : MonoBehaviour
         foreach(Rigidbody rigidbody in _rigidbodies)
         {
             rigidbody.isKinematic = true;
+        }
+        foreach(Collider collider in _colliders)
+        {
+            collider.enabled = false;
         }
         _mainRigidbody.position = ragdollPosition;
         // TODO : Check if this position is inside a non-trigger collider and move it out if so (otherwise Enemies get sucked through walls)
