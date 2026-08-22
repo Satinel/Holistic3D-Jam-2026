@@ -7,6 +7,9 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText, _coreText;
     [SerializeField] Slider _healthSlider, _manaSlider;
     [SerializeField] PlayerController _player;
+    [SerializeField] GameObject[] _icons;
+    [SerializeField] Image[] _iconHighlights;
+
     Health _playerHealth;
     Mana _playerMana;
     Wallet _playerWallet;
@@ -17,6 +20,8 @@ public class PlayerHUD : MonoBehaviour
         _playerMana = _player.GetComponent<Mana>();
         _playerWallet = _player.GetComponent<Wallet>();
 
+        _player.ReportTotalItems += Player_ReportTotalItems;
+        _player.OnActiveItemChanged += Player_OnActiveItemChanged;
         _playerHealth.OnHealthChanged += PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged += PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged += PlayerWallet_OnMoneyChanged;
@@ -25,10 +30,32 @@ public class PlayerHUD : MonoBehaviour
 
     void OnDestroy()
     {
+        _player.ReportTotalItems -= Player_ReportTotalItems;
+        _player.OnActiveItemChanged -= Player_OnActiveItemChanged;
         _playerHealth.OnHealthChanged -= PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged -= PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged -= PlayerWallet_OnMoneyChanged;
         Core.OnCoreValueChanged -= Core_OnCoreValueChanged;
+    }
+
+    void Player_ReportTotalItems(int totalItems)
+    {
+        for(int i = 0; i < totalItems; i++)
+        {
+            _icons[i].SetActive(true);
+        }
+    }
+
+    void Player_OnActiveItemChanged(int index)
+    {
+        if(index >= _iconHighlights.Length) { return; }
+
+        foreach(Image highlight in _iconHighlights)
+        {
+            highlight.enabled = false;
+        }
+
+        _iconHighlights[index].enabled = true;
     }
 
     void PlayerHealth_OnHealthChanged(int currentHealth, int maxHealth)

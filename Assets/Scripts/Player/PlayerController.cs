@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
+    public event Action<int> ReportTotalItems;
+    public event Action<int> OnActiveItemChanged;
+
     [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 1.5f;
     [SerializeField] float _minLookAngle = -25f, _maxLookAngle = 40f;
     [SerializeField] float _modelRotateSpeed = 15f;
@@ -66,8 +70,11 @@ public class PlayerController : MonoBehaviour
     {
         if(_items.Length > 0)
         {
+            ReportTotalItems?.Invoke(_items.Length);
+            // TODO ? Rather than sending an int, send the array of items with icons/costs to be set in PlayerHUD
             _activeItem = _items[_itemIndex];
             _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
+            OnActiveItemChanged?.Invoke(_itemIndex);
         }
     }
 
@@ -223,11 +230,13 @@ public class PlayerController : MonoBehaviour
     public void SetActiveItemByIndex(int index)    // TODO : Use this via number keys input
     {
         if(index > _items.Length - 1) { return; }
+        if(_itemIndex == index) { return; }
 
         CancelTrapCommerce();
         _itemIndex = index;
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
+        OnActiveItemChanged?.Invoke(_itemIndex);
     }
 
     void InputManager_OnMoveAction(Vector2 value)
@@ -308,6 +317,7 @@ public class PlayerController : MonoBehaviour
 
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
+        OnActiveItemChanged?.Invoke(_itemIndex);
     }
 
     void InputManager_OnNextPressed()
@@ -319,6 +329,7 @@ public class PlayerController : MonoBehaviour
 
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
+        OnActiveItemChanged?.Invoke(_itemIndex);
     }
 
     void MyHealth_OnDeath()
