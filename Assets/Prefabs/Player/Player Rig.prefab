@@ -161,8 +161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _moveSpeed: 2.75
   _rotateSpeed: 0.5
-  _minLookAngle: -15
-  _maxLookAngle: 45
+  _minLookAngle: -65
+  _maxLookAngle: 65
   _modelRotateSpeed: 15
   _characterController: {fileID: 8051295987283848619}
   _cameraTarget: {fileID: 529067122796502576}
@@ -322,12 +322,12 @@ MonoBehaviour:
   CameraSide: 0.85
   CameraDistance: 2
   AvoidObstacles:
-    Enabled: 0
+    Enabled: 1
     CollisionFilter:
       serializedVersion: 2
-      m_Bits: 1
-    IgnoreTag: 
-    CameraRadius: 0.2
+      m_Bits: 257
+    IgnoreTag: Player
+    CameraRadius: 0.5
     DampingIntoCollision: 0
     DampingFromCollision: 0.5
 --- !u!114 &4089820210516653131
