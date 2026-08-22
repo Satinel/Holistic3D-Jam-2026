@@ -52,6 +52,17 @@ public class PlayerController : MonoBehaviour
         InputManager.OnScroll += InputManager_OnScroll;
         InputManager.OnPreviousPressed += InputManager_OnPreviousPressed;
         InputManager.OnNextPressed += InputManager_OnNextPressed;
+
+        InputManager.On1Pressed += SetActiveItemByIndex;
+        InputManager.On2Pressed += SetActiveItemByIndex;
+        InputManager.On3Pressed += SetActiveItemByIndex;
+        InputManager.On4Pressed += SetActiveItemByIndex;
+        InputManager.On5Pressed += SetActiveItemByIndex;
+        InputManager.On6Pressed += SetActiveItemByIndex;
+        InputManager.On7Pressed += SetActiveItemByIndex;
+        InputManager.On8Pressed += SetActiveItemByIndex;
+        InputManager.On9Pressed += SetActiveItemByIndex;
+        InputManager.On10Pressed += SetActiveItemByIndex;
     }
 
     void OnDisable()
@@ -64,6 +75,17 @@ public class PlayerController : MonoBehaviour
         InputManager.OnScroll -= InputManager_OnScroll;
         InputManager.OnPreviousPressed -= InputManager_OnPreviousPressed;
         InputManager.OnNextPressed -= InputManager_OnNextPressed;
+
+        InputManager.On1Pressed -= SetActiveItemByIndex;
+        InputManager.On2Pressed -= SetActiveItemByIndex;
+        InputManager.On3Pressed -= SetActiveItemByIndex;
+        InputManager.On4Pressed -= SetActiveItemByIndex;
+        InputManager.On5Pressed -= SetActiveItemByIndex;
+        InputManager.On6Pressed -= SetActiveItemByIndex;
+        InputManager.On7Pressed -= SetActiveItemByIndex;
+        InputManager.On8Pressed -= SetActiveItemByIndex;
+        InputManager.On9Pressed -= SetActiveItemByIndex;
+        InputManager.On10Pressed -= SetActiveItemByIndex;
     }
 
     void Start()
@@ -227,7 +249,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetActiveItemByIndex(int index)    // TODO : Use this via number keys input
+    public void SetActiveItemByIndex(int index)
     {
         if(index > _items.Length - 1) { return; }
         if(_itemIndex == index) { return; }
