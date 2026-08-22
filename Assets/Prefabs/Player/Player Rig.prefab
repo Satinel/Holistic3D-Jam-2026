@@ -179,7 +179,7 @@ MonoBehaviour:
   - {fileID: 7952293838711724501}
   _socketLayer:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 4352
   _buyMaterial: {fileID: 2100000, guid: c77619660647838459141f47a56579cb, type: 2}
   _poorMaterial: {fileID: 2100000, guid: aa86592759fe5254e842916363800b18, type: 2}
 --- !u!114 &4957972843577305603
