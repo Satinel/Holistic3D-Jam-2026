@@ -33,7 +33,7 @@ public class TrapSocket : MonoBehaviour
     {
         if(!_placedTrap) { return; }
 
-        _placedTrap.HighlightModel.enabled = isHighlighted;
+        _placedTrap.HighlightModel.SetActive(isHighlighted);
         _placedTrap.RangeRenderer.enabled = isHighlighted;
     }
 }

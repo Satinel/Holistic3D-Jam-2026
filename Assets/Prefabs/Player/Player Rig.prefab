@@ -75,12 +75,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
-  <IsTrap>k__BackingField: 0
+  <IsTrap>k__BackingField: 1
   <BuyPrice>k__BackingField: 100
   <TrapPosition>k__BackingField: 0
-  <PreviewPrefab>k__BackingField: {fileID: 562670957820120424, guid: 1b9fc0f525b802342871835e02c5f4d6, type: 3}
+  <PreviewPrefab>k__BackingField: {fileID: 4181882122987973882, guid: 948aaa44f4979ba4cbe9e8870cf67efb, type: 3}
   _size: {x: 1, y: 1}
-  _trapPrefab: {fileID: 2055251873432864748, guid: 3838bed2de6051e4f8c6c38e90b6f4e1, type: 3}
+  _trapPrefab: {fileID: 3840993093556309465, guid: bb1a40affdf0b1e45ad2cb4142c406cb, type: 3}
 --- !u!1 &2020367325111526498
 GameObject:
   m_ObjectHideFlags: 0

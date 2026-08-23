@@ -3,9 +3,6 @@ using UnityEngine;
 public class PushTrap : Trap
 {
     [SerializeField] Collider _triggerCollider, _physicsCollider;
-    [SerializeField] Animator _animator;
-
-    static readonly int TRIGGER_HASH = Animator.StringToHash("Trigger");
 
     float _timer;
 

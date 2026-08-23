@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     float _ragddollTimer, _ragdollDuration;
     Transform _destination;
 
+    public Health Health => _health;
     static readonly int DEATH_HASH = Animator.StringToHash("Death");
 
 
@@ -36,41 +37,45 @@ public class Enemy : MonoBehaviour
         _health.OnDeath -= OnDeath;
     }
 
-    void OnCollisionEnter(Collision collision)  // Note : Once Ragdoll() is called, _mainCollider (and thus this method) is disabled
+    void OnCollisionEnter(Collision collision)
     {
         if(!collision.gameObject.CompareTag("Trap")) { return; }
-
-        if(collision.gameObject.TryGetComponent(out Trap trap))
-        {
-            if(trap.Damage > 0)
-            {
-                _health.LoseHealth(trap.Damage);
-            }
-
-            if(!trap.UsesPhysics)
-            {
-                trap.TrapAction(this);
-                return;
-            }
-
-            _ragdollDuration += trap.RagdollDuration;
-        }
-        else
-        {
-            _ragdollDuration += _ragdollRecoveryTime;
-        }
-
-        if(_isRagdolled) { return; }    // Note : This entire method will never be called while isRagdolled == true because the collider is disabled, so...
-
-        if(trap && trap.OverridesPhysics)   // TODO : Overriding physics while isRagdolled requires code attached to each collider in the ragdoll itself, it can't be done here
-        {
-            Ragdoll(collision.contacts[0], trap.DirectionOverride * trap.ForceOverride, trap.ForceMode);
-            return;
-        }
+        if(collision.gameObject.GetComponent<Trap>()) { return; }   // This should only handle objects without attached Trap monobehaviours (like projectiles)
 
         float mass = collision.rigidbody ? collision.rigidbody.mass : 1;
 
         Ragdoll(collision.contacts[0], collision.relativeVelocity * mass);
+        _ragdollDuration += _ragdollRecoveryTime;
+
+    //-------------------------------- NONSENSE --------------------------------
+        // if(collision.gameObject.TryGetComponent(out Trap trap))
+        // {
+        //     if(trap.Damage > 0)
+        //     {
+        //         _health.LoseHealth(trap.Damage);
+        //     }
+
+        //     if(!trap.UsesPhysics)
+        //     {
+        //         trap.TrapAction(this);
+        //         return;
+        //     }
+
+        //     _ragdollDuration += trap.RagdollDuration;
+        // }
+        // else
+        // {
+        //     _ragdollDuration += _ragdollRecoveryTime;
+        // }
+
+        // if(_isRagdolled) { return; }    // Note : This entire method will never be called while isRagdolled == true because the collider is disabled, so...
+
+        // if(trap && trap.OverridesPhysics)   // TODO : Overriding physics while isRagdolled requires code attached to each collider in the ragdoll itself, it can't be done here
+        // {
+        //     Ragdoll(collision.contacts[0], trap.DirectionOverride * trap.ForceOverride, trap.ForceMode);
+        //     return;
+        // }
+    //-------------------------------------------------------------------------
     }
 
     void FixedUpdate()
@@ -152,6 +157,25 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        foreach(Collider collider in _colliders)
+        {
+            collider.enabled = true;
+        }
+    }
+
+    public void AccurateRagdoll(Vector3 force, ForceMode forceMode, float ragdollDuration)
+    {
+        _ragdollDuration += ragdollDuration;
+        _isRagdolled = true;
+        _animator.enabled = false;
+        _mainCollider.enabled = false;
+        _mainRigidbody.isKinematic = true;
+
+        foreach(Rigidbody rigidbody in _rigidbodies)
+        {
+            rigidbody.isKinematic = false;
+            rigidbody.AddForce(force, forceMode);
+        }
         foreach(Collider collider in _colliders)
         {
             collider.enabled = true;
