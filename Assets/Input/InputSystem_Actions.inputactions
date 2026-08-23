@@ -61,6 +61,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Unleash",
+                    "type": "Button",
+                    "id": "a21dbc7c-b530-4694-ba01-2518d1510426",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Scroll",
                     "type": "Value",
                     "id": "978d7234-56d6-4473-b4f4-f68c960575e9",
@@ -744,6 +753,28 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "10",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4ebacf1-6db8-4284-acb5-cb413e829abe",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Unleash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "649923f3-628d-4fcb-85ad-87d5e9d98306",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Unleash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

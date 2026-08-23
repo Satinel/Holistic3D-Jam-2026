@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public static event Action<Enemy> OnAnyEnemySpawned, OnAnyEnemyDestroyed;
+
     [field:SerializeField] public int CoreValue { get; private set; } = 1;
 
     [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f, _destroyDelay = 3f; //_deceleration = 5f;
@@ -24,10 +27,12 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         _health.OnDeath += OnDeath;
+        OnAnyEnemySpawned?.Invoke(this);
     }
 
     void OnDestroy()
     {
+        OnAnyEnemyDestroyed?.Invoke(this);
         _health.OnDeath -= OnDeath;
     }
 

@@ -9,6 +9,7 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] PlayerController _player;
     [SerializeField] GameObject[] _icons;
     [SerializeField] Image[] _iconHighlights;
+    [SerializeField] GameObject _nextWaveMessage, _canSellMessage;
 
     Health _playerHealth;
     Mana _playerMana;
@@ -22,20 +23,26 @@ public class PlayerHUD : MonoBehaviour
 
         _player.ReportTotalItems += Player_ReportTotalItems;
         _player.OnActiveItemChanged += Player_OnActiveItemChanged;
+        _player.OnCanSellTrap += Player_OnCanSellTrap;
         _playerHealth.OnHealthChanged += PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged += PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged += PlayerWallet_OnMoneyChanged;
         Core.OnCoreValueChanged += Core_OnCoreValueChanged;
+        LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
+        LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
     }
 
     void OnDestroy()
     {
         _player.ReportTotalItems -= Player_ReportTotalItems;
         _player.OnActiveItemChanged -= Player_OnActiveItemChanged;
+        _player.OnCanSellTrap -= Player_OnCanSellTrap;
         _playerHealth.OnHealthChanged -= PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged -= PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged -= PlayerWallet_OnMoneyChanged;
         Core.OnCoreValueChanged -= Core_OnCoreValueChanged;
+        LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
+        LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
     }
 
     void Player_ReportTotalItems(int totalItems)
@@ -56,6 +63,11 @@ public class PlayerHUD : MonoBehaviour
         }
 
         _iconHighlights[index].enabled = true;
+    }
+
+    void Player_OnCanSellTrap(bool canSell)
+    {
+        _canSellMessage.SetActive(canSell);
     }
 
     void PlayerHealth_OnHealthChanged(int currentHealth, int maxHealth)
@@ -80,5 +92,15 @@ public class PlayerHUD : MonoBehaviour
     void Core_OnCoreValueChanged(int value)
     {
         _coreText.text = value.ToString();
+    }
+
+    void LevelManager_OnWaveStarted()
+    {
+        _nextWaveMessage.SetActive(false);
+    }
+
+    void LevelManager_OnWaveCompleted(int _)
+    {
+        _nextWaveMessage.SetActive(true);
     }
 }

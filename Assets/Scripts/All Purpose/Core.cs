@@ -14,6 +14,16 @@ public class Core : MonoBehaviour
     int _currentCharge;
     bool _coreDestroyed;
 
+    void Awake()
+    {
+        Health.OnAnyHealthDeath += Health_OnAnyHealthDeath;
+    }
+
+    void OnDestroy()
+    {
+        Health.OnAnyHealthDeath -= Health_OnAnyHealthDeath;
+    }
+
     void Start()
     {
         _currentCharge = _maxCharge;
@@ -31,7 +41,7 @@ public class Core : MonoBehaviour
         }
     }
 
-    void LowerCoreCharge(int amount)    // TODO ? If the player can die, call this on player death with an amount of ~5
+    void LowerCoreCharge(int amount)
     {
             _currentCharge -= amount;
             _currentCharge = _currentCharge < 0 ? 0 : _currentCharge;
@@ -45,5 +55,12 @@ public class Core : MonoBehaviour
                 _collider.isTrigger = false;
                 OnCoreDestroyed?.Invoke();
             }
+    }
+
+    void Health_OnAnyHealthDeath(Health health)
+    {
+        if(!health.IsPlayer) { return; }
+
+        LowerCoreCharge(5); // Note : 5 is arbitrary but probably fine, if the player even CAN die by jam time
     }
 }

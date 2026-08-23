@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public event System.Action OnFinalWaveSpawned;
-
     [System.Serializable] class Wave
     {
         public Enemy[] Enemies;
@@ -13,14 +11,17 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Transform[] _spawnPoints;
     [SerializeField] float _minSpawnTime = 0.35f, _maxSpawnTime = 0.85f;
 
-    int _waveIndex, _enemyIndex;
+    int _waveIndex = 0, _enemyIndex = 0;
     float _spawnTimer = 1f;
-    bool _isSpawning =  true, _isFinished;
+    bool _isSpawning = false, _isFinished = false;
+    public bool IsSpawning => _isSpawning;
+    public int TotalWaves => _waves.Length;
 
     void Update()
     {
         if(!_isSpawning || _isFinished) { return; }
         if(_waveIndex >= _waves.Length) { return; }
+        if(_waves[_waveIndex].Enemies.Length <= 0) { return; }
 
         if(_spawnTimer > 0)
         {
@@ -40,16 +41,8 @@ public class EnemySpawner : MonoBehaviour
 
             if(_enemyIndex >= _waves[_waveIndex].Enemies.Length)
             {
-                // _isSpawning = false;
+                _isSpawning = false;
                 _enemyIndex = 0;
-                _waveIndex++;
-_spawnTimer = 30f;  // TODO : Player triggers the next wave through input when they choose
-
-                if(_waveIndex >= _waves.Length)
-                {
-                    _isFinished = true;
-                    OnFinalWaveSpawned?.Invoke();
-                }
             }
             else
             {
@@ -58,9 +51,26 @@ _spawnTimer = 30f;  // TODO : Player triggers the next wave through input when t
         }
     }
 
-    public void BeginSpawning()
+    void BeginSpawning()
     {
         _enemyIndex = 0;
         _isSpawning = true;
+    }
+
+    public void StartSpawning(int index)
+    {
+        if(_isFinished) { return; }
+
+        _waveIndex = index;
+
+        if(_waveIndex + 1 >= _waves.Length)
+        {
+            _isFinished = true;
+        }
+
+        if(gameObject.activeSelf && !_isSpawning)
+        {
+            BeginSpawning();
+        }
     }
 }

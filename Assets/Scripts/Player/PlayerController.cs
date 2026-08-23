@@ -4,6 +4,7 @@ using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
+    public event Action<bool> OnCanSellTrap;
     public event Action<int> ReportTotalItems;
     public event Action<int> OnActiveItemChanged;
 
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
     float _currentXAngle = 0f;
-    bool _isDead, _inSellMode, _canBuyTrap, _canSellTrap;
+    bool _isDead, _inSellMode, _canBuyTrap, _canSellTrap, _isLevelOver;
     int _itemIndex = 0;
     Item _activeItem;
     BuyableTrap _activeTrap;
@@ -35,11 +36,21 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _myHealth.OnDeath += MyHealth_OnDeath;
+
+        LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
+        LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
+        LevelManager.OnLevelCompleted += LevelManager_LevelOver;
+        LevelManager.OnLevelFailed += LevelManager_LevelOver;
     }
 
     void OnDestroy()
     {
         _myHealth.OnDeath -= MyHealth_OnDeath;
+
+        LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
+        LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
+        LevelManager.OnLevelCompleted -= LevelManager_LevelOver;
+        LevelManager.OnLevelFailed -= LevelManager_LevelOver;
     }
 
     void OnEnable()
@@ -98,15 +109,21 @@ public class PlayerController : MonoBehaviour
             _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
             OnActiveItemChanged?.Invoke(_itemIndex);
         }
+
+        _inSellMode = true;
     }
 
     void Update()
     {
+        if(_isDead || _isLevelOver) { return; }
+
         MovePlayer();
     }
 
     void LateUpdate()
     {
+        if(_isDead || _isLevelOver) { return; }
+
         RotateCameraTarget();
         _aimPositionMarker.position = _cinemachineThirdPersonAim.AimTarget;
         CheckSocket();
@@ -175,12 +192,17 @@ public class PlayerController : MonoBehaviour
         {
             if(hit.collider.TryGetComponent(out TrapSocket socket))
             {
+                if(_activeSocket && _activeSocket != socket)
+                {
+                    _activeSocket.HighlightTrap(false);
+                }
                 _activeSocket = socket;
 
-                if(_activeTrap.CanPlaceTrap(_activeSocket))
+                if(_activeTrap != null && _activeTrap.CanPlaceTrap(_activeSocket))
                 {
                     _activeSocket.HighlightTrap(false);
                     _canSellTrap = false;
+                    OnCanSellTrap?.Invoke(_canSellTrap);
                     _canBuyTrap = _wallet.CanAfford(_activeTrap.BuyPrice);
 
                     if(_previewModel == null)
@@ -213,7 +235,7 @@ public class PlayerController : MonoBehaviour
                     _canBuyTrap = false;
                     _activeSocket.HighlightTrap(true);
                     _canSellTrap = true;
-                    // TODO : Activate UI prompt for selling
+                    OnCanSellTrap?.Invoke(_canSellTrap);
                 }
             }
             else
@@ -229,9 +251,9 @@ public class PlayerController : MonoBehaviour
 
     void CancelTrapCommerce()
     {
-        // TODO : Deactivate UI prompt for selling
         _canBuyTrap = false;
         _canSellTrap = false;
+        OnCanSellTrap?.Invoke(_canSellTrap);
         if(_activeSocket != null)
         {
             _activeSocket.HighlightTrap(false);
@@ -308,12 +330,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void InputManager_OnSellPressed()   // TODO : Keybind for Sell (probably E)
+    void InputManager_OnSellPressed()
     {
         if(!_inSellMode) { return; }
         if(!_canSellTrap) { return; }
         if(!_activeSocket) { return; }
 
+        _canSellTrap = false;
+        OnCanSellTrap?.Invoke(_canSellTrap);
         _activeSocket.SellTrap();
     }
 
@@ -365,6 +389,23 @@ public class PlayerController : MonoBehaviour
                 _animator.SetTrigger(DEATH_HASH);
                 // TODO : Attach an animator and have a death animation (and a model, etc.)
             }
+            // TODO : If Level doesn't end as a result of player death, respawn
         }
+    }
+
+    void LevelManager_OnWaveStarted()
+    {
+        _inSellMode = false;
+    }
+
+    void LevelManager_OnWaveCompleted(int _)
+    {
+        _inSellMode = true;
+    }
+
+    void LevelManager_LevelOver()
+    {
+        _isLevelOver = true;
+        this.enabled = false;   // This seems like the simplest way to disable all input
     }
 }

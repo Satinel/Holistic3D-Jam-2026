@@ -13,12 +13,14 @@ public class Wallet : MonoBehaviour
     {
         Health.OnAnyHealthDeath += Health_OnAnyHealthDeath;
         TrapSocket.OnAnyTrapSold += TrapSocket_OnAnyTrapSold;
+        LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
     }
 
     void OnDestroy()
     {
         Health.OnAnyHealthDeath -= Health_OnAnyHealthDeath;
         TrapSocket.OnAnyTrapSold -= TrapSocket_OnAnyTrapSold;
+        LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
     }
 
     void Start()
@@ -57,5 +59,10 @@ public class Wallet : MonoBehaviour
     void TrapSocket_OnAnyTrapSold(int soldPrice)
     {
         GainMoney(soldPrice);
+    }
+
+    void LevelManager_OnWaveCompleted(int reward)
+    {
+        GainMoney(reward);
     }
 }
