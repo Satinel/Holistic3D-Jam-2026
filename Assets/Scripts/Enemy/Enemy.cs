@@ -4,7 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [field:SerializeField] public int CoreValue { get; private set; } = 1;
 
-    [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _deceleration = 5f, _turnSpeed = 7.5f, _destroyDelay = 3f;
+    [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f, _destroyDelay = 3f; //_deceleration = 5f;
     [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
     [SerializeField] Health _health;
     [SerializeField] Collider _mainCollider;
@@ -92,16 +92,11 @@ public class Enemy : MonoBehaviour
 
         RotateTowardDestination();
 
-        float forwardVelocity = Vector3.Dot(_mainRigidbody.linearVelocity, transform.forward);
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
+        float forwardVelocity = Vector3.Dot(_mainRigidbody.linearVelocity, forward);
 
-        if(forwardVelocity < _moveSpeed)
-        {
-            _mainRigidbody.AddForce(transform.forward * _acceleration, ForceMode.Force);
-        }
-        else if(forwardVelocity > _moveSpeed)
-        {
-            _mainRigidbody.AddForce(-transform.forward * _deceleration, ForceMode.Force);
-        }
+        float speedDifference = _moveSpeed - forwardVelocity;
+        _mainRigidbody.AddForce(speedDifference * _acceleration * forward, ForceMode.Acceleration);
     }
 
     void RotateTowardDestination()

@@ -12,6 +12,10 @@ public class Waypoint : MonoBehaviour
         {
             enemy.SetDestination(GetNextWaypoint());
         }
+        else if(other.TryGetComponent(out WaypointDetector detector))
+        {
+            detector.ThisEnemy.SetDestination(GetNextWaypoint());
+        }
     }
 
     Transform GetNextWaypoint()
