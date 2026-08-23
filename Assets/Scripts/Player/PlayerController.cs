@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     Item _activeItem;
     BuyableTrap _activeTrap;
     TrapSocket _activeSocket;
-    GameObject _previewModel;
+    TrapPreview _previewModel;
 
     static readonly int DEATH_HASH = Animator.StringToHash("Death");
 
@@ -188,6 +188,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        _canBuyTrap = false;
+
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, Mathf.Infinity, _socketLayer))
         {
             if(hit.collider.TryGetComponent(out TrapSocket socket))
@@ -195,6 +197,7 @@ public class PlayerController : MonoBehaviour
                 if(_activeSocket && _activeSocket != socket)
                 {
                     _activeSocket.HighlightTrap(false);
+                    RemoveTrapPreview();
                 }
                 _activeSocket = socket;
 
@@ -207,19 +210,20 @@ public class PlayerController : MonoBehaviour
 
                     if(_previewModel == null)
                     {
-                        _previewModel = Instantiate(_activeTrap.PreviewPrefab);;
+                        _previewModel = Instantiate(_activeTrap.PreviewPrefab.gameObject).GetComponent<TrapPreview>();
                     }
 
                     _previewModel.transform.SetPositionAndRotation(socket.transform.position, socket.transform.rotation);
 
                     if(_canBuyTrap)
                     {
-                        _previewModel.GetComponent<Renderer>().material = _buyMaterial;
+                        _previewModel.SetMaterials(_buyMaterial);
                     }
                     else
                     {
-                        _previewModel.GetComponent<Renderer>().material = _poorMaterial;
+                        _previewModel.SetMaterials(_poorMaterial);
                     }
+                    _previewModel.ShowRange(_canBuyTrap);
                     return;
                 }
 
@@ -235,6 +239,11 @@ public class PlayerController : MonoBehaviour
                     _canBuyTrap = false;
                     _activeSocket.HighlightTrap(true);
                     _canSellTrap = true;
+                    OnCanSellTrap?.Invoke(_canSellTrap);
+                }
+                else
+                {
+                    _canSellTrap = false;
                     OnCanSellTrap?.Invoke(_canSellTrap);
                 }
             }
@@ -266,7 +275,7 @@ public class PlayerController : MonoBehaviour
     {
         if(_previewModel != null)
         {
-            Destroy(_previewModel);
+            Destroy(_previewModel.gameObject);
             _previewModel = null;
         }
     }

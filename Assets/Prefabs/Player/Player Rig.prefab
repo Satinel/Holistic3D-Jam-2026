@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 7162693873742941381}
   - component: {fileID: 8212515531238699994}
   m_Layer: 0
-  m_Name: Test Trap
+  m_Name: Spring Trap Buyable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   <IsTrap>k__BackingField: 1
   <BuyPrice>k__BackingField: 100
   <TrapPosition>k__BackingField: 0
-  <PreviewPrefab>k__BackingField: {fileID: 4181882122987973882, guid: 948aaa44f4979ba4cbe9e8870cf67efb, type: 3}
+  <PreviewPrefab>k__BackingField: {fileID: -7515853688993139911, guid: 948aaa44f4979ba4cbe9e8870cf67efb, type: 3}
   _size: {x: 1, y: 1}
   _trapPrefab: {fileID: 3840993093556309465, guid: bb1a40affdf0b1e45ad2cb4142c406cb, type: 3}
 --- !u!1 &2020367325111526498
@@ -180,8 +180,8 @@ MonoBehaviour:
   _socketLayer:
     serializedVersion: 2
     m_Bits: 4352
-  _buyMaterial: {fileID: 2100000, guid: c77619660647838459141f47a56579cb, type: 2}
-  _poorMaterial: {fileID: 2100000, guid: aa86592759fe5254e842916363800b18, type: 2}
+  _buyMaterial: {fileID: 2100000, guid: 2fa7670c359937f4a9041f3c28376b67, type: 2}
+  _poorMaterial: {fileID: 2100000, guid: 306cf8acdeb0dac4688b0ff4900e40bb, type: 2}
 --- !u!114 &4957972843577305603
 MonoBehaviour:
   m_ObjectHideFlags: 0

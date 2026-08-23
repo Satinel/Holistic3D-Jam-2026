@@ -7,6 +7,7 @@ public class Waypoint : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(_nextWaypoints.Length <= 0) { return; }
+        if(!other.CompareTag(Trap.ENEMY_TAG)) { return; }
 
         if(other.TryGetComponent(out Enemy enemy))
         {

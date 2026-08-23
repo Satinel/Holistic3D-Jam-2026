@@ -53,6 +53,7 @@ public class EnemySpawner : MonoBehaviour
 
     void BeginSpawning()
     {
+        _spawnTimer = 1;
         _enemyIndex = 0;
         _isSpawning = true;
     }
@@ -63,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
 
         _waveIndex = index;
 
-        if(_waveIndex + 1 >= _waves.Length)
+        if(_waveIndex + 1 > _waves.Length)
         {
             _isFinished = true;
         }

@@ -4,7 +4,7 @@ public class BuyableTrap : Item
 {
     [field:SerializeField] public int BuyPrice { get; protected set; } = 100;
     [field:SerializeField] public TrapPosition TrapPosition { get; protected set; } = TrapPosition.Floor;
-    [field:SerializeField] public GameObject PreviewPrefab { get; private set; }
+    [field:SerializeField] public TrapPreview PreviewPrefab { get; private set; }
     
     [SerializeField] Vector2 _size = Vector2.one;
     [SerializeField] Trap _trapPrefab;

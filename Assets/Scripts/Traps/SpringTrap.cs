@@ -5,13 +5,16 @@ public class SpringTrap : Trap
     [SerializeField] float _forceMultiplyer;
     [SerializeField] Vector3 _forceDirection = Vector3.up;
 
-    bool _hasTriggered;
+    bool _hasTriggered, _isRecharging;
     float _timer;
 
     void OnTriggerEnter(Collider other)
     {
+        if(_isRecharging) { return; }
+
         if(!_hasTriggered && other.CompareTag(ENEMY_TAG))
         {
+            _hasTriggered = true;
             _animator.SetTrigger(TRIGGER_HASH);
         }
 
@@ -19,22 +22,22 @@ public class SpringTrap : Trap
         {
             HitEnemy(enemy);
         }
-        else if(other.TryGetComponent(out WaypointDetector detector))   // TODO? : Replace this with a new class attached to Ragdoll Rigidbody (if this doesn't work)
+        else if(other.TryGetComponent(out WaypointDetector detector))
         {
-Debug.Log("It worked");
             HitEnemy(detector.ThisEnemy);
         }
     }
 
     void Update()
     {
-        if(_hasTriggered)
+        if(_isRecharging)
         {
             _timer += Time.deltaTime;
 
             if(_timer >= RechargeTime)
             {
                 _hasTriggered = false;
+                _isRecharging = false;
                 _timer = 0;
             }
         }
@@ -47,5 +50,10 @@ Debug.Log("It worked");
         {
             enemy.Health.LoseHealth(Damage);
         }
+    }
+
+    void SetRechargingAnimationEvent()
+    {
+        _isRecharging = true;
     }
 }
