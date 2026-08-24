@@ -2326,7 +2326,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097401372419688804}
-  m_Material: {fileID: 13400000, guid: 9b2c63c7aa6ff1e45b7bf67b0d30ff49, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2531,7 +2531,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 3
+  m_CollisionDetection: 2
 --- !u!144 &630587978497572810
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -4445,7 +4445,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 3
+  m_CollisionDetection: 2
 --- !u!144 &7807478684097309220
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -7317,7 +7317,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4373525944036908840}
-  m_Material: {fileID: 13400000, guid: 9b2c63c7aa6ff1e45b7bf67b0d30ff49, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -9302,9 +9302,6 @@ MonoBehaviour:
   _mainCollider: {fileID: 345493617949419171}
   _mainRigidbody: {fileID: 1177097325106653104}
   _animator: {fileID: 4889558895641657395}
-  _obstacleLayerMask:
-    serializedVersion: 2
-    m_Bits: 257
   _ragdoll: {fileID: 4820830033733442918}
   _colliders:
   - {fileID: 492191918292376147}
@@ -12061,4 +12058,4 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 3
+  m_CollisionDetection: 2

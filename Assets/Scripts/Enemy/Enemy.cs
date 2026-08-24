@@ -46,36 +46,6 @@ public class Enemy : MonoBehaviour
 
         Ragdoll(collision.contacts[0], collision.relativeVelocity * mass);
         _ragdollDuration += _ragdollRecoveryTime;
-
-    //-------------------------------- NONSENSE --------------------------------
-        // if(collision.gameObject.TryGetComponent(out Trap trap))
-        // {
-        //     if(trap.Damage > 0)
-        //     {
-        //         _health.LoseHealth(trap.Damage);
-        //     }
-
-        //     if(!trap.UsesPhysics)
-        //     {
-        //         trap.TrapAction(this);
-        //         return;
-        //     }
-
-        //     _ragdollDuration += trap.RagdollDuration;
-        // }
-        // else
-        // {
-        //     _ragdollDuration += _ragdollRecoveryTime;
-        // }
-
-        // if(_isRagdolled) { return; }    // Note : This entire method will never be called while isRagdolled == true because the collider is disabled, so...
-
-        // if(trap && trap.OverridesPhysics)   // TODO : Overriding physics while isRagdolled requires code attached to each collider in the ragdoll itself, it can't be done here
-        // {
-        //     Ragdoll(collision.contacts[0], trap.DirectionOverride * trap.ForceOverride, trap.ForceMode);
-        //     return;
-        // }
-    //-------------------------------------------------------------------------
     }
 
     void FixedUpdate()
