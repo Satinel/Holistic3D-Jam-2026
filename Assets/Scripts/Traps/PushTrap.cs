@@ -2,48 +2,54 @@ using UnityEngine;
 
 public class PushTrap : Trap
 {
-    [SerializeField] Collider _triggerCollider, _physicsCollider;
+    [SerializeField] float _forceMultiplyer;
+    [SerializeField] Vector3 _forceDirection = Vector3.up;
 
+    bool _hasTriggered, _isRecharging;
     float _timer;
 
     void Start()
     {
-        _physicsCollider.enabled = false;
-        _timer = RechargeTime;
-        _triggerCollider.enabled = true;
+        _forceDirection = transform.up;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(ENEMY_TAG))
+        if(_isRecharging) { return; }
+
+        if(!_hasTriggered && other.CompareTag(ENEMY_TAG))
         {
-            Trigger();
+            _hasTriggered = true;
+            _animator.SetTrigger(TRIGGER_HASH);
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if(_timer < RechargeTime)
+        if(_isRecharging)
         {
-            _timer = _timer + Time.deltaTime >= RechargeTime ? RechargeTime : _timer + Time.deltaTime;
+            _timer += Time.deltaTime;
 
-            if(_timer == RechargeTime)
+            if(_timer >= RechargeTime)
             {
-                _triggerCollider.enabled = true;
+                _hasTriggered = false;
+                _isRecharging = false;
+                _timer = 0;
             }
         }
     }
 
-    void Trigger()
+    public override void HitEnemy(Enemy enemy)
     {
-        _triggerCollider.enabled = false;
-        _physicsCollider.enabled = true;
-        _timer = 0;
-        _animator.SetTrigger(TRIGGER_HASH);
+        enemy.AccurateRagdoll(_forceDirection * _forceMultiplyer, ForceMode, RagdollDuration);
+        if(Damage > 0)
+        {
+            enemy.Health.LoseHealth(Damage);
+        }
     }
 
-    void ActivationFinishedAnimationEvent()
+    void SetRechargingAnimationEvent()
     {
-        _physicsCollider.enabled = false;
+        _isRecharging = true;
     }
 }

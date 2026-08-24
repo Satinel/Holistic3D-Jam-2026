@@ -29,9 +29,10 @@ public class Trap : MonoBehaviour
 
     [SerializeField] protected Animator _animator;
 
-
     public void Initialize(int price)
     {
         SellPrice = price;
     }
+
+    public virtual void HitEnemy(Enemy enemy){}
 }

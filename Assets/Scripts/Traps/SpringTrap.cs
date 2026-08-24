@@ -43,7 +43,7 @@ public class SpringTrap : Trap
         }
     }
 
-    void HitEnemy(Enemy enemy)
+    public override void HitEnemy(Enemy enemy)
     {
         enemy.AccurateRagdoll(_forceDirection * _forceMultiplyer, ForceMode, RagdollDuration);
         if(Damage > 0)
