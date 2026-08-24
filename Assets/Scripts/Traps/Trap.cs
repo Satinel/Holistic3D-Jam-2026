@@ -35,4 +35,5 @@ public class Trap : MonoBehaviour
     }
 
     public virtual void HitEnemy(Enemy enemy){}
+    public virtual void GetForceDirection(Vector3 direction){}
 }
