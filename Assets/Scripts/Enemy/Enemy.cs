@@ -89,11 +89,12 @@ public class Enemy : MonoBehaviour
             if(_ragddollTimer >= _ragdollDuration)
             {
                 RecoverFromRagdoll();
-                return;
             }
         }
-
-        Move();
+        else
+        {
+            Move();
+        }
     }
 
     void Move()
@@ -165,7 +166,8 @@ public class Enemy : MonoBehaviour
 
     public void AccurateRagdoll(Vector3 force, ForceMode forceMode, float ragdollDuration)
     {
-        _ragdollDuration += ragdollDuration;
+        _ragdollDuration = ragdollDuration > _ragdollDuration ? ragdollDuration : _ragdollDuration;
+        _ragddollTimer = 0;
         _isRagdolled = true;
         _animator.enabled = false;
         _mainCollider.enabled = false;

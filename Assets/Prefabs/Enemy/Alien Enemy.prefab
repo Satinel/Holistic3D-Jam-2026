@@ -771,7 +771,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &7151926995488033826
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2368,7 +2368,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &8136415549849332689
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2531,7 +2531,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &630587978497572810
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -4445,7 +4445,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &7807478684097309220
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -5200,7 +5200,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &2703064991082201902
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -5775,7 +5775,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &7999127740499258858
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -6086,7 +6086,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &7831737912177315775
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -7359,7 +7359,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &8817994142397559487
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -8082,7 +8082,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &7504300992163598602
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -9302,6 +9302,9 @@ MonoBehaviour:
   _mainCollider: {fileID: 345493617949419171}
   _mainRigidbody: {fileID: 1177097325106653104}
   _animator: {fileID: 4889558895641657395}
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 257
   _ragdoll: {fileID: 4820830033733442918}
   _colliders:
   - {fileID: 492191918292376147}
@@ -9907,7 +9910,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!144 &1194313674646819620
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -12058,4 +12061,4 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
