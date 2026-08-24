@@ -10,10 +10,14 @@ public class Payload : MonoBehaviour
 
         if(other.TryGetComponent(out Enemy enemy))
         {
+            if(enemy.Health.IsDead) { return; }
+
             _parentTrap.HitEnemy(enemy);
         }
         else if(other.TryGetComponent(out WaypointDetector detector))
         {
+            if(detector.ThisEnemy.Health.IsDead) { return; }
+
             _parentTrap.HitEnemy(detector.ThisEnemy);
         }
     }

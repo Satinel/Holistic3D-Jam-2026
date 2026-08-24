@@ -16,8 +16,22 @@ public class PushTrap : Trap
     void OnTriggerEnter(Collider other)
     {
         if(_isRecharging) { return; }
+        if(!other.CompareTag(ENEMY_TAG)) { return; }
 
-        if(!_hasTriggered && other.CompareTag(ENEMY_TAG))
+        Enemy detectedEnemy = null;
+
+        if(other.TryGetComponent(out Enemy enemy))
+        {
+            detectedEnemy = enemy;
+        }
+        else if(other.TryGetComponent(out WaypointDetector detector))
+        {
+            detectedEnemy = detector.ThisEnemy;
+        }
+
+        if(detectedEnemy == null || detectedEnemy.Health.IsDead) { return; }
+
+        if(!_hasTriggered)
         {
             _hasTriggered = true;
             _animator.SetTrigger(TRIGGER_HASH);

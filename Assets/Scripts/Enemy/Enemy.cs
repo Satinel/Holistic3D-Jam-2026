@@ -39,13 +39,13 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if(_health.IsDead) { return; }
         if(!collision.gameObject.CompareTag("Trap")) { return; }
         if(collision.gameObject.GetComponent<Trap>()) { return; }   // This should only handle objects without attached Trap monobehaviours (like projectiles)
 
         float mass = collision.rigidbody ? collision.rigidbody.mass : 1;
 
         Ragdoll(collision.contacts[0], collision.relativeVelocity * mass);
-        _ragdollDuration += _ragdollRecoveryTime;
     }
 
     void FixedUpdate()
@@ -96,6 +96,9 @@ public class Enemy : MonoBehaviour
 
     void Ragdoll(ContactPoint contactPoint, Vector3 force, ForceMode forceMode = ForceMode.Impulse)
     {
+        _ragdollDuration = _ragdollDuration < _ragdollRecoveryTime ? _ragdollRecoveryTime : _ragdollDuration;
+        _ragddollTimer = 0;
+
         if(_isRagdolled) { return; }
 
         _isRagdolled = true;
