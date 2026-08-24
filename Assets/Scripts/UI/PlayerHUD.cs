@@ -8,6 +8,7 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] Slider _healthSlider, _manaSlider;
     [SerializeField] PlayerController _player;
     [SerializeField] GameObject[] _icons;
+    [SerializeField] Image[] _iconImages;
     [SerializeField] Image[] _iconHighlights;
     [SerializeField] GameObject _nextWaveMessage, _canSellMessage;
 
@@ -45,11 +46,12 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
     }
 
-    void Player_ReportTotalItems(int totalItems)
+    void Player_ReportTotalItems(Item[] items)
     {
-        for(int i = 0; i < totalItems; i++)
+        for(int i = 0; i < items.Length; i++)
         {
             _icons[i].SetActive(true);
+            _iconImages[i].sprite = items[i].Icon;
         }
     }
 

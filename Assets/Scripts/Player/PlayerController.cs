@@ -5,7 +5,7 @@ using Unity.Cinemachine;
 public class PlayerController : MonoBehaviour
 {
     public event Action<bool> OnCanSellTrap;
-    public event Action<int> ReportTotalItems;
+    public event Action<Item[]> ReportTotalItems;
     public event Action<int> OnActiveItemChanged;
 
     [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 1.5f;
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         if(_items.Length > 0)
         {
-            ReportTotalItems?.Invoke(_items.Length);
+            ReportTotalItems?.Invoke(_items);
             // TODO ? Rather than sending an int, send the array of items with icons/costs to be set in PlayerHUD
             _activeItem = _items[_itemIndex];
             _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;

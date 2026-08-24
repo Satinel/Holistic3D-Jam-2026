@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 21300000, guid: f9338bb18de8fa64ca01008b616ed5bc, type: 3}
   <BuyPrice>k__BackingField: 100
   <TrapPosition>k__BackingField: 0
   <PreviewPrefab>k__BackingField: {fileID: -7515853688993139911, guid: 948aaa44f4979ba4cbe9e8870cf67efb, type: 3}
@@ -493,6 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shove
   <IsTrap>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 21300000, guid: a14e6ee680df42f4c99bf69bc3d6b9ca, type: 3}
   _damage: 0
   _forceMultiplyer: 25
   _spawnPoint: {fileID: 1074038391351336449}
@@ -598,7 +600,7 @@ GameObject:
   - component: {fileID: 199585906568999915}
   - component: {fileID: 7952293838711724501}
   m_Layer: 0
-  m_Name: Test Trap 2
+  m_Name: Push Trap Buyable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -632,9 +634,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
-  <BuyPrice>k__BackingField: 100
+  <Icon>k__BackingField: {fileID: 21300000, guid: ddaba6aa939d9514a9a40ee1212af8dd, type: 3}
+  <BuyPrice>k__BackingField: 90
   <TrapPosition>k__BackingField: 1
-  <PreviewPrefab>k__BackingField: {fileID: 562670957820120424, guid: 1b9fc0f525b802342871835e02c5f4d6, type: 3}
+  <PreviewPrefab>k__BackingField: {fileID: -9049143495794857357, guid: 1727486c4f012fa4c9a7c6c87e035610, type: 3}
   _size: {x: 1, y: 1}
   _trapPrefab: {fileID: 7374095726659422914, guid: 3fb0bd66527b9d542963219d82303ebe, type: 3}
 --- !u!1 &6308799473111567811

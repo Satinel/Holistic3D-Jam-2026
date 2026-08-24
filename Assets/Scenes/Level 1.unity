@@ -28366,10 +28366,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Rig
       objectReference: {fileID: 0}
-    - target: {fileID: 5833635987429462672, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
-      propertyPath: m_Name
-      value: Push Trap Buyable
-      objectReference: {fileID: 0}
     - target: {fileID: 7278810624925462545, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -28410,14 +28406,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7952293838711724501, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
-      propertyPath: <BuyPrice>k__BackingField
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 7952293838711724501, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
-      propertyPath: <PreviewPrefab>k__BackingField
-      value: 
-      objectReference: {fileID: -9049143495794857357, guid: 1727486c4f012fa4c9a7c6c87e035610, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
