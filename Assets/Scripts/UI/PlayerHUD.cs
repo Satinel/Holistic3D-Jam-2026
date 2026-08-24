@@ -9,8 +9,10 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] PlayerController _player;
     [SerializeField] GameObject[] _icons;
     [SerializeField] Image[] _iconImages;
+    [SerializeField] TextMeshProUGUI[] _iconCostTexts;
     [SerializeField] Image[] _iconHighlights;
     [SerializeField] GameObject _nextWaveMessage, _canSellMessage;
+    [SerializeField] Color _trapColor, _baseColor;
 
     Health _playerHealth;
     Mana _playerMana;
@@ -52,6 +54,8 @@ public class PlayerHUD : MonoBehaviour
         {
             _icons[i].SetActive(true);
             _iconImages[i].sprite = items[i].Icon;
+            _iconCostTexts[i].text = items[i].Cost <= 0 ? string.Empty : items[i].Cost.ToString();
+            _iconCostTexts[i].color = items[i].IsTrap ? _trapColor : _baseColor;
         }
     }
 

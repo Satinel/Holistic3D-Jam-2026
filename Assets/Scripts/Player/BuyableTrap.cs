@@ -12,6 +12,7 @@ public class BuyableTrap : Item
     void Awake()
     {
         IsTrap = true;
+        Cost = BuyPrice;
     }
 
     public bool CanPlaceTrap(TrapSocket activeSocket)
@@ -19,11 +20,11 @@ public class BuyableTrap : Item
         if(activeSocket.HasTrap) { return false; }
         if(activeSocket.SocketPosition != TrapPosition) { return false; }
 
-        if(_size.x > 1 || _size.y > 1)
-        {
-            // TODO : Assuming larger traps exist, check if Size fits surrounding TrapSockets
+        // if(_size.x > 1 || _size.y > 1)
+        // {
+            // TODO ? Assuming larger traps exist, check if Size fits surrounding TrapSockets
             // return [...];
-        }
+        // }
 
         return true;
     }
