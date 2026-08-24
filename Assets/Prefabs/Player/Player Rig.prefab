@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <Cost>k__BackingField: 5
   <Icon>k__BackingField: {fileID: 21300000, guid: f9338bb18de8fa64ca01008b616ed5bc, type: 3}
   <BuyPrice>k__BackingField: 100
   <TrapPosition>k__BackingField: 0
@@ -494,8 +495,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shove
   <IsTrap>k__BackingField: 0
+  <Cost>k__BackingField: 5
   <Icon>k__BackingField: {fileID: 21300000, guid: a14e6ee680df42f4c99bf69bc3d6b9ca, type: 3}
-  _damage: 0
+  _damage: 5
   _forceMultiplyer: 25
   _spawnPoint: {fileID: 1074038391351336449}
   _cannonballPrefab: {fileID: -7536709174669590218, guid: ded973ce211ffd942ba157059a5ff4d1, type: 3}
@@ -634,6 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <Cost>k__BackingField: 5
   <Icon>k__BackingField: {fileID: 21300000, guid: ddaba6aa939d9514a9a40ee1212af8dd, type: 3}
   <BuyPrice>k__BackingField: 90
   <TrapPosition>k__BackingField: 1

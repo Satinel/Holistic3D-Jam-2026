@@ -322,8 +322,10 @@ public class PlayerController : MonoBehaviour
 
         if(!_activeItem.IsTrap)
         {
+            if(_myMana.CurrentMana < _activeItem.Cost) { return; }  // TODO ? "Not enough energy" message (never tell the player it's really mana!!)
             RotateModelInstantly();
             _activeItem.PrimaryAction(_aimPositionMarker.position);
+            _myMana.SpendMana(_activeItem.Cost);
         }
     }
 
@@ -410,6 +412,8 @@ public class PlayerController : MonoBehaviour
     void LevelManager_OnWaveCompleted(int _)
     {
         _inSellMode = true;
+        _myMana.ResetMana();
+        _myHealth.ResetHealth();
     }
 
     void LevelManager_LevelOver()

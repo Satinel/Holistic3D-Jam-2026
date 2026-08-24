@@ -9,6 +9,7 @@ public class Mana : MonoBehaviour
 
     float _regenTimer;
     int _currentMana;
+    public int CurrentMana => _currentMana;
 
     void Start()
     {
@@ -31,7 +32,7 @@ public class Mana : MonoBehaviour
         }
     }
 
-    void SpendMana(int amount)
+    public void SpendMana(int amount)
     {
         _currentMana = Mathf.Max(_currentMana - amount, 0);
 

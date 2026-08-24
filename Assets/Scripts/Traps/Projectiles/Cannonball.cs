@@ -4,24 +4,32 @@ public class Cannonball : MonoBehaviour
 {
     [field:SerializeField] public Rigidbody Rigidbody { get; private set; }
 
-    [SerializeField] int _damage = 10;
-    [SerializeField] bool _destroyOnImpact;
+    [SerializeField] int _damage = 10, _penetration = 5;
+    [SerializeField] bool _destroyOnImpact, _usePenetration;
     [SerializeField] float _destructionDelay = 1.75f;
 
     void OnCollisionEnter(Collision collision)
     {
         if(_destroyOnImpact)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 0.1f);
         }
-
-        if(_damage <= 0) { return; }
 
         if(collision.gameObject.TryGetComponent(out Health health))
         {
-            if(health.IsPlayer) { return; } // This shouldn't ever happen but there's nothing wrong which making sure
+            if(health.IsPlayer) { return; } // This shouldn't ever happen but there's nothing wrong with making sure
 
-            health.LoseHealth(_damage);
+            if(_damage > 0)
+            {
+                health.LoseHealth(_damage);
+            }
+
+            _penetration = _usePenetration ? _penetration -1 : _penetration;
+
+            if(_penetration <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
