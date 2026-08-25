@@ -1191,9 +1191,9 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 21300000, guid: 0db1b0f20d4d91445bca35a8ddd540e7, type: 3}
   <BuyPrice>k__BackingField: 125
   <TrapPosition>k__BackingField: 2
-  <PreviewPrefab>k__BackingField: {fileID: -6580914942362227244, guid: 02fade36c7428ab44bf56acd633e6712, type: 3}
+  <PreviewPrefab>k__BackingField: {fileID: 6698504682365999681, guid: 566d992b48df9f6439f36fbe6a6ce5b2, type: 3}
   _size: {x: 1, y: 1}
-  _trapPrefab: {fileID: 3154503559914260140, guid: a52a8c7651f41b242bc5704444ca7b9d, type: 3}
+  _trapPrefab: {fileID: 9089455552382710355, guid: 329b38d4742d9654ba99ba0cd5236ed2, type: 3}
 --- !u!1001 &6055493650769628718
 PrefabInstance:
   m_ObjectHideFlags: 0

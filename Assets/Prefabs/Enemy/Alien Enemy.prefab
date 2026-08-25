@@ -9303,6 +9303,7 @@ MonoBehaviour:
   _mainRigidbody: {fileID: 1177097325106653104}
   _animator: {fileID: 4889558895641657395}
   _ragdoll: {fileID: 4820830033733442918}
+  _ragdollModel: {fileID: 8520355316149715777}
   _colliders:
   - {fileID: 492191918292376147}
   - {fileID: 4033192807561138583}

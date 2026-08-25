@@ -9,6 +9,11 @@ public class CannonTrap : Trap
     bool _canFire = true;
     float _timer;
 
+    void Start()
+    {
+        _timer = RechargeTime;
+    }
+
     void OnEnable()
     {
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;

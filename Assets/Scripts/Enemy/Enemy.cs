@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Animator _animator;
 
     [SerializeField] Rigidbody _ragdoll;
+    [SerializeField] ModelAnimator _ragdollModel;
     [SerializeField] Collider[] _colliders;
     [SerializeField] Rigidbody[] _rigidbodies;
     bool _isRagdolled, _isCrushed;
@@ -39,7 +40,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        _startingScaleY = transform.localScale.y;
+        _startingScaleY = _ragdollModel.transform.localScale.y;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -67,10 +68,6 @@ public class Enemy : MonoBehaviour
                 RecoverFromRagdoll();
             }
         }
-        else
-        {
-            Move();
-        }
 
         if(_isCrushed)
         {
@@ -81,10 +78,13 @@ public class Enemy : MonoBehaviour
                 RecoverFromCrushed();
             }
         }
+
+        Move();
     }
 
     void Move()
     {
+        if(_isRagdolled || _isCrushed) { return; }
         if(!_destination) { return; }
 
         RotateTowardDestination();
@@ -189,7 +189,10 @@ public class Enemy : MonoBehaviour
         _mainCollider.enabled = true;
         _mainRigidbody.isKinematic = false;
 
-        _animator.enabled = true;
+        if(!_isCrushed)
+        {
+            _animator.enabled = true;
+        }
         // TODO (but probably won't have time in a game jam) : Set to a stand up animation based on supine/prone position
 
         _isRagdolled = false;
@@ -199,16 +202,23 @@ public class Enemy : MonoBehaviour
 
     public void Crush(float newScaleY, float duration)
     {
+        if(_isRagdolled) { return; }
+
+        _animator.enabled = false;
         _crushedTimer = duration;
-        transform.localScale = new(transform.localScale.x, newScaleY, transform.localScale.z);
+        _ragdollModel.transform.localScale = new(_ragdollModel.transform.localScale.x, newScaleY, _ragdollModel.transform.localScale.z);
         _isCrushed = true;
     }
 
     void RecoverFromCrushed()
     {
-        transform.localScale = new(transform.localScale.x, _startingScaleY, transform.localScale.z);
+        _ragdollModel.transform.localScale = new(_ragdollModel.transform.localScale.x, _startingScaleY, _ragdollModel.transform.localScale.z);
         // TODO : Maybe play Pop sound effect from 2D Princess here
         _isCrushed = false;
+        if(!_isRagdolled)
+        {
+            _animator.enabled = true;
+        }
     }
 
     public void DisableRagdollGravity()
