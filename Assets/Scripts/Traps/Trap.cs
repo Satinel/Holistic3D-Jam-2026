@@ -29,11 +29,22 @@ public class Trap : MonoBehaviour
 
     [SerializeField] protected Animator _animator;
 
+    void Awake()
+    {
+        LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
+    }
+
+    void OnDestroy()
+    {
+        LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
+    }
+
     public void Initialize(int price)
     {
         SellPrice = price;
     }
 
+    protected virtual void LevelManager_OnWaveStarted(){}
     public virtual void HitEnemy(Enemy enemy){}
     public virtual void GetForceDirection(Vector3 direction){}
 }

@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
         if(_isDead || _isLevelOver) { return; }
 
         MovePlayer();
+        Gravity();
     }
 
     void LateUpdate()
@@ -145,6 +146,14 @@ public class PlayerController : MonoBehaviour
             _characterController.Move(_moveSpeed * Time.deltaTime * direction);
 
             RotateModel();
+        }
+    }
+
+    void Gravity()
+    {
+        if(transform.position.y > 0)
+        {
+            transform.position = new(transform.position.x, 0, transform.position.z);
         }
     }
 

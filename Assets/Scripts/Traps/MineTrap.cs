@@ -1,21 +1,19 @@
 using UnityEngine;
 
-public class PushTrap : Trap
+public class MineTrap : Trap
 {
-    [SerializeField] float _forceMultiplyer;
+    [SerializeField] float _forceMultiplyer = 50f;
+    [SerializeField] GameObject _mine;
+    [SerializeField] Payload _explosionRadius;
+    [SerializeField] Collider _mainCollider;
 
-    Vector3 _forceDirection = Vector3.up;
-    bool _hasTriggered, _isRecharging;
+    bool _isRecharging;
     float _timer;
-
-    void Start()
-    {
-        _forceDirection = transform.up;
-    }
 
     void OnTriggerEnter(Collider other)
     {
         if(_isRecharging) { return; }
+
         if(!other.CompareTag(ENEMY_TAG)) { return; }
 
         Enemy detectedEnemy = null;
@@ -31,12 +29,7 @@ public class PushTrap : Trap
 
         if(detectedEnemy == null || detectedEnemy.Health.IsDead) { return; }
 
-        if(!_hasTriggered)
-        {
-            _timer = 0;
-            _hasTriggered = true;
-            _animator.SetTrigger(TRIGGER_HASH);
-        }
+        Explode();
     }
 
     void Update()
@@ -44,29 +37,37 @@ public class PushTrap : Trap
         if(_isRecharging)
         {
             _timer += Time.deltaTime;
-
+            
             if(_timer >= RechargeTime)
             {
-                _hasTriggered = false;
                 _isRecharging = false;
                 _timer = 0;
+                _mine.SetActive(true);
+                _mainCollider.enabled = true;
             }
         }
     }
 
+    void Explode()
+    {
+        _mainCollider.enabled = false;
+        _timer = 0;
+        _isRecharging = true;
+
+        _explosionRadius.gameObject.SetActive(true);
+        // TODO : Explosion particle effects (it can auto-play as a component of _explosionRadius)
+
+        _mine.SetActive(false);
+    }
+
     public override void HitEnemy(Enemy enemy)
     {
-        enemy.AccurateRagdoll(_forceDirection * _forceMultiplyer, ForceMode, RagdollDuration);
+        enemy.AccurateRagdoll((enemy.transform.position - transform.position + Vector3.up).normalized * _forceMultiplyer, ForceMode, RagdollDuration);
 
         if(Damage > 0)
         {
             enemy.Health.LoseHealth(Damage);
         }
-    }
-
-    void SetRechargingAnimationEvent()
-    {
-        _isRecharging = true;
     }
 
     protected override void LevelManager_OnWaveStarted()

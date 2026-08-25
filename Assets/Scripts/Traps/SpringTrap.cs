@@ -3,10 +3,15 @@ using UnityEngine;
 public class SpringTrap : Trap
 {
     [SerializeField] float _forceMultiplyer;
-    [SerializeField] Vector3 _forceDirection = Vector3.up;
 
+    Vector3 _forceDirection = Vector3.up;
     bool _hasTriggered, _isRecharging;
     float _timer;
+
+    void Start()
+    {
+        _forceDirection = transform.up;
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -28,6 +33,7 @@ public class SpringTrap : Trap
 
         if(!_hasTriggered)
         {
+            _timer = 0;
             _hasTriggered = true;
             _animator.SetTrigger(TRIGGER_HASH);
         }
@@ -53,6 +59,7 @@ public class SpringTrap : Trap
     public override void HitEnemy(Enemy enemy)
     {
         enemy.AccurateRagdoll(_forceDirection * _forceMultiplyer, ForceMode, RagdollDuration);
+
         if(Damage > 0)
         {
             enemy.Health.LoseHealth(Damage);
@@ -62,5 +69,10 @@ public class SpringTrap : Trap
     void SetRechargingAnimationEvent()
     {
         _isRecharging = true;
+    }
+
+    protected override void LevelManager_OnWaveStarted()
+    {
+        _timer = RechargeTime;
     }
 }
