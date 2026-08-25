@@ -416,6 +416,8 @@ public class PlayerController : MonoBehaviour
     void LevelManager_OnWaveStarted()
     {
         _inSellMode = false;
+        _myMana.ResetMana();
+        _myHealth.ResetHealth();
     }
 
     void LevelManager_OnWaveCompleted(int _)
