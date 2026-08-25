@@ -45,7 +45,8 @@ public class Enemy : MonoBehaviour
 
         float mass = collision.rigidbody ? collision.rigidbody.mass : 1;
 
-        Ragdoll(collision.contacts[0], collision.relativeVelocity * mass);
+        // Ragdoll(collision.contacts[0], collision.relativeVelocity * mass);
+        Ragdoll(collision.GetContact(0), collision.relativeVelocity * mass);
     }
 
     void FixedUpdate()
@@ -94,7 +95,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Ragdoll(ContactPoint contactPoint, Vector3 force, ForceMode forceMode = ForceMode.Impulse)
+    void Ragdoll(ContactPoint contactPoint, Vector3 force)
     {
         _ragdollDuration = _ragdollDuration < _ragdollRecoveryTime ? _ragdollRecoveryTime : _ragdollDuration;
         _ragddollTimer = 0;
@@ -119,7 +120,7 @@ public class Enemy : MonoBehaviour
 
         if(closestBone != null)
         {
-            closestBone.AddForceAtPosition(force, contactPoint.point, forceMode);
+            closestBone.AddForceAtPosition(force, contactPoint.point, ForceMode.Impulse);
 
             foreach(Rigidbody rigidbody in _rigidbodies)
             {
@@ -127,7 +128,7 @@ public class Enemy : MonoBehaviour
 
                 float distance = Vector3.Distance(rigidbody.worldCenterOfMass, contactPoint.point);
                 float falloff = Mathf.Clamp01(1f - distance / _falloffFadeOut);
-                rigidbody.AddForceAtPosition(force * falloff, contactPoint.point, forceMode);
+                rigidbody.AddForceAtPosition(force * falloff, contactPoint.point, ForceMode.Impulse);
             }
         }
 
