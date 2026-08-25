@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1597839742149710497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1343697673378463046}
+  - component: {fileID: 6391751865453023513}
+  m_Layer: 0
+  m_Name: Cannon Trap Buyable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1343697673378463046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597839742149710497}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3731261836584538087}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6391751865453023513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597839742149710497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+  <IsTrap>k__BackingField: 1
+  <Cost>k__BackingField: 100
+  <Icon>k__BackingField: {fileID: 21300000, guid: cdd15499457998444b18fe5dcc7e683d, type: 3}
+  <BuyPrice>k__BackingField: 100
+  <TrapPosition>k__BackingField: 1
+  <PreviewPrefab>k__BackingField: {fileID: -9049143495794857357, guid: 1727486c4f012fa4c9a7c6c87e035610, type: 3}
+  _size: {x: 1, y: 1}
+  _trapPrefab: {fileID: 7374095726659422914, guid: 3fb0bd66527b9d542963219d82303ebe, type: 3}
 --- !u!1 &1700470819044464327
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,15 +281,17 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _items:
   - {fileID: 5655566831911952000}
+  - {fileID: 6391751865453023513}
   - {fileID: 8212515531238699994}
-  - {fileID: 7952293838711724501}
   - {fileID: 3945681393335931111}
+  - {fileID: 7952293838711724501}
+  - {fileID: 8178449417334588259}
   - {fileID: 5208355875650815327}
   _socketLayer:
     serializedVersion: 2
     m_Bits: 4352
-  _buyMaterial: {fileID: 2100000, guid: 2fa7670c359937f4a9041f3c28376b67, type: 2}
-  _poorMaterial: {fileID: 2100000, guid: 306cf8acdeb0dac4688b0ff4900e40bb, type: 2}
+  _buyColor: {r: 0, g: 1, b: 0, a: 1}
+  _poorColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &4957972843577305603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,6 +558,8 @@ Transform:
   - {fileID: 199585906568999915}
   - {fileID: 827512631339979137}
   - {fileID: 408720742180844048}
+  - {fileID: 1343697673378463046}
+  - {fileID: 7467964109030972216}
   m_Father: {fileID: 7278810624925462545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5354036191806772627
@@ -872,6 +928,58 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8761857091762351169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7467964109030972216}
+  - component: {fileID: 8178449417334588259}
+  m_Layer: 0
+  m_Name: Crush Trap Buyable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7467964109030972216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8761857091762351169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3731261836584538087}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8178449417334588259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8761857091762351169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+  <IsTrap>k__BackingField: 1
+  <Cost>k__BackingField: 125
+  <Icon>k__BackingField: {fileID: 21300000, guid: 0db1b0f20d4d91445bca35a8ddd540e7, type: 3}
+  <BuyPrice>k__BackingField: 125
+  <TrapPosition>k__BackingField: 2
+  <PreviewPrefab>k__BackingField: {fileID: -6580914942362227244, guid: 02fade36c7428ab44bf56acd633e6712, type: 3}
+  _size: {x: 1, y: 1}
+  _trapPrefab: {fileID: 3154503559914260140, guid: a52a8c7651f41b242bc5704444ca7b9d, type: 3}
 --- !u!1001 &6055493650769628718
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,9 +7,15 @@ public class Cannonball : MonoBehaviour
     [SerializeField] int _damage = 10, _penetration = 5;
     [SerializeField] bool _destroyOnImpact, _usePenetration;
     [SerializeField] float _destructionDelay = 1.75f;
+    [SerializeField] GameObject _particlesPrefab;
 
     void OnCollisionEnter(Collision collision)
     {
+        if(_particlesPrefab)
+        {
+            Instantiate(_particlesPrefab, collision.GetContact(0).point, Quaternion.identity);
+        }
+
         if(_destroyOnImpact)
         {
             Destroy(gameObject, 0.1f);

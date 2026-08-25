@@ -17,8 +17,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] Rigidbody _ragdoll;
     [SerializeField] Collider[] _colliders;
     [SerializeField] Rigidbody[] _rigidbodies;
-    bool _isRagdolled;
-    float _ragddollTimer, _ragdollDuration;
+    bool _isRagdolled, _isCrushed;
+    float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY;
     Transform _destination;
 
     public Health Health => _health;
@@ -35,6 +35,11 @@ public class Enemy : MonoBehaviour
     {
         OnAnyEnemyDestroyed?.Invoke(this);
         _health.OnDeath -= OnDeath;
+    }
+
+    void Start()
+    {
+        _startingScaleY = transform.localScale.y;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -65,6 +70,16 @@ public class Enemy : MonoBehaviour
         else
         {
             Move();
+        }
+
+        if(_isCrushed)
+        {
+            _crushedTimer -= Time.deltaTime;
+
+            if(_crushedTimer <= 0)
+            {
+                RecoverFromCrushed();
+            }
         }
     }
 
@@ -180,6 +195,20 @@ public class Enemy : MonoBehaviour
         _isRagdolled = false;
         _ragdollDuration = 0;
         _ragddollTimer = 0;
+    }
+
+    public void Crush(float newScaleY, float duration)
+    {
+        _crushedTimer = duration;
+        transform.localScale = new(transform.localScale.x, newScaleY, transform.localScale.z);
+        _isCrushed = true;
+    }
+
+    void RecoverFromCrushed()
+    {
+        transform.localScale = new(transform.localScale.x, _startingScaleY, transform.localScale.z);
+        // TODO : Maybe play Pop sound effect from 2D Princess here
+        _isCrushed = false;
     }
 
     public void DisableRagdollGravity()

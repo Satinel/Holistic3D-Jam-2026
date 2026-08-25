@@ -11997,6 +11997,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1074038391351336449, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1650755757461359682, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -12008,18 +12012,6 @@ PrefabInstance:
     - target: {fileID: 2912779287998950981, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
       propertyPath: m_Name
       value: Player Rig
-      objectReference: {fileID: 0}
-    - target: {fileID: 4082996769198193809, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.56000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 4082996769198193809, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4082996769198193809, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.75
       objectReference: {fileID: 0}
     - target: {fileID: 7278810624925462545, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
       propertyPath: m_LocalPosition.x
