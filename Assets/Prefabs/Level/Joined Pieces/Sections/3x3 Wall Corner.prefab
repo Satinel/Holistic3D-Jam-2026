@@ -47,26 +47,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Tile Upper
       objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Size.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Size.z
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Center.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Center.y
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7250026047401271574, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -128,30 +108,6 @@ PrefabInstance:
     - target: {fileID: 3738637742486998933, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
       propertyPath: m_Name
       value: Wall Corner Tile (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Size.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Size.z
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Center.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Center.y
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Center.z
-      value: -0.125
       objectReference: {fileID: 0}
     - target: {fileID: 7250026047401271574, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -215,26 +171,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Tile Lower
       objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Size.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Size.z
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Center.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7250026047401271574, guid: 18a0678374f12d14a8074990d879a9ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -296,30 +232,6 @@ PrefabInstance:
     - target: {fileID: 3738637742486998933, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
       propertyPath: m_Name
       value: Wall Corner Tile
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Size.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Size.z
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Center.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4509455777507609731, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
-      propertyPath: m_Center.z
-      value: -0.125
       objectReference: {fileID: 0}
     - target: {fileID: 7250026047401271574, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
       propertyPath: m_LocalPosition.x

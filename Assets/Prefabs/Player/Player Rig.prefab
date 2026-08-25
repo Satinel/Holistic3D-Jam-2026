@@ -139,9 +139,9 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 21300000, guid: cdd15499457998444b18fe5dcc7e683d, type: 3}
   <BuyPrice>k__BackingField: 100
   <TrapPosition>k__BackingField: 1
-  <PreviewPrefab>k__BackingField: {fileID: -9049143495794857357, guid: 1727486c4f012fa4c9a7c6c87e035610, type: 3}
+  <PreviewPrefab>k__BackingField: {fileID: 3843553560958220383, guid: c62c37ff71c30d947a6d7f5bc6b01a20, type: 3}
   _size: {x: 1, y: 1}
-  _trapPrefab: {fileID: 7374095726659422914, guid: 3fb0bd66527b9d542963219d82303ebe, type: 3}
+  _trapPrefab: {fileID: 429749477939662534, guid: 21a2bd5cc6bc5e849b2f0f4988f64c8e, type: 3}
 --- !u!1 &1700470819044464327
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,12 +624,9 @@ GameObject:
   - component: {fileID: 8682072654555864371}
   - component: {fileID: 2666085628207971004}
   - component: {fileID: 7810642204065582890}
-  - component: {fileID: 5355043907225916096}
-  - component: {fileID: 6085343702786862851}
-  - component: {fileID: 8901745968391725617}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Shove Ball Model
-  m_TagString: Trap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -706,73 +703,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5355043907225916096
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3137276085842704938}
-  m_Material: {fileID: 13400000, guid: f028537db8da69c41a194d9fd92ba74a, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &6085343702786862851
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3137276085842704938}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
---- !u!114 &8901745968391725617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3137276085842704938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 951c32f55036e16458f67ca36311b59c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cannonball
-  <Rigidbody>k__BackingField: {fileID: 6085343702786862851}
-  _damage: 5
-  _penetration: 1
-  _destroyOnImpact: 0
-  _usePenetration: 1
-  _destructionDelay: 1.75
-  _particlesPrefab: {fileID: 7506962589691023094, guid: 454800b51e31ce542847239e7dbed44e, type: 3}
 --- !u!1 &4787445760137352739
 GameObject:
   m_ObjectHideFlags: 0
