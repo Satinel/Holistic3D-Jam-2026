@@ -9,7 +9,11 @@ public class DeathZone : MonoBehaviour
         if(other.GetComponentInParent<Enemy>())
         {
             other.GetComponentInParent<Health>().Kill();
-            other.GetComponentInParent<Enemy>().ChangeRagdollGravity(_disableGravity);
+
+            if(_disableGravity)
+            {
+                other.GetComponentInParent<Enemy>().DisableRagdollGravity();
+            }
         }
     }
 }

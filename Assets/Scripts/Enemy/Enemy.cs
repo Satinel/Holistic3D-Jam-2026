@@ -182,11 +182,11 @@ public class Enemy : MonoBehaviour
         _ragddollTimer = 0;
     }
 
-    public void ChangeRagdollGravity(bool enabled)
+    public void DisableRagdollGravity()
     {
         foreach(Rigidbody rigidbody in _rigidbodies)
         {
-            rigidbody.useGravity = enabled;
+            rigidbody.useGravity = false;
         }
     }
 
