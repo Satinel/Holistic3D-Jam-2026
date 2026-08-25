@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] Item[] _items;
     [SerializeField] LayerMask _socketLayer;
-    [SerializeField] Material _buyMaterial, _poorMaterial;
+    [SerializeField] Color _buyColor = Color.green, _poorColor = Color.red;
 
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
     float _currentXAngle = 0f;
@@ -226,11 +226,11 @@ public class PlayerController : MonoBehaviour
 
                     if(_canBuyTrap)
                     {
-                        _previewModel.SetMaterials(_buyMaterial);
+                        _previewModel.SetMaterials(_buyColor);
                     }
                     else
                     {
-                        _previewModel.SetMaterials(_poorMaterial);
+                        _previewModel.SetMaterials(_poorColor);
                     }
                     _previewModel.ShowRange(_canBuyTrap);
                     return;

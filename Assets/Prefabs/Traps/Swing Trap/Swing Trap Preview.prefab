@@ -66,8 +66,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a34c48816c88dde4a9e09244cf41f3ba, type: 2}
-  - {fileID: 2100000, guid: a34c48816c88dde4a9e09244cf41f3ba, type: 2}
+  - {fileID: 2100000, guid: fd46cb39e0df7d84badc6d6421449853, type: 2}
+  - {fileID: 2100000, guid: fd46cb39e0df7d84badc6d6421449853, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,8 +157,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a34c48816c88dde4a9e09244cf41f3ba, type: 2}
-  - {fileID: 2100000, guid: a34c48816c88dde4a9e09244cf41f3ba, type: 2}
+  - {fileID: 2100000, guid: fd46cb39e0df7d84badc6d6421449853, type: 2}
+  - {fileID: 2100000, guid: fd46cb39e0df7d84badc6d6421449853, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -230,9 +230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrapPreview
   _renderers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8412496625676660390}
+  - {fileID: 2472252331160542023}
+  - {fileID: 3086615985557520260}
   _rangeIndicator: {fileID: 8857527941869081248}
 --- !u!1 &6178859423260859597
 GameObject:
@@ -300,9 +300,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a34c48816c88dde4a9e09244cf41f3ba, type: 2}
-  - {fileID: 2100000, guid: a34c48816c88dde4a9e09244cf41f3ba, type: 2}
-  - {fileID: 2100000, guid: a34c48816c88dde4a9e09244cf41f3ba, type: 2}
+  - {fileID: 2100000, guid: fd46cb39e0df7d84badc6d6421449853, type: 2}
+  - {fileID: 2100000, guid: fd46cb39e0df7d84badc6d6421449853, type: 2}
+  - {fileID: 2100000, guid: fd46cb39e0df7d84badc6d6421449853, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -6,12 +6,16 @@ public class TrapPreview : MonoBehaviour
     [SerializeField] MeshRenderer[] _renderers;
     [SerializeField] GameObject _rangeIndicator;
 
-    public void SetMaterials(Material material)
+    static readonly int COLOR_ID = Shader.PropertyToID("_BaseColor");
+
+    public void SetMaterials(Color color)
     {
-        List<Material> materials = new() { material };
+        MaterialPropertyBlock mpb = new();
         foreach(MeshRenderer renderer in _renderers)
         {
-            renderer.SetMaterials(materials);
+            renderer.GetPropertyBlock(mpb);
+            mpb.SetColor(COLOR_ID, color);
+            renderer.SetPropertyBlock(mpb);
         }
     }
 
