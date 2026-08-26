@@ -13,6 +13,8 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] Image[] _iconHighlights;
     [SerializeField] GameObject _nextWaveMessage, _canSellMessage;
     [SerializeField] Color _trapColor, _baseColor;
+    // [SerializeField] Image _painVignette;
+    //Coroutine _vignetteRoutine;
 
     Health _playerHealth;
     Mana _playerMana;
@@ -27,6 +29,7 @@ public class PlayerHUD : MonoBehaviour
         _player.ReportTotalItems += Player_ReportTotalItems;
         _player.OnActiveItemChanged += Player_OnActiveItemChanged;
         _player.OnCanSellTrap += Player_OnCanSellTrap;
+        _playerHealth.OnLoseHealth += Player_OnLoseHealth;
         _playerHealth.OnHealthChanged += PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged += PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged += PlayerWallet_OnMoneyChanged;
@@ -40,6 +43,7 @@ public class PlayerHUD : MonoBehaviour
         _player.ReportTotalItems -= Player_ReportTotalItems;
         _player.OnActiveItemChanged -= Player_OnActiveItemChanged;
         _player.OnCanSellTrap -= Player_OnCanSellTrap;
+        _playerHealth.OnLoseHealth -= Player_OnLoseHealth;
         _playerHealth.OnHealthChanged -= PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged -= PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged -= PlayerWallet_OnMoneyChanged;
@@ -74,6 +78,12 @@ public class PlayerHUD : MonoBehaviour
     void Player_OnCanSellTrap(bool canSell)
     {
         _canSellMessage.SetActive(canSell);
+    }
+
+    void Player_OnLoseHealth()
+    {
+        // TODO : Enable _painVignette and start a _vignetteRoutine coroutine which fades it out over time
+        // (Unless one is already going, in which case stop that one first, THEN start a new one)
     }
 
     void PlayerHealth_OnHealthChanged(int currentHealth, int maxHealth)

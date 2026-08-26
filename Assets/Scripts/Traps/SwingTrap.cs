@@ -57,7 +57,7 @@ public class SwingTrap : Trap
         enemy.AccurateRagdoll(_forceDirection * _forceMultiplyer, ForceMode, RagdollDuration);
         if(Damage > 0)
         {
-            enemy.Health.LoseHealth(Damage);
+            enemy.EnemyHealth.LoseHealth(Damage);
         }
     }
 }

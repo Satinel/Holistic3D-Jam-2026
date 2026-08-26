@@ -4,8 +4,13 @@ public class ModelAnimator : MonoBehaviour
 {
     [SerializeField] Enemy _parent;
 
-    void DeathAnimationEvent()
+    void AttackAnimationEvent()
     {
-        Destroy(_parent.gameObject);
+        _parent.DealDamage();
     }
+
+    // void DeathAnimationEvent()   // Destroy is called in Enemy regardless of whether DeathAnimation occurs
+    // {
+    //     Destroy(_parent.gameObject);
+    // }
 }

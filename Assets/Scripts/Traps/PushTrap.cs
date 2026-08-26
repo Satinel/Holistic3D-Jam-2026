@@ -29,7 +29,7 @@ public class PushTrap : Trap
             detectedEnemy = detector.ThisEnemy;
         }
 
-        if(detectedEnemy == null || detectedEnemy.Health.IsDead) { return; }
+        if(detectedEnemy == null || detectedEnemy.EnemyHealth.IsDead) { return; }
 
         if(!_hasTriggered)
         {
@@ -60,7 +60,7 @@ public class PushTrap : Trap
 
         if(Damage > 0)
         {
-            enemy.Health.LoseHealth(Damage);
+            enemy.EnemyHealth.LoseHealth(Damage);
         }
     }
 
