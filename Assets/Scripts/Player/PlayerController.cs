@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public event Action<Item[]> ReportTotalItems;
     public event Action<int> OnActiveItemChanged;
 
-    [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 1.5f, _sprintSpeed = 2.5f;
+    [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 1.5f, _sprintSpeed = 2.5f, _respawnDelay = 1.25f;
     [SerializeField] float _minLookAngle = -25f, _maxLookAngle = 40f;
     [SerializeField] float _modelRotateSpeed = 15f;
     [SerializeField] CharacterController _characterController;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _socketLayer;
     [SerializeField] Color _buyColor = Color.green, _poorColor = Color.red;
 
+    Vector3 _respawnPosition = new();
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
     float _currentXAngle = 0f;
     bool _isDead, _inSellMode, _canBuyTrap, _canSellTrap, _isLevelOver, _isSprinting;
@@ -113,6 +114,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _inSellMode = true;
+        _respawnPosition = transform.position;
     }
 
     void Update()
@@ -417,8 +419,18 @@ public class PlayerController : MonoBehaviour
                 _animator.SetTrigger(DEATH_HASH);
                 // TODO : Attach an animator and have a death animation (and a model, etc.)
             }
-            // TODO : If Level doesn't end as a result of player death, respawn
+            Invoke(nameof(Respawn), _respawnDelay);
         }
+    }
+
+    void Respawn()
+    {
+        if(_isLevelOver) { return; }
+
+        transform.position = _respawnPosition;
+        _myHealth.ResetHealth();
+        _myMana.ResetMana();
+        _isDead = false;
     }
 
     void LevelManager_OnWaveStarted()

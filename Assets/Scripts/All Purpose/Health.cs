@@ -102,6 +102,7 @@ public class Health : MonoBehaviour
     public void ResetHealth()
     {
         GainHealth(_maxHealth);
+        _isDead = false;
     }
 
     void HandleDeath()

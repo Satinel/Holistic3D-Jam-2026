@@ -52,7 +52,7 @@ public class Core : MonoBehaviour
             if(_currentCharge == 0)
             {
                 _coreDestroyed = true;
-                _collider.isTrigger = false;
+                _collider.enabled = false;
                 OnCoreDestroyed?.Invoke();
             }
     }
