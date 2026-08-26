@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public event Action<Item[]> ReportTotalItems;
     public event Action<int> OnActiveItemChanged;
 
-    [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 1.5f;
+    [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 1.5f, _sprintSpeed = 2.5f;
     [SerializeField] float _minLookAngle = -25f, _maxLookAngle = 40f;
     [SerializeField] float _modelRotateSpeed = 15f;
     [SerializeField] CharacterController _characterController;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
     float _currentXAngle = 0f;
-    bool _isDead, _inSellMode, _canBuyTrap, _canSellTrap, _isLevelOver;
+    bool _isDead, _inSellMode, _canBuyTrap, _canSellTrap, _isLevelOver, _isSprinting;
     int _itemIndex = 0;
     Item _activeItem;
     BuyableTrap _activeTrap;
@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
         InputManager.OnLookAction += InputManager_OnLookAction;
         InputManager.OnMainPressed += InputManager_OnMainPressed;
         InputManager.OnSecondaryPressed += InputManager_OnSecondaryPressed;
+        InputManager.OnSprintHeld += InputManager_OnSprintHeld;
         InputManager.OnSellPressed += InputManager_OnSellPressed;
         InputManager.OnScroll += InputManager_OnScroll;
         InputManager.OnPreviousPressed += InputManager_OnPreviousPressed;
@@ -82,6 +83,7 @@ public class PlayerController : MonoBehaviour
         InputManager.OnLookAction -= InputManager_OnLookAction;
         InputManager.OnMainPressed -= InputManager_OnMainPressed;
         InputManager.OnSecondaryPressed -= InputManager_OnSecondaryPressed;
+        InputManager.OnSprintHeld -= InputManager_OnSprintHeld;
         InputManager.OnSellPressed -= InputManager_OnSellPressed;
         InputManager.OnScroll -= InputManager_OnScroll;
         InputManager.OnPreviousPressed -= InputManager_OnPreviousPressed;
@@ -143,7 +145,8 @@ public class PlayerController : MonoBehaviour
             Vector3 direction = (_moveInputValue.x * right) + (_moveInputValue.y * forward);
             direction = new Vector3(direction.x, 0f, direction.z).normalized;
 
-            _characterController.Move(_moveSpeed * Time.deltaTime * direction);
+            float speed = _isSprinting ? _moveSpeed + _sprintSpeed : _moveSpeed;
+            _characterController.Move(speed * Time.deltaTime * direction);
 
             RotateModel();
         }
@@ -348,6 +351,11 @@ public class PlayerController : MonoBehaviour
             RotateModelInstantly();
             _activeItem.SecondaryAction();
         }
+    }
+
+    void InputManager_OnSprintHeld(bool isHeld)
+    {
+        _isSprinting = isHeld;
     }
 
     void InputManager_OnSellPressed()

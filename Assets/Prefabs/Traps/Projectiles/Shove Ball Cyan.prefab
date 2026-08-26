@@ -158,5 +158,5 @@ MonoBehaviour:
   _penetration: 1
   _destroyOnImpact: 0
   _usePenetration: 1
-  _destructionDelay: 1.75
+  _destructionDelay: 5
   _particlesPrefab: {fileID: 7506962589691023094, guid: 418caf967a62cb34fa2d11fdc192d8c7, type: 3}

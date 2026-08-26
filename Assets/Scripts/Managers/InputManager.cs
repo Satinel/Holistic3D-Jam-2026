@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     public static event Action<Vector2> OnMoveAction;
     public static event Action<Vector2> OnLookAction;
     public static event Action OnMainPressed, OnSecondaryPressed;
+    public static event Action<bool> OnSprintHeld;
     public static event Action OnSellPressed, OnUnleashPressed, OnOptionsPressed;
     public static event Action<Vector2> OnScroll;
     public static event Action OnPreviousPressed, OnNextPressed;
@@ -15,7 +16,8 @@ public class InputManager : MonoBehaviour
     public static event Action<int> On6Pressed, On7Pressed, On8Pressed, On9Pressed, On10Pressed;
 
     InputAction _moveAction, _lookAction;
-    InputAction _mainAction, _secondaryAction, _sellAction, _unleashAction, _optionsAction;
+    InputAction _mainAction, _secondaryAction, _sprintAction;
+    InputAction _sellAction, _unleashAction, _optionsAction;
     InputAction _scrollAction, _previousAction, _nextAction;
 
     InputAction _1Action, _2Action, _3Action, _4Action, _5Action, _6Action, _7Action, _8Action, _9Action, _10Action;
@@ -26,6 +28,7 @@ public class InputManager : MonoBehaviour
         _lookAction = InputSystem.actions.FindAction("Look");
         _mainAction = InputSystem.actions.FindAction("Action");
         _secondaryAction = InputSystem.actions.FindAction("Secondary");
+        _sprintAction = InputSystem.actions.FindAction("Sprint");
         _sellAction = InputSystem.actions.FindAction("Sell");
         _unleashAction = InputSystem.actions.FindAction("Unleash");
         _optionsAction = InputSystem.actions.FindAction("Options");
@@ -59,6 +62,8 @@ public class InputManager : MonoBehaviour
         {
             OnSecondaryPressed?.Invoke();
         }
+
+        OnSprintHeld?.Invoke(_sprintAction.IsPressed());
 
         if(_sellAction.WasPerformedThisFrame())
         {
