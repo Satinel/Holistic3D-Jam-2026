@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -13,12 +14,15 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] Image[] _iconHighlights;
     [SerializeField] GameObject _nextWaveMessage, _canSellMessage;
     [SerializeField] Color _trapColor, _baseColor;
-    // [SerializeField] Image _painVignette;
-    //Coroutine _vignetteRoutine;
+    [SerializeField] Image _painVignette;
+    Coroutine _vignetteRoutine;
+    Color _vignetteStartColor;
 
     Health _playerHealth;
     Mana _playerMana;
     Wallet _playerWallet;
+    float _wait = 0.1f;
+    WaitForSeconds _waitForSeconds;
 
     void Awake()
     {
@@ -52,6 +56,13 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
     }
 
+    void Start()
+    {
+        _waitForSeconds = new(_wait);
+        _vignetteStartColor = _painVignette.color;
+        _painVignette.enabled = false;
+    }
+
     void Player_ReportTotalItems(Item[] items)
     {
         for(int i = 0; i < items.Length; i++)
@@ -82,8 +93,24 @@ public class PlayerHUD : MonoBehaviour
 
     void Player_OnLoseHealth()
     {
-        // TODO : Enable _painVignette and start a _vignetteRoutine coroutine which fades it out over time
-        // (Unless one is already going, in which case stop that one first, THEN start a new one)
+        if(_vignetteRoutine != null)
+        {
+            _vignetteRoutine = null;
+        }
+        _painVignette.color = _vignetteStartColor;
+        _painVignette.enabled = true;
+        _vignetteRoutine = StartCoroutine(VignetteRoutine());
+    }
+
+    IEnumerator VignetteRoutine()
+    {
+        while(_painVignette.color.a > 0)
+        {
+            _painVignette.color = new Color(_painVignette.color.r, _painVignette.color.g, _painVignette.color.b, _painVignette.color.a - 0.025f);
+            yield return _waitForSeconds;
+        }
+        _painVignette.enabled = false;
+        _vignetteRoutine = null;
     }
 
     void PlayerHealth_OnHealthChanged(int currentHealth, int maxHealth)
