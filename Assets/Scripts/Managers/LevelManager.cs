@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public static event Action OnWaveStarted, OnLevelCompleted, OnLevelFailed;
-    public static event Action<int> OnWaveCompleted;
+    public static event Action<int> AnnounceWaves, OnWaveCompleted;
 
     [SerializeField] EnemySpawner[] _spawners;
     [SerializeField] int[] _waveRewards;
@@ -34,8 +34,9 @@ public class LevelManager : MonoBehaviour
     {
         foreach(EnemySpawner spawner in _spawners)
         {
-            _totalWaves = spawner.TotalWaves > _totalWaves ? spawner.TotalWaves : _totalWaves;
+            _totalWaves = spawner.TotalWaves > _totalWaves ? spawner.TotalWaves : _totalWaves;  // TODO : Set total waves here and tell the spawners to deal with it
         }
+        AnnounceWaves?.Invoke(_totalWaves);
     }
 
     void InputManager_OnUnleashPressed()

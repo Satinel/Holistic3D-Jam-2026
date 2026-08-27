@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText, _coreText;
+    [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText, _coreText, _wavesText;
     [SerializeField] Slider _healthSlider, _manaSlider;
     [SerializeField] PlayerController _player;
     [SerializeField] GameObject[] _icons;
@@ -23,6 +23,7 @@ public class PlayerHUD : MonoBehaviour
     Wallet _playerWallet;
     float _wait = 0.1f;
     WaitForSeconds _waitForSeconds;
+    int _totalWaves = 1, _waveIndex = 1;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class PlayerHUD : MonoBehaviour
         _playerMana.OnManaChanged += PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged += PlayerWallet_OnMoneyChanged;
         Core.OnCoreValueChanged += Core_OnCoreValueChanged;
+        LevelManager.AnnounceWaves += LevelManager_AnnounceWaves;
         LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
     }
@@ -52,6 +54,7 @@ public class PlayerHUD : MonoBehaviour
         _playerMana.OnManaChanged -= PlayerMana_OnManaChanged;
         _playerWallet.OnMoneyChanged -= PlayerWallet_OnMoneyChanged;
         Core.OnCoreValueChanged -= Core_OnCoreValueChanged;
+        LevelManager.AnnounceWaves -= LevelManager_AnnounceWaves;
         LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
     }
@@ -137,6 +140,12 @@ public class PlayerHUD : MonoBehaviour
         _coreText.text = value.ToString();
     }
 
+    void LevelManager_AnnounceWaves(int totalWaves)
+    {
+        _totalWaves = totalWaves;
+        _wavesText.text = $"Wave\n{_waveIndex} / {_totalWaves}";
+    }
+
     void LevelManager_OnWaveStarted()
     {
         _nextWaveMessage.SetActive(false);
@@ -145,5 +154,8 @@ public class PlayerHUD : MonoBehaviour
     void LevelManager_OnWaveCompleted(int _)
     {
         _nextWaveMessage.SetActive(true);
+        _waveIndex++;
+        if(_waveIndex > _totalWaves) { return; }
+        _wavesText.text = $"Wave\n{_waveIndex} / {_totalWaves}";
     }
 }
