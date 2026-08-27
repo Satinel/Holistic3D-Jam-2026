@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
 
     // [field:SerializeField] public Collider Collider { get; private set; }
     // [field:SerializeField] public bool IsEnemy { get; private set; }
+    [field:SerializeField] public Transform AttackTargetPoint { get; private set; }
     [field:SerializeField] public bool IsPlayer { get; private set; }
     [field:SerializeField] public int MoneyValue { get; private set; } = 10;
 
@@ -26,6 +27,11 @@ public class Health : MonoBehaviour
 
     void Start()
     {
+        if(!AttackTargetPoint)
+        {
+            AttackTargetPoint = transform;
+        }
+
         _currentHealth = _maxHealth;
         OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
     }

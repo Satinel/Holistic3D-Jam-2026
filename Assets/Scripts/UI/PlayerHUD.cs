@@ -129,7 +129,7 @@ public class PlayerHUD : MonoBehaviour
 
     void PlayerWallet_OnMoneyChanged(int money)
     {
-        _moneyText.text = $"Money : {money}";
+        _moneyText.text = money.ToString();
     }
 
     void Core_OnCoreValueChanged(int value)

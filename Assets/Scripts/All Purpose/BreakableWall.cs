@@ -6,6 +6,7 @@ public class BreakableWall : MonoBehaviour
     [SerializeField] Collider _collider;
     [SerializeField] Rigidbody[] _rigidbodies;
     [SerializeField] float _forceMultiplyer = 2.25f, _destructionDelay = 5f;
+    [SerializeField] GameObject _minimapIcon;
 
     static readonly string RAGDOLL_TAG = "Ragdoll";
 
@@ -26,6 +27,10 @@ public class BreakableWall : MonoBehaviour
             }
 
             Destroy(_shatteredVersion, _destructionDelay);
+            if(_minimapIcon)
+            {
+                _minimapIcon.SetActive(false);
+            }
         }
     }
 }

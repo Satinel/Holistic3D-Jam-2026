@@ -20,6 +20,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] ModelAnimator _ragdollModel;
     [SerializeField] Collider[] _colliders;
     [SerializeField] Rigidbody[] _rigidbodies;
+
+    [SerializeField] Transform _leftHand, _rightHand;
+    [SerializeField] Transform _leftBeam, _rightBeam;
+
     bool _isRagdolled, _isCrushed, _isAttacking;
     float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY;
     Transform _destination;
@@ -88,7 +92,8 @@ public class Enemy : MonoBehaviour
 
         if(_playerHealth && _isAttacking)
         {
-            RotateTowardDestination(_playerHealth.transform);
+            RotateTowardDestination(_playerHealth.AttackTargetPoint);
+            PositionBeams(_playerHealth.AttackTargetPoint);
         }
         else
         {
@@ -123,6 +128,15 @@ public class Enemy : MonoBehaviour
         {
             _mainRigidbody.MoveRotation(Quaternion.Slerp(_mainRigidbody.rotation, Quaternion.LookRotation(rotationToFace, Vector3.up), _turnSpeed * Time.deltaTime));
         }
+    }
+
+    void PositionBeams(Transform player)
+    {
+        _leftBeam.position = (_leftHand.position + player.position) * 0.5f;
+        _leftBeam.up = (player.position - _leftHand.position).normalized;
+
+        _rightBeam.position = (_rightHand.position + player.position) * 0.5f;
+        _rightBeam.up = (player.position - _rightHand.position).normalized;
     }
 
     void Ragdoll(ContactPoint contactPoint, Vector3 force)
@@ -274,18 +288,22 @@ public class Enemy : MonoBehaviour
         _playerHealth = playerHealth;
         _isAttacking = true;
         _animator.SetBool(ATTACK_HASH, true);
-        // TODO : Activate some sort of lightning-esc effect which arcs from enemy to player somehow
     }
 
     public void DealDamage()
     {
         if(!_playerHealth) { return; }
 
+        _leftBeam.gameObject.SetActive(true);
+        _rightBeam.gameObject.SetActive(true);
         _playerHealth.LoseHealth(_drainDamage);
     }
 
     public void StopAttack()
     {
+        _leftBeam.gameObject.SetActive(false);
+        _rightBeam.gameObject.SetActive(false);
+
         _animator.SetBool(ATTACK_HASH, false);
         _animator.Play(WALKING_NAME_HASH);
         _isAttacking = false;
