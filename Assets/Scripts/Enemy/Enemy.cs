@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Rigidbody _mainRigidbody;
     [SerializeField] Animator _animator;
     [SerializeField] PlayerDetector _playerDetector;
+    [SerializeField] FloatingText _floatingTextPrefab;
 
     [SerializeField] Rigidbody _ragdoll;
     [SerializeField] ModelAnimator _ragdollModel;
@@ -324,7 +325,9 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger(DEATH_HASH);
         }
 
-        // A really fancy shader should make the model disintegrate or something!!!
+        // TODO ? A really fancy shader should make the model disintegrate or something!!!
+        FloatingText floatingText = Instantiate(_floatingTextPrefab, _ragdoll.position, Quaternion.identity);
+        floatingText.SetUp(_health.MoneyValue.ToString());
         Destroy(gameObject, _destroyDelay);
     }
 }

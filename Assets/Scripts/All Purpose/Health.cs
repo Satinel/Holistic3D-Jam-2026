@@ -78,7 +78,7 @@ public class Health : MonoBehaviour
         }
 
         FloatingText floatingText = Instantiate(floatingTextPrefab, textPosition, Quaternion.identity);
-        floatingText.SetUp(lostAmount.ToString(), textColor);
+        floatingText.SetUpWithColor(lostAmount.ToString(), textColor);
 
         _currentHealth = Mathf.Max(_currentHealth - lostAmount, 0);
 

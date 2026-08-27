@@ -17,7 +17,13 @@ public class FloatingText : MonoBehaviour
         transform.Translate(_speed * Time.deltaTime * Vector3.up, Space.World);
     }
 
-    public void SetUp(string newText, Color color)
+    public void SetUp(string newText)
+    {
+        _text.text = newText;
+        Destroy(gameObject, _destroyTime);
+    }
+
+    public void SetUpWithColor(string newText, Color color)
     {
         _text.text = newText;
         _text.color = color;

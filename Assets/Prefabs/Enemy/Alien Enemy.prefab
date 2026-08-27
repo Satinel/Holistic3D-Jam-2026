@@ -9403,6 +9403,7 @@ MonoBehaviour:
   _mainRigidbody: {fileID: 1177097325106653104}
   _animator: {fileID: 4889558895641657395}
   _playerDetector: {fileID: 7058717795555157401}
+  _floatingTextPrefab: {fileID: 165850438541052818, guid: a001700873c5f4e41b9b909572f6a5ad, type: 3}
   _ragdoll: {fileID: 4820830033733442918}
   _ragdollModel: {fileID: 8520355316149715777}
   _colliders:
@@ -9446,6 +9447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bf296e6de2e12438fed4bf86619b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
+  <AttackTargetPoint>k__BackingField: {fileID: 0}
   <IsPlayer>k__BackingField: 0
   <MoneyValue>k__BackingField: 10
   _maxHealth: 100
