@@ -1,17 +1,20 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     public static event Action OnWaveStarted, OnLevelCompleted, OnLevelFailed;
     public static event Action<int> AnnounceWaves, OnWaveCompleted;
 
+    [SerializeField] int _totalWaves = 1;
+    [SerializeField] Canvas _winCanvas, _loseCanvas;
     [SerializeField] EnemySpawner[] _spawners;
     [SerializeField] int[] _waveRewards;
 
-    bool _wavesActive;
-    int _waveIndex, _totalWaves;
+    bool _wavesActive, _levelWon, _levelLost, _isLoading = true;
+    int _waveIndex;
     HashSet<Enemy> _activeEnemies = new();
 
     void Awake()
@@ -32,15 +35,26 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        foreach(EnemySpawner spawner in _spawners)
-        {
-            _totalWaves = spawner.TotalWaves > _totalWaves ? spawner.TotalWaves : _totalWaves;  // TODO : Set total waves here and tell the spawners to deal with it
-        }
         AnnounceWaves?.Invoke(_totalWaves);
+        _isLoading = false;
     }
 
     void InputManager_OnUnleashPressed()
     {
+        if(_isLoading) { return; }
+
+        if(_levelWon)
+        {
+            LoadNextLevel();
+            return;
+        }
+
+        if(_levelLost)
+        {
+            ReloadLevel();
+            return;
+        }
+
         if(_wavesActive) { return; }
 
         _wavesActive = true;
@@ -49,6 +63,24 @@ public class LevelManager : MonoBehaviour
             spawner.StartSpawning(_waveIndex);
         }
         OnWaveStarted?.Invoke();
+    }
+
+    void LoadNextLevel()
+    {
+        if(_isLoading) { return; }
+
+        _isLoading = true;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    void ReloadLevel()
+    {
+        if(_isLoading) { return; }
+
+        _isLoading = true;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void Enemy_OnAnyEnemySpawned(Enemy enemy)
@@ -81,7 +113,9 @@ public class LevelManager : MonoBehaviour
 
         if(_waveIndex > _totalWaves)
         {
-            OnLevelCompleted?.Invoke(); // TODO : Handle success state
+            OnLevelCompleted?.Invoke(); // TODO : SFX/Music
+            _winCanvas.enabled = true;
+            _levelWon = true;
         }
         else
         {
@@ -91,6 +125,8 @@ public class LevelManager : MonoBehaviour
 
     void Core_OnCoreDestroyed()
     {
-        OnLevelFailed?.Invoke();    // TODO : Handle failure state
+        OnLevelFailed?.Invoke();    // TODO : SFX/Music
+        _loseCanvas.enabled = true;
+        _levelLost = true;
     }
 }

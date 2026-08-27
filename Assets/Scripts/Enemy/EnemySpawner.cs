@@ -13,13 +13,13 @@ public class EnemySpawner : MonoBehaviour
 
     int _waveIndex = 0, _enemyIndex = 0;
     float _spawnTimer = 1f;
-    bool _isSpawning = false, _isFinished = false;
+    bool _isSpawning = false;
     public bool IsSpawning => _isSpawning;
     public int TotalWaves => _waves.Length;
 
     void Update()
     {
-        if(!_isSpawning || _isFinished) { return; }
+        if(!_isSpawning) { return; }
         if(_waveIndex >= _waves.Length) { return; }
         if(_waves[_waveIndex].Enemies.Length <= 0) { return; }
 
@@ -60,14 +60,9 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartSpawning(int index)
     {
-        if(_isFinished) { return; }
+        if(_waves.Length <= 0) { return; }
 
-        _waveIndex = index;
-
-        if(_waveIndex + 1 > _waves.Length)
-        {
-            _isFinished = true;
-        }
+        _waveIndex = index % _waves.Length;
 
         if(gameObject.activeSelf && !_isSpawning)
         {
