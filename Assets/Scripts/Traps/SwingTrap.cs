@@ -3,14 +3,20 @@ using UnityEngine;
 public class SwingTrap : Trap
 {
     [SerializeField] Transform _swing;
-    [SerializeField] float _forceMultiplyer = 15f, _swingSpeed = 50f, _maxRotation = 270f, _minRotation = 90f;
+    [SerializeField] float _forceMultiplyer = 15f, _swingSpeed = 50f, _maxRotation = 270f, _minRotation = 90f, _sfxDelay = 0.9f;
+    [SerializeField] AudioClip[] _hitSFX;
 
-    float _timer;
+    float _timer, _sfxTimer;
     bool _isIncreasing, _isPaused;
     Vector3 _forceDirection = new();
 
     void Update()
     {
+        if(_sfxTimer > 0)
+        {
+            _sfxTimer = Mathf.Max(0, _sfxTimer - Time.deltaTime);
+        }
+
         if(_isPaused)
         {
             _timer += Time.deltaTime;
@@ -18,6 +24,7 @@ public class SwingTrap : Trap
             if(_timer > RechargeTime)
             {
                 _isPaused = false;
+                _audioSource.Play();
             }
             else
             {
@@ -54,6 +61,12 @@ public class SwingTrap : Trap
 
     public override void HitEnemy(Enemy enemy)
     {
+        if(_sfxTimer <= 0)
+        {
+            _audioSource.PlayOneShot(_hitSFX[Random.Range(0, _hitSFX.Length)]);
+            _sfxTimer = _sfxDelay;
+        }
+
         enemy.AccurateRagdoll(_forceDirection * _forceMultiplyer, ForceMode, RagdollDuration);
         if(Damage > 0)
         {

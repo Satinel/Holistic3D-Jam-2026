@@ -55,6 +55,7 @@ public class MineTrap : Trap
         _isRecharging = true;
 
         _explosionRadius.gameObject.SetActive(true);
+        _audioSource.Play();
 
         _mine.SetActive(false);
     }

@@ -43,6 +43,7 @@ public class CannonTrap : Trap
 
     void Fire()
     {
+        _audioSource.Play();
         Cannonball cannonball = Instantiate(_cannonballPrefab, _spawnPoint.position, _spawnPoint.rotation);
         cannonball.Initialize(Damage);
         cannonball.Rigidbody.AddForce(cannonball.transform.forward * _forceMultiplyer, ForceMode.VelocityChange);

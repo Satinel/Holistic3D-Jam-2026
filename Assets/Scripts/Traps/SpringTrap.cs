@@ -36,6 +36,7 @@ public class SpringTrap : Trap
             _timer = 0;
             _hasTriggered = true;
             _animator.SetTrigger(TRIGGER_HASH);
+            _audioSource.Play();
         }
 
         HitEnemy(detectedEnemy);

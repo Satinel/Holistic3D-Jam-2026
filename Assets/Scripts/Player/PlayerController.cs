@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _socketLayer;
     [SerializeField] Color _buyColor = Color.green, _poorColor = Color.red;
     [SerializeField] GameObject _ballModel;
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _attackSFX, _placeTrapSFX, _sellTrapSFX;
 
     Vector3 _respawnPosition = new();
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
@@ -345,6 +347,7 @@ public class PlayerController : MonoBehaviour
 
         if(_canBuyTrap && _activeTrap && _activeSocket)
         {
+            _audioSource.PlayOneShot(_placeTrapSFX);
             _wallet.SpendMoney(_activeTrap.BuyPrice);
             _activeTrap.CompletePurchase(_activeSocket);
             // TODO : Add an animation (and a cool shader to make the trap appear through magical science)
@@ -369,6 +372,7 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
+        _audioSource.PlayOneShot(_attackSFX);
         RotateModelInstantly();
         _activeItem.PrimaryAction(_aimPositionMarker.position);
         _myMana.SpendMana(_activeItem.Cost);
@@ -404,6 +408,7 @@ public class PlayerController : MonoBehaviour
         _canSellTrap = false;
         OnCanSellTrap?.Invoke(_canSellTrap);
         _activeSocket.SellTrap();
+        _audioSource.PlayOneShot(_sellTrapSFX);
     }
 
     void InputManager_OnScroll(Vector2 value)

@@ -28,6 +28,7 @@ public class Trap : MonoBehaviour
     [field:SerializeField] public ForceMode ForceMode { get; protected set; } = ForceMode.Impulse;
 
     [SerializeField] protected Animator _animator;
+    [SerializeField] protected AudioSource _audioSource;
 
     void Awake()
     {
