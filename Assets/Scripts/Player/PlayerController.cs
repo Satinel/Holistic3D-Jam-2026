@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Color _buyColor = Color.green, _poorColor = Color.red;
     [SerializeField] GameObject _ballModel;
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] AudioClip _attackSFX, _placeTrapSFX, _sellTrapSFX;
+    [SerializeField] AudioClip _attackSFX, _placeTrapSFX, _sellTrapSFX, _hurtSFX;
 
     Vector3 _respawnPosition = new();
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        _myHealth.OnLoseHealth += _myHealth_OnLoseHealth;
         _myHealth.OnDeath += MyHealth_OnDeath;
 
         LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void OnDestroy()
     {
+        _myHealth.OnLoseHealth += _myHealth_OnLoseHealth;
         _myHealth.OnDeath -= MyHealth_OnDeath;
 
         LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
@@ -451,6 +453,11 @@ public class PlayerController : MonoBehaviour
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
         OnActiveItemChanged?.Invoke(_itemIndex);
+    }
+
+    void _myHealth_OnLoseHealth()
+    {
+        _audioSource.PlayOneShot(_hurtSFX);
     }
 
     void MyHealth_OnDeath()

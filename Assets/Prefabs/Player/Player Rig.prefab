@@ -837,7 +837,8 @@ MonoBehaviour:
   _audioSource: {fileID: 3988781548349033303}
   _attackSFX: {fileID: 8300000, guid: 0bb73594864814e46929def58bd4cce5, type: 3}
   _placeTrapSFX: {fileID: 8300000, guid: a28f6225d763bb5458a77c1ed7e68d37, type: 3}
-  _sellTrapSFX: {fileID: 8300000, guid: 267c83bb442823b4d97cf5844eda2c6a, type: 3}
+  _sellTrapSFX: {fileID: 8300000, guid: 261a05ce7528d1746b8db3ee17e8d43f, type: 3}
+  _hurtSFX: {fileID: 8300000, guid: 6c9a9ea827fd9b0438200d51d2832164, type: 3}
 --- !u!114 &4957972843577305603
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -98,6 +98,8 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            _leftBeam.gameObject.SetActive(false);
+            _rightBeam.gameObject.SetActive(false);
             Move();
         }
 
@@ -302,9 +304,6 @@ public class Enemy : MonoBehaviour
 
     public void StopAttack()
     {
-        _leftBeam.gameObject.SetActive(false);
-        _rightBeam.gameObject.SetActive(false);
-
         _animator.SetBool(ATTACK_HASH, false);
         _animator.Play(WALKING_NAME_HASH);
         _isAttacking = false;

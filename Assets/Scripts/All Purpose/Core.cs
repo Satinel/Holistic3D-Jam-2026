@@ -10,6 +10,7 @@ public class Core : MonoBehaviour
     [SerializeField] int _maxCharge;
     [SerializeField] float _enemyDestructionDelay = 1.25f;
     [SerializeField] Collider _collider;
+    [SerializeField] AudioSource _audioSource;
 
     int _currentCharge;
     bool _coreDestroyed;
@@ -43,18 +44,23 @@ public class Core : MonoBehaviour
 
     void LowerCoreCharge(int amount)
     {
-            _currentCharge -= amount;
-            _currentCharge = _currentCharge < 0 ? 0 : _currentCharge;
+        if(!_audioSource.isPlaying)
+        {
+            _audioSource.Play();
+        }
 
-            OnCoreValueLowered?.Invoke();
-            OnCoreValueChanged?.Invoke(_currentCharge);
+        _currentCharge -= amount;
+        _currentCharge = _currentCharge < 0 ? 0 : _currentCharge;
 
-            if(_currentCharge == 0)
-            {
-                _coreDestroyed = true;
-                _collider.enabled = false;
-                OnCoreDestroyed?.Invoke();
-            }
+        OnCoreValueLowered?.Invoke();
+        OnCoreValueChanged?.Invoke(_currentCharge);
+
+        if(_currentCharge == 0)
+        {
+            _coreDestroyed = true;
+            _collider.enabled = false;
+            OnCoreDestroyed?.Invoke();
+        }
     }
 
     void Health_OnAnyHealthDeath(Health health)

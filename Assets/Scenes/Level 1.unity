@@ -6970,18 +6970,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1322587930}
     m_Modifications:
     - target: {fileID: 1571921391972432423, guid: 3048fe5ec694d244f84c27823c91f319, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571921391972432423, guid: 3048fe5ec694d244f84c27823c91f319, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 99
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571921391972432423, guid: 3048fe5ec694d244f84c27823c91f319, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1571921391972432423, guid: 3048fe5ec694d244f84c27823c91f319, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -7021,17 +7009,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2495864625675232935, guid: 3048fe5ec694d244f84c27823c91f319, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 2410186958086458721, guid: 3048fe5ec694d244f84c27823c91f319, type: 3}
+      propertyPath: _disableGravity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3667982642647705618, guid: 3048fe5ec694d244f84c27823c91f319, type: 3}
       propertyPath: m_Name
       value: Catch All Death Zone
-      objectReference: {fileID: 0}
-    - target: {fileID: 3667982642647705618, guid: 3048fe5ec694d244f84c27823c91f319, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
