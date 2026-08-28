@@ -406,6 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a7aa4f422be0a448c4ee74cedc22c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  _totalWaves: 2
   _winCanvas: {fileID: 4965902045971121583}
   _loseCanvas: {fileID: 5950597514311363071}
   _spawners:
