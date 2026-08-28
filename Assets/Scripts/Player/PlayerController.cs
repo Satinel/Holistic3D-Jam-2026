@@ -406,12 +406,12 @@ public class PlayerController : MonoBehaviour
     {
         if(_isAttacking) { return; }
 
-        if(value.y < 0)
+        if(value.y > 0)
         {
             InputManager_OnNextPressed();
         }
 
-        if(value.y > 0)
+        if(value.y < 0)
         {
             InputManager_OnPreviousPressed();
         }
@@ -423,7 +423,8 @@ public class PlayerController : MonoBehaviour
         if(_items.Length <= 0) { return; }
 
         CancelTrapCommerce();
-        _itemIndex = (_itemIndex + 1) % _items.Length;
+        _itemIndex = (_itemIndex - 1 + _items.Length) % _items.Length;
+
 
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
@@ -436,7 +437,7 @@ public class PlayerController : MonoBehaviour
         if(_items.Length <= 0) { return; }
 
         CancelTrapCommerce();
-        _itemIndex = (_itemIndex - 1 + _items.Length) % _items.Length;
+        _itemIndex = (_itemIndex + 1) % _items.Length;
 
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;

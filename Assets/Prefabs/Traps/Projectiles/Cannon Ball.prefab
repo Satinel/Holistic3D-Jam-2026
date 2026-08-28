@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cannonball
   <Rigidbody>k__BackingField: {fileID: 4076351397142989828}
   _damage: 10
-  _penetration: 5
+  _penetration: 2
   _destroyOnImpact: 0
   _usePenetration: 1
   _destructionDelay: 1.75

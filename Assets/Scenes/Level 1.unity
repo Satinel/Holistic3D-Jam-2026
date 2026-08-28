@@ -5466,6 +5466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolumeControl
   AudioMixer: {fileID: 24100000, guid: 7582a441e47eab04cb01cf9b8dce1a08, type: 2}
   _mainMenuButton: {fileID: 3968422728040096463}
+  _cancelButton: {fileID: 1665187556}
+  _quitPrompt: {fileID: 1665187555}
   _audioCanvas: {fileID: 3968422728040096471}
   _mainVolumeSlider: {fileID: 3968422728040096470}
   _musicVolumeSlider: {fileID: 3968422728040096469}
@@ -5979,6 +5981,16 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1064170934014501140, guid: 99535f3304b1b3f4f8268fa9792c934d, type: 3}
   m_PrefabInstance: {fileID: 1658272714}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1665187555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1810350015842783015, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
+  m_PrefabInstance: {fileID: 3968422728040096462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1665187556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 519650515054992636, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
+  m_PrefabInstance: {fileID: 3968422728040096462}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1666204806
 PrefabInstance:
@@ -7530,6 +7542,14 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1524415867}
+    - target: {fileID: 2290196538850675835, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1524415867}
+    - target: {fileID: 2290196538850675835, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PromptQuit
+      objectReference: {fileID: 0}
     - target: {fileID: 2467704719166127179, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7634,6 +7654,14 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1524415867}
+    - target: {fileID: 6968224957127109329, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1524415867}
+    - target: {fileID: 6968224957127109329, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CancelQuit
+      objectReference: {fileID: 0}
     - target: {fileID: 7047850984751846308, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7641,6 +7669,14 @@ PrefabInstance:
     - target: {fileID: 7047850984751846308, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004230420679759861, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1524415867}
+    - target: {fileID: 9004230420679759861, guid: d94218e83dc4b6147b02f2a482c9b074, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

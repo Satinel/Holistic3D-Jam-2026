@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class VolumeControl : MonoBehaviour
 {
-    public static event Action<bool> OnAudioCanvasToggled;  // TODO : Move this type of logic to main Options script (when it exists)
+    public static event Action<bool> OnAudioCanvasToggled;  // TODO : Move this type of logic to main Options script (if it exists)
 
     public AudioMixer AudioMixer;
-    [SerializeField] GameObject _mainMenuButton;
+    [SerializeField] GameObject _mainMenuButton, _cancelButton, _quitPrompt;
     [SerializeField] Canvas _audioCanvas;
     [SerializeField] Slider _mainVolumeSlider;
     [SerializeField] Slider _musicVolumeSlider;
@@ -139,5 +139,25 @@ public class VolumeControl : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_mainMenuButton);
         OnAudioCanvasToggled?.Invoke(true);
+    }
+
+    public void PromptQuit()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        _quitPrompt.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(_cancelButton);
+    }
+
+    public void CancelQuit()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        _quitPrompt.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
+
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
