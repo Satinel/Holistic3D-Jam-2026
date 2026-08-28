@@ -21,11 +21,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Item[] _items;
     [SerializeField] LayerMask _socketLayer;
     [SerializeField] Color _buyColor = Color.green, _poorColor = Color.red;
+    [SerializeField] GameObject _ballModel;
 
     Vector3 _respawnPosition = new();
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
     float _currentXAngle = 0f;
-    bool _isDead, _inSellMode, _canBuyTrap, _canSellTrap, _isLevelOver, _isSprinting;
+    bool _isDead, _inSellMode, _canBuyTrap, _canSellTrap, _isLevelOver, _isSprinting, _isAttacking;
     int _itemIndex = 0;
     Item _activeItem;
     BuyableTrap _activeTrap;
@@ -33,6 +34,10 @@ public class PlayerController : MonoBehaviour
     TrapPreview _previewModel;
 
     static readonly int DEATH_HASH = Animator.StringToHash("Death");
+    static readonly int ATTACK_HASH = Animator.StringToHash("Attack");
+    static readonly int MOVE_HASH = Animator.StringToHash("IsMoving");
+    static readonly int SPRINT_HASH = Animator.StringToHash("IsSprinting");
+    static readonly int RESPAWN_HASH = Animator.StringToHash("Respawn");
 
     void Awake()
     {
@@ -119,6 +124,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(_activeItem)
+        {
+            _ballModel.SetActive(!_activeItem.IsTrap);
+        }
+
         if(_isDead || _isLevelOver) { return; }
 
         MovePlayer();
@@ -136,8 +146,10 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        if(_moveInputValue.magnitude > 0)
+        if(_moveInputValue.magnitude > 0 && !_isAttacking)
         {
+            _animator.SetBool(MOVE_HASH, true);
+
             Vector3 right = _cameraTarget.right;
             Vector3 forward = _cameraTarget.forward;
 
@@ -151,6 +163,10 @@ public class PlayerController : MonoBehaviour
             _characterController.Move(speed * Time.deltaTime * direction);
 
             RotateModel();
+        }
+        else
+        {
+            _animator.SetBool(MOVE_HASH, false);
         }
     }
 
@@ -296,6 +312,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetActiveItemByIndex(int index)
     {
+        if(_isAttacking) { return; }
         if(index > _items.Length - 1) { return; }
         if(_itemIndex == index) { return; }
 
@@ -336,15 +353,27 @@ public class PlayerController : MonoBehaviour
 
         if(!_activeItem.IsTrap)
         {
+            if(_isAttacking) { return; }
             if(_myMana.CurrentMana < _activeItem.Cost) { return; }  // TODO ? "Not enough energy" message (never tell the player it's really mana!!)
             RotateModelInstantly();
-            _activeItem.PrimaryAction(_aimPositionMarker.position);
-            _myMana.SpendMana(_activeItem.Cost);
+
+            _animator.SetTrigger(ATTACK_HASH);
+
+            _isAttacking = true;
         }
+    }
+
+    public void Attack()
+    {
+        RotateModelInstantly();
+        _activeItem.PrimaryAction(_aimPositionMarker.position);
+        _myMana.SpendMana(_activeItem.Cost);
+        _isAttacking = false;
     }
 
     void InputManager_OnSecondaryPressed()
     {
+        if(_isAttacking) { return; }
         if(_isDead) { return; }
         if(Time.timeScale == 0) { return; }
 
@@ -358,10 +387,12 @@ public class PlayerController : MonoBehaviour
     void InputManager_OnSprintHeld(bool isHeld)
     {
         _isSprinting = isHeld;
+        _animator.SetBool(SPRINT_HASH, isHeld);
     }
 
     void InputManager_OnSellPressed()
     {
+        if(_isAttacking) { return; }
         if(!_inSellMode) { return; }
         if(!_canSellTrap) { return; }
         if(!_activeSocket) { return; }
@@ -373,6 +404,8 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnScroll(Vector2 value)
     {
+        if(_isAttacking) { return; }
+
         if(value.y < 0)
         {
             InputManager_OnNextPressed();
@@ -386,6 +419,7 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnPreviousPressed()
     {
+        if(_isAttacking) { return; }
         if(_items.Length <= 0) { return; }
 
         CancelTrapCommerce();
@@ -398,6 +432,7 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnNextPressed()
     {
+        if(_isAttacking) { return; }
         if(_items.Length <= 0) { return; }
 
         CancelTrapCommerce();
@@ -414,13 +449,13 @@ public class PlayerController : MonoBehaviour
         {
             _isDead = true;
             _moveInputValue = Vector2.zero;
-            if(_animator)
-            {
-                _animator.SetTrigger(DEATH_HASH);
-                // TODO : Attach an animator and have a death animation (and a model, etc.)
-            }
-            Invoke(nameof(Respawn), _respawnDelay);
+            _animator.SetTrigger(DEATH_HASH);
         }
+    }
+
+    public void DeathComplete()
+    {
+        Invoke(nameof(Respawn), _respawnDelay);
     }
 
     void Respawn()
@@ -430,6 +465,7 @@ public class PlayerController : MonoBehaviour
         transform.position = _respawnPosition;
         _myHealth.ResetHealth();
         _myMana.ResetMana();
+        _animator.SetTrigger(RESPAWN_HASH);
         _isDead = false;
     }
 

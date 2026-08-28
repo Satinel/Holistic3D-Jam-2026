@@ -111,7 +111,7 @@ public class LevelManager : MonoBehaviour
         _wavesActive = false;
         _waveIndex++;
 
-        if(_waveIndex > _totalWaves)
+        if(_waveIndex >= _totalWaves)
         {
             OnLevelCompleted?.Invoke(); // TODO : SFX/Music
             _winCanvas.enabled = true;
