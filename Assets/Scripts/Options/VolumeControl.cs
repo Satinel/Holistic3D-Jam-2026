@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class VolumeControl : MonoBehaviour
 {
-    public static event Action<bool> OnAudioCanvasToggled;  // TODO : Move this type of logic to main Options script (if it exists)
+    public static event Action<bool> OnAudioCanvasToggled;
 
     public AudioMixer AudioMixer;
     [SerializeField] GameObject _mainMenuButton, _cancelButton, _quitPrompt;

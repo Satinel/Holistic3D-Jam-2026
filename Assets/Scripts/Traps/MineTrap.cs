@@ -55,7 +55,6 @@ public class MineTrap : Trap
         _isRecharging = true;
 
         _explosionRadius.gameObject.SetActive(true);
-        // TODO : Explosion particle effects (it can auto-play as a component of _explosionRadius)
 
         _mine.SetActive(false);
     }

@@ -12,7 +12,7 @@ public class TrapSocket : MonoBehaviour
 
     public void PlaceTrap(Trap trapPrefab, int trapPrice)
     {
-        if(HasTrap) { return; } // TODO : Prevent calling PlaceTrap in such circumstances
+        if(HasTrap) { return; }
 
         HasTrap = true;
         _placedTrap = Instantiate(trapPrefab, transform.position, transform.rotation, transform);

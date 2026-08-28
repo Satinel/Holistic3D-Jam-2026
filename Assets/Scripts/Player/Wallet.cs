@@ -46,7 +46,6 @@ public class Wallet : MonoBehaviour
         _money -= price;
 
         OnMoneyChanged?.Invoke(_money);
-        // TODO Buy things
     }
 
     void Health_OnAnyHealthDeath(Health health)

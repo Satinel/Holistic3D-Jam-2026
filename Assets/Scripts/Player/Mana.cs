@@ -52,8 +52,6 @@ public class Mana : MonoBehaviour
         _currentMana = Mathf.Min(_currentMana + gainedAmount, _maxMana);
 
         OnManaChanged?.Invoke(_currentMana, _maxMana);
-
-        // TODO : (Blue/Cyan) Floating Text
     }
 
     public void ResetMana()

@@ -21,8 +21,6 @@ public class PlayerDetector : MonoBehaviour
                 if(health.IsPlayer && !health.IsDead)
                 {
                     _thisEnemy.StartAttack(health);
-                    // TODO ? Call _thisEnemy.DealDamage() here instead of the animation event in StartAttack?
-                    // And/Or enable a _glowyfield GameObject
                 }
             }
         }

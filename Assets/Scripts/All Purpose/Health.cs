@@ -102,7 +102,6 @@ public class Health : MonoBehaviour
         _currentHealth = Mathf.Min(_currentHealth + gainedAmount, _maxHealth);
 
         OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
-        // TODO : (Green) Floating Text
     }
 
     public void ResetHealth()

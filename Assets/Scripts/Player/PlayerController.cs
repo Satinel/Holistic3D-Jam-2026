@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public event Action<bool> OnCanSellTrap;
     public event Action<Item[]> ReportTotalItems;
     public event Action<int> OnActiveItemChanged;
+    public event Action OnTooTired;
 
     [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 1.5f, _sprintSpeed = 2.5f, _respawnDelay = 1.25f;
     [SerializeField] float _minLookAngle = -25f, _maxLookAngle = 40f;
@@ -112,7 +113,6 @@ public class PlayerController : MonoBehaviour
         if(_items.Length > 0)
         {
             ReportTotalItems?.Invoke(_items);
-            // TODO ? Rather than sending an int, send the array of items with icons/costs to be set in PlayerHUD
             _activeItem = _items[_itemIndex];
             _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
             OnActiveItemChanged?.Invoke(_itemIndex);
@@ -354,7 +354,11 @@ public class PlayerController : MonoBehaviour
         if(!_activeItem.IsTrap)
         {
             if(_isAttacking) { return; }
-            if(_myMana.CurrentMana < _activeItem.Cost) { return; }  // TODO ? "Not enough energy" message (never tell the player it's really mana!!)
+            if(_myMana.CurrentMana < _activeItem.Cost)
+            {
+                OnTooTired?.Invoke();
+                return;
+            }
             RotateModelInstantly();
 
             _animator.SetTrigger(ATTACK_HASH);

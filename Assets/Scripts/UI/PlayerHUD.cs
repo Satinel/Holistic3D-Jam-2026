@@ -5,23 +5,24 @@ using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText, _coreText, _wavesText;
+    [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText, _coreText, _wavesText, _tiredText;
     [SerializeField] Slider _healthSlider, _manaSlider;
     [SerializeField] PlayerController _player;
     [SerializeField] GameObject[] _icons;
     [SerializeField] Image[] _iconImages;
     [SerializeField] TextMeshProUGUI[] _iconCostTexts;
     [SerializeField] Image[] _iconHighlights;
-    [SerializeField] GameObject _nextWaveMessage, _canSellMessage;
+    [SerializeField] GameObject _nextWaveMessage, _canSellMessage, _tiredMessage;
     [SerializeField] Color _trapColor, _baseColor;
     [SerializeField] Image _painVignette;
-    Coroutine _vignetteRoutine;
-    Color _vignetteStartColor;
+    [SerializeField] float _tiredAlphaDepletionRate = 0.05f, _painAlphaDepletionRate = 0.025f;
+    Coroutine _vignetteRoutine, _tiredRoutine;
+    Color _vignetteStartColor, _tiredStartColor;
 
     Health _playerHealth;
     Mana _playerMana;
     Wallet _playerWallet;
-    float _wait = 0.1f;
+    readonly float _wait = 0.1f;
     WaitForSeconds _waitForSeconds;
     int _totalWaves = 1, _waveIndex = 1;
 
@@ -34,6 +35,7 @@ public class PlayerHUD : MonoBehaviour
         _player.ReportTotalItems += Player_ReportTotalItems;
         _player.OnActiveItemChanged += Player_OnActiveItemChanged;
         _player.OnCanSellTrap += Player_OnCanSellTrap;
+        _player.OnTooTired += Player_OnTooTired;
         _playerHealth.OnLoseHealth += Player_OnLoseHealth;
         _playerHealth.OnHealthChanged += PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged += PlayerMana_OnManaChanged;
@@ -49,6 +51,7 @@ public class PlayerHUD : MonoBehaviour
         _player.ReportTotalItems -= Player_ReportTotalItems;
         _player.OnActiveItemChanged -= Player_OnActiveItemChanged;
         _player.OnCanSellTrap -= Player_OnCanSellTrap;
+        _player.OnTooTired -= Player_OnTooTired;
         _playerHealth.OnLoseHealth -= Player_OnLoseHealth;
         _playerHealth.OnHealthChanged -= PlayerHealth_OnHealthChanged;
         _playerMana.OnManaChanged -= PlayerMana_OnManaChanged;
@@ -62,6 +65,7 @@ public class PlayerHUD : MonoBehaviour
     void Start()
     {
         _waitForSeconds = new(_wait);
+        _tiredStartColor = _tiredText.color;
         _vignetteStartColor = _painVignette.color;
         _painVignette.enabled = false;
     }
@@ -94,10 +98,37 @@ public class PlayerHUD : MonoBehaviour
         _canSellMessage.SetActive(canSell);
     }
 
+    void Player_OnTooTired()
+    {
+        if(_tiredRoutine != null)
+        {
+            StopCoroutine(_tiredRoutine);
+            _tiredRoutine = null;
+        }
+        _tiredText.color = _tiredStartColor;
+        _tiredMessage.SetActive(true);
+        _tiredRoutine = StartCoroutine(TiredRoutine());
+    }
+
+    IEnumerator TiredRoutine()
+    {
+        while(_tiredText.color.a > 0)
+        {
+            Color tiredColor = _tiredText.color;
+            tiredColor.a = Mathf.Max(0f, tiredColor.a - _tiredAlphaDepletionRate);
+            _tiredText.color = tiredColor;
+            yield return _waitForSeconds;
+        }
+        _tiredMessage.SetActive(false);
+        _tiredRoutine = null;
+    }
+
+
     void Player_OnLoseHealth()
     {
         if(_vignetteRoutine != null)
         {
+            StopCoroutine(_vignetteRoutine);
             _vignetteRoutine = null;
         }
         _painVignette.color = _vignetteStartColor;
@@ -109,12 +140,17 @@ public class PlayerHUD : MonoBehaviour
     {
         while(_painVignette.color.a > 0)
         {
-            _painVignette.color = new Color(_painVignette.color.r, _painVignette.color.g, _painVignette.color.b, _painVignette.color.a - 0.025f);
+            Color vignetteColor = _painVignette.color;
+            vignetteColor.a = Mathf.Max(0f, vignetteColor.a - _painAlphaDepletionRate);
+            _painVignette.color = vignetteColor;
+            // Above is apparently more performant than below
+            // _painVignette.color = new Color(_painVignette.color.r, _painVignette.color.g, _painVignette.color.b, _painVignette.color.a - _alphaDepletionRate);
             yield return _waitForSeconds;
         }
         _painVignette.enabled = false;
         _vignetteRoutine = null;
     }
+
 
     void PlayerHealth_OnHealthChanged(int currentHealth, int maxHealth)
     {

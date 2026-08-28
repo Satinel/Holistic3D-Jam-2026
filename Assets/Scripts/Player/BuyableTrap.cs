@@ -22,7 +22,7 @@ public class BuyableTrap : Item
 
         // if(_size.x > 1 || _size.y > 1)
         // {
-            // TODO ? Assuming larger traps exist, check if Size fits surrounding TrapSockets
+            // Assuming larger traps exist, check if Size fits surrounding TrapSockets
             // return [...];
         // }
 

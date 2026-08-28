@@ -5,7 +5,7 @@ public class Core : MonoBehaviour
 {
     public static event Action<int> OnCoreValueChanged;
     public static event Action OnCoreValueLowered;
-    public static event Action OnCoreDestroyed; // TODO : Something ends the level when this happens
+    public static event Action OnCoreDestroyed;
 
     [SerializeField] int _maxCharge;
     [SerializeField] float _enemyDestructionDelay = 1.25f;
