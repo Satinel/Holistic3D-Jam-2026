@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class VolumeControl : MonoBehaviour
@@ -9,7 +10,7 @@ public class VolumeControl : MonoBehaviour
     public static event Action<bool> OnAudioCanvasToggled;
 
     public AudioMixer AudioMixer;
-    [SerializeField] GameObject _mainMenuButton, _cancelButton, _quitPrompt;
+    [SerializeField] GameObject _mainMenuButton, _cancelButton, _cancelRestartButton, _restartPrompt, _quitPrompt;
     [SerializeField] Canvas _audioCanvas;
     [SerializeField] Slider _mainVolumeSlider;
     [SerializeField] Slider _musicVolumeSlider;
@@ -141,6 +142,26 @@ public class VolumeControl : MonoBehaviour
         OnAudioCanvasToggled?.Invoke(true);
     }
 
+    public void PromptRestart()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        _restartPrompt.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(_cancelRestartButton);
+    }
+
+    public void CancelRestart()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        _restartPrompt.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
+    }
+
+    public void RestartLevel()
+    {
+        DisableAudioCanvas();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void PromptQuit()
     {
         EventSystem.current.SetSelectedGameObject(null);
@@ -153,7 +174,6 @@ public class VolumeControl : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         _quitPrompt.SetActive(false);
         EventSystem.current.SetSelectedGameObject(_mainMenuButton);
-
     }
 
     public void QuitGame()

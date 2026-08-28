@@ -7,14 +7,18 @@ public class TimescaleManager : MonoBehaviour
     void OnEnable()
     {
         VolumeControl.OnAudioCanvasToggled += VolumeControl_OnAudioCanvasToggled;
+        LevelManager.OnLevelCompleted += LevelManager_OnLevelCompleted;
+        LevelManager.OnLevelLoaded += LevelManager_OnLevelLoaded;
     }
 
     void OnDisable()
     {
         VolumeControl.OnAudioCanvasToggled -= VolumeControl_OnAudioCanvasToggled;
+        LevelManager.OnLevelCompleted -= LevelManager_OnLevelCompleted;
+        LevelManager.OnLevelLoaded -= LevelManager_OnLevelLoaded;
     }
 
-    private void VolumeControl_OnAudioCanvasToggled(bool isEnabled)
+    void VolumeControl_OnAudioCanvasToggled(bool isEnabled)
     {
         if(isEnabled)
         {
@@ -24,5 +28,15 @@ public class TimescaleManager : MonoBehaviour
         {
             Time.timeScale = _currentTimeScale;
         }
+    }
+
+    void LevelManager_OnLevelCompleted()
+    {
+        Time.timeScale = 0;
+    }
+
+    void LevelManager_OnLevelLoaded()
+    {
+        Time.timeScale = _currentTimeScale;
     }
 }

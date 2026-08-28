@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public static event Action OnWaveStarted, OnLevelCompleted, OnLevelFailed;
+    public static event Action OnWaveStarted, OnLevelCompleted, OnLevelFailed, OnLevelLoaded;
     public static event Action<int> AnnounceWaves, OnWaveCompleted;
 
     [SerializeField] int _totalWaves = 1;
@@ -37,6 +37,7 @@ public class LevelManager : MonoBehaviour
     {
         AnnounceWaves?.Invoke(_totalWaves);
         _isLoading = false;
+        OnLevelLoaded?.Invoke();
     }
 
     void InputManager_OnUnleashPressed()
