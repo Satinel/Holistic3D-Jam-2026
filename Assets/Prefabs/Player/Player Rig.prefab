@@ -328,7 +328,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 0bb73594864814e46929def58bd4cce5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -836,7 +836,7 @@ MonoBehaviour:
   _ballModel: {fileID: 3137276085842704938}
   _audioSource: {fileID: 3988781548349033303}
   _attackSFX: {fileID: 8300000, guid: 0bb73594864814e46929def58bd4cce5, type: 3}
-  _placeTrapSFX: {fileID: 8300000, guid: e2a007b21434cdb4689188863749ac66, type: 3}
+  _placeTrapSFX: {fileID: 8300000, guid: a28f6225d763bb5458a77c1ed7e68d37, type: 3}
   _sellTrapSFX: {fileID: 8300000, guid: 267c83bb442823b4d97cf5844eda2c6a, type: 3}
 --- !u!114 &4957972843577305603
 MonoBehaviour:

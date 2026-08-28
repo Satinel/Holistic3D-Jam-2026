@@ -8,12 +8,20 @@ public class Cannonball : MonoBehaviour
     [SerializeField] bool _destroyOnImpact, _usePenetration;
     [SerializeField] float _destructionDelay = 1.75f;
     [SerializeField] GameObject _particlesPrefab;
+    [SerializeField] AudioClip[] _hitSFX;
 
     void OnCollisionEnter(Collision collision)
     {
+        AudioSource audioSource = null;
+
         if(_particlesPrefab)
         {
-            Instantiate(_particlesPrefab, collision.GetContact(0).point, Quaternion.identity);
+            GameObject particles = Instantiate(_particlesPrefab, collision.GetContact(0).point, Quaternion.identity);
+
+            if(_hitSFX.Length > 0)
+            {
+                audioSource = particles.GetComponent<AudioSource>();
+            }
         }
 
         if(_destroyOnImpact)
@@ -24,6 +32,11 @@ public class Cannonball : MonoBehaviour
         if(collision.gameObject.TryGetComponent(out Health health))
         {
             if(health.IsPlayer) { return; } // This shouldn't ever happen but there's nothing wrong with making sure
+
+            if(_hitSFX.Length > 0 && audioSource)
+            {
+                audioSource.PlayOneShot(_hitSFX[Random.Range(0, _hitSFX.Length)]);
+            }
 
             if(_damage > 0)
             {

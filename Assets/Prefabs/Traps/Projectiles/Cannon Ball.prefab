@@ -159,4 +159,8 @@ MonoBehaviour:
   _destroyOnImpact: 0
   _usePenetration: 1
   _destructionDelay: 1.75
-  _particlesPrefab: {fileID: 0}
+  _particlesPrefab: {fileID: 7506962589691023094, guid: c6c33cf07ecf72c43b51c40f40d36252, type: 3}
+  _hitSFX:
+  - {fileID: 8300000, guid: ac46e87876555d04a8d7b2956130e91c, type: 3}
+  - {fileID: 8300000, guid: 86fab165da4e60543936fb7c4fb1de38, type: 3}
+  - {fileID: 8300000, guid: 826a302e8170de2498b3682afecb7c12, type: 3}

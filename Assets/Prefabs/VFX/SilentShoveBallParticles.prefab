@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6945175075875146923}
   - component: {fileID: 7796766935949898045}
   m_Layer: 0
-  m_Name: ShoveBallParticles
+  m_Name: SilentShoveBallParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

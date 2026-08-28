@@ -7,6 +7,7 @@ public class BreakableWall : MonoBehaviour
     [SerializeField] Rigidbody[] _rigidbodies;
     [SerializeField] float _forceMultiplyer = 2.25f, _destructionDelay = 5f;
     [SerializeField] GameObject _minimapIcon;
+    [SerializeField] AudioSource _audioSource;
 
     static readonly string RAGDOLL_TAG = "Ragdoll";
 
@@ -26,6 +27,7 @@ public class BreakableWall : MonoBehaviour
                 rigidbody.AddTorque(Random.insideUnitSphere * Random.Range(0.5f, 2f));
             }
 
+            _audioSource.Play();
             Destroy(_shatteredVersion, _destructionDelay);
             if(_minimapIcon)
             {
