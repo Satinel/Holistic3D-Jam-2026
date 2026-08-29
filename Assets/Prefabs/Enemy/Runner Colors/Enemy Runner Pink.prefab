@@ -564,6 +564,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: dff5c42791bb0124e93c3bbebc946ab3, type: 2}
+    - target: {fileID: 4889558895641657395, guid: 90fdd5aa7a927314295688639099b305, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1abafdb5eafeb43458e3101fba09e69c, type: 2}
     - target: {fileID: 4932722541034615632, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -678,7 +682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6064142015798586965, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: m_Name
-      value: Enemy Runner Blue 1
+      value: Enemy Runner Pink
       objectReference: {fileID: 0}
     - target: {fileID: 6066134840341690667, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: m_IsActive
