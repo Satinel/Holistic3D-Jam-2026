@@ -12,7 +12,7 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] Image[] _iconImages;
     [SerializeField] TextMeshProUGUI[] _iconCostTexts;
     [SerializeField] Image[] _iconHighlights;
-    [SerializeField] GameObject _nextWaveMessage, _canSellMessage, _tiredMessage;
+    [SerializeField] GameObject _nextWaveMessage, _canSellMessage, _tiredMessage, _newPortalMessage;
     [SerializeField] Color _trapColor, _baseColor;
     [SerializeField] Image _painVignette;
     [SerializeField] float _tiredAlphaDepletionRate = 0.05f, _painAlphaDepletionRate = 0.025f;
@@ -44,6 +44,7 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.AnnounceWaves += LevelManager_AnnounceWaves;
         LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
+        EnemySpawner.OnAnySpawnerActivated += EnemySpawner_OnAnySpawnerActivated;
     }
 
     void OnDestroy()
@@ -60,6 +61,7 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.AnnounceWaves -= LevelManager_AnnounceWaves;
         LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
+        EnemySpawner.OnAnySpawnerActivated -= EnemySpawner_OnAnySpawnerActivated;
     }
 
     void Start()
@@ -184,6 +186,7 @@ public class PlayerHUD : MonoBehaviour
 
     void LevelManager_OnWaveStarted()
     {
+        _newPortalMessage.SetActive(false);
         _nextWaveMessage.SetActive(false);
     }
 
@@ -193,5 +196,10 @@ public class PlayerHUD : MonoBehaviour
         _waveIndex++;
         if(_waveIndex > _totalWaves) { return; }
         _wavesText.text = $"Wave\n{_waveIndex} / {_totalWaves}";
+    }
+
+    void EnemySpawner_OnAnySpawnerActivated()
+    {
+        _newPortalMessage.SetActive(true);
     }
 }

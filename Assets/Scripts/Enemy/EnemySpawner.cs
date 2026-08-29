@@ -2,23 +2,37 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static event System.Action OnAnySpawnerActivated;
+
     [System.Serializable] class Wave
     {
         public Enemy[] Enemies;
     }
 
+    [SerializeField] int _activationIndex;
     [SerializeField] Wave[] _waves;
     [SerializeField] Transform[] _spawnPoints;
     [SerializeField] float _minSpawnTime = 0.35f, _maxSpawnTime = 0.85f;
+    [SerializeField] bool _isActive;
 
     int _waveIndex = 0, _enemyIndex = 0;
     float _spawnTimer = 1f;
     bool _isSpawning = false;
     public bool IsSpawning => _isSpawning;
-    public int TotalWaves => _waves.Length;
+
+    void Awake()
+    {
+        LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
+    }
+
+    void OnDestroy()
+    {
+        LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
+    }
 
     void Update()
     {
+        if(!_isActive) { return; }
         if(!_isSpawning) { return; }
         if(_waveIndex >= _waves.Length) { return; }
         if(_waves[_waveIndex].Enemies.Length <= 0) { return; }
@@ -60,6 +74,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartSpawning(int index)
     {
+        if(!_isActive) { return; }
         if(_waves.Length <= 0) { return; }
 
         _waveIndex = index % _waves.Length;
@@ -67,6 +82,15 @@ public class EnemySpawner : MonoBehaviour
         if(gameObject.activeSelf && !_isSpawning)
         {
             BeginSpawning();
+        }
+    }
+
+    void LevelManager_OnWaveCompleted(int index)
+    {
+        if(!_isActive && index >= _activationIndex)
+        {
+            _isActive = true;
+            OnAnySpawnerActivated?.Invoke();
         }
     }
 }

@@ -12,6 +12,7 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
         LevelManager.OnLevelCompleted += LevelManager_OnLevelCompleted;
         LevelManager.OnLevelFailed += LevelManager_OnLevelFailed;
+        LevelManager.OnSceneChangeStarted += LevelManager_OnSceneChangeStarted;
     }
 
     void OnDestroy()
@@ -21,10 +22,13 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
         LevelManager.OnLevelCompleted -= LevelManager_OnLevelCompleted;
         LevelManager.OnLevelFailed -= LevelManager_OnLevelFailed;
+        LevelManager.OnSceneChangeStarted -= LevelManager_OnSceneChangeStarted;
     }
 
     void LevelManager_OnLevelLoaded()
     {
+        if(_audioSource.isPlaying) { return; }
+
         _audioSource.clip = _buildMusic;
         _audioSource.loop = true;
         _audioSource.Play();
@@ -56,5 +60,10 @@ public class MusicManager : MonoBehaviour
         _audioSource.clip = _loseMusic;
         _audioSource.loop = false;
         _audioSource.Play();
+    }
+
+    void LevelManager_OnSceneChangeStarted()
+    {
+        _audioSource.Stop();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public static event Action OnWaveStarted, OnLevelCompleted, OnLevelFailed, OnLevelLoaded;
+    public static event Action OnWaveStarted, OnLevelCompleted, OnLevelFailed, OnLevelLoaded, OnSceneChangeStarted;
     public static event Action<int> AnnounceWaves, OnWaveCompleted;
 
     [SerializeField] int _totalWaves = 1;
@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         InputManager.OnUnleashPressed += InputManager_OnUnleashPressed;
+        VolumeControl.OnRestartRequested += VolumeControl_OnRestartRequested;
         Enemy.OnAnyEnemySpawned += Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed += Enemy_OnAnyEnemyDestroyed;
         Core.OnCoreDestroyed += Core_OnCoreDestroyed;
@@ -28,6 +29,7 @@ public class LevelManager : MonoBehaviour
     void OnDestroy()
     {
         InputManager.OnUnleashPressed -= InputManager_OnUnleashPressed;
+        VolumeControl.OnRestartRequested -= VolumeControl_OnRestartRequested;
         Enemy.OnAnyEnemySpawned -= Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
         Core.OnCoreDestroyed -= Core_OnCoreDestroyed;
@@ -61,15 +63,24 @@ public class LevelManager : MonoBehaviour
         _wavesActive = true;
         foreach(EnemySpawner spawner in _spawners)
         {
-            spawner.StartSpawning(_waveIndex);
+            if(spawner.gameObject.activeSelf)
+            {
+                spawner.StartSpawning(_waveIndex);
+            }
         }
         OnWaveStarted?.Invoke();
+    }
+
+    void VolumeControl_OnRestartRequested()
+    {
+        ReloadLevel();
     }
 
     void LoadNextLevel()
     {
         if(_isLoading) { return; }
 
+        OnSceneChangeStarted?.Invoke();
         _isLoading = true;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -79,6 +90,7 @@ public class LevelManager : MonoBehaviour
     {
         if(_isLoading) { return; }
 
+        OnSceneChangeStarted?.Invoke();
         _isLoading = true;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
