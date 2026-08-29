@@ -3,6 +3,7 @@ using UnityEngine;
 public class TimescaleManager : MonoBehaviour
 {
     float _currentTimeScale = 1f;
+    bool _levelComplete;
 
     void OnEnable()
     {
@@ -24,7 +25,7 @@ public class TimescaleManager : MonoBehaviour
         {
             Time.timeScale = 0;
         }
-        else
+        else if(!_levelComplete)
         {
             Time.timeScale = _currentTimeScale;
         }
@@ -33,6 +34,7 @@ public class TimescaleManager : MonoBehaviour
     void LevelManager_OnLevelCompleted()
     {
         Time.timeScale = 0;
+        _levelComplete = true;
     }
 
     void LevelManager_OnLevelLoaded()

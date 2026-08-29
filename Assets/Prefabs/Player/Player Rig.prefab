@@ -2797,9 +2797,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
-  <Cost>k__BackingField: 125
+  <Cost>k__BackingField: 95
   <Icon>k__BackingField: {fileID: 21300000, guid: 0db1b0f20d4d91445bca35a8ddd540e7, type: 3}
-  <BuyPrice>k__BackingField: 125
+  <BuyPrice>k__BackingField: 95
   <TrapPosition>k__BackingField: 2
   <PreviewPrefab>k__BackingField: {fileID: 6698504682365999681, guid: 566d992b48df9f6439f36fbe6a6ce5b2, type: 3}
   _size: {x: 1, y: 1}

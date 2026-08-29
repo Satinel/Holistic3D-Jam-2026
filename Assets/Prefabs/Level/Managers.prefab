@@ -1134,7 +1134,8 @@ MonoBehaviour:
   _buildMusic: {fileID: 8300000, guid: 9b9f1ed1ad76d86429a29632e145e54f, type: 3}
   _waveMusic: {fileID: 8300000, guid: 5b9a5264981521441b39f83e5e8267e8, type: 3}
   _winMusic: {fileID: 8300000, guid: aeafc05d1332976439767de171498ca5, type: 3}
-  _loseMusic: {fileID: 0}
+  _loseMusic: {fileID: 8300000, guid: 53bda727ee4a3c347a187e791e82b110, type: 3}
+  _clipStartPoint: 0
 --- !u!82 &3595724542692899713
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1147,7 +1148,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 1462747661866214708, guid: 7582a441e47eab04cb01cf9b8dce1a08, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9b9f1ed1ad76d86429a29632e145e54f, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1
   Loop: 0

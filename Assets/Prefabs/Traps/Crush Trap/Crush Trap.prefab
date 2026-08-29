@@ -404,7 +404,7 @@ MonoBehaviour:
   <SellPrice>k__BackingField: 100
   <RangeRenderer>k__BackingField: {fileID: 2804671179617191022}
   <HighlightModel>k__BackingField: {fileID: 2637512230679867431}
-  <RechargeTime>k__BackingField: 5.75
+  <RechargeTime>k__BackingField: 4.75
   <Damage>k__BackingField: 50
   <RagdollDuration>k__BackingField: 0
   <ForceMode>k__BackingField: 1
