@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1758009366463248394}
   - component: {fileID: 7414381154463309559}
   - component: {fileID: 1055856459851829458}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Death Zone Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}

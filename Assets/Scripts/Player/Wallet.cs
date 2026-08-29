@@ -60,7 +60,7 @@ public class Wallet : MonoBehaviour
         GainMoney(soldPrice);
     }
 
-    void LevelManager_OnWaveCompleted(int reward)
+    void LevelManager_OnWaveCompleted(int index, int reward)
     {
         GainMoney(reward);
     }

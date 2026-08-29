@@ -9,11 +9,12 @@ public class EnemySpawner : MonoBehaviour
         public Enemy[] Enemies;
     }
 
-    [SerializeField] int _activationIndex;
+    [SerializeField] int _activationIndex = 0;
     [SerializeField] Wave[] _waves;
     [SerializeField] Transform[] _spawnPoints;
     [SerializeField] float _minSpawnTime = 0.35f, _maxSpawnTime = 0.85f;
     [SerializeField] bool _isActive;
+    [SerializeField] GameObject _visualsParent;
 
     int _waveIndex = 0, _enemyIndex = 0;
     float _spawnTimer = 1f;
@@ -28,6 +29,15 @@ public class EnemySpawner : MonoBehaviour
     void OnDestroy()
     {
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
+    }
+
+    void Start()
+    {
+        if(_activationIndex == 0)
+        {
+            _isActive = true;
+            _visualsParent.SetActive(true);
+        }
     }
 
     void Update()
@@ -85,12 +95,20 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void LevelManager_OnWaveCompleted(int index)
+    void LevelManager_OnWaveCompleted(int index, int rewards)
     {
         if(!_isActive && index >= _activationIndex)
         {
-            _isActive = true;
-            OnAnySpawnerActivated?.Invoke();
+            Activate();
         }
+    }
+
+    void Activate()
+    {
+        if(_isActive) { return; }
+
+        _isActive = true;
+        _visualsParent.SetActive(true);
+        OnAnySpawnerActivated?.Invoke();
     }
 }

@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public static event Action OnWaveStarted, OnLevelCompleted, OnLevelFailed, OnLevelLoaded, OnSceneChangeStarted;
-    public static event Action<int> AnnounceWaves, OnWaveCompleted;
+    public static event Action<int> AnnounceWaves;
+    public static event Action<int, int> OnWaveCompleted;
 
     [SerializeField] int _totalWaves = 1;
     [SerializeField] Canvas _winCanvas, _loseCanvas;
@@ -132,7 +133,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            OnWaveCompleted?.Invoke(_waveRewards[_waveIndex]);
+            OnWaveCompleted?.Invoke(_waveIndex, _waveRewards[_waveIndex]);
         }
     }
 

@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 3302379530340041691}
   - component: {fileID: 1113414937465007316}
   - component: {fileID: 371753733855480104}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Death Zone Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 7607098428874877457}
   - component: {fileID: 1220978918597321262}
   - component: {fileID: 7417624100866820988}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Death Zone Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}

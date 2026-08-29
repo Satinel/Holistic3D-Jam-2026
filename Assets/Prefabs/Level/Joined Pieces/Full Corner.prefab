@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2234325909455422769}
   m_Layer: 8
-  m_Name: 3x3 Corner 1
+  m_Name: Full Corner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

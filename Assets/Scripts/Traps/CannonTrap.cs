@@ -49,7 +49,7 @@ public class CannonTrap : Trap
         cannonball.Rigidbody.AddForce(cannonball.transform.forward * _forceMultiplyer, ForceMode.VelocityChange);
     }
 
-    void LevelManager_OnWaveCompleted(int _)
+    void LevelManager_OnWaveCompleted(int index, int rewards)
     {
         _canFire = false;
     }

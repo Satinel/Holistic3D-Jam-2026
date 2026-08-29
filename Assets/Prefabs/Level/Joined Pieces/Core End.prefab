@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4244081302449668188}
   - component: {fileID: 6275538074105822657}
   - component: {fileID: 904403340703664643}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Death Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 4838807490294924736}
   - component: {fileID: 8529607997976984155}
   - component: {fileID: 4342435824272119122}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Death Zone (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 922625714414781788}
   - component: {fileID: 6439480165578622518}
   - component: {fileID: 5005390955831659193}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Death Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 8442584390964415326}
   - component: {fileID: 7620376393451806141}
   - component: {fileID: 4023462741840506964}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Death Zone (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -759,7 +759,7 @@ GameObject:
   - component: {fileID: 8733493144870606788}
   - component: {fileID: 9147561911453377377}
   - component: {fileID: 5803418170483237814}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Death Zone (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

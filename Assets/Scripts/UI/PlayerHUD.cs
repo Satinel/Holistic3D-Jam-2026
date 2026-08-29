@@ -24,7 +24,7 @@ public class PlayerHUD : MonoBehaviour
     Wallet _playerWallet;
     readonly float _wait = 0.1f;
     WaitForSeconds _waitForSeconds;
-    int _totalWaves = 1, _waveIndex = 1;
+    int _totalWaves = 1;
 
     void Awake()
     {
@@ -181,7 +181,7 @@ public class PlayerHUD : MonoBehaviour
     void LevelManager_AnnounceWaves(int totalWaves)
     {
         _totalWaves = totalWaves;
-        _wavesText.text = $"Wave\n{_waveIndex} / {_totalWaves}";
+        _wavesText.text = $"Wave\n1 / {_totalWaves}";
     }
 
     void LevelManager_OnWaveStarted()
@@ -190,12 +190,11 @@ public class PlayerHUD : MonoBehaviour
         _nextWaveMessage.SetActive(false);
     }
 
-    void LevelManager_OnWaveCompleted(int _)
+    void LevelManager_OnWaveCompleted(int index, int _)
     {
         _nextWaveMessage.SetActive(true);
-        _waveIndex++;
-        if(_waveIndex > _totalWaves) { return; }
-        _wavesText.text = $"Wave\n{_waveIndex} / {_totalWaves}";
+
+        _wavesText.text = $"Wave\n{index + 1} / {_totalWaves}";
     }
 
     void EnemySpawner_OnAnySpawnerActivated()

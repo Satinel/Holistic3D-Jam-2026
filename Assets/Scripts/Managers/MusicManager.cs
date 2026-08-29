@@ -41,7 +41,7 @@ public class MusicManager : MonoBehaviour
         _audioSource.Play();
     }
 
-    void LevelManager_OnWaveCompleted(int obj)
+    void LevelManager_OnWaveCompleted(int obj, int _)
     {
         _audioSource.clip = _buildMusic;
         _audioSource.loop = true;
