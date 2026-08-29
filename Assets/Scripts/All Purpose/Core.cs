@@ -44,10 +44,11 @@ public class Core : MonoBehaviour
 
     void LowerCoreCharge(int amount)
     {
-        if(!_audioSource.isPlaying)
+        if(_audioSource.isPlaying)
         {
-            _audioSource.Play();
+            _audioSource.Stop();
         }
+        _audioSource.Play();
 
         _currentCharge -= amount;
         _currentCharge = _currentCharge < 0 ? 0 : _currentCharge;
