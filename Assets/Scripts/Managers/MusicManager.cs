@@ -2,15 +2,59 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _buildMusic, _waveMusic, _winMusic, _loseMusic;
+
+    void Awake()
     {
-        
+        LevelManager.OnLevelLoaded += LevelManager_OnLevelLoaded;
+        LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
+        LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
+        LevelManager.OnLevelCompleted += LevelManager_OnLevelCompleted;
+        LevelManager.OnLevelFailed += LevelManager_OnLevelFailed;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDestroy()
     {
-        
+        LevelManager.OnLevelLoaded -= LevelManager_OnLevelLoaded;
+        LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
+        LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
+        LevelManager.OnLevelCompleted -= LevelManager_OnLevelCompleted;
+        LevelManager.OnLevelFailed -= LevelManager_OnLevelFailed;
+    }
+
+    void LevelManager_OnLevelLoaded()
+    {
+        _audioSource.clip = _buildMusic;
+        _audioSource.loop = true;
+        _audioSource.Play();
+    }
+
+    void LevelManager_OnWaveStarted()
+    {
+        _audioSource.clip = _waveMusic;
+        _audioSource.loop = true;
+        _audioSource.Play();
+    }
+
+    void LevelManager_OnWaveCompleted(int obj)
+    {
+        _audioSource.clip = _buildMusic;
+        _audioSource.loop = true;
+        _audioSource.Play();
+    }
+
+    void LevelManager_OnLevelCompleted()
+    {
+        _audioSource.clip = _winMusic;
+        _audioSource.loop = false;
+        _audioSource.Play();
+    }
+
+    void LevelManager_OnLevelFailed()
+    {
+        _audioSource.clip = _loseMusic;
+        _audioSource.loop = false;
+        _audioSource.Play();
     }
 }

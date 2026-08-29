@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class CorridorSection : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] GameObject[] _objectsToEnable;
+
+    public void EnableObjects()
     {
-        
+        foreach(GameObject gObject in _objectsToEnable)
+        {
+            gObject.SetActive(true);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DisableObjects()
     {
-        
+        foreach(GameObject gObject in _objectsToEnable)
+        {
+            gObject.SetActive(false);
+        }
     }
 }
