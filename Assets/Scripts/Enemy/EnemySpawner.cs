@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -15,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float _minSpawnTime = 0.35f, _maxSpawnTime = 0.85f;
     [SerializeField] bool _isActive;
     [SerializeField] GameObject _visualsParent;
+    [SerializeField] Path _path;
 
     int _waveIndex = 0, _enemyIndex = 0;
     float _spawnTimer = 1f;
@@ -37,6 +39,10 @@ public class EnemySpawner : MonoBehaviour
         {
             _isActive = true;
             _visualsParent.SetActive(true);
+        }
+        else if(_path)
+        {
+            _path.DeactivatePassage();
         }
     }
 
@@ -107,6 +113,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if(_isActive) { return; }
 
+        _path.ActivatePath();
         _isActive = true;
         _visualsParent.SetActive(true);
         OnAnySpawnerActivated?.Invoke();

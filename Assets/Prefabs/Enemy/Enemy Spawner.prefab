@@ -271,6 +271,8 @@ MonoBehaviour:
   _maxSpawnTime: 1.85
   _isActive: 1
   _visualsParent: {fileID: 1478145637794341941}
+  _sectionParent: {fileID: 0}
+  _wait: 0.1
 --- !u!1 &5138658903563731925
 GameObject:
   m_ObjectHideFlags: 0

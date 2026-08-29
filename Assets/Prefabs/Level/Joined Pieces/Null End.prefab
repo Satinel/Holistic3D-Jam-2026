@@ -173,6 +173,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8887039270024798859}
     m_Modifications:
+    - target: {fileID: 801802247321204164, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
+      propertyPath: m_Center.z
+      value: -0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1412355956007909680, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -216,6 +220,10 @@ PrefabInstance:
     - target: {fileID: 3960642664360379057, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
       propertyPath: m_Name
       value: Null Wall Variant (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014993254455126336, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
+      propertyPath: m_Center.z
+      value: -0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -297,6 +305,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8887039270024798859}
     m_Modifications:
+    - target: {fileID: 801802247321204164, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
+      propertyPath: m_Center.z
+      value: -0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1412355956007909680, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
@@ -340,6 +352,10 @@ PrefabInstance:
     - target: {fileID: 3960642664360379057, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
       propertyPath: m_Name
       value: Null Wall Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014993254455126336, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
+      propertyPath: m_Center.z
+      value: -0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -421,6 +437,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8887039270024798859}
     m_Modifications:
+    - target: {fileID: 801802247321204164, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
+      propertyPath: m_Center.z
+      value: -0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1412355956007909680, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -464,6 +484,10 @@ PrefabInstance:
     - target: {fileID: 3960642664360379057, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
       propertyPath: m_Name
       value: Null Wall Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014993254455126336, guid: a3ac34377b74b484fbf367c5892b8827, type: 3}
+      propertyPath: m_Center.z
+      value: -0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
