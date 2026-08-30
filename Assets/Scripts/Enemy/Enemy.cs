@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] PlayerDetector _playerDetector;
     [SerializeField] FloatingText _floatingTextPrefab;
+    [SerializeField] GameObject _armorBreakPrefab;
 
     [SerializeField] Rigidbody _ragdoll;
     [SerializeField] ModelAnimator _ragdollModel;
@@ -301,7 +302,7 @@ public class Enemy : MonoBehaviour
 
     void BreakArmor()
     {
-        // TODO : Instantiate a particle effect (with sound) and disable armor piece game objects
+        Instantiate(_armorBreakPrefab, _ragdoll.transform.position, Quaternion.identity);
     }
 
     public void DisableRagdollGravity()

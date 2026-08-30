@@ -9392,6 +9392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   <CoreValue>k__BackingField: 1
   _drainDamage: 10
+  _ragdollResist: 0
+  _isBoss: 0
   _moveSpeed: 2.25
   _acceleration: 10
   _turnSpeed: 2.5
@@ -9404,6 +9406,7 @@ MonoBehaviour:
   _animator: {fileID: 4889558895641657395}
   _playerDetector: {fileID: 7058717795555157401}
   _floatingTextPrefab: {fileID: 165850438541052818, guid: a001700873c5f4e41b9b909572f6a5ad, type: 3}
+  _armorBreakPrefab: {fileID: 7506962589691023094, guid: e52a2935708d05c43a667043c3fd0d31, type: 3}
   _ragdoll: {fileID: 4820830033733442918}
   _ragdollModel: {fileID: 8520355316149715777}
   _colliders:
