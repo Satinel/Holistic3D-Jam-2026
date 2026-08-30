@@ -83,8 +83,9 @@ public class LevelManager : MonoBehaviour
 
         OnSceneChangeStarted?.Invoke();
         _isLoading = true;
+        int nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
     void ReloadLevel()

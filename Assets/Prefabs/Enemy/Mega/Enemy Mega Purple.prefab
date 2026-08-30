@@ -148,6 +148,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -16.519194
       objectReference: {fileID: 0}
+    - target: {fileID: 1177097325106653104, guid: 90fdd5aa7a927314295688639099b305, type: 3}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1332122640767489678, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -458,7 +462,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 247b4dd5ede4aae47807cafb97dae0d5, type: 2}
     - target: {fileID: 4128515336638853484, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: _maxHealth
-      value: 500
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 4128515336638853484, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: <MoneyValue>k__BackingField
