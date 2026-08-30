@@ -51,8 +51,6 @@ public class EnemySpawner : MonoBehaviour
     {
         if(!_isActive) { return; }
         if(!_isSpawning) { return; }
-        if(_waveIndex >= _waves.Length) { return; }
-        if(_waves[_waveIndex].Enemies.Length <= 0) { return; }
 
         if(_spawnTimer > 0)
         {
@@ -82,13 +80,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void BeginSpawning()
-    {
-        _spawnTimer = 1;
-        _enemyIndex = 0;
-        _isSpawning = true;
-    }
-
     public void StartSpawning(int index)
     {
         if(!_isActive) { return; }
@@ -100,6 +91,16 @@ public class EnemySpawner : MonoBehaviour
         {
             BeginSpawning();
         }
+    }
+
+    void BeginSpawning()
+    {
+        if(_waveIndex >= _waves.Length) { return; }
+        if(_waves[_waveIndex].Enemies.Length <= 0) { return; }
+
+        _spawnTimer = 1;
+        _enemyIndex = 0;
+        _isSpawning = true;
     }
 
     void LevelManager_OnWaveCompleted(int index, int rewards)

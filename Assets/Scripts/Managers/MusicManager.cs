@@ -3,10 +3,11 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] AudioClip _buildMusic, _waveMusic, _winMusic, _loseMusic;
+    [SerializeField] AudioClip _buildMusic, _waveMusic, _winMusic, _loseMusic, _bossMusic;
     [SerializeField] float _clipStartPoint = 0f;
 
     int _clipPausePoint = 0;
+    bool _isPlayingBossMusic;
 
     void Awake()
     {
@@ -16,6 +17,7 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnLevelCompleted += LevelManager_OnLevelCompleted;
         LevelManager.OnLevelFailed += LevelManager_OnLevelFailed;
         LevelManager.OnSceneChangeStarted += LevelManager_OnSceneChangeStarted;
+        Enemy.OnBossSpawned += Enemy_OnBossSpawned;
     }
 
     void OnDestroy()
@@ -26,6 +28,7 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnLevelCompleted -= LevelManager_OnLevelCompleted;
         LevelManager.OnLevelFailed -= LevelManager_OnLevelFailed;
         LevelManager.OnSceneChangeStarted -= LevelManager_OnSceneChangeStarted;
+        Enemy.OnBossSpawned -= Enemy_OnBossSpawned;
     }
 
     void LevelManager_OnLevelLoaded()
@@ -74,5 +77,16 @@ public class MusicManager : MonoBehaviour
     void LevelManager_OnSceneChangeStarted()
     {
         _audioSource.Stop();
+    }
+
+    void Enemy_OnBossSpawned()
+    {
+        if(_isPlayingBossMusic) { return; }
+
+        _isPlayingBossMusic = true;
+        _audioSource.Stop();
+        _audioSource.clip = _bossMusic;
+        _audioSource.loop = true;
+        _audioSource.Play();
     }
 }

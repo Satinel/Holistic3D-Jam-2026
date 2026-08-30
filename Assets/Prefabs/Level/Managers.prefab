@@ -1135,6 +1135,7 @@ MonoBehaviour:
   _waveMusic: {fileID: 8300000, guid: 5b9a5264981521441b39f83e5e8267e8, type: 3}
   _winMusic: {fileID: 8300000, guid: aeafc05d1332976439767de171498ca5, type: 3}
   _loseMusic: {fileID: 8300000, guid: 53bda727ee4a3c347a187e791e82b110, type: 3}
+  _bossMusic: {fileID: 8300000, guid: 0a81feb833a068b4a9bd037fef302a90, type: 3}
   _clipStartPoint: 0
 --- !u!82 &3595724542692899713
 AudioSource:

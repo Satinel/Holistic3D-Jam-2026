@@ -4,10 +4,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public static event Action<Enemy> OnAnyEnemySpawned, OnAnyEnemyDestroyed;
+    public static event Action OnBossSpawned;
 
     [field:SerializeField] public int CoreValue { get; private set; } = 1;
 
-    [SerializeField] int _drainDamage = 10;
+    [SerializeField] int _drainDamage = 10, _ragdollResist = 0;
+    [SerializeField] bool _isBoss = false;
     [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f, _destroyDelay = 3f; //_deceleration = 5f;
     [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
     [SerializeField] Health _health;
@@ -53,10 +55,15 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _startingScaleY = _ragdollModel.transform.localScale.y;
+        if(_isBoss)
+        {
+            OnBossSpawned?.Invoke();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        if(_ragdollResist > 0) { return; }  // TODO : Make sure this isn't a huge issue
         if(_health.IsDead) { return; }
         if(!collision.gameObject.CompareTag("Trap")) { return; }
         if(collision.gameObject.GetComponent<Trap>()) { return; }   // This should only handle objects without attached Trap monobehaviours (like projectiles)
@@ -193,6 +200,17 @@ public class Enemy : MonoBehaviour
 
     public void AccurateRagdoll(Vector3 force, ForceMode forceMode, float ragdollDuration)
     {
+        if(_ragdollResist > 0)
+        {
+            _ragdollResist--;
+
+            if(_ragdollResist == 0)
+            {
+                BreakArmor();
+            }
+            return;
+        }
+
         if(_isAttacking)
         {
             StopAttack();
@@ -247,6 +265,14 @@ public class Enemy : MonoBehaviour
 
     public void Crush(float newScaleY, float duration)
     {
+        if(_ragdollResist > 0)
+        {
+            _ragdollResist--;
+            if(_ragdollResist == 0)
+            {
+                BreakArmor();
+            }
+        }
         if(_isAttacking)
         {
             _playerDetector.ToggleActive(false);
@@ -271,6 +297,11 @@ public class Enemy : MonoBehaviour
             _animator.enabled = true;
             _playerDetector.ToggleActive(true);
         }
+    }
+
+    void BreakArmor()
+    {
+        // TODO : Instantiate a particle effect (with sound) and disable armor piece game objects
     }
 
     public void DisableRagdollGravity()
