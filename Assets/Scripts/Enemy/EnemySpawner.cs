@@ -40,10 +40,14 @@ public class EnemySpawner : MonoBehaviour
             _isActive = true;
             _visualsParent.SetActive(true);
         }
-        else if(!_isActive && _path)
+        else if(!_isActive)
         {
             _visualsParent.SetActive(false);
-            _path.DeactivatePassage();
+
+            if(_path)
+            {
+                _path.DeactivatePassage();
+            }
         }
     }
 
@@ -115,7 +119,10 @@ public class EnemySpawner : MonoBehaviour
     {
         if(_isActive) { return; }
 
-        _path.ActivatePath();
+        if(_path)
+        {
+            _path.ActivatePath();
+        }
         _isActive = true;
         _visualsParent.SetActive(true);
         OnAnySpawnerActivated?.Invoke();
