@@ -1,22 +1,25 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public static event Action OnWaveStarted, OnLevelCompleted, OnLevelFailed, OnLevelLoaded, OnSceneChangeStarted;
+    public static event Action OnWaveStarted, OnLevelCompleted, OnLevelFailed, OnLevelStarted, OnSceneChangeStarted;
     public static event Action<int> AnnounceWaves;
     public static event Action<int, int> OnWaveCompleted;
 
     [SerializeField] int _totalWaves = 1;
-    [SerializeField] Canvas _winCanvas, _loseCanvas;
+    [SerializeField] Canvas _splashCanvas, _winCanvas, _loseCanvas, _loadCanvas;
     [SerializeField] EnemySpawner[] _spawners;
     [SerializeField] int[] _waveRewards;
 
-    bool _wavesActive, _levelWon, _levelLost, _isLoading = true;
+    bool _wavesActive, _levelWon, _levelLost, _isLoading = true, _hasStarted;
     int _waveIndex;
     HashSet<Enemy> _activeEnemies = new();
+    IDisposable _eventListener;
 
     void Awake()
     {
@@ -38,9 +41,21 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        _eventListener = InputSystem.onAnyButtonPress.Call(OnButtonPressed);
         AnnounceWaves?.Invoke(_totalWaves);
         _isLoading = false;
-        OnLevelLoaded?.Invoke();
+    }
+
+    void OnButtonPressed(InputControl button)
+    {
+        // I really don't know why the 'new' input system needs such convoluted means to check for any input, when the 'bad' system it replaced handled it with ease
+        _eventListener.Dispose();
+        _eventListener = null;
+        if(_hasStarted) { return; }
+
+        _hasStarted = true;
+        _splashCanvas.enabled = false;
+        OnLevelStarted?.Invoke();
     }
 
     void InputManager_OnUnleashPressed()
@@ -81,6 +96,7 @@ public class LevelManager : MonoBehaviour
     {
         if(_isLoading) { return; }
 
+        _loadCanvas.enabled = true;
         OnSceneChangeStarted?.Invoke();
         _isLoading = true;
         int nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;

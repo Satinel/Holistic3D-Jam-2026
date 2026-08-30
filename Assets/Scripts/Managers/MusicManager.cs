@@ -11,7 +11,7 @@ public class MusicManager : MonoBehaviour
 
     void Awake()
     {
-        LevelManager.OnLevelLoaded += LevelManager_OnLevelLoaded;
+        LevelManager.OnLevelStarted += LevelManager_OnLevelStarted;
         LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
         LevelManager.OnLevelCompleted += LevelManager_OnLevelCompleted;
@@ -22,7 +22,7 @@ public class MusicManager : MonoBehaviour
 
     void OnDestroy()
     {
-        LevelManager.OnLevelLoaded -= LevelManager_OnLevelLoaded;
+        LevelManager.OnLevelStarted -= LevelManager_OnLevelStarted;
         LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
         LevelManager.OnLevelCompleted -= LevelManager_OnLevelCompleted;
@@ -31,7 +31,7 @@ public class MusicManager : MonoBehaviour
         Enemy.OnBossSpawned -= Enemy_OnBossSpawned;
     }
 
-    void LevelManager_OnLevelLoaded()
+    void LevelManager_OnLevelStarted()
     {
         _audioSource.clip = _buildMusic;
         _audioSource.loop = true;
