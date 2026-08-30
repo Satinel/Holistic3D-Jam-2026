@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public event Action<int> OnActiveItemChanged;
     public event Action OnTooTired;
 
-    [SerializeField] float _moveSpeed = 2.5f, _rotateSpeed = 1.5f, _sprintSpeed = 2.5f, _respawnDelay = 1.25f;
+    [SerializeField] float _moveSpeed = 2.5f, _backupPenalty = 1f, _rotateSpeed = 1.5f, _sprintSpeed = 2.5f, _respawnDelay = 1.25f;
     [SerializeField] float _minLookAngle = -25f, _maxLookAngle = 40f;
     [SerializeField] float _modelRotateSpeed = 15f;
     [SerializeField] CharacterController _characterController;
@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     static readonly int DEATH_HASH = Animator.StringToHash("Death");
     static readonly int ATTACK_HASH = Animator.StringToHash("Attack");
     static readonly int MOVE_HASH = Animator.StringToHash("IsMoving");
+    static readonly int BACKUP_HASH = Animator.StringToHash("IsBackingUp");
     static readonly int SPRINT_HASH = Animator.StringToHash("IsSprinting");
     static readonly int RESPAWN_HASH = Animator.StringToHash("Respawn");
 
@@ -152,7 +153,22 @@ public class PlayerController : MonoBehaviour
     {
         if(_moveInputValue.magnitude > 0 && !_isAttacking)
         {
-            _animator.SetBool(MOVE_HASH, true);
+            bool movingBackward = _moveInputValue.y < 0;
+            if(movingBackward)
+            {
+                _animator.SetBool(BACKUP_HASH, true);
+                _animator.SetBool(MOVE_HASH, false);
+            }
+            else if(_moveInputValue.y > 0)
+            {
+                _animator.SetBool(MOVE_HASH, true);
+                _animator.SetBool(BACKUP_HASH, false);
+            }
+            else
+            {
+                _animator.SetBool(BACKUP_HASH, true);
+                _animator.SetBool(MOVE_HASH, false);
+            }
 
             Vector3 right = _cameraTarget.right;
             Vector3 forward = _cameraTarget.forward;
@@ -163,7 +179,8 @@ public class PlayerController : MonoBehaviour
             Vector3 direction = (_moveInputValue.x * right) + (_moveInputValue.y * forward);
             direction = new Vector3(direction.x, 0f, direction.z).normalized;
 
-            float speed = _isSprinting ? _moveSpeed + _sprintSpeed : _moveSpeed;
+            float penalty = movingBackward ? _backupPenalty : 0;
+            float speed = _isSprinting ? _moveSpeed + _sprintSpeed - penalty : _moveSpeed - penalty;
             _characterController.Move(speed * Time.deltaTime * direction);
 
             RotateModel();
@@ -171,6 +188,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _animator.SetBool(MOVE_HASH, false);
+            _animator.SetBool(BACKUP_HASH, false);
         }
     }
 
