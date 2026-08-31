@@ -1922,7 +1922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Shove
   <IsTrap>k__BackingField: 0
   <Cost>k__BackingField: 10
-  <Icon>k__BackingField: {fileID: 21300000, guid: 2587885b7a796ad4db97759df27ce4f6, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: a990247de269c5b4c9b0d656ec20d0ec, type: 3}
   _damage: 5
   _forceMultiplyer: 25
   _spawnPoint: {fileID: 1074038391351336449}
