@@ -734,7 +734,7 @@ MonoBehaviour:
   <RangeRenderer>k__BackingField: {fileID: 6266070007179462890}
   <HighlightModel>k__BackingField: {fileID: 2112606744153770705}
   <RechargeTime>k__BackingField: 3.15
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 25
   <RagdollDuration>k__BackingField: 1.75
   <ForceMode>k__BackingField: 1
   _animator: {fileID: 2961309112882066762}

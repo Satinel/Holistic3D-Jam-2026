@@ -458,7 +458,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a0cb6ebf7c75bad43869959e9ed4c736, type: 2}
     - target: {fileID: 4128515336638853484, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: _maxHealth
-      value: 250
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 4128515336638853484, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: <MoneyValue>k__BackingField
