@@ -5,7 +5,7 @@ public class TrapPreview : MonoBehaviour
     [SerializeField] MeshRenderer[] _renderers;
     [SerializeField] GameObject _rangeIndicator;
 
-    static readonly int COLOR_ID = Shader.PropertyToID("_BaseColor");
+    static readonly int EMISSION_COLOR_ID = Shader.PropertyToID("_EmissionColor");
 
     public void SetMaterials(Color color)
     {
@@ -13,7 +13,7 @@ public class TrapPreview : MonoBehaviour
         foreach(MeshRenderer renderer in _renderers)
         {
             renderer.GetPropertyBlock(mpb);
-            mpb.SetColor(COLOR_ID, color);
+            mpb.SetColor(EMISSION_COLOR_ID, color);
             renderer.SetPropertyBlock(mpb);
         }
     }
