@@ -150,6 +150,8 @@ public class InputManager : MonoBehaviour
 
     void LevelManager_OnLevelStarted()
     {
+        if(_acceptInput) { return; }
+
         Invoke(nameof(SetAcceptInput), 0.1f);
     }
 
