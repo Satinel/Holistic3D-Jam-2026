@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject _ballModel;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioClip _attackSFX, _placeTrapSFX, _sellTrapSFX, _hurtSFX;
+    [SerializeField] GameObject _itemsParent;
+    [SerializeField] NewGamePlusSO _newGamePlusSO;
 
     Vector3 _respawnPosition = new();
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
@@ -115,6 +117,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        if(_newGamePlusSO && _newGamePlusSO.IsNewGamePlus)
+        {
+            _items = _itemsParent.GetComponentsInChildren<Item>();
+        }
+
         if(_items.Length > 0)
         {
             ReportTotalItems?.Invoke(_items);

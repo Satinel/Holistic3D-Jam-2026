@@ -14095,6 +14095,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2976668484592272088, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
+      propertyPath: _newGamePlusSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e93d00d3882cda49b30f969b4884297, type: 2}
+    - target: {fileID: 2976668484592272088, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
       propertyPath: _spawners.Array.size
       value: 5
       objectReference: {fileID: 0}

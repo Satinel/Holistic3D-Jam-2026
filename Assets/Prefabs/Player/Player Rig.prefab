@@ -805,6 +805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _moveSpeed: 2.75
+  _backupPenalty: 1
   _rotateSpeed: 0.5
   _sprintSpeed: 2.5
   _respawnDelay: 1.25
@@ -839,6 +840,8 @@ MonoBehaviour:
   _placeTrapSFX: {fileID: 8300000, guid: a28f6225d763bb5458a77c1ed7e68d37, type: 3}
   _sellTrapSFX: {fileID: 8300000, guid: 261a05ce7528d1746b8db3ee17e8d43f, type: 3}
   _hurtSFX: {fileID: 8300000, guid: 6c9a9ea827fd9b0438200d51d2832164, type: 3}
+  _itemsParent: {fileID: 4787445760137352739}
+  _newGamePlusSO: {fileID: 11400000, guid: 9e93d00d3882cda49b30f969b4884297, type: 2}
 --- !u!114 &4957972843577305603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1736,12 +1739,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2264376328042916735}
+  - {fileID: 1343697673378463046}
   - {fileID: 7162693873742941381}
+  - {fileID: 7467964109030972216}
   - {fileID: 199585906568999915}
   - {fileID: 827512631339979137}
   - {fileID: 408720742180844048}
-  - {fileID: 1343697673378463046}
-  - {fileID: 7467964109030972216}
   m_Father: {fileID: 7278810624925462545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4807773708274420016

@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] Canvas _splashCanvas, _winCanvas, _loseCanvas, _loadCanvas;
     [SerializeField] EnemySpawner[] _spawners;
     [SerializeField] int[] _waveRewards;
+    [SerializeField] NewGamePlusSO _newGamePlusSO;
 
     bool _wavesActive, _levelWon, _levelLost, _isLoading = true, _hasStarted;
     int _waveIndex;
@@ -95,6 +96,11 @@ public class LevelManager : MonoBehaviour
     void LoadNextLevel()
     {
         if(_isLoading) { return; }
+
+        if(_newGamePlusSO)
+        {
+            _newGamePlusSO.SetNewGamePlus();
+        }
 
         _loadCanvas.enabled = true;
         OnSceneChangeStarted?.Invoke();
