@@ -22,6 +22,8 @@ public class InputManager : MonoBehaviour
 
     InputAction _1Action, _2Action, _3Action, _4Action, _5Action, _6Action, _7Action, _8Action, _9Action, _10Action;
 
+    bool _acceptInput;
+
     void Awake()
     {
         _moveAction = InputSystem.actions.FindAction("Move");
@@ -48,8 +50,20 @@ public class InputManager : MonoBehaviour
         _10Action = InputSystem.actions.FindAction("10");
     }
 
+    void OnEnable()
+    {
+        LevelManager.OnLevelStarted += LevelManager_OnLevelStarted;
+    }
+
+    void OnDisable()
+    {
+        LevelManager.OnLevelStarted -= LevelManager_OnLevelStarted;
+    }
+
     void Update()
     {
+        if(!_acceptInput) { return; }
+
         OnMoveAction?.Invoke(_moveAction.ReadValue<Vector2>());
         OnLookAction?.Invoke(_lookAction.ReadValue<Vector2>());
 
@@ -132,6 +146,15 @@ public class InputManager : MonoBehaviour
         {
             On10Pressed?.Invoke(9);
         }
+    }
 
+    void LevelManager_OnLevelStarted()
+    {
+        Invoke(nameof(SetAcceptInput), 0.1f);
+    }
+
+    void SetAcceptInput()
+    {
+        _acceptInput = true;
     }
 }

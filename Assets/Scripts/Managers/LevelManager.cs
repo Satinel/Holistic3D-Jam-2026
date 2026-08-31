@@ -38,6 +38,9 @@ public class LevelManager : MonoBehaviour
         Enemy.OnAnyEnemySpawned -= Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
         Core.OnCoreDestroyed -= Core_OnCoreDestroyed;
+
+        _eventListener?.Dispose();
+        _eventListener = null;
     }
 
     void Start()
@@ -50,7 +53,7 @@ public class LevelManager : MonoBehaviour
     void OnButtonPressed(InputControl button)
     {
         // I really don't know why the 'new' input system needs such convoluted means to check for any input, when the 'bad' system it replaced handled it with ease
-        _eventListener.Dispose();
+        _eventListener?.Dispose();
         _eventListener = null;
         if(_hasStarted) { return; }
 
@@ -61,6 +64,7 @@ public class LevelManager : MonoBehaviour
 
     void InputManager_OnUnleashPressed()
     {
+        if(!_hasStarted) { return; }
         if(_isLoading) { return; }
 
         if(_levelWon)
