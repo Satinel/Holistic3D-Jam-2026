@@ -2145,7 +2145,8 @@ PrefabInstance:
       value: 3x3 One Wall (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8082098935473636280, guid: 50540d48da44c104da9157394559d1e8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50540d48da44c104da9157394559d1e8, type: 3}
@@ -7265,7 +7266,8 @@ PrefabInstance:
       value: 3x3 One Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8082098935473636280, guid: 50540d48da44c104da9157394559d1e8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50540d48da44c104da9157394559d1e8, type: 3}
