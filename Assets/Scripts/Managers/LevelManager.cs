@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         InputManager.OnUnleashPressed += InputManager_OnUnleashPressed;
-        VolumeControl.OnRestartRequested += VolumeControl_OnRestartRequested;
+        OptionsMenu.OnRestartRequested += OptionsMenu_OnRestartRequested;
         Enemy.OnAnyEnemySpawned += Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed += Enemy_OnAnyEnemyDestroyed;
         Core.OnCoreDestroyed += Core_OnCoreDestroyed;
@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
     void OnDestroy()
     {
         InputManager.OnUnleashPressed -= InputManager_OnUnleashPressed;
-        VolumeControl.OnRestartRequested -= VolumeControl_OnRestartRequested;
+        OptionsMenu.OnRestartRequested -= OptionsMenu_OnRestartRequested;
         Enemy.OnAnyEnemySpawned -= Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
         Core.OnCoreDestroyed -= Core_OnCoreDestroyed;
@@ -92,7 +92,7 @@ public class LevelManager : MonoBehaviour
         OnWaveStarted?.Invoke();
     }
 
-    void VolumeControl_OnRestartRequested()
+    void OptionsMenu_OnRestartRequested()
     {
         ReloadLevel();
     }

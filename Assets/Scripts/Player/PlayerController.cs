@@ -364,6 +364,7 @@ public class PlayerController : MonoBehaviour
     {
         if(Time.timeScale == 0) { return; }
 
+        value.y = PlayerPrefs.GetInt(OptionsMenu.INVERT_Y, 1) > 0 ? value.y : -value.y;
         _lookAccumulation += value;
     }
 

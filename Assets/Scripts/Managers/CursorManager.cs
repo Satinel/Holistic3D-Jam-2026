@@ -10,12 +10,12 @@ public class CursorManager : MonoBehaviour
 
     void OnEnable()
     {
-        VolumeControl.OnAudioCanvasToggled += SetShouldShowCursor;
+        OptionsMenu.OnOptionsCanvasToggled += SetShouldShowCursor;
     }
 
     void OnDisable()
     {
-        VolumeControl.OnAudioCanvasToggled -= SetShouldShowCursor;
+        OptionsMenu.OnOptionsCanvasToggled -= SetShouldShowCursor;
     }
 
     void ShowCursor()

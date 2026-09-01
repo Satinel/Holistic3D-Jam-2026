@@ -1,36 +1,15 @@
-using System;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class VolumeControl : MonoBehaviour
 {
-    public static event Action<bool> OnAudioCanvasToggled;
-    public static event Action OnRestartRequested;
-
     public AudioMixer AudioMixer;
-    [SerializeField] GameObject _mainMenuButton, _cancelButton, _cancelRestartButton, _restartPrompt, _quitPrompt;
-    [SerializeField] Canvas _audioCanvas;
+    [SerializeField] GameObject _mainMenuButton;
     [SerializeField] Slider _mainVolumeSlider;
     [SerializeField] Slider _musicVolumeSlider;
     [SerializeField] Slider _sfxVolumeSlider;
     [SerializeField] Toggle _mainMuteToggle, _musicMuteToggle, _sfxMuteToggle;
-    // [SerializeField] OptionsMenu _optionsMenu;
-
-    bool _sceneChanging;
-
-    void Awake()
-    {
-        InputManager.OnOptionsPressed += ToggleAudioCanvas;
-        LevelManager.OnSceneChangeStarted += LevelManager_OnScenChangeStarted;
-    }
-
-    void OnDestroy()
-    {
-        InputManager.OnOptionsPressed -= ToggleAudioCanvas;
-        LevelManager.OnSceneChangeStarted -= LevelManager_OnScenChangeStarted;
-    }
 
     void Start()
     {
@@ -115,83 +94,5 @@ public class VolumeControl : MonoBehaviour
             PlayerPrefs.SetInt("SFXMuted", 0);
             SetSFXVolume(_sfxVolumeSlider.value);
         }
-    }
-
-    void ToggleAudioCanvas()
-    {
-        if(_sceneChanging) { return; }
-
-        _audioCanvas.enabled = !_audioCanvas.enabled;
-        if(_audioCanvas.enabled)
-        {
-            EnableAudioCanvas();
-        }
-        else
-        {
-            DisableAudioCanvas();
-        }
-    }
-
-    public void DisableAudioCanvas()
-    {
-        _audioCanvas.enabled = false;
-        EventSystem.current.SetSelectedGameObject(null);
-        OnAudioCanvasToggled?.Invoke(false);
-
-        // _optionsMenu.EnableOptionsCanvas();
-    }
-
-    void EnableAudioCanvas()
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
-        OnAudioCanvasToggled?.Invoke(true);
-    }
-
-    public void PromptRestart()
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-        _restartPrompt.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(_cancelRestartButton);
-    }
-
-    public void CancelRestart()
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-        _restartPrompt.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
-    }
-
-    public void RestartLevel()
-    {
-        if(_sceneChanging) { return; }
-
-        DisableAudioCanvas();
-        _sceneChanging = true;
-        OnRestartRequested?.Invoke();
-    }
-
-    public void PromptQuit()
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-        _quitPrompt.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(_cancelButton);
-    }
-
-    public void CancelQuit()
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-        _quitPrompt.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    void LevelManager_OnScenChangeStarted()
-    {
-        _sceneChanging = true;
     }
 }
