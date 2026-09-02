@@ -22,6 +22,8 @@ public class InputManager : MonoBehaviour
 
     InputAction _1Action, _2Action, _3Action, _4Action, _5Action, _6Action, _7Action, _8Action, _9Action, _10Action;
 
+    [SerializeField] CameraOptionsSO _cameraOptions;
+
     bool _acceptInput;
 
     void Awake()
@@ -65,7 +67,11 @@ public class InputManager : MonoBehaviour
         if(!_acceptInput) { return; }
 
         OnMoveAction?.Invoke(_moveAction.ReadValue<Vector2>());
-        OnLookAction?.Invoke(_lookAction.ReadValue<Vector2>());
+
+        Vector2 lookValue = _lookAction.ReadValue<Vector2>();
+        lookValue.y = _cameraOptions.InvertY ? lookValue.y : -lookValue.y;
+        lookValue *= _cameraOptions.SensitivityMultiplyer;
+        OnLookAction?.Invoke(lookValue);
 
         if(_mainAction.WasPerformedThisFrame())
         {

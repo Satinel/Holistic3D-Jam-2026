@@ -12,15 +12,20 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] Canvas _mainCanvas, _audioCanvas;
     [SerializeField] GameObject _unpauseButton, _mainMenuButton, _cancelQuitButton, _cancelRestartButton, _restartPrompt, _quitPrompt;
     [SerializeField] Toggle _invertYToggle;
+    [SerializeField] Slider _lookSensitivitySlider;
+
+    [SerializeField] CameraOptionsSO _cameraOptions;
 
     bool _sceneChanging;
 
-    public static readonly string INVERT_Y = "InvertY";
+    public static readonly string INVERT_Y = "InvertY", LOOK_SENSITIVITY = "LookSensitivity";
 
     void Awake()
     {
         InputManager.OnOptionsPressed += ToggleOptionsCanvas;
         LevelManager.OnSceneChangeStarted += LevelManager_OnScenChangeStarted;
+
+        LoadCameraOptionValues();
     }
 
     void OnDestroy()
@@ -29,12 +34,16 @@ public class OptionsMenu : MonoBehaviour
         LevelManager.OnSceneChangeStarted -= LevelManager_OnScenChangeStarted;
     }
 
-    void Start()
+    void LoadCameraOptionValues()
     {
         _invertYToggle.isOn = PlayerPrefs.GetInt(INVERT_Y, 1) == 1;
+        SetInvertLookY();
+
+        _lookSensitivitySlider.value = PlayerPrefs.GetFloat(LOOK_SENSITIVITY, 1);
+        SetLookSensitivity(_lookSensitivitySlider.value);
     }
 
-    public void SetInvertLookY()
+    public void SetInvertLookY()    // Hooked up to UI Toggle
     {
         if(_invertYToggle.isOn)
         {
@@ -44,6 +53,13 @@ public class OptionsMenu : MonoBehaviour
         {
             PlayerPrefs.SetInt(INVERT_Y, 0);
         }
+        _cameraOptions.SetInvertY(_invertYToggle.isOn);
+    }
+
+    public void SetLookSensitivity(float sliderValue)
+    {
+        PlayerPrefs.SetFloat(LOOK_SENSITIVITY, sliderValue);
+        _cameraOptions.SetSensitivity(sliderValue);
     }
 
     void ToggleOptionsCanvas()
