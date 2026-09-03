@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
@@ -110,7 +109,7 @@ public class OptionsMenu : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         _audioCanvas.enabled = false;
-        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
+        EventSystem.current.SetSelectedGameObject(_unpauseButton);
     }
 
     public void PromptRestart()
@@ -147,7 +146,7 @@ public class OptionsMenu : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         _quitPrompt.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
+        EventSystem.current.SetSelectedGameObject(_unpauseButton);
     }
 
     public void QuitGame()
