@@ -6,18 +6,18 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
     public static event Action<bool> OnOptionsCanvasToggled;
-    public static event Action OnRestartRequested;
+    public static event Action OnRestartRequested, OnCameraValuesChanged;
 
     [SerializeField] Canvas _mainCanvas, _audioCanvas;
     [SerializeField] GameObject _unpauseButton, _mainMenuButton, _cancelQuitButton, _cancelRestartButton, _restartPrompt, _quitPrompt;
-    [SerializeField] Toggle _invertYToggle;
-    [SerializeField] Slider _lookSensitivitySlider;
+    [SerializeField] Toggle _invertYToggle, _firstPersonToggle;
+    [SerializeField] Slider _lookSensitivitySlider, _fovSlider, _cameraSideSlider;
 
     [SerializeField] CameraOptionsSO _cameraOptions;
 
     bool _sceneChanging;
 
-    public static readonly string INVERT_Y = "InvertY", LOOK_SENSITIVITY = "LookSensitivity";
+    public static readonly string FIRST_PERSON = "FirstPerson", INVERT_Y = "InvertY", LOOK_SENSITIVITY = "LookSensitivity", CAMERA_FOV = "FieldOfView", CAMERA_SIDE = "CameraSide";
 
     void Awake()
     {
@@ -35,11 +35,36 @@ public class OptionsMenu : MonoBehaviour
 
     void LoadCameraOptionValues()
     {
+        _firstPersonToggle.isOn = PlayerPrefs.GetInt(FIRST_PERSON, 0) == 1;
+        SetFirstPerson();
+
         _invertYToggle.isOn = PlayerPrefs.GetInt(INVERT_Y, 0) == 1;
         SetInvertLookY();
 
         _lookSensitivitySlider.value = PlayerPrefs.GetFloat(LOOK_SENSITIVITY, 1);
         SetLookSensitivity(_lookSensitivitySlider.value);
+
+        _fovSlider.value = PlayerPrefs.GetFloat(CAMERA_FOV, 70f);
+        SetCameraFOV(_fovSlider.value);
+
+        _cameraSideSlider.value = PlayerPrefs.GetFloat(CAMERA_SIDE, 0.85f);
+        SetCameraSideValue(_cameraSideSlider.value);
+
+        OnCameraValuesChanged?.Invoke();
+    }
+
+    public void SetFirstPerson()
+    {
+        if(_firstPersonToggle.isOn)
+        {
+            PlayerPrefs.SetInt(FIRST_PERSON, 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(FIRST_PERSON, 0);
+        }
+        _cameraOptions.SetFirstPerson(_firstPersonToggle.isOn);
+        OnCameraValuesChanged?.Invoke();
     }
 
     public void SetInvertLookY()    // Hooked up to UI Toggle
@@ -59,6 +84,20 @@ public class OptionsMenu : MonoBehaviour
     {
         PlayerPrefs.SetFloat(LOOK_SENSITIVITY, sliderValue);
         _cameraOptions.SetSensitivity(sliderValue);
+    }
+
+    public void SetCameraFOV(float sliderValue)
+    {
+        PlayerPrefs.SetFloat(CAMERA_FOV, sliderValue);
+        _cameraOptions.SetFOV(sliderValue);
+        OnCameraValuesChanged?.Invoke();
+    }
+
+    public void SetCameraSideValue(float sliderValue)
+    {
+        PlayerPrefs.SetFloat(CAMERA_SIDE, sliderValue);
+        _cameraOptions.SetCamearSide(sliderValue);
+        OnCameraValuesChanged?.Invoke();
     }
 
     void ToggleOptionsCanvas()
