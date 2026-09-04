@@ -16,11 +16,13 @@ public class PlayerCameraSettings : MonoBehaviour
     void Awake()
     {
         OptionsMenu.OnCameraValuesChanged += OptionsMenu_OnCameraValuesChanged;
+        InputManager.OnViewChangePressed += InputManager_OnViewChangePressed;
     }
 
     void OnDestroy()
     {
         OptionsMenu.OnCameraValuesChanged -= OptionsMenu_OnCameraValuesChanged;
+        InputManager.OnViewChangePressed -= InputManager_OnViewChangePressed;
     }
 
     void OptionsMenu_OnCameraValuesChanged()
@@ -35,6 +37,11 @@ public class PlayerCameraSettings : MonoBehaviour
         {
             ExitFirstPerson();
         }
+    }
+
+    void InputManager_OnViewChangePressed()
+    {
+        ToggleFirstPerson();
     }
 
     void EnterFirstPerson()

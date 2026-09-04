@@ -115,6 +115,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ViewChange",
+                    "type": "Button",
+                    "id": "13c2d823-1f6c-4e9c-8d6c-06bd3ece896d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "1",
                     "type": "Button",
                     "id": "0c89ac79-bfe5-4b1d-85cf-5bbc4032c747",
@@ -775,6 +784,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Unleash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6134e4ce-1401-4b5f-8b96-3dd320422982",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ViewChange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72a24ca8-ef74-4d37-be7b-96f0fc79adb2",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ViewChange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
