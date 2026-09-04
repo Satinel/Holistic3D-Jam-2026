@@ -35,7 +35,7 @@ public class OptionsMenu : MonoBehaviour
 
     void LoadCameraOptionValues()
     {
-        _invertYToggle.isOn = PlayerPrefs.GetInt(INVERT_Y, 1) == 1;
+        _invertYToggle.isOn = PlayerPrefs.GetInt(INVERT_Y, 0) == 1;
         SetInvertLookY();
 
         _lookSensitivitySlider.value = PlayerPrefs.GetFloat(LOOK_SENSITIVITY, 1);

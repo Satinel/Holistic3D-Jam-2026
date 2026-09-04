@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] int[] _waveRewards;
     [SerializeField] NewGamePlusSO _newGamePlusSO;
 
-    bool _wavesActive, _levelWon, _levelLost, _isLoading = true, _hasStarted;
+    bool _wavesActive, _levelWon, _levelLost, _isLoading = true, _hasStarted, _isInOptions;
     int _waveIndex;
     HashSet<Enemy> _activeEnemies = new();
     IDisposable _eventListener;
@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         InputManager.OnUnleashPressed += InputManager_OnUnleashPressed;
+        OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
         OptionsMenu.OnRestartRequested += OptionsMenu_OnRestartRequested;
         Enemy.OnAnyEnemySpawned += Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed += Enemy_OnAnyEnemyDestroyed;
@@ -34,6 +35,7 @@ public class LevelManager : MonoBehaviour
     void OnDestroy()
     {
         InputManager.OnUnleashPressed -= InputManager_OnUnleashPressed;
+        OptionsMenu.OnOptionsCanvasToggled -= OptionsMenu_OnOptionsCanvasToggled;
         OptionsMenu.OnRestartRequested -= OptionsMenu_OnRestartRequested;
         Enemy.OnAnyEnemySpawned -= Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
@@ -66,6 +68,7 @@ public class LevelManager : MonoBehaviour
     {
         if(!_hasStarted) { return; }
         if(_isLoading) { return; }
+        if(_isInOptions) { return; }
 
         if(_levelWon)
         {
@@ -90,6 +93,11 @@ public class LevelManager : MonoBehaviour
             }
         }
         OnWaveStarted?.Invoke();
+    }
+
+    void OptionsMenu_OnOptionsCanvasToggled(bool isInOptions)
+    {
+        _isInOptions = isInOptions;
     }
 
     void OptionsMenu_OnRestartRequested()
