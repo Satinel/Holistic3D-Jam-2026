@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraOptionsSO
   <InvertY>k__BackingField: 1
   <IsFirstPerson>k__BackingField: 0
-  <SensitivityMultiplyer>k__BackingField: 0.7930706
+  <SensitivityMultiplyer>k__BackingField: 1.0546468
   <FieldOfView>k__BackingField: 70
-  <CameraSide>k__BackingField: 0.85
+  <CameraSide>k__BackingField: 0.85221666

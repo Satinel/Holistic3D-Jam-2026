@@ -558,7 +558,10 @@ MonoBehaviour:
   <BuyPrice>k__BackingField: 100
   <TrapPosition>k__BackingField: 1
   <PreviewPrefab>k__BackingField: {fileID: 3843553560958220383, guid: c62c37ff71c30d947a6d7f5bc6b01a20, type: 3}
-  _size: {x: 1, y: 1}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _halfSize: {x: 1, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 429749477939662534, guid: 21a2bd5cc6bc5e849b2f0f4988f64c8e, type: 3}
 --- !u!1 &1700470819044464327
 GameObject:
@@ -800,7 +803,10 @@ MonoBehaviour:
   <BuyPrice>k__BackingField: 150
   <TrapPosition>k__BackingField: 2
   <PreviewPrefab>k__BackingField: {fileID: -6580914942362227244, guid: 02fade36c7428ab44bf56acd633e6712, type: 3}
-  _size: {x: 1, y: 1}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _halfSize: {x: 1.5, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 3154503559914260140, guid: a52a8c7651f41b242bc5704444ca7b9d, type: 3}
 --- !u!1 &1947754627779257413
 GameObject:
@@ -852,7 +858,10 @@ MonoBehaviour:
   <BuyPrice>k__BackingField: 90
   <TrapPosition>k__BackingField: 0
   <PreviewPrefab>k__BackingField: {fileID: -7515853688993139911, guid: 948aaa44f4979ba4cbe9e8870cf67efb, type: 3}
-  _size: {x: 1, y: 1}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _halfSize: {x: 1, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 3840993093556309465, guid: bb1a40affdf0b1e45ad2cb4142c406cb, type: 3}
 --- !u!1 &2020367325111526498
 GameObject:
@@ -2344,7 +2353,10 @@ MonoBehaviour:
   <BuyPrice>k__BackingField: 85
   <TrapPosition>k__BackingField: 1
   <PreviewPrefab>k__BackingField: {fileID: -9049143495794857357, guid: 1727486c4f012fa4c9a7c6c87e035610, type: 3}
-  _size: {x: 1, y: 1}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _halfSize: {x: 1, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 7374095726659422914, guid: 3fb0bd66527b9d542963219d82303ebe, type: 3}
 --- !u!1 &6069965557136231489
 GameObject:
@@ -2396,7 +2408,10 @@ MonoBehaviour:
   <BuyPrice>k__BackingField: 200
   <TrapPosition>k__BackingField: 0
   <PreviewPrefab>k__BackingField: {fileID: 7181421974874963660, guid: 90f5b95194e506246aa0f1f128c14c4f, type: 3}
-  _size: {x: 1, y: 1}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _halfSize: {x: 1, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 1156799813800213701, guid: 6b05fcdbf2d7d584ba22885e971a40ea, type: 3}
 --- !u!1 &6203236494954808939
 GameObject:
@@ -2953,7 +2968,10 @@ MonoBehaviour:
   <BuyPrice>k__BackingField: 95
   <TrapPosition>k__BackingField: 2
   <PreviewPrefab>k__BackingField: {fileID: 6698504682365999681, guid: 566d992b48df9f6439f36fbe6a6ce5b2, type: 3}
-  _size: {x: 1, y: 1}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _halfSize: {x: 1.5, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 9089455552382710355, guid: 329b38d4742d9654ba99ba0cd5236ed2, type: 3}
 --- !u!1 &8941446757197666240
 GameObject:

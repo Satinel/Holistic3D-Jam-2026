@@ -6,7 +6,8 @@ public class BuyableTrap : Item
     [field:SerializeField] public TrapPosition TrapPosition { get; protected set; } = TrapPosition.Floor;
     [field:SerializeField] public TrapPreview PreviewPrefab { get; private set; }
     
-    [SerializeField] Vector2 _size = Vector2.one;
+    [SerializeField] LayerMask _socketLayer;
+    [SerializeField] Vector3 _halfSize = new(1f, 0.01f, 0.9f);
     [SerializeField] Trap _trapPrefab;
 
     void Awake()
@@ -20,11 +21,15 @@ public class BuyableTrap : Item
         if(activeSocket.HasTrap) { return false; }
         if(activeSocket.SocketPosition != TrapPosition) { return false; }
 
-        // if(_size.x > 1 || _size.y > 1)
-        // {
-            // Assuming larger traps exist, check if Size fits surrounding TrapSockets
-            // return [...];
-        // }
+        Collider[] adjacentSockets = Physics.OverlapBox(activeSocket.transform.position, _halfSize, activeSocket.transform.rotation, _socketLayer, QueryTriggerInteraction.Collide);
+        foreach(Collider collider in adjacentSockets)
+        {
+            if(collider.TryGetComponent(out TrapSocket socket))
+            {
+                if(socket.SocketPosition != TrapPosition) { continue; }
+                if(socket.HasTrap) { return false; }
+            }
+        }
 
         return true;
     }
