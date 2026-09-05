@@ -9,6 +9,7 @@ public class BuyableTrap : Item
     [SerializeField] LayerMask _socketLayer;
     [SerializeField] Vector3 _halfSize = new(1f, 0.01f, 0.9f);
     [SerializeField] Trap _trapPrefab;
+    [SerializeField] float _requiredHorizontalSockets = 1, _requiredVerticalSockets = 1;
 
     void Awake()
     {
@@ -29,6 +30,18 @@ public class BuyableTrap : Item
                 if(socket.SocketPosition != TrapPosition) { continue; }
                 if(socket.HasTrap) { return false; }
             }
+        }
+
+        if(_requiredHorizontalSockets > 1)
+        {
+            // Check if enough free sockets exist
+            //else return false;
+        }
+
+        if(_requiredVerticalSockets > 1)
+        {
+            // Check if enough free sockets exist
+            //else return false;
         }
 
         return true;

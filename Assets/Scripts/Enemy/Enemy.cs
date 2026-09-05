@@ -339,6 +339,8 @@ public class Enemy : MonoBehaviour
         _animator.SetBool(ATTACK_HASH, false);
         _animator.Play(WALKING_NAME_HASH);
         _isAttacking = false;
+        _leftBeam.gameObject.SetActive(false);
+        _rightBeam.gameObject.SetActive(false);
     }
 
     void Health_OnAnyHealthDeath(Health health)
