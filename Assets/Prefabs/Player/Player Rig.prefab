@@ -563,6 +563,8 @@ MonoBehaviour:
     m_Bits: 4096
   _halfSize: {x: 1, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 429749477939662534, guid: 21a2bd5cc6bc5e849b2f0f4988f64c8e, type: 3}
+  _requiredHorizontalSockets: 1
+  _requiredVerticalSockets: 1
 --- !u!1 &1700470819044464327
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +810,8 @@ MonoBehaviour:
     m_Bits: 4096
   _halfSize: {x: 1.5, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 3154503559914260140, guid: a52a8c7651f41b242bc5704444ca7b9d, type: 3}
+  _requiredHorizontalSockets: 3
+  _requiredVerticalSockets: 1
 --- !u!1 &1947754627779257413
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +867,8 @@ MonoBehaviour:
     m_Bits: 4096
   _halfSize: {x: 1, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 3840993093556309465, guid: bb1a40affdf0b1e45ad2cb4142c406cb, type: 3}
+  _requiredHorizontalSockets: 1
+  _requiredVerticalSockets: 1
 --- !u!1 &2020367325111526498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2358,6 +2364,8 @@ MonoBehaviour:
     m_Bits: 4096
   _halfSize: {x: 1, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 7374095726659422914, guid: 3fb0bd66527b9d542963219d82303ebe, type: 3}
+  _requiredHorizontalSockets: 1
+  _requiredVerticalSockets: 1
 --- !u!1 &6069965557136231489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2413,6 +2421,8 @@ MonoBehaviour:
     m_Bits: 4096
   _halfSize: {x: 1, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 1156799813800213701, guid: 6b05fcdbf2d7d584ba22885e971a40ea, type: 3}
+  _requiredHorizontalSockets: 1
+  _requiredVerticalSockets: 1
 --- !u!1 &6203236494954808939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2973,6 +2983,8 @@ MonoBehaviour:
     m_Bits: 4096
   _halfSize: {x: 1.5, y: 0.01, z: 0.9}
   _trapPrefab: {fileID: 9089455552382710355, guid: 329b38d4742d9654ba99ba0cd5236ed2, type: 3}
+  _requiredHorizontalSockets: 3
+  _requiredVerticalSockets: 1
 --- !u!1 &8941446757197666240
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,9 +55,9 @@ public class Wallet : MonoBehaviour
         GainMoney(health.MoneyValue);
     }
 
-    void TrapSocket_OnAnyTrapSold(int soldPrice)
+    void TrapSocket_OnAnyTrapSold(Trap soldTrap)
     {
-        GainMoney(soldPrice);
+        GainMoney(soldTrap.SellPrice);
     }
 
     void LevelManager_OnWaveCompleted(int index, int reward)

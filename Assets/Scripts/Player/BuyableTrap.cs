@@ -11,6 +11,8 @@ public class BuyableTrap : Item
     [SerializeField] Trap _trapPrefab;
     [SerializeField] float _requiredHorizontalSockets = 1, _requiredVerticalSockets = 1;
 
+    readonly Collider[] _adjacentSockets = new Collider[36];
+
     void Awake()
     {
         IsTrap = true;
@@ -22,10 +24,10 @@ public class BuyableTrap : Item
         if(activeSocket.HasTrap) { return false; }
         if(activeSocket.SocketPosition != TrapPosition) { return false; }
 
-        Collider[] adjacentSockets = Physics.OverlapBox(activeSocket.transform.position, _halfSize, activeSocket.transform.rotation, _socketLayer, QueryTriggerInteraction.Collide);
-        foreach(Collider collider in adjacentSockets)
+        int socketCount = Physics.OverlapBoxNonAlloc(activeSocket.transform.position, _halfSize, _adjacentSockets, activeSocket.transform.rotation, _socketLayer, QueryTriggerInteraction.Collide);
+        for(int i = 0; i < socketCount; i++)
         {
-            if(collider.TryGetComponent(out TrapSocket socket))
+            if(_adjacentSockets[i].TryGetComponent(out TrapSocket socket))
             {
                 if(socket.SocketPosition != TrapPosition) { continue; }
                 if(socket.HasTrap) { return false; }
@@ -34,14 +36,28 @@ public class BuyableTrap : Item
 
         if(_requiredHorizontalSockets > 1)
         {
-            // Check if enough free sockets exist
-            //else return false;
+            for(int i = 0; i < _requiredHorizontalSockets + 1; i++) // I almost understand why the +1 is needed, but in any case it's definitely needed
+            {
+                float xFactor = i % 2 == 0 ? i : -(i - 1);
+                Vector3 origin = activeSocket.transform.TransformPoint(new Vector3(xFactor, -0.5f, 0));
+
+                if(!Physics.Raycast(origin, activeSocket.transform.up, out RaycastHit hit, 0.51f, _socketLayer, QueryTriggerInteraction.Collide)) { return false; }
+                if(!hit.collider.TryGetComponent(out TrapSocket trapSocket)) { return false; }
+                if(trapSocket.HasTrap) { return false; }
+            }
         }
 
         if(_requiredVerticalSockets > 1)
         {
-            // Check if enough free sockets exist
-            //else return false;
+            for(int i = 2; i < _requiredVerticalSockets + 1; i++)
+            {
+                float zFactor = i % 2 == 0 ? i : -(i - 1);
+                Vector3 origin = activeSocket.transform.TransformPoint(new Vector3(0, -0.5f, zFactor));
+
+                if(!Physics.Raycast(origin, activeSocket.transform.up, out RaycastHit hit, 0.51f, _socketLayer, QueryTriggerInteraction.Collide)) { return false; }
+                if(!hit.collider.TryGetComponent(out TrapSocket trapSocket)) { return false; }
+                if(trapSocket.HasTrap) { return false; }
+            }
         }
 
         return true;
