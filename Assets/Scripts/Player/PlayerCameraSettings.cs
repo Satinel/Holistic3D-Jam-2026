@@ -9,7 +9,8 @@ public class PlayerCameraSettings : MonoBehaviour
     [SerializeField] float _cameraSideCenter = 0.5f;
     [SerializeField] Vector3 _firstPersonCameraOffset = new(0f, -1f, 1.75f);
     [SerializeField] Vector3 _thirdPersonCameraOffset = new(0.8f, -1f, 0f);
-    [SerializeField] GameObject _playerModel;
+    [SerializeField] SkinnedMeshRenderer _playerRenderer;
+    [SerializeField] Renderer _ballRenderer;
 
     bool _isFirstPerson;    // This exists so the player can toggle between first and third person without going into options or saving/loading from PlayerPrefs
 
@@ -48,7 +49,8 @@ public class PlayerCameraSettings : MonoBehaviour
     {
         _thirdPersonCamera.ShoulderOffset = _firstPersonCameraOffset;
         _thirdPersonCamera.CameraSide = _cameraSideCenter;
-        _playerModel.SetActive(false);
+        _playerRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+        _ballRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         _isFirstPerson = true;
     }
 
@@ -56,7 +58,8 @@ public class PlayerCameraSettings : MonoBehaviour
     {
         _thirdPersonCamera.ShoulderOffset = _thirdPersonCameraOffset;
         _thirdPersonCamera.CameraSide = _cameraOptions.CameraSide;
-        _playerModel.SetActive(true);
+        _playerRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        _ballRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         _isFirstPerson = false;
     }
 
