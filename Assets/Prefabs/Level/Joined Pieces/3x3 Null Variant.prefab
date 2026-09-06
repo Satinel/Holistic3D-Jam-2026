@@ -94,6 +94,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 3x3 Null Ceiling Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3300974580252953908, guid: bc354fe503bf04d4dbe695d4c8a749ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772855602956593539, guid: bc354fe503bf04d4dbe695d4c8a749ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6370690525568299961, guid: bc354fe503bf04d4dbe695d4c8a749ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -132,6 +140,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6370690525568299961, guid: bc354fe503bf04d4dbe695d4c8a749ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7711321112601450549, guid: bc354fe503bf04d4dbe695d4c8a749ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8255264660066401410, guid: bc354fe503bf04d4dbe695d4c8a749ea, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -458,6 +474,22 @@ PrefabInstance:
       propertyPath: '_objectsToEnable.Array.data[17]'
       value: 
       objectReference: {fileID: 1120975211353049553}
+    - target: {fileID: 1341640542145195367, guid: 99535f3304b1b3f4f8268fa9792c934d, type: 3}
+      propertyPath: '_objectsToEnable.Array.data[18]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341640542145195367, guid: 99535f3304b1b3f4f8268fa9792c934d, type: 3}
+      propertyPath: '_objectsToEnable.Array.data[19]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341640542145195367, guid: 99535f3304b1b3f4f8268fa9792c934d, type: 3}
+      propertyPath: '_objectsToEnable.Array.data[20]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341640542145195367, guid: 99535f3304b1b3f4f8268fa9792c934d, type: 3}
+      propertyPath: '_objectsToEnable.Array.data[21]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6271931869871508487, guid: 99535f3304b1b3f4f8268fa9792c934d, type: 3}
       propertyPath: m_Name
       value: 3x3 Null Variant

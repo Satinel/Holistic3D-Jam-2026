@@ -215,6 +215,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5480321879600073145, guid: e8a621de79f8997429cce49f6b5783f2, type: 3}
+      propertyPath: m_Name
+      value: Ceiling Highlight 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168393809330613518, guid: e8a621de79f8997429cce49f6b5783f2, type: 3}
+      propertyPath: m_Name
+      value: Ceiling Socket 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -339,6 +347,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5480321879600073145, guid: e8a621de79f8997429cce49f6b5783f2, type: 3}
+      propertyPath: m_Name
+      value: Ceiling Highlight 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168393809330613518, guid: e8a621de79f8997429cce49f6b5783f2, type: 3}
+      propertyPath: m_Name
+      value: Ceiling Socket 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -400,6 +416,14 @@ PrefabInstance:
     - target: {fileID: 5153674304336084115, guid: e8a621de79f8997429cce49f6b5783f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480321879600073145, guid: e8a621de79f8997429cce49f6b5783f2, type: 3}
+      propertyPath: m_Name
+      value: Ceiling Highlight 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168393809330613518, guid: e8a621de79f8997429cce49f6b5783f2, type: 3}
+      propertyPath: m_Name
+      value: Ceiling Socket 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
