@@ -1526,6 +1526,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationEvents
   _playerController: {fileID: 8786054174648764059}
+  _audioSource: {fileID: 3988781548349033303}
+  _footstepsSFX:
+  - {fileID: 8300000, guid: 4c9de53fe268dfe4b993ee8870f573d9, type: 3}
+  - {fileID: 8300000, guid: ef5e22563a4143c40a234a53e0ba0c17, type: 3}
+  - {fileID: 8300000, guid: d25f800c5f172fe4eb402cd7dfe3e50f, type: 3}
+  - {fileID: 8300000, guid: ba4822d305767cf488f1b73e90739a1e, type: 3}
+  _footstepVolume: 0.15
 --- !u!1 &3758991083433830246
 GameObject:
   m_ObjectHideFlags: 0
