@@ -341,6 +341,8 @@ public class PlayerController : MonoBehaviour
 
     public void SetActiveItemByIndex(int index)
     {
+        if(_isDead) { return; }
+        if(Time.timeScale == 0) { return; }
         if(_isAttacking) { return; }
         if(index > _items.Length - 1) { return; }
         if(_itemIndex == index) { return; }
@@ -427,6 +429,8 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnSellPressed()
     {
+        if(_isDead) { return; }
+        if(Time.timeScale == 0) { return; }
         if(_isAttacking) { return; }
         if(!_inSellMode) { return; }
         if(!_canSellTrap) { return; }
@@ -440,6 +444,8 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnScroll(Vector2 value)
     {
+        if(_isDead) { return; }
+        if(Time.timeScale == 0) { return; }
         if(_isAttacking) { return; }
 
         if(value.y > 0)
@@ -455,6 +461,8 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnPreviousPressed()
     {
+        if(_isDead) { return; }
+        if(Time.timeScale == 0) { return; }
         if(_isAttacking) { return; }
         if(_items.Length <= 0) { return; }
 
@@ -469,6 +477,8 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnNextPressed()
     {
+        if(_isDead) { return; }
+        if(Time.timeScale == 0) { return; }
         if(_isAttacking) { return; }
         if(_items.Length <= 0) { return; }
 
