@@ -4,12 +4,23 @@ using UnityEngine.UI;
 
 public class VolumeControl : MonoBehaviour
 {
-    public AudioMixer AudioMixer;
+    public AudioMixer AudioMixer;   // There's no reason at all for this to be public
     [SerializeField] GameObject _mainMenuButton;
     [SerializeField] Slider _mainVolumeSlider;
     [SerializeField] Slider _musicVolumeSlider;
     [SerializeField] Slider _sfxVolumeSlider;
     [SerializeField] Toggle _mainMuteToggle, _musicMuteToggle, _sfxMuteToggle;
+    readonly float _defaultPitch = 1f;
+
+    void Awake()
+    {
+        TimescaleManager.OnTimeScaleChanged += TimescaleManager_OnTimeScaleChanged;
+    }
+
+    void OnDestroy()
+    {
+        TimescaleManager.OnTimeScaleChanged -= TimescaleManager_OnTimeScaleChanged;
+    }
 
     void Start()
     {
@@ -94,5 +105,11 @@ public class VolumeControl : MonoBehaviour
             PlayerPrefs.SetInt("SFXMuted", 0);
             SetSFXVolume(_sfxVolumeSlider.value);
         }
+    }
+
+    void TimescaleManager_OnTimeScaleChanged(float speed)
+    {
+        float newPitch = speed > 0 ? speed : _defaultPitch;
+        AudioMixer.SetFloat("SFXPitch", newPitch);
     }
 }

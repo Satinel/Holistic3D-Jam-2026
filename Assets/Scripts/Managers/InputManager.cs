@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     public static event Action<bool> OnSprintHeld;
     public static event Action OnSellPressed, OnUnleashPressed, OnOptionsPressed;
     public static event Action<Vector2> OnScroll;
-    public static event Action OnPreviousPressed, OnNextPressed, OnViewChangePressed;
+    public static event Action OnPreviousPressed, OnNextPressed, OnViewChangePressed, OnTimeScalePressed;
 
     public static event Action<int> On1Pressed, On2Pressed, On3Pressed, On4Pressed, On5Pressed;
     public static event Action<int> On6Pressed, On7Pressed, On8Pressed, On9Pressed, On10Pressed;
@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     InputAction _mainAction, _secondaryAction, _sprintAction;
     InputAction _sellAction, _unleashAction, _optionsAction;
     InputAction _scrollAction, _previousAction, _nextAction;
-    InputAction _viewChangeAction;
+    InputAction _viewChangeAction, _timeScaleAction;
 
     InputAction _1Action, _2Action, _3Action, _4Action, _5Action, _6Action, _7Action, _8Action, _9Action, _10Action;
 
@@ -41,6 +41,7 @@ public class InputManager : MonoBehaviour
         _previousAction = InputSystem.actions.FindAction("Previous");
         _nextAction = InputSystem.actions.FindAction("Next");
         _viewChangeAction = InputSystem.actions.FindAction("ViewChange");
+        _timeScaleAction = InputSystem.actions.FindAction("TimeScale");
 
         _1Action = InputSystem.actions.FindAction("1");
         _2Action = InputSystem.actions.FindAction("2");
@@ -117,6 +118,11 @@ public class InputManager : MonoBehaviour
         if(_viewChangeAction.WasPerformedThisFrame())
         {
             OnViewChangePressed?.Invoke();
+        }
+
+        if(_timeScaleAction.WasPerformedThisFrame())
+        {
+            OnTimeScalePressed?.Invoke();
         }
 
         if(_1Action.WasPerformedThisFrame())

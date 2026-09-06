@@ -124,6 +124,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "TimeScale",
+                    "type": "Button",
+                    "id": "29096b68-2a66-493d-a742-b12635cf03d2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "1",
                     "type": "Button",
                     "id": "0c89ac79-bfe5-4b1d-85cf-5bbc4032c747",
@@ -806,6 +815,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "ViewChange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b09d179-2686-4244-9ae1-db76aad4ec4e",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "TimeScale",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0b9a55d-9784-4505-a5bb-d2b6ff089677",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "TimeScale",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

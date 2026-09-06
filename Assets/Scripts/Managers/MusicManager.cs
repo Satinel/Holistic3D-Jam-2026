@@ -17,6 +17,7 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnLevelCompleted += LevelManager_OnLevelCompleted;
         LevelManager.OnLevelFailed += LevelManager_OnLevelFailed;
         LevelManager.OnSceneChangeStarted += LevelManager_OnSceneChangeStarted;
+        TimescaleManager.OnTimeScaleChanged += TimescaleManager_OnTimeScaleChanged;
         Enemy.OnBossSpawned += Enemy_OnBossSpawned;
     }
 
@@ -28,6 +29,7 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnLevelCompleted -= LevelManager_OnLevelCompleted;
         LevelManager.OnLevelFailed -= LevelManager_OnLevelFailed;
         LevelManager.OnSceneChangeStarted -= LevelManager_OnSceneChangeStarted;
+        TimescaleManager.OnTimeScaleChanged -= TimescaleManager_OnTimeScaleChanged;
         Enemy.OnBossSpawned -= Enemy_OnBossSpawned;
     }
 
@@ -77,6 +79,11 @@ public class MusicManager : MonoBehaviour
     void LevelManager_OnSceneChangeStarted()
     {
         _audioSource.Stop();
+    }
+
+    void TimescaleManager_OnTimeScaleChanged(float speed)
+    {
+        _audioSource.pitch = speed > 0 ? speed : 1f;
     }
 
     void Enemy_OnBossSpawned()
