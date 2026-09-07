@@ -9396,7 +9396,7 @@ MonoBehaviour:
   _isBoss: 0
   _moveSpeed: 2.25
   _acceleration: 12
-  _turnSpeed: 2.5
+  _turnSpeed: 2.75
   _destroyDelay: 3
   _ragdollRecoveryTime: 5
   _falloffFadeOut: 3

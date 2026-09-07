@@ -190,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: _turnSpeed
-      value: 2.25
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: _drainDamage
