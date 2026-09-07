@@ -197,10 +197,6 @@ PrefabInstance:
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
-      propertyPath: _acceleration
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: _ragdollResist
       value: 18
       objectReference: {fileID: 0}

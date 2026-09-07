@@ -9395,7 +9395,7 @@ MonoBehaviour:
   _ragdollResist: 0
   _isBoss: 0
   _moveSpeed: 2.25
-  _acceleration: 10
+  _acceleration: 12
   _turnSpeed: 2.5
   _destroyDelay: 3
   _ragdollRecoveryTime: 5
@@ -9462,7 +9462,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6064142015798586965}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4dff6115f4767f94e98ff58fdb5ea228, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

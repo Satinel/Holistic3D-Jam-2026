@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform _leftBeam, _rightBeam;
 
     bool _isRagdolled, _isCrushed, _isAttacking;
+    float _currentMoveSpeed, _defaultMoveSpeed, _slowMoveSpeed;
     float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY;
     Transform _destination;
     Health _playerHealth;
@@ -55,6 +56,9 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        _defaultMoveSpeed = _moveSpeed;
+        _currentMoveSpeed = _defaultMoveSpeed;
+        _slowMoveSpeed = _moveSpeed * 0.5f;
         _startingScaleY = _ragdollModel.transform.localScale.y;
         if(_isBoss)
         {
@@ -64,8 +68,8 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(_ragdollResist > 0) { return; }  // TODO : Make sure this isn't a huge issue
-        if(_health.IsDead) { return; }
+        if(_ragdollResist > 0) { return; }
+        // if(_health.IsDead) { return; }                           // There's no reason not to ragdoll a dead enemy (except for performance but that seems fine)
         if(!collision.gameObject.CompareTag("Trap")) { return; }
         if(collision.gameObject.GetComponent<Trap>()) { return; }   // This should only handle objects without attached Trap monobehaviours (like projectiles)
 
@@ -123,7 +127,7 @@ public class Enemy : MonoBehaviour
         Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
         float forwardVelocity = Vector3.Dot(_mainRigidbody.linearVelocity, forward);
 
-        float speedDifference = _moveSpeed - forwardVelocity;
+        float speedDifference = _currentMoveSpeed - forwardVelocity;
         _mainRigidbody.AddForce(speedDifference * _acceleration * forward, ForceMode.Acceleration);
     }
 
@@ -238,6 +242,7 @@ public class Enemy : MonoBehaviour
 
     void RecoverFromRagdoll()
     {
+        RecoverFromSlow();
         Vector3 ragdollPosition = _ragdoll.position;
         foreach(Rigidbody rigidbody in _rigidbodies)
         {
@@ -290,6 +295,7 @@ public class Enemy : MonoBehaviour
 
     void RecoverFromCrushed()
     {
+        RecoverFromSlow();
         _ragdollModel.transform.localScale = new(_ragdollModel.transform.localScale.x, _startingScaleY, _ragdollModel.transform.localScale.z);
         // TODO : Maybe play Pop sound effect from 2D Princess here
         _isCrushed = false;
@@ -298,6 +304,20 @@ public class Enemy : MonoBehaviour
             _animator.enabled = true;
             _playerDetector.ToggleActive(true);
         }
+    }
+
+    public void Slow()
+    {
+        _currentMoveSpeed = _slowMoveSpeed;
+        _animator.speed = 0.5f;
+        // TODO ? If enemies ever make noises or have voice lines, lower pitch by * 0.5f
+    }
+
+    public void RecoverFromSlow()
+    {
+        _currentMoveSpeed = _defaultMoveSpeed;
+        _animator.speed = 1f;
+        // TODO ? If enemies ever make noises or have voice lines, restore pitch level which was lowered in Slow()
     }
 
     void BreakArmor()
