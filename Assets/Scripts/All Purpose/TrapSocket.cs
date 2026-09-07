@@ -8,17 +8,8 @@ public class TrapSocket : MonoBehaviour
     [field:SerializeField] public TrapPosition SocketPosition { get; private set; }
 
     public bool HasTrap { get; private set; }
+    public bool IsBlocked { get; private set; }
     Trap _placedTrap = null;
-
-    // void Awake()
-    // {
-    //     OnAnyTrapSold += RemoveTrap;
-    // }
-
-    // void OnDestroy()
-    // {
-    //     OnAnyTrapSold -= RemoveTrap;
-    // }
 
     public void PlaceTrap(Trap trapPrefab, int trapPrice)
     {
@@ -45,5 +36,15 @@ public class TrapSocket : MonoBehaviour
 
         _placedTrap.HighlightModel.SetActive(isHighlighted);
         _placedTrap.RangeRenderer.enabled = isHighlighted;
+    }
+
+    public void Block()
+    {
+        IsBlocked = true;
+    }
+
+    public void Unblock()
+    {
+        IsBlocked = false;
     }
 }

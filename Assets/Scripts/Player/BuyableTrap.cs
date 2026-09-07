@@ -21,6 +21,7 @@ public class BuyableTrap : Item
 
     public bool CanPlaceTrap(TrapSocket activeSocket)
     {
+        if(activeSocket.IsBlocked) { return false; }
         if(activeSocket.HasTrap) { return false; }
         if(activeSocket.SocketPosition != TrapPosition) { return false; }
 
@@ -44,6 +45,7 @@ public class BuyableTrap : Item
                 if(!Physics.Raycast(origin, activeSocket.transform.up, out RaycastHit hit, 0.51f, _socketLayer, QueryTriggerInteraction.Collide)) { return false; }
                 if(!hit.collider.TryGetComponent(out TrapSocket trapSocket)) { return false; }
                 if(trapSocket.HasTrap) { return false; }
+                if(trapSocket.IsBlocked) { return false; }
             }
         }
 
@@ -57,6 +59,7 @@ public class BuyableTrap : Item
                 if(!Physics.Raycast(origin, activeSocket.transform.up, out RaycastHit hit, 0.51f, _socketLayer, QueryTriggerInteraction.Collide)) { return false; }
                 if(!hit.collider.TryGetComponent(out TrapSocket trapSocket)) { return false; }
                 if(trapSocket.HasTrap) { return false; }
+                if(trapSocket.IsBlocked) { return false; }
             }
         }
 
