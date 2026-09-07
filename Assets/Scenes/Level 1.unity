@@ -7977,13 +7977,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
       propertyPath: _items.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      propertyPath: '_items.Array.data[3]'
+      value: 
+      objectReference: {fileID: 527485788012095054}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+--- !u!114 &527485788012095054 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4075209143647908865, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+  m_PrefabInstance: {fileID: 527485788012095053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
 --- !u!1001 &2321929348235871396
 PrefabInstance:
   m_ObjectHideFlags: 0
