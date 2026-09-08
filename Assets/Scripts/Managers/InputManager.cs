@@ -178,4 +178,32 @@ public class InputManager : MonoBehaviour
     {
         _acceptInput = true;
     }
+
+    InputActionRebindingExtensions.RebindingOperation _rebindOperation;
+
+    void RebindAction(InputAction inputAction)
+    {
+        _rebindOperation?.Cancel();
+        _rebindOperation?.Dispose();
+        inputAction.Disable();
+
+        _rebindOperation = inputAction.PerformInteractiveRebinding()
+                                .WithExpectedControlType("Button")
+                                .WithCancelingThrough("<Keyboard>/escape")
+                                .OnMatchWaitForAnother(0.1f)
+                                .OnComplete(operation =>
+                                {
+                                    inputAction.Enable();
+                                    operation.Dispose();
+                                    _rebindOperation = null;
+                                })
+                                .OnCancel(operation =>
+                                {
+                                    inputAction.Enable();
+                                    operation.Dispose();
+                                    _rebindOperation = null;
+                                });
+
+        _rebindOperation.Start();
+    }
 }
