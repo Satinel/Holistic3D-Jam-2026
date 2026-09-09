@@ -8,8 +8,8 @@ public class OptionsMenu : MonoBehaviour
     public static event Action<bool> OnOptionsCanvasToggled;
     public static event Action OnRestartRequested, OnCameraValuesChanged;
 
-    [SerializeField] Canvas _mainCanvas, _audioCanvas;
-    [SerializeField] GameObject _unpauseButton, _mainMenuButton, _cancelQuitButton, _cancelRestartButton, _restartPrompt, _quitPrompt;
+    [SerializeField] Canvas _mainCanvas, _audioCanvas, _rebindCanvas;
+    [SerializeField] GameObject _unpauseButton, _disableAudioButton, _disableRebindsButton, _cancelQuitButton, _cancelRestartButton, _restartPrompt, _quitPrompt;
     [SerializeField] Toggle _invertYToggle, _firstPersonToggle;
     [SerializeField] Slider _lookSensitivitySlider, _fovSlider, _cameraSideSlider;
 
@@ -110,6 +110,12 @@ public class OptionsMenu : MonoBehaviour
             return;
         }
 
+        if(_rebindCanvas.enabled)
+        {
+            DisableRebindCanvas();
+            return;
+        }
+
         _mainCanvas.enabled = !_mainCanvas.enabled;
 
         if(_mainCanvas.enabled)
@@ -141,13 +147,27 @@ public class OptionsMenu : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         _audioCanvas.enabled = true;
-        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
+        EventSystem.current.SetSelectedGameObject(_disableAudioButton);
     }
 
     public void DisableAudioCanvas()
     {
         EventSystem.current.SetSelectedGameObject(null);
         _audioCanvas.enabled = false;
+        EventSystem.current.SetSelectedGameObject(_unpauseButton);
+    }
+
+    public void EnableRebindCanvas()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        _rebindCanvas.enabled = true;
+        EventSystem.current.SetSelectedGameObject(_disableRebindsButton);
+    }
+
+    public void DisableRebindCanvas()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        _rebindCanvas.enabled = false;
         EventSystem.current.SetSelectedGameObject(_unpauseButton);
     }
 
