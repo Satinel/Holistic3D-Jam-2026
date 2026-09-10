@@ -55,13 +55,6 @@ public class InputManager : MonoBehaviour
         _10Action = InputSystem.actions.FindAction("10");
     }
 
-    void OnDestroy()
-    {
-        _rebindOperation?.Cancel();
-        _rebindOperation?.Dispose();
-        _rebindOperation = null;
-    }
-
     void OnEnable()
     {
         LevelManager.OnLevelStarted += LevelManager_OnLevelStarted;
@@ -70,6 +63,12 @@ public class InputManager : MonoBehaviour
     void OnDisable()
     {
         LevelManager.OnLevelStarted -= LevelManager_OnLevelStarted;
+    }
+
+    public static event Action<InputAction> TestSendingInputActions;
+    void Start()
+    {
+        TestSendingInputActions?.Invoke(_secondaryAction);
     }
 
     void Update()
@@ -185,67 +184,4 @@ public class InputManager : MonoBehaviour
     {
         _acceptInput = true;
     }
-
-//----------------------------------------------------- KEY REBINDING -----------------------------------------------------\\
-//------------------------------------------- Potentially Move To UI Based Class -------------------------------------------\\
-
-    InputActionRebindingExtensions.RebindingOperation _rebindOperation;
-
-    void KeyboardButtonRebindAction(InputAction inputAction)
-    {
-        _rebindOperation?.Cancel();
-        _rebindOperation?.Dispose();
-        inputAction.Disable();
-
-        _rebindOperation = inputAction.PerformInteractiveRebinding()    // TODO : Specify which part of the inputAction is to be rebound
-                                .WithExpectedControlType("Button")
-                                .WithCancelingThrough("<Keyboard>/escape")
-                                .WithControlsExcluding("<Gamepad>")
-                                .OnMatchWaitForAnother(0.1f)
-                                .OnComplete(operation =>
-                                {
-                                    inputAction.Enable();
-                                    operation.Dispose();
-                                    _rebindOperation = null;
-                                })
-                                .OnCancel(operation =>
-                                {
-                                    inputAction.Enable();
-                                    operation.Dispose();
-                                    _rebindOperation = null;
-                                });
-
-        _rebindOperation.Start();
-    }
-
-    void GamepadButtonRebindAction(InputAction inputAction)
-    {
-        _rebindOperation?.Cancel();
-        _rebindOperation?.Dispose();
-        inputAction.Disable();
-
-        _rebindOperation = inputAction.PerformInteractiveRebinding()
-                                .WithExpectedControlType("Button")
-                                .WithCancelingThrough("<Gamepad>/start")
-                                .WithControlsExcluding("<Keyboard>")
-                                .WithControlsExcluding("<Mouse>")
-                                .OnMatchWaitForAnother(0.1f)
-                                .OnComplete(operation =>
-                                {
-                                    inputAction.Enable();
-                                    operation.Dispose();
-                                    _rebindOperation = null;
-                                })
-                                .OnCancel(operation =>
-                                {
-                                    inputAction.Enable();
-                                    operation.Dispose();
-                                    _rebindOperation = null;
-                                });
-
-        _rebindOperation.Start();
-    }
-
-    // TODO : Save rebind overrides via json in playerprefs
-    // TODO : Load rebind overrides via json in playerprefs
 }

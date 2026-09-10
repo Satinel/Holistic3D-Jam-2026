@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 8315286897982099559}
   - component: {fileID: 7989404338762683515}
   m_Layer: 5
-  m_Name: Rebind Text
+  m_Name: Action Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[Rebind Text]'
+  m_text: '[Action Name]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cbebcfaac42cd86408aa58ac664c5b40, type: 2}
   m_sharedMaterial: {fileID: 68681809946090922, guid: cbebcfaac42cd86408aa58ac664c5b40, type: 2}
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.5
+  m_fontSize: 65.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 4187035443010812675}
   - component: {fileID: 3073223278238958883}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Default Button Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 6568477270893199880}
   - component: {fileID: 8595400747983034357}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Rebind Button Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

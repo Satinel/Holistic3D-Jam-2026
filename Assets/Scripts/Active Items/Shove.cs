@@ -14,4 +14,10 @@ public class Shove : Item
         cannonball.Initialize(_damage);
         cannonball.Rigidbody.AddForce(cannonball.transform.forward * _forceMultiplyer, ForceMode.Impulse);
     }
+
+    public override void SecondaryAction()
+    {
+        base.SecondaryAction();
+        Debug.Log("Shove Secondary Action was performed!");
+    }
 }
