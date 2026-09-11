@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
     public static event Action<int> On6Pressed, On7Pressed, On8Pressed, On9Pressed, On10Pressed;
 
     public static event Action<InputAction> ReportMoveAction;
+    public static event Action<InputAction[]> ReportRebindableActions;
 
     InputAction _moveAction, _lookAction;
     InputAction _mainAction, _secondaryAction, _sprintAction;
@@ -24,6 +25,8 @@ public class InputManager : MonoBehaviour
     InputAction _viewChangeAction, _timeScaleAction;
 
     InputAction _1Action, _2Action, _3Action, _4Action, _5Action, _6Action, _7Action, _8Action, _9Action, _10Action;
+
+    InputAction[] _rebindableActions;
 
     [SerializeField] CameraOptionsSO _cameraOptions;
 
@@ -69,7 +72,9 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
+        _rebindableActions = new InputAction[] { _mainAction, _sprintAction, _sellAction, _unleashAction, _previousAction, _nextAction, _viewChangeAction, _timeScaleAction};
         ReportMoveAction?.Invoke(_moveAction);
+        ReportRebindableActions?.Invoke(_rebindableActions);
     }
 
     void Update()

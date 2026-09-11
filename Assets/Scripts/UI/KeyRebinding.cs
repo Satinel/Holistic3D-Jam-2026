@@ -10,11 +10,13 @@ public class KeyRebinding : MonoBehaviour
     void Awake()
     {
         InputManager.ReportMoveAction += InputManager_ReportMoveAction;
+        InputManager.ReportRebindableActions += InputManager_ReportRebindableActions;
     }
 
     void OnDestroy()
     {
         InputManager.ReportMoveAction -= InputManager_ReportMoveAction;
+        InputManager.ReportRebindableActions -= InputManager_ReportRebindableActions;
         _rebindOperation?.Cancel();
         _rebindOperation?.Dispose();
         _rebindOperation = null;
@@ -27,19 +29,20 @@ public class KeyRebinding : MonoBehaviour
             RebindActionUI rebindUI = Instantiate(_rebindActionUIPrefab, _keyboardBindingsParent);
             rebindUI.Initialize(this, moveAction, i, false);
         }
-        // for(int i = 0; i < inputAction.bindings.Count; i++)
-        // {
-            // if(inputAction.bindings[i].isComposite)
-            // {
-            //     Debug.Log(i + " is composite");
-            //     continue;
-            // }
-            // Debug.Log(inputAction.bindings[i].path);
-            // Debug.Log(inputAction.GetBindingDisplayString(i));
-        // }
 
         // inputAction.ApplyBindingOverride(0, "<Keyboard>/space"); // This works! (But there's no reason to use it, this is just a test)
+    }
 
+    void InputManager_ReportRebindableActions(InputAction[] rebindableActions)
+    {
+        for(int i = 0; i < rebindableActions.Length; i++)
+        {
+            RebindActionUI keyboardRebindUI = Instantiate(_rebindActionUIPrefab, _keyboardBindingsParent);
+            keyboardRebindUI.Initialize(this, rebindableActions[i], 0, false);
+
+            RebindActionUI gamepadRebindUI = Instantiate(_rebindActionUIPrefab, _gamepadBindingsParent);
+            gamepadRebindUI.Initialize(this, rebindableActions[i], 1, true);
+        }
     }
 
     public void KeyboardButtonRebindAction(InputAction inputAction, int bindingIndex)
