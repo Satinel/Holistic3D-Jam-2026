@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour
     public static event Action<int> On1Pressed, On2Pressed, On3Pressed, On4Pressed, On5Pressed;
     public static event Action<int> On6Pressed, On7Pressed, On8Pressed, On9Pressed, On10Pressed;
 
+    public static event Action<InputAction> ReportMoveAction;
+
     InputAction _moveAction, _lookAction;
     InputAction _mainAction, _secondaryAction, _sprintAction;
     InputAction _sellAction, _unleashAction, _optionsAction;
@@ -65,10 +67,9 @@ public class InputManager : MonoBehaviour
         LevelManager.OnLevelStarted -= LevelManager_OnLevelStarted;
     }
 
-    public static event Action<InputAction> TestSendingInputActions;
     void Start()
     {
-        TestSendingInputActions?.Invoke(_secondaryAction);
+        ReportMoveAction?.Invoke(_moveAction);
     }
 
     void Update()

@@ -1,27 +1,32 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class KeyRebinding : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _actionNameText, _rebindButtonText, _defautButtonText;
+    [SerializeField] RebindActionUI _rebindActionUIPrefab;
+    [SerializeField] Transform _keyboardBindingsParent, _gamepadBindingsParent;
     InputActionRebindingExtensions.RebindingOperation _rebindOperation;
 
     void Awake()
     {
-        InputManager.TestSendingInputActions += InputManager_TestSendingInputActions;
+        InputManager.ReportMoveAction += InputManager_ReportMoveAction;
     }
 
     void OnDestroy()
     {
-        InputManager.TestSendingInputActions -= InputManager_TestSendingInputActions;
+        InputManager.ReportMoveAction -= InputManager_ReportMoveAction;
         _rebindOperation?.Cancel();
         _rebindOperation?.Dispose();
         _rebindOperation = null;
     }
 
-    void InputManager_TestSendingInputActions(InputAction inputAction)
+    void InputManager_ReportMoveAction(InputAction moveAction)
     {
+        for(int i = 1; i < 5; i++)
+        {
+            RebindActionUI rebindUI = Instantiate(_rebindActionUIPrefab, _keyboardBindingsParent);
+            rebindUI.Initialize(this, moveAction, i, false);
+        }
         // for(int i = 0; i < inputAction.bindings.Count; i++)
         // {
             // if(inputAction.bindings[i].isComposite)
@@ -34,12 +39,10 @@ public class KeyRebinding : MonoBehaviour
         // }
 
         // inputAction.ApplyBindingOverride(0, "<Keyboard>/space"); // This works! (But there's no reason to use it, this is just a test)
-        _actionNameText.text = inputAction.bindings[0].name;
-        _rebindButtonText.text = inputAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);//, InputBinding.DisplayStringOptions.DontOmitDevice);
-        _defautButtonText.text = $"Restore Default\n[{InputControlPath.ToHumanReadableString(inputAction.bindings[0].path, InputControlPath.HumanReadableStringOptions.OmitDevice)}]";
+
     }
 
-    void KeyboardButtonRebindAction(InputAction inputAction, int bindingIndex)
+    public void KeyboardButtonRebindAction(InputAction inputAction, int bindingIndex)
     {
         _rebindOperation?.Cancel();
         _rebindOperation?.Dispose();
@@ -67,7 +70,7 @@ public class KeyRebinding : MonoBehaviour
         _rebindOperation.Start();
     }
 
-    void GamepadButtonRebindAction(InputAction inputAction, int bindingIndex)
+    public void GamepadButtonRebindAction(InputAction inputAction, int bindingIndex)
     {
         _rebindOperation?.Cancel();
         _rebindOperation?.Dispose();
@@ -94,6 +97,25 @@ public class KeyRebinding : MonoBehaviour
                                 });
 
         _rebindOperation.Start();
+    }
+
+    public void ResetBinding(InputAction inputAction, int index)
+    {
+        inputAction.RemoveBindingOverride(index);
+    }
+
+    public void ToggleDisplayedBindings()
+    {
+        if(_keyboardBindingsParent.gameObject.activeSelf)
+        {
+            _keyboardBindingsParent.gameObject.SetActive(false);
+            _gamepadBindingsParent.gameObject.SetActive(true);
+        }
+        else
+        {
+            _gamepadBindingsParent.gameObject.SetActive(false);
+            _keyboardBindingsParent.gameObject.SetActive(true);
+        }
     }
 
     // TODO : Save rebind overrides via json in playerprefs

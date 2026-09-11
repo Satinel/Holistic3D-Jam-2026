@@ -97,6 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4f3170eda0ef2418d7ed1ba8d33671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyRebinding
+  _rebindActionUIPrefab: {fileID: 3056349611147623193, guid: 76f92ffea9bd2f24393832361abcafec, type: 3}
+  _keyboardBindingsParent: {fileID: 2586204097580020899}
+  _gamepadBindingsParent: {fileID: 13439363351405814}
 --- !u!1001 &1287799415438961140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -436,6 +439,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+--- !u!224 &13439363351405814 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5777245364444712393, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+  m_PrefabInstance: {fileID: 5765549852304779583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!223 &1013334325678628551 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 6778848967832008696, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
@@ -444,6 +452,11 @@ Canvas:
 --- !u!224 &2308842380613502085 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8073264056669793722, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+  m_PrefabInstance: {fileID: 5765549852304779583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2586204097580020899 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8351736287891561884, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
   m_PrefabInstance: {fileID: 5765549852304779583}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &3376070350979100878 stripped
