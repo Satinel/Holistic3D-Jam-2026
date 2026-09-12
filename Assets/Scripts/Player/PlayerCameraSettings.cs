@@ -65,6 +65,8 @@ public class PlayerCameraSettings : MonoBehaviour
 
     public void ToggleFirstPerson()
     {
+        if(Time.timeScale == 0) { return; }
+
         if(_isFirstPerson)
         {
             ExitFirstPerson();

@@ -423,6 +423,9 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnSprintHeld(bool isHeld)
     {
+        if(_isDead) { return; }
+        if(Time.timeScale == 0) { return; }
+
         _isSprinting = isHeld;
         _animator.SetBool(SPRINT_HASH, isHeld);
     }

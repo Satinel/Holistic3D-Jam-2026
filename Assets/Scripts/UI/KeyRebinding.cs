@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -63,10 +64,12 @@ public class KeyRebinding : MonoBehaviour
 
     void InputManager_OnOptionsPressed()
     {
+        if(Time.timeScale > 0) { return; }
+
         _rebindOperation?.Cancel();
     }
 
-    public void KeyboardButtonRebindAction(InputAction inputAction, int bindingIndex)
+    public void KeyboardButtonRebindAction(InputAction inputAction, int bindingIndex, Action onComplete)
     {
         _rebindOperation?.Cancel();
         _rebindOperation?.Dispose();
@@ -77,6 +80,7 @@ public class KeyRebinding : MonoBehaviour
         _rebindOperation = inputAction.PerformInteractiveRebinding()
                                 .WithExpectedControlType("Button")
                                 .WithCancelingThrough("<Keyboard>/escape")
+                                .WithCancelingThrough("<Keyboard>/tab")
                                 .WithControlsExcluding("<Gamepad>")
                                 .WithTargetBinding(bindingIndex)
                                 .OnMatchWaitForAnother(0.1f)
@@ -87,6 +91,7 @@ public class KeyRebinding : MonoBehaviour
                                     operation.Dispose();
                                     _rebindOperation = null;
                                     SaveOverrides();
+                                    onComplete?.Invoke();
                                 })
                                 .OnCancel(operation =>
                                 {
@@ -99,7 +104,7 @@ public class KeyRebinding : MonoBehaviour
         _rebindOperation.Start();
     }
 
-    public void GamepadButtonRebindAction(InputAction inputAction, int bindingIndex)
+    public void GamepadButtonRebindAction(InputAction inputAction, int bindingIndex, Action onComplete)
     {
         _rebindOperation?.Cancel();
         _rebindOperation?.Dispose();
@@ -121,6 +126,7 @@ public class KeyRebinding : MonoBehaviour
                                     operation.Dispose();
                                     _rebindOperation = null;
                                     SaveOverrides();
+                                    onComplete?.Invoke();
                                 })
                                 .OnCancel(operation =>
                                 {
