@@ -9,7 +9,8 @@ public class OptionsMenu : MonoBehaviour
     public static event Action OnRestartRequested, OnCameraValuesChanged;
 
     [SerializeField] Canvas _mainCanvas, _audioCanvas, _rebindCanvas;
-    [SerializeField] GameObject _unpauseButton, _disableAudioButton, _disableRebindsButton, _cancelQuitButton, _cancelRestartButton, _restartPrompt, _quitPrompt;
+    [SerializeField] KeyRebinding _keyRebinding;
+    [SerializeField] GameObject _unpauseButton, _disableAudioButton, _cancelQuitButton, _cancelRestartButton, _restartPrompt, _quitPrompt;
     [SerializeField] Toggle _invertYToggle, _firstPersonToggle;
     [SerializeField] Slider _lookSensitivitySlider, _fovSlider, _cameraSideSlider;
 
@@ -160,14 +161,13 @@ public class OptionsMenu : MonoBehaviour
     public void EnableRebindCanvas()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        _rebindCanvas.enabled = true;
-        EventSystem.current.SetSelectedGameObject(_disableRebindsButton);
+        _keyRebinding.EnableUI();
     }
 
     public void DisableRebindCanvas()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        _rebindCanvas.enabled = false;
+        _keyRebinding.DisableUI();
         EventSystem.current.SetSelectedGameObject(_unpauseButton);
     }
 

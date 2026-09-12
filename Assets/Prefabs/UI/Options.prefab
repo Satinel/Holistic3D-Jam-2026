@@ -52,9 +52,9 @@ MonoBehaviour:
   _mainCanvas: {fileID: 2108273125430112558}
   _audioCanvas: {fileID: 9151013172747550089}
   _rebindCanvas: {fileID: 1013334325678628551}
+  _keyRebinding: {fileID: 1684294922046525576}
   _unpauseButton: {fileID: 4433854406493806375}
   _disableAudioButton: {fileID: 4298760763030729914}
-  _disableRebindsButton: {fileID: 3376070350979100878}
   _cancelQuitButton: {fileID: 8454944384004684207}
   _cancelRestartButton: {fileID: 120001474810218839}
   _restartPrompt: {fileID: 7316987437205729367}
@@ -97,9 +97,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4f3170eda0ef2418d7ed1ba8d33671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyRebinding
+  _inputActions: {fileID: -944628639613478452, guid: 69f53f5cc8fa125408ec38605d59757a, type: 3}
+  _rebindCanvas: {fileID: 1013334325678628551}
   _rebindActionUIPrefab: {fileID: 3056349611147623193, guid: 76f92ffea9bd2f24393832361abcafec, type: 3}
+  _keyboardUI: {fileID: 5947525421072519330}
+  _gamepadUI: {fileID: 7213871603811206591}
+  _keyboadMainMenuButton: {fileID: 3376070350979100878}
+  _gamepadMainMenuButton: {fileID: 2846754603413439520}
   _keyboardBindingsParent: {fileID: 2586204097580020899}
   _gamepadBindingsParent: {fileID: 13439363351405814}
+  _keyboardPrompt: {fileID: 8563920426574536638}
+  _gamepadPrompt: {fileID: 562620396804787766}
 --- !u!1001 &1287799415438961140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -342,11 +350,67 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1991577852467373694}
     m_Modifications:
+    - target: {fileID: 397973740684783282, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 397973740684783282, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 397973740684783282, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1684294922046525576}
+    - target: {fileID: 397973740684783282, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 397973740684783282, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetAllGamepadBindings
+      objectReference: {fileID: 0}
+    - target: {fileID: 397973740684783282, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: KeyRebinding, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 397973740684783282, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1810142605192506159, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2687580325957866336}
+    - target: {fileID: 4674785488706126779, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1684294922046525576}
+    - target: {fileID: 4674785488706126779, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleDisplayedBindings
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674785488706126779, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: KeyRebinding, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4675685899219266535, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2687580325957866336}
+    - target: {fileID: 5588372986096137128, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1684294922046525576}
+    - target: {fileID: 5588372986096137128, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleDisplayedBindings
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588372986096137128, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: KeyRebinding, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446500280595268322, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2687580325957866336}
@@ -434,6 +498,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key Rebind Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8756461001954601177, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756461001954601177, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756461001954601177, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1684294922046525576}
+    - target: {fileID: 8756461001954601177, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756461001954601177, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetAllKeyboardBindings
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756461001954601177, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: KeyRebinding, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756461001954601177, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -442,6 +534,11 @@ PrefabInstance:
 --- !u!224 &13439363351405814 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5777245364444712393, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+  m_PrefabInstance: {fileID: 5765549852304779583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &562620396804787766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6326868418739758857, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
   m_PrefabInstance: {fileID: 5765549852304779583}
   m_PrefabAsset: {fileID: 0}
 --- !u!223 &1013334325678628551 stripped
@@ -459,9 +556,29 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8351736287891561884, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
   m_PrefabInstance: {fileID: 5765549852304779583}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2846754603413439520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8611706234380496159, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+  m_PrefabInstance: {fileID: 5765549852304779583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3376070350979100878 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9140459050276280817, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+  m_PrefabInstance: {fileID: 5765549852304779583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5947525421072519330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 183103667707885981, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+  m_PrefabInstance: {fileID: 5765549852304779583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7213871603811206591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3755873497388117120, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
+  m_PrefabInstance: {fileID: 5765549852304779583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8563920426574536638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799674682075346561, guid: fd7d2578c16efd94d80939e300d5b654, type: 3}
   m_PrefabInstance: {fileID: 5765549852304779583}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7139624705494948155
