@@ -728,8 +728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd4508058b72df4ca1e7c791c03e473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RebindActionUI
+  <RebindB>k__BackingField: {fileID: 8104894940332575403}
+  <DefaultB>k__BackingField: {fileID: 1726625738033703687}
   _actionNameText: {fileID: 7989404338762683515}
   _rebindButtonText: {fileID: 8595400747983034357}
   _defautButtonText: {fileID: 3073223278238958883}
-  _index: 0
-  _isGamepadBinding: 0
