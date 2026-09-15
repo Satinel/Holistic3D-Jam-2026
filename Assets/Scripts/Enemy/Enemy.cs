@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     protected Health _playerHealth;
 
     public Health EnemyHealth => _health;
+    public bool IsAttacking => _isAttacking;
     protected static readonly int DEATH_HASH = Animator.StringToHash("Death");
     protected static readonly int ATTACK_HASH = Animator.StringToHash("Attack");
     protected static readonly int WALKING_NAME_HASH = Animator.StringToHash("Walk");
@@ -340,6 +341,8 @@ public class Enemy : MonoBehaviour
 
     public virtual void StartAttack(Health playerHealth)
     {
+        if(_isAttacking || _isRagdolled || _isCrushed) { return; }
+
         _playerHealth = playerHealth;
         _isAttacking = true;
         _animator.SetBool(ATTACK_HASH, true);

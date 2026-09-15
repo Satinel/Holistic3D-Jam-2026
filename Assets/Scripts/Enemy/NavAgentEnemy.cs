@@ -15,6 +15,7 @@ public class NavAgentEnemy : Enemy
     // [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
     // [SerializeField] Health _health;
     [SerializeField] NavMeshAgent _navAgent;
+    Vector3 _desiredVelocity = new();
     // [SerializeField] Collider _mainCollider;
     // [SerializeField] Rigidbody _mainRigidbody;
     // [SerializeField] Animator _animator;
@@ -62,9 +63,12 @@ public class NavAgentEnemy : Enemy
         _currentMoveSpeed = _defaultMoveSpeed;
         _slowMoveSpeed = _moveSpeed * 0.5f;
         _startingScaleY = _ragdollModel.transform.localScale.y;
+
+        _navAgent.updatePosition = false;
+
         _navAgent.speed = _currentMoveSpeed;
         _navAgent.acceleration = _acceleration;
-        _navAgent.angularSpeed = _turnSpeed;
+
         if(_isBoss)
         {
             OnNavBossSpawned?.Invoke();
@@ -85,6 +89,19 @@ public class NavAgentEnemy : Enemy
     }
 
     void Update()
+    {
+        if(!_navAgent.enabled || !_navAgent.isOnNavMesh) { return; }
+
+        _navAgent.isStopped = _isRagdolled || _isCrushed || _isAttacking;
+
+        Vector3 currentVelocity = _mainRigidbody.linearVelocity;
+        currentVelocity.y = 0f;
+        _navAgent.velocity = currentVelocity;
+        _desiredVelocity = _navAgent.isStopped ? Vector3.zero : _navAgent.desiredVelocity;
+        _desiredVelocity.y = 0;
+    }
+
+    void FixedUpdate()
     {
         if(_health.IsDead) { return; }
 
@@ -110,8 +127,6 @@ public class NavAgentEnemy : Enemy
 
         if(_playerHealth && _isAttacking)
         {
-            // _navAgent.destination = _playerHealth.AttackTargetPoint.position;
-
             RotateTowardDestination(_playerHealth.AttackTargetPoint);
             PositionBeams(_playerHealth.AttackTargetPoint);
         }
@@ -121,19 +136,22 @@ public class NavAgentEnemy : Enemy
             _rightBeam.gameObject.SetActive(false);
             Move();
         }
-
     }
 
     void Move()
     {
-        if(_isRagdolled || _isCrushed) { return; }
+        if(!_navAgent.enabled || !_navAgent.isOnNavMesh) { return; }
+
+        _navAgent.nextPosition = _mainRigidbody.position;
+
         if(!_destination) { return; }
 
-        _navAgent.destination = _destination.position;
-        _navAgent.speed = _currentMoveSpeed;
-        _navAgent.stoppingDistance = 0;
-
-        // RotateTowardDestination(_destination);
+        Vector3 current = _mainRigidbody.linearVelocity;
+        Vector3 currentHorizontal = new(current.x, 0, current.z);
+        Vector3 velocityDifference = _desiredVelocity - currentHorizontal;
+        Vector3 accel = velocityDifference / Time.fixedDeltaTime;
+        accel = Vector3.ClampMagnitude(accel, _acceleration);
+        _mainRigidbody.AddForce(accel, ForceMode.Acceleration);
 
         // Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
         // float forwardVelocity = Vector3.Dot(_mainRigidbody.linearVelocity, forward);
@@ -152,7 +170,7 @@ public class NavAgentEnemy : Enemy
 
         if(rotationToFace.sqrMagnitude > 0.001f)
         {
-            _mainRigidbody.MoveRotation(Quaternion.Slerp(_mainRigidbody.rotation, Quaternion.LookRotation(rotationToFace, Vector3.up), _turnSpeed * Time.deltaTime));
+            _mainRigidbody.MoveRotation(Quaternion.Slerp(_mainRigidbody.rotation, Quaternion.LookRotation(rotationToFace, Vector3.up), _turnSpeed * Time.fixedDeltaTime));
         }
     }
 
@@ -269,7 +287,9 @@ public class NavAgentEnemy : Enemy
 
         _navAgent.enabled = true;
         _navAgent.Warp(_mainRigidbody.position);
-        _navAgent.speed = _currentMoveSpeed;
+
+        _navAgent.ResetPath();
+        _navAgent.destination = _destination.position;
 
         // TODO : Check if this position is inside a non-trigger collider and move it out if so (otherwise Enemies get sucked through walls)
         _mainCollider.enabled = true;
@@ -309,7 +329,6 @@ public class NavAgentEnemy : Enemy
         _crushedTimer = duration;
         _ragdollModel.transform.localScale = new(_ragdollModel.transform.localScale.x, newScaleY, _ragdollModel.transform.localScale.z);
         _isCrushed = true;
-        _navAgent.speed = 0;
     }
 
     void RecoverFromCrushed()
@@ -322,7 +341,6 @@ public class NavAgentEnemy : Enemy
         {
             _animator.enabled = true;
             _playerDetector.ToggleActive(true);
-            _navAgent.speed = _currentMoveSpeed;
         }
     }
 
@@ -330,16 +348,16 @@ public class NavAgentEnemy : Enemy
     {
         _currentMoveSpeed = _slowMoveSpeed;
         _animator.speed = 0.5f;
-        // TODO ? If enemies ever make noises or have voice lines, lower pitch by * 0.5f
         _navAgent.speed = _currentMoveSpeed;
+        // TODO ? If enemies ever make noises or have voice lines, lower pitch by * 0.5f
     }
 
     public override void RecoverFromSlow()
     {
         _currentMoveSpeed = _defaultMoveSpeed;
         _animator.speed = 1f;
-        // TODO ? If enemies ever make noises or have voice lines, restore pitch level which was lowered in Slow()
         _navAgent.speed = _currentMoveSpeed;
+        // TODO ? If enemies ever make noises or have voice lines, restore pitch level which was lowered in Slow()
     }
 
     void BreakArmor()
@@ -358,11 +376,17 @@ public class NavAgentEnemy : Enemy
     public override void SetDestination(Transform destination)
     {
         _destination = destination;
+        if(_navAgent.isOnNavMesh)
+        {
+            _navAgent.destination = _destination.position;
+        }
     }
 
     public override void StartAttack(Health playerHealth)
     {
-        _navAgent.speed = 0;
+        if(_isRagdolled || _isCrushed || _isAttacking) { return; }
+
+        _navAgent.enabled = false;
         _playerHealth = playerHealth;
         _isAttacking = true;
         _animator.SetBool(ATTACK_HASH, true);
@@ -384,7 +408,13 @@ public class NavAgentEnemy : Enemy
         _isAttacking = false;
         _leftBeam.gameObject.SetActive(false);
         _rightBeam.gameObject.SetActive(false);
-        _navAgent.speed = _currentMoveSpeed;
+
+        if(!_isRagdolled)
+        {
+            _navAgent.enabled = true;
+            _navAgent.ResetPath();
+            _navAgent.destination = _destination.position;
+        }
     }
 
     void Health_OnAnyHealthDeath(Health health)

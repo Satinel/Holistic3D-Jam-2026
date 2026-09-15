@@ -12,6 +12,24 @@ public class PlayerDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if(_thisEnemy.IsAttacking) { return; }
+        if(!_isActive) { return; }
+
+        if(other.CompareTag(PLAYER_TAG))
+        {
+            if(other.TryGetComponent(out Health health))
+            {
+                if(health.IsPlayer && !health.IsDead)
+                {
+                    _thisEnemy.StartAttack(health);
+                }
+            }
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if(_thisEnemy.IsAttacking) { return; }
         if(!_isActive) { return; }
 
         if(other.CompareTag(PLAYER_TAG))
@@ -28,6 +46,8 @@ public class PlayerDetector : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        if(!_thisEnemy.IsAttacking) { return; }
+
         if(other.CompareTag(PLAYER_TAG))
         {
             if(other.TryGetComponent(out Health health))
