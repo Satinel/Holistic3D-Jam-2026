@@ -28,7 +28,9 @@ public class LevelManager : MonoBehaviour
         OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
         OptionsMenu.OnRestartRequested += OptionsMenu_OnRestartRequested;
         Enemy.OnAnyEnemySpawned += Enemy_OnAnyEnemySpawned;
+        NavAgentEnemy.OnAnyNavEnemySpawned += Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed += Enemy_OnAnyEnemyDestroyed;
+        NavAgentEnemy.OnAnyNavEnemyDestroyed += Enemy_OnAnyEnemyDestroyed;
         Core.OnCoreDestroyed += Core_OnCoreDestroyed;
     }
 
@@ -38,7 +40,9 @@ public class LevelManager : MonoBehaviour
         OptionsMenu.OnOptionsCanvasToggled -= OptionsMenu_OnOptionsCanvasToggled;
         OptionsMenu.OnRestartRequested -= OptionsMenu_OnRestartRequested;
         Enemy.OnAnyEnemySpawned -= Enemy_OnAnyEnemySpawned;
+        NavAgentEnemy.OnAnyNavEnemySpawned -= Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
+        NavAgentEnemy.OnAnyNavEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
         Core.OnCoreDestroyed -= Core_OnCoreDestroyed;
 
         _eventListener?.Dispose();
