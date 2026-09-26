@@ -1,47 +1,44 @@
 using System;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class OldEnemy : MonoBehaviour
 {
-    public static event Action<Enemy> OnAnyEnemySpawned, OnAnyEnemyDestroyed;
+    public static event Action<OldEnemy> OnAnyEnemySpawned, OnAnyEnemyDestroyed;
     public static event Action OnBossSpawned;
 
     [field:SerializeField] public int CoreValue { get; private set; } = 1;
 
-    [SerializeField] int _drainDamage = 10, _ragdollResist = 0;
-    [SerializeField] bool _isBoss = false;
-    [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f, _destroyDelay = 3f; //_deceleration = 5f;
-    [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
-    [SerializeField] Health _health;
-    [SerializeField] Collider _mainCollider;
-    [SerializeField] Rigidbody _mainRigidbody;
-    [SerializeField] Animator _animator;
-    [SerializeField] PlayerDetector _playerDetector;
-    [SerializeField] FloatingText _floatingTextPrefab;
-    [SerializeField] GameObject _armorBreakPrefab;
+    [SerializeField] protected int _drainDamage = 10, _ragdollResist = 0;
+    [SerializeField] protected bool _isBoss = false;
+    [SerializeField] protected float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f, _destroyDelay = 3f; //_deceleration = 5f;
+    [SerializeField] protected float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
+    [SerializeField] protected Health _health;
+    [SerializeField] protected Collider _mainCollider;
+    [SerializeField] protected Rigidbody _mainRigidbody;
+    [SerializeField] protected Animator _animator;
+    [SerializeField] protected PlayerDetector _playerDetector;
+    [SerializeField] protected FloatingText _floatingTextPrefab;
+    [SerializeField] protected GameObject _armorBreakPrefab;
 
-    [SerializeField] Rigidbody _ragdoll;
-    [SerializeField] ModelAnimator _ragdollModel;
-    [SerializeField] Collider[] _colliders;
-    [SerializeField] Rigidbody[] _rigidbodies;
+    [SerializeField] protected Rigidbody _ragdoll;
+    [SerializeField] protected ModelAnimator _ragdollModel;
+    [SerializeField] protected Collider[] _colliders;
+    [SerializeField] protected Rigidbody[] _rigidbodies;
 
-    [SerializeField] Transform _leftHand, _rightHand;
-    [SerializeField] Transform _leftBeam, _rightBeam;
-    [SerializeField] NavMeshAgent _navAgent;
-    Vector3 _desiredVelocity = new();
+    [SerializeField] protected Transform _leftHand, _rightHand;
+    [SerializeField] protected Transform _leftBeam, _rightBeam;
 
-    bool _isRagdolled, _isCrushed, _isAttacking;
-    float _currentMoveSpeed, _defaultMoveSpeed, _slowMoveSpeed;
-    float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY;
-    Transform _destination;
-    Health _playerHealth;
+    protected bool _isRagdolled, _isCrushed, _isAttacking;
+    protected float _currentMoveSpeed, _defaultMoveSpeed, _slowMoveSpeed;
+    protected float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY;
+    protected Transform _destination;
+    protected Health _playerHealth;
 
     public Health EnemyHealth => _health;
     public bool IsAttacking => _isAttacking;
-    static readonly int DEATH_HASH = Animator.StringToHash("Death");
-    static readonly int ATTACK_HASH = Animator.StringToHash("Attack");
-    static readonly int WALKING_NAME_HASH = Animator.StringToHash("Walk");
+    protected static readonly int DEATH_HASH = Animator.StringToHash("Death");
+    protected static readonly int ATTACK_HASH = Animator.StringToHash("Attack");
+    protected static readonly int WALKING_NAME_HASH = Animator.StringToHash("Walk");
 
 
     void Awake()
@@ -64,12 +61,6 @@ public class Enemy : MonoBehaviour
         _currentMoveSpeed = _defaultMoveSpeed;
         _slowMoveSpeed = _moveSpeed * 0.5f;
         _startingScaleY = _ragdollModel.transform.localScale.y;
-
-        _navAgent.updatePosition = false;
-
-        _navAgent.speed = _currentMoveSpeed;
-        _navAgent.acceleration = _acceleration;
-
         if(_isBoss)
         {
             OnBossSpawned?.Invoke();
@@ -85,20 +76,8 @@ public class Enemy : MonoBehaviour
 
         float mass = collision.rigidbody ? collision.rigidbody.mass : 1;
 
+        // Ragdoll(collision.contacts[0], collision.relativeVelocity * mass);
         Ragdoll(collision.GetContact(0), collision.relativeVelocity * mass);
-    }
-
-    void Update()
-    {
-        if(!_navAgent.enabled || !_navAgent.isOnNavMesh) { return; }
-
-        _navAgent.isStopped = _isRagdolled || _isCrushed || _isAttacking;
-
-        Vector3 currentVelocity = _mainRigidbody.linearVelocity;
-        currentVelocity.y = 0f;
-        _navAgent.velocity = currentVelocity;
-        _desiredVelocity = _navAgent.isStopped ? Vector3.zero : _navAgent.desiredVelocity;
-        _desiredVelocity.y = 0;
     }
 
     void FixedUpdate()
@@ -136,22 +115,21 @@ public class Enemy : MonoBehaviour
             _rightBeam.gameObject.SetActive(false);
             Move();
         }
+
     }
 
     void Move()
     {
-        if(!_navAgent.enabled || !_navAgent.isOnNavMesh) { return; }
-
-        _navAgent.nextPosition = _mainRigidbody.position;
-
+        if(_isRagdolled || _isCrushed) { return; }
         if(!_destination) { return; }
 
-        Vector3 current = _mainRigidbody.linearVelocity;
-        Vector3 currentHorizontal = new(current.x, 0, current.z);
-        Vector3 velocityDifference = _desiredVelocity - currentHorizontal;
-        Vector3 accel = velocityDifference / Time.fixedDeltaTime;
-        accel = Vector3.ClampMagnitude(accel, _acceleration);
-        _mainRigidbody.AddForce(accel, ForceMode.Acceleration);
+        RotateTowardDestination(_destination);
+
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
+        float forwardVelocity = Vector3.Dot(_mainRigidbody.linearVelocity, forward);
+
+        float speedDifference = _currentMoveSpeed - forwardVelocity;
+        _mainRigidbody.AddForce(speedDifference * _acceleration * forward, ForceMode.Acceleration);
     }
 
     void RotateTowardDestination(Transform destination)
@@ -164,7 +142,7 @@ public class Enemy : MonoBehaviour
 
         if(rotationToFace.sqrMagnitude > 0.001f)
         {
-            _mainRigidbody.MoveRotation(Quaternion.Slerp(_mainRigidbody.rotation, Quaternion.LookRotation(rotationToFace, Vector3.up), _turnSpeed * Time.fixedDeltaTime));
+            _mainRigidbody.MoveRotation(Quaternion.Slerp(_mainRigidbody.rotation, Quaternion.LookRotation(rotationToFace, Vector3.up), _turnSpeed * Time.deltaTime));
         }
     }
 
@@ -194,7 +172,6 @@ public class Enemy : MonoBehaviour
         _animator.enabled = false;
         _mainCollider.enabled = false;
         _mainRigidbody.isKinematic = true;
-        _navAgent.enabled = false;
 
         Rigidbody closestBone = null;
         float smallestDistance = Mathf.Infinity;
@@ -227,7 +204,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void AccurateRagdoll(Vector3 force, ForceMode forceMode, float ragdollDuration)
+    public virtual void AccurateRagdoll(Vector3 force, ForceMode forceMode, float ragdollDuration)
     {
         if(_ragdollResist > 0)
         {
@@ -252,7 +229,6 @@ public class Enemy : MonoBehaviour
         _animator.enabled = false;
         _mainCollider.enabled = false;
         _mainRigidbody.isKinematic = true;
-        _navAgent.enabled = false;
 
         foreach(Rigidbody rigidbody in _rigidbodies)
         {
@@ -278,13 +254,6 @@ public class Enemy : MonoBehaviour
             collider.enabled = false;
         }
         _mainRigidbody.position = ragdollPosition;
-
-        _navAgent.enabled = true;
-        _navAgent.Warp(_mainRigidbody.position);
-
-        _navAgent.ResetPath();
-        _navAgent.destination = _destination.position;
-
         // TODO : Check if this position is inside a non-trigger collider and move it out if so (otherwise Enemies get sucked through walls)
         _mainCollider.enabled = true;
         _mainRigidbody.isKinematic = false;
@@ -301,7 +270,7 @@ public class Enemy : MonoBehaviour
         _ragddollTimer = 0;
     }
 
-    public void Crush(float newScaleY, float duration)
+    public virtual void Crush(float newScaleY, float duration)
     {
         if(_ragdollResist > 0)
         {
@@ -338,19 +307,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Slow()
+    public virtual void Slow()
     {
         _currentMoveSpeed = _slowMoveSpeed;
         _animator.speed = 0.5f;
-        _navAgent.speed = _currentMoveSpeed;
         // TODO ? If enemies ever make noises or have voice lines, lower pitch by * 0.5f
     }
 
-    public void RecoverFromSlow()
+    public virtual void RecoverFromSlow()
     {
         _currentMoveSpeed = _defaultMoveSpeed;
         _animator.speed = 1f;
-        _navAgent.speed = _currentMoveSpeed;
         // TODO ? If enemies ever make noises or have voice lines, restore pitch level which was lowered in Slow()
     }
 
@@ -359,7 +326,7 @@ public class Enemy : MonoBehaviour
         Instantiate(_armorBreakPrefab, _ragdoll.transform.position, Quaternion.identity);
     }
 
-    public void DisableRagdollGravity()
+    public virtual void DisableRagdollGravity()
     {
         foreach(Rigidbody rigidbody in _rigidbodies)
         {
@@ -367,26 +334,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void SetDestination(Transform destination)
+    public virtual void SetDestination(Transform destination)
     {
         _destination = destination;
-        if(_navAgent.isOnNavMesh)
-        {
-            _navAgent.destination = _destination.position;
-        }
     }
 
-    public void StartAttack(Health playerHealth)
+    public virtual void StartAttack(Health playerHealth)
     {
-        if(_isRagdolled || _isCrushed || _isAttacking) { return; }
+        if(_isAttacking || _isRagdolled || _isCrushed) { return; }
 
-        _navAgent.enabled = false;
         _playerHealth = playerHealth;
         _isAttacking = true;
         _animator.SetBool(ATTACK_HASH, true);
     }
 
-    public void DealDamage()
+    public virtual void DealDamage()
     {
         if(!_playerHealth) { return; }
 
@@ -395,20 +357,13 @@ public class Enemy : MonoBehaviour
         _playerHealth.LoseHealth(_drainDamage);
     }
 
-    public void StopAttack()
+    public virtual void StopAttack()
     {
         _animator.SetBool(ATTACK_HASH, false);
         _animator.Play(WALKING_NAME_HASH);
         _isAttacking = false;
         _leftBeam.gameObject.SetActive(false);
         _rightBeam.gameObject.SetActive(false);
-
-        if(!_isRagdolled)
-        {
-            _navAgent.enabled = true;
-            _navAgent.ResetPath();
-            _navAgent.destination = _destination.position;
-        }
     }
 
     void Health_OnAnyHealthDeath(Health health)
@@ -429,7 +384,6 @@ public class Enemy : MonoBehaviour
         // TODO ? A really fancy shader should make the model disintegrate or something!!!
         FloatingText floatingText = Instantiate(_floatingTextPrefab, _ragdoll.position, Quaternion.identity);
         floatingText.SetUp(_health.MoneyValue.ToString());
-        _navAgent.enabled = false;
         Destroy(gameObject, _destroyDelay);
     }
 }

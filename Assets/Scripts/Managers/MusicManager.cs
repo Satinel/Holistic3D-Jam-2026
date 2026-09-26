@@ -19,7 +19,6 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnSceneChangeStarted += LevelManager_OnSceneChangeStarted;
         TimescaleManager.OnTimeScaleChanged += TimescaleManager_OnTimeScaleChanged;
         Enemy.OnBossSpawned += Enemy_OnBossSpawned;
-        NavAgentEnemy.OnNavBossSpawned += Enemy_OnBossSpawned;
     }
 
     void OnDestroy()
@@ -32,7 +31,6 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnSceneChangeStarted -= LevelManager_OnSceneChangeStarted;
         TimescaleManager.OnTimeScaleChanged -= TimescaleManager_OnTimeScaleChanged;
         Enemy.OnBossSpawned -= Enemy_OnBossSpawned;
-        NavAgentEnemy.OnNavBossSpawned -= Enemy_OnBossSpawned;
     }
 
     void LevelManager_OnLevelStarted()

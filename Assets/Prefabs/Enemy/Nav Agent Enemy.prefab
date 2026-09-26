@@ -72,17 +72,13 @@ PrefabInstance:
       propertyPath: _parent
       value: 
       objectReference: {fileID: 721905008822554647}
-    m_RemovedComponents:
-    - {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6064142015798586965, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       insertIndex: 1
       addedObject: {fileID: 721905008822554647}
-    - targetCorrespondingSourceObject: {fileID: 6064142015798586965, guid: 90fdd5aa7a927314295688639099b305, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1400830799389601742}
   m_SourcePrefab: {fileID: 100100000, guid: 90fdd5aa7a927314295688639099b305, type: 3}
 --- !u!136 &26166316939885196 stripped
 CapsuleCollider:
@@ -275,29 +271,7 @@ MonoBehaviour:
   _rightHand: {fileID: 1076346980779486377}
   _leftBeam: {fileID: 8340824106901720072}
   _rightBeam: {fileID: 6241756834970596773}
-  _navAgent: {fileID: 1400830799389601742}
---- !u!195 &1400830799389601742
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6327144149835463647}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 1
-  m_Speed: 1
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 2
+  _navAgent: {fileID: 0}
 --- !u!54 &6890893488900067312 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 6649562659452672634, guid: 90fdd5aa7a927314295688639099b305, type: 3}
