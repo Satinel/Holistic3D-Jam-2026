@@ -3523,7 +3523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &386464236
 Transform:
   m_ObjectHideFlags: 0
@@ -5174,6 +5174,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564474e4aee394647958e865ea17d811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
+--- !u!1 &605438969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 605438970}
+  - component: {fileID: 605438971}
+  m_Layer: 0
+  m_Name: Barricade Trap Buyable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &605438970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605438969}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1925938965}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &605438971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605438969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+  <IsTrap>k__BackingField: 1
+  <Cost>k__BackingField: 125
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7c037eed7acb05845b58d1e4f220b6f8, type: 3}
+  <BuyPrice>k__BackingField: 125
+  <TrapPosition>k__BackingField: 0
+  <PreviewPrefab>k__BackingField: {fileID: -7515853688993139911, guid: 06834154afadb964a895f8719f5fbac3, type: 3}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _halfSize: {x: 1, y: 0.01, z: 0.9}
+  _trapPrefab: {fileID: 3840993093556309465, guid: bb1a40affdf0b1e45ad2cb4142c406cb, type: 3}
+  _requiredHorizontalSockets: 1
+  _requiredVerticalSockets: 1
 --- !u!1001 &610485111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6112,7 +6169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &719603129
 Transform:
   m_ObjectHideFlags: 0
@@ -6750,7 +6807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &816124651
 Transform:
   m_ObjectHideFlags: 0
@@ -13821,7 +13878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1549669015
 Transform:
   m_ObjectHideFlags: 0
@@ -16356,7 +16413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1886361492
 Transform:
   m_ObjectHideFlags: 0
@@ -17156,6 +17213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d04f4375451cc5444a77bd63ad0d63b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+--- !u!4 &1925938965 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3731261836584538087, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+  m_PrefabInstance: {fileID: 527485788012095053}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1928582288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5137089126978033666, guid: 4e4af743163647144a07cb54d5cd9518, type: 3}
@@ -18134,7 +18196,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3731261836584538087, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 605438970}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
 --- !u!1001 &2284742681068110919
