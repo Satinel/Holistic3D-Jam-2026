@@ -3725,6 +3725,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 325450206568839983, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
+      propertyPath: _core
+      value: 
+      objectReference: {fileID: 1583681654}
+    - target: {fileID: 325450206568839983, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: _path
       value: 
       objectReference: {fileID: 1521541149}
@@ -5135,6 +5139,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564474e4aee394647958e865ea17d811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
+--- !u!114 &1583681654 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7121510667103033549, guid: eb20f60ffada6894caadb957edf95fb8, type: 3}
+  m_PrefabInstance: {fileID: 1583681652}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d18998610c7a44c817c7085cbfb35b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core
 --- !u!4 &1610048380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3329237817125961105, guid: ee1c0b974471add44b9d44820150281f, type: 3}
@@ -5743,6 +5758,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 325450206568839983, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
+      propertyPath: _core
+      value: 
+      objectReference: {fileID: 1583681654}
     - target: {fileID: 325450206568839983, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: _path
       value: 

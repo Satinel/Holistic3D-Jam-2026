@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -16,20 +18,32 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] bool _isActive;
     [SerializeField] GameObject _visualsParent;
     [SerializeField] Path _path;
+    [SerializeField] Core _core;
 
+    readonly HashSet<Enemy> _spawnedEnemies = new();
+    readonly HashSet<BarricadeTrap> _blockingBarricades = new();
+
+    BarricadeTrap _targetBarricade;
     int _waveIndex = 0, _enemyIndex = 0;
     float _spawnTimer = 1f;
     bool _isSpawning = false;
+    bool _pathBlocked;
     public bool IsSpawning => _isSpawning;
 
     void Awake()
     {
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
+        Enemy.OnAnyEnemyDestroyed += Enemy_OnAnyEnemyDestroyed;
+        BarricadeTrap.OnAnyBarricadePlaced += CheckPath;
+        BarricadeTrap.OnAnyBarricadeDestroyed += CheckPath;
     }
 
     void OnDestroy()
     {
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
+        Enemy.OnAnyEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
+        BarricadeTrap.OnAnyBarricadePlaced -= CheckPath;
+        BarricadeTrap.OnAnyBarricadeDestroyed -= CheckPath;
     }
 
     void Start()
@@ -67,7 +81,13 @@ public class EnemySpawner : MonoBehaviour
 
         if(_enemyIndex < _waves[_waveIndex].Enemies.Length)
         {
-            Instantiate(_waves[_waveIndex].Enemies[_enemyIndex], _spawnPoints[Random.Range(0, _spawnPoints.Length)].position, transform.rotation, transform);
+            Enemy enemy = Instantiate(_waves[_waveIndex].Enemies[_enemyIndex], _spawnPoints[Random.Range(0, _spawnPoints.Length)].position, transform.rotation, transform);
+            _spawnedEnemies.Add(enemy);
+            enemy.SetCore(_core);
+            if(_targetBarricade)
+            {
+                enemy.SetTargetBarricade(_targetBarricade);
+            }
 
             _enemyIndex++;
 
@@ -108,9 +128,64 @@ public class EnemySpawner : MonoBehaviour
 
     void LevelManager_OnWaveCompleted(int index, int rewards)
     {
+        _spawnedEnemies.Clear();
+
         if(!_isActive && index >= _activationIndex)
         {
             Activate();
+        }
+    }
+
+    void Enemy_OnAnyEnemyDestroyed(Enemy enemy)
+    {
+        _spawnedEnemies.Remove(enemy);
+    }
+
+    void CheckPath(BarricadeTrap newBarricade)
+    {
+        NavMeshPath path = new();
+        _pathBlocked = !NavMesh.CalculatePath(transform.position, _core.transform.position, NavMesh.AllAreas, path);
+
+        if(!_pathBlocked)
+        {
+            _blockingBarricades.Clear();
+            _targetBarricade = null;
+            foreach(Enemy enemy in _spawnedEnemies)
+            {
+                enemy.SetTargetBarricade(null);
+            }
+        }
+        else
+        {
+            _blockingBarricades.Add(newBarricade);
+            NavMeshPath pathToBlock = new();
+            if(NavMesh.CalculatePath(transform.position, newBarricade.transform.position, NavMesh.AllAreas, pathToBlock))
+            {
+                _targetBarricade = newBarricade;
+                newBarricade.SetShouldDestroy();
+
+                foreach(Enemy enemy in _spawnedEnemies)
+                {
+                    enemy.SetTargetBarricade(newBarricade);
+                }
+            }
+            else
+            {
+                foreach(BarricadeTrap barricadeTrap in _blockingBarricades)
+                {
+                    if(NavMesh.CalculatePath(transform.position, barricadeTrap.transform.position, NavMesh.AllAreas, pathToBlock))
+                    {
+                        _targetBarricade = barricadeTrap;
+                        barricadeTrap.SetShouldDestroy();
+
+                        foreach(Enemy enemy in _spawnedEnemies)
+                        {
+                            enemy.SetTargetBarricade(barricadeTrap);
+                        }
+                        break;
+                    }
+                }
+            }
         }
     }
 

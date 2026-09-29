@@ -35,7 +35,9 @@ public class Enemy : MonoBehaviour
     float _currentMoveSpeed, _defaultMoveSpeed, _slowMoveSpeed;
     float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY;
     Transform _destination;
+    BarricadeTrap _targetBarricade;
     Health _playerHealth;
+    Core _core;
 
     public Health EnemyHealth => _health;
     public bool IsAttacking => _isAttacking;
@@ -369,11 +371,58 @@ public class Enemy : MonoBehaviour
 
     public void SetDestination(Transform destination)
     {
+        if(_targetBarricade != null) { return; }    // Waypoints shouldn't overwrite destination if headed to a blocking barricade
+
         _destination = destination;
         if(_navAgent.isOnNavMesh)
         {
             _navAgent.destination = _destination.position;
         }
+    }
+
+    public void SetCore(Core core)
+    {
+        _core = core;
+    }
+
+    public void SetTargetBarricade(BarricadeTrap barricade)
+    {
+        if(barricade == null)   // If barricade is passed as null it means there should be a path to _core
+        {
+            _targetBarricade = null;
+            SetDestination(_core.transform);
+            return;
+        }
+
+        NavMeshPath fullPath = new();
+        if(NavMesh.CalculatePath(transform.position, _core.transform.position, NavMesh.AllAreas, fullPath)) // Ignore if path to _core is not blocked
+        {
+            _targetBarricade = null;
+            SetDestination(_core.transform);
+            return;
+        }
+        else
+        {
+            NavMeshPath targetPath = new();
+            if(_targetBarricade && NavMesh.CalculatePath(transform.position, _targetBarricade.transform.position, NavMesh.AllAreas, targetPath))    // Ignore if heading to a different barricade already
+            {
+                return;
+            }
+
+            NavMeshPath blockedPath = new();
+            if(NavMesh.CalculatePath(transform.position, barricade.transform.position, NavMesh.AllAreas, blockedPath))
+            {
+                _targetBarricade = null;
+                SetDestination(barricade.transform);
+                _targetBarricade = barricade;
+            }
+        }
+    }
+
+    public void AttackBarricade(BarricadeTrap barricade)
+    {
+        // TODO Trigger animation and such
+        barricade.SufferAttack(this);
     }
 
     public void StartAttack(Health playerHealth)

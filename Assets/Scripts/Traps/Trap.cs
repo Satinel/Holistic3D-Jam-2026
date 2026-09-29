@@ -30,12 +30,12 @@ public class Trap : MonoBehaviour
     [SerializeField] protected Animator _animator;
     [SerializeField] protected AudioSource _audioSource;
 
-    void Awake()
+    protected virtual void Awake()
     {
         LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
     }
 
-    void OnDestroy()
+    protected virtual void OnDestroy()
     {
         LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
     }
