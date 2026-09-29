@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BuyableTrap : Item
 {
-    [field:SerializeField] public int BuyPrice { get; protected set; } = 100;
+    // [field:SerializeField] public int BuyPrice { get; protected set; } = 100;
     [field:SerializeField] public TrapPosition TrapPosition { get; protected set; } = TrapPosition.Floor;
     [field:SerializeField] public TrapPreview PreviewPrefab { get; private set; }
     
@@ -16,7 +16,7 @@ public class BuyableTrap : Item
     void Awake()
     {
         IsTrap = true;
-        Cost = BuyPrice;
+        // Cost = BuyPrice;
     }
 
     public bool CanPlaceTrap(TrapSocket activeSocket)
@@ -68,6 +68,6 @@ public class BuyableTrap : Item
 
     public void CompletePurchase(TrapSocket activeSocket)
     {
-        activeSocket.PlaceTrap(_trapPrefab, BuyPrice);
+        activeSocket.PlaceTrap(_trapPrefab, Cost);
     }
 }

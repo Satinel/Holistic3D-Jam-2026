@@ -19,6 +19,11 @@ public class Waypoint : MonoBehaviour
         }
     }
 
+    public void SetEnemyDestination(Enemy enemy)
+    {
+        enemy.SetDestination(GetNextWaypoint());
+    }
+
     Transform GetNextWaypoint()
     {
         return _nextWaypoints[Random.Range(0, _nextWaypoints.Length)].transform;

@@ -394,29 +394,23 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        NavMeshPath fullPath = new();
-        if(NavMesh.CalculatePath(transform.position, _core.transform.position, NavMesh.AllAreas, fullPath)) // Ignore if path to _core is not blocked
+        NavMeshPath path = new();
+        if(NavMesh.CalculatePath(transform.position, _core.transform.position, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete) // Ignore if path to _core is not blocked
         {
             _targetBarricade = null;
             SetDestination(_core.transform);
             return;
         }
-        else
+        else if(_targetBarricade && NavMesh.FindClosestEdge(_targetBarricade.transform.position, out NavMeshHit hit, NavMesh.AllAreas)
+                                && NavMesh.CalculatePath(transform.position, hit.position, NavMesh.AllAreas, path)
+                                && path.status == NavMeshPathStatus.PathComplete)    // Ignore if heading to a different reachable barricade already
         {
-            NavMeshPath targetPath = new();
-            if(_targetBarricade && NavMesh.CalculatePath(transform.position, _targetBarricade.transform.position, NavMesh.AllAreas, targetPath))    // Ignore if heading to a different barricade already
-            {
-                return;
-            }
-
-            NavMeshPath blockedPath = new();
-            if(NavMesh.CalculatePath(transform.position, barricade.transform.position, NavMesh.AllAreas, blockedPath))
-            {
-                _targetBarricade = null;
-                SetDestination(barricade.transform);
-                _targetBarricade = barricade;
-            }
+            return;
         }
+
+        _targetBarricade = null;
+        SetDestination(barricade.transform);
+        _targetBarricade = barricade;
     }
 
     public void AttackBarricade(BarricadeTrap barricade)

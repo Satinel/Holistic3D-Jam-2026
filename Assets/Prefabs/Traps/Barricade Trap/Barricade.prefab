@@ -100,6 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4450654176597003183}
   - component: {fileID: 3925305361766464066}
+  - component: {fileID: -5151416961225727800}
   - component: {fileID: 5320037039668316710}
   - component: {fileID: 4994454167024305095}
   m_Layer: 3
@@ -137,7 +138,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -148,6 +149,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &-5151416961225727800
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528876823167001106}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1024
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!208 &5320037039668316710
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -161,9 +189,9 @@ NavMeshObstacle:
   m_Extents: {x: 0.075, y: 1, z: 0.075}
   m_MoveThreshold: 0.1
   m_Carve: 1
-  m_CarveOnlyStationary: 1
+  m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 1, z: 0}
-  m_TimeToStationary: 0.5
+  m_TimeToStationary: 0
 --- !u!114 &4994454167024305095
 MonoBehaviour:
   m_ObjectHideFlags: 0

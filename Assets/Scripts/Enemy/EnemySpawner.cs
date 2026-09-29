@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,26 +25,34 @@ public class EnemySpawner : MonoBehaviour
     readonly HashSet<BarricadeTrap> _blockingBarricades = new();
 
     BarricadeTrap _targetBarricade;
+    Coroutine _checkDelayCoroutine;
     int _waveIndex = 0, _enemyIndex = 0;
     float _spawnTimer = 1f;
     bool _isSpawning = false;
-    bool _pathBlocked;
+    bool _levelComplete, _applicationQuitting;
     public bool IsSpawning => _isSpawning;
 
     void Awake()
     {
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
+        LevelManager.OnLevelCompleted += LevelManager_OnLevelCompleted;
         Enemy.OnAnyEnemyDestroyed += Enemy_OnAnyEnemyDestroyed;
-        BarricadeTrap.OnAnyBarricadePlaced += CheckPath;
-        BarricadeTrap.OnAnyBarricadeDestroyed += CheckPath;
+        BarricadeTrap.OnAnyBarricadePlaced += BarricadeTrap_OnAnyBarricadePlaced;
+        BarricadeTrap.OnAnyBarricadeDestroyed += BarricadeTrap_OnAnyBarricadeDestroyed;
     }
 
     void OnDestroy()
     {
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
+        LevelManager.OnLevelCompleted -= LevelManager_OnLevelCompleted;
         Enemy.OnAnyEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
-        BarricadeTrap.OnAnyBarricadePlaced -= CheckPath;
-        BarricadeTrap.OnAnyBarricadeDestroyed -= CheckPath;
+        BarricadeTrap.OnAnyBarricadePlaced -= BarricadeTrap_OnAnyBarricadePlaced;
+        BarricadeTrap.OnAnyBarricadeDestroyed -= BarricadeTrap_OnAnyBarricadeDestroyed;
+    }
+
+    void OnApplicationQuit()
+    {
+        _applicationQuitting = true;
     }
 
     void Start()
@@ -136,34 +145,100 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    void LevelManager_OnLevelCompleted()
+    {
+        _levelComplete = true;
+    }
+
     void Enemy_OnAnyEnemyDestroyed(Enemy enemy)
     {
         _spawnedEnemies.Remove(enemy);
     }
 
+    void BarricadeTrap_OnAnyBarricadePlaced(BarricadeTrap newBarricade)
+    {
+        if(_checkDelayCoroutine != null)
+        {
+            StopCoroutine(_checkDelayCoroutine);
+        }
+
+        _checkDelayCoroutine = StartCoroutine(BarricadePlacementDelayRoutine(newBarricade));
+    }
+
+    void BarricadeTrap_OnAnyBarricadeDestroyed(BarricadeTrap newBarricade)
+    {
+        if(_targetBarricade == newBarricade)
+        {
+            _targetBarricade = null;
+        }
+
+        if(_checkDelayCoroutine != null)
+        {
+            StopCoroutine(_checkDelayCoroutine);
+        }
+
+        _checkDelayCoroutine = StartCoroutine(BarricadePlacementDelayRoutine(newBarricade));
+    }
+
+    IEnumerator BarricadePlacementDelayRoutine(BarricadeTrap newBarricade)
+    {
+        yield return null;
+        yield return null;
+
+        _checkDelayCoroutine = null;
+        CheckPath(newBarricade);
+    }
+
     void CheckPath(BarricadeTrap newBarricade)
     {
+        if(_applicationQuitting || _levelComplete) { return; }
+Debug.Log($"{name} is checking path");
         NavMeshPath path = new();
-        _pathBlocked = !NavMesh.CalculatePath(transform.position, _core.transform.position, NavMesh.AllAreas, path);
 
-        if(!_pathBlocked)
+        if(NavMesh.CalculatePath(transform.position, _core.transform.position, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete)
         {
-            _blockingBarricades.Clear();
+Debug.Log($"{name} has found a path");
             _targetBarricade = null;
             foreach(Enemy enemy in _spawnedEnemies)
             {
                 enemy.SetTargetBarricade(null);
             }
+
+            foreach(BarricadeTrap barricadeTrap in _blockingBarricades)
+            {
+                if(barricadeTrap)
+                {
+                    barricadeTrap.VoteToIgnore();
+                }
+            }
+            _blockingBarricades.Clear();
         }
         else
         {
-            _blockingBarricades.Add(newBarricade);
-            NavMeshPath pathToBlock = new();
-            if(NavMesh.CalculatePath(transform.position, newBarricade.transform.position, NavMesh.AllAreas, pathToBlock))
+            if(newBarricade != null)
+            {
+                _blockingBarricades.Add(newBarricade);
+            }
+
+            if(_targetBarricade != null)
+            {
+                if(NavMesh.FindClosestEdge(_targetBarricade.transform.position, out NavMeshHit hit, NavMesh.AllAreas))
+                {
+                    if(NavMesh.CalculatePath(transform.position, hit.position, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete)
+                    {
+Debug.Log("Maintaining path to targetBarricade");
+                        return;
+                    }
+                }
+            }
+
+            if(newBarricade != null && NavMesh.FindClosestEdge(newBarricade.transform.position, out NavMeshHit newHit, NavMesh.AllAreas) 
+                                    && NavMesh.CalculatePath(transform.position, newHit.position, NavMesh.AllAreas, path) 
+                                    && path.status == NavMeshPathStatus.PathComplete)
             {
                 _targetBarricade = newBarricade;
-                newBarricade.SetShouldDestroy();
-
+                newBarricade.VoteToDestroy();
+Debug.Log("newBarricade set as targetBarricade");
                 foreach(Enemy enemy in _spawnedEnemies)
                 {
                     enemy.SetTargetBarricade(newBarricade);
@@ -171,12 +246,18 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
+Debug.Log("Searching for pathable barricade");
                 foreach(BarricadeTrap barricadeTrap in _blockingBarricades)
                 {
-                    if(NavMesh.CalculatePath(transform.position, barricadeTrap.transform.position, NavMesh.AllAreas, pathToBlock))
+                    if(barricadeTrap == null) { continue; }
+
+                    if(NavMesh.FindClosestEdge(barricadeTrap.transform.position, out NavMeshHit navHit, NavMesh.AllAreas)
+                        && NavMesh.CalculatePath(transform.position, navHit.position, NavMesh.AllAreas, path) 
+                        && path.status == NavMeshPathStatus.PathComplete)
                     {
+Debug.Log("Pathable barricade found");
                         _targetBarricade = barricadeTrap;
-                        barricadeTrap.SetShouldDestroy();
+                        barricadeTrap.VoteToDestroy();
 
                         foreach(Enemy enemy in _spawnedEnemies)
                         {
@@ -185,6 +266,7 @@ public class EnemySpawner : MonoBehaviour
                         break;
                     }
                 }
+Debug.Log("Search Complete");
             }
         }
     }

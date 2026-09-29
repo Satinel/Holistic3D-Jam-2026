@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviour
                     _activeSocket.HighlightTrap(false);
                     _canSellTrap = false;
                     OnCanSellTrap?.Invoke(_canSellTrap);
-                    _canBuyTrap = _wallet.CanAfford(_activeTrap.BuyPrice);
+                    _canBuyTrap = _wallet.CanAfford(_activeTrap.Cost);
 
                     if(_previewModel == null)
                     {
@@ -377,7 +377,7 @@ public class PlayerController : MonoBehaviour
         if(_canBuyTrap && _activeTrap && _activeSocket)
         {
             _audioSource.PlayOneShot(_placeTrapSFX);
-            _wallet.SpendMoney(_activeTrap.BuyPrice);
+            _wallet.SpendMoney(_activeTrap.Cost);
             _activeTrap.CompletePurchase(_activeSocket);
             // TODO : Add an animation (and a cool shader to make the trap appear through magical science)
             return;
@@ -505,6 +505,7 @@ public class PlayerController : MonoBehaviour
             _isDead = true;
             _moveInputValue = Vector2.zero;
             _animator.SetTrigger(DEATH_HASH);
+            _isAttacking = false;
         }
     }
 
