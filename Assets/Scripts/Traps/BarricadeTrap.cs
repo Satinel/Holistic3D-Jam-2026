@@ -5,6 +5,8 @@ public class BarricadeTrap : Trap
 {
     public static event Action<BarricadeTrap> OnAnyBarricadePlaced, OnAnyBarricadeDestroyed;
 
+    [field:SerializeField] public Transform[] AttackPoints { get; private set; }
+
     int _votesToDestroy;
     Waypoint _intersectingWaypoint;
 

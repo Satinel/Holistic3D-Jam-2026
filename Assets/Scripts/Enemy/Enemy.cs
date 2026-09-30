@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
     bool _isRagdolled, _isCrushed, _isAttacking;
     float _currentMoveSpeed, _defaultMoveSpeed, _slowMoveSpeed;
     float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY;
-    Transform _destination;
+    Transform _destination, _deferredDestination;
     BarricadeTrap _targetBarricade;
     Health _playerHealth;
     Core _core;
@@ -371,7 +371,13 @@ public class Enemy : MonoBehaviour
 
     public void SetDestination(Transform destination)
     {
-        if(_targetBarricade != null) { return; }    // Waypoints shouldn't overwrite destination if headed to a blocking barricade
+        if(!destination) { return; }
+
+        if(_targetBarricade != null)
+        {
+            _deferredDestination = destination; // Waypoints shouldn't overwrite destination if headed to a blocking barricade
+            return;
+        }
 
         _destination = destination;
         if(_navAgent.isOnNavMesh)
@@ -385,31 +391,73 @@ public class Enemy : MonoBehaviour
         _core = core;
     }
 
-    public void SetTargetBarricade(BarricadeTrap barricade)
+    public void SetTargetBarricade(BarricadeTrap barricade, Transform attackPoint)
     {
+        if(_health.IsDead) { return; }
+
         if(barricade == null)   // If barricade is passed as null it means there should be a path to _core
         {
             _targetBarricade = null;
-            SetDestination(_core.transform);
-            return;
+            if(_deferredDestination)
+            {
+                SetDestination(_deferredDestination);
+                _deferredDestination = null;
+                return;
+            }
+            else if(_destination)
+            {
+                SetDestination(_destination);
+                return;
+            }
+            else
+            {
+                SetDestination(_core.transform);
+                return;
+            }
         }
 
         NavMeshPath path = new();
         if(NavMesh.CalculatePath(transform.position, _core.transform.position, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete) // Ignore if path to _core is not blocked
         {
             _targetBarricade = null;
-            SetDestination(_core.transform);
-            return;
+            if(_deferredDestination)
+            {
+                SetDestination(_deferredDestination);
+                _deferredDestination = null;
+                return;
+            }
+            else if(_destination)
+            {
+                SetDestination(_destination);
+                return;
+            }
+            else
+            {
+                SetDestination(_core.transform);
+                return;
+            }
         }
-        else if(_targetBarricade && NavMesh.FindClosestEdge(_targetBarricade.transform.position, out NavMeshHit hit, NavMesh.AllAreas)
-                                && NavMesh.CalculatePath(transform.position, hit.position, NavMesh.AllAreas, path)
-                                && path.status == NavMeshPathStatus.PathComplete)    // Ignore if heading to a different reachable barricade already
+        else if(_targetBarricade)
         {
-            return;
+            for(int i = 0; i < _targetBarricade.AttackPoints.Length; i++)
+            {
+                if(NavMesh.CalculatePath(transform.position, _targetBarricade.AttackPoints[i].position, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete)
+                {
+                    BarricadeTrap target = _targetBarricade;    // Yes this is convoluted but less so than introducing a bool to track everywhere all the time
+                    _targetBarricade = null;
+                    SetDestination(_targetBarricade.AttackPoints[i]);
+                    _targetBarricade = target;
+                    return; // Ignore if heading to a different blocking and reachable barricade already (so Enemy doesn't get trapped heading for the wrong side of a different barricade)
+                }
+            }
         }
 
+        if(!_targetBarricade)
+        {
+            _deferredDestination = _destination;
+        }
         _targetBarricade = null;
-        SetDestination(barricade.transform);
+        SetDestination(attackPoint);
         _targetBarricade = barricade;
     }
 
