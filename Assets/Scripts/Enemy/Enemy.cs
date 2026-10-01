@@ -445,7 +445,7 @@ public class Enemy : MonoBehaviour
                 {
                     BarricadeTrap target = _targetBarricade;    // Yes this is convoluted but less so than introducing a bool to track everywhere all the time
                     _targetBarricade = null;
-                    SetDestination(_targetBarricade.AttackPoints[i]);
+                    SetDestination(target.AttackPoints[i]);
                     _targetBarricade = target;
                     return; // Ignore if heading to a different blocking and reachable barricade already (so Enemy doesn't get trapped heading for the wrong side of a different barricade)
                 }

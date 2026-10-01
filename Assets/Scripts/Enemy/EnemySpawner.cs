@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
 
     BarricadeTrap _targetBarricade;
     Transform _barricadeAttackPoint;
-    Coroutine _checkDelayCoroutine;
+    Coroutine _checkDelayCoroutine, _enemyTargetingCoroutine;
     int _waveIndex = 0, _enemyIndex = 0;
     float _spawnTimer = 1f;
     bool _isSpawning = false;
@@ -191,20 +191,28 @@ public class EnemySpawner : MonoBehaviour
         CheckPath(newBarricade);
     }
 
+    IEnumerator SetEnemiesTarget(HashSet<Enemy> enemies, BarricadeTrap barricade, Transform attackPoint)
+    {
+        foreach(Enemy enemy in enemies)
+        {
+            enemy.SetTargetBarricade(barricade, attackPoint);
+            yield return null;
+        }
+
+        _enemyTargetingCoroutine = null;
+    }
+
+// [SerializeField] Transform _indicator;
     void CheckPath(BarricadeTrap newBarricade)
     {
         if(_applicationQuitting || _levelComplete) { return; }
-Debug.Log($"{name} is checking path");
+// Debug.Log($"{name} is checking path");
         NavMeshPath path = new();
 
         if(NavMesh.CalculatePath(transform.position, _core.transform.position, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete)
         {
             _targetBarricade = null;
             _barricadeAttackPoint = null;
-            foreach(Enemy enemy in _spawnedEnemies)
-            {
-                enemy.SetTargetBarricade(null, null);
-            }
 
             foreach(BarricadeTrap barricadeTrap in _blockingBarricades)
             {
@@ -214,7 +222,14 @@ Debug.Log($"{name} is checking path");
                 }
             }
             _blockingBarricades.Clear();
-Debug.Log($"{name} has found a path");
+
+            if(_enemyTargetingCoroutine != null)
+            {
+                StopCoroutine(_enemyTargetingCoroutine);
+            }
+            _enemyTargetingCoroutine = StartCoroutine(SetEnemiesTarget(_spawnedEnemies, null, null));
+// _indicator.transform.position = transform.position;
+// Debug.Log($"{name} has found a path");
             return;
         }
 
@@ -230,7 +245,8 @@ Debug.Log($"{name} has found a path");
                 if(NavMesh.CalculatePath(transform.position, _targetBarricade.AttackPoints[i].position, NavMesh.AllAreas, path) && path.status == NavMeshPathStatus.PathComplete)
                 {
                     _barricadeAttackPoint = _targetBarricade.AttackPoints[i];
-Debug.Log("Maintaining path to targetBarricade");
+// _indicator.transform.position = _targetBarricade.AttackPoints[i].position;
+// Debug.Log("Maintaining path to targetBarricade");
                     return;
                 }
             }
@@ -245,18 +261,21 @@ Debug.Log("Maintaining path to targetBarricade");
                     _barricadeAttackPoint = newBarricade.AttackPoints[i];
                     _targetBarricade = newBarricade;
                     newBarricade.VoteToDestroy();
-                    foreach(Enemy enemy in _spawnedEnemies)
+
+                    if(_enemyTargetingCoroutine != null)
                     {
-                        enemy.SetTargetBarricade(_targetBarricade, _barricadeAttackPoint);
+                        StopCoroutine(_enemyTargetingCoroutine);
                     }
-Debug.Log("newBarricade set as targetBarricade");
+                    _enemyTargetingCoroutine = StartCoroutine(SetEnemiesTarget(_spawnedEnemies, _targetBarricade, _barricadeAttackPoint));
+// _indicator.transform.position = newBarricade.AttackPoints[i].position;
+// Debug.Log("newBarricade set as targetBarricade");
                     return;
                 }
             }
         }
         else
         {
-Debug.Log("Searching for pathable barricade");
+// Debug.Log("Searching for pathable barricade");
             foreach(BarricadeTrap barricadeTrap in _blockingBarricades)
             {
                 if(barricadeTrap == null) { continue; }
@@ -268,17 +287,20 @@ Debug.Log("Searching for pathable barricade");
                         _barricadeAttackPoint = barricadeTrap.AttackPoints[i];
                         _targetBarricade = barricadeTrap;
                         barricadeTrap.VoteToDestroy();
-                        foreach(Enemy enemy in _spawnedEnemies)
+
+                        if(_enemyTargetingCoroutine != null)
                         {
-                            enemy.SetTargetBarricade(_targetBarricade, _barricadeAttackPoint);
+                            StopCoroutine(_enemyTargetingCoroutine);
                         }
-Debug.Log("Pathable barricade found");
+                        _enemyTargetingCoroutine = StartCoroutine(SetEnemiesTarget(_spawnedEnemies, _targetBarricade, _barricadeAttackPoint));
+// _indicator.transform.position = barricadeTrap.AttackPoints[i].position;
+// Debug.Log("Pathable barricade found");
                         return;
                     }
                 }
             }
         }
-Debug.Log("No possible paths found (that's bad but in theory also impossible)");
+// Debug.Log("No possible paths found (that's bad but in theory also impossible)");
     }
 
     void Activate()

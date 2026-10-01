@@ -18,6 +18,10 @@ public class BarricadeTrap : Trap
 
     protected override void OnDestroy() // As with Awake, no need to override and base.OnDestroy() it's just a safety precaution if base changes
     {
+        if(_trapSocket)
+        {
+            _trapSocket.TrapDestroyed();
+        }
         OnAnyBarricadeDestroyed?.Invoke(this);
         base.OnDestroy();
     }
@@ -32,16 +36,28 @@ public class BarricadeTrap : Trap
 
         if(!_intersectingWaypoint && _votesToDestroy <= 0) { return; }
 
-        if(other.TryGetComponent(out WaypointDetector detector))
+        if(!other.CompareTag(ENEMY_TAG)) { return; }
+
+        Enemy detectedEnemy = null;
+
+        if(other.TryGetComponent(out Enemy enemy))
         {
-            if(_votesToDestroy > 0)
-            {
-                detector.ThisEnemy.AttackBarricade(this);
-            }
-            else if(_intersectingWaypoint)
-            {
-                _intersectingWaypoint.SetEnemyDestination(detector.ThisEnemy);
-            }
+            detectedEnemy = enemy;
+        }
+        else if(other.TryGetComponent(out WaypointDetector detector))
+        {
+            detectedEnemy = detector.ThisEnemy;
+        }
+
+        if(detectedEnemy == null || detectedEnemy.EnemyHealth.IsDead) { return; }
+
+        if(_votesToDestroy > 0 && enemy)
+        {
+            enemy.AttackBarricade(this);
+        }
+        else if(_intersectingWaypoint)
+        {
+            _intersectingWaypoint.SetEnemyDestination(detectedEnemy);
         }
     }
 

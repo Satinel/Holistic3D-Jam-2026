@@ -17,7 +17,7 @@ public class TrapSocket : MonoBehaviour
 
         HasTrap = true;
         _placedTrap = Instantiate(trapPrefab, transform.position, transform.rotation, transform);
-        _placedTrap.Initialize(trapPrice);
+        _placedTrap.Initialize(trapPrice, this);
     }
 
     public void SellTrap()
@@ -28,6 +28,18 @@ public class TrapSocket : MonoBehaviour
         OnAnyTrapSold?.Invoke(_placedTrap);
         Destroy(_placedTrap.gameObject);
         _placedTrap = null;
+    }
+
+    public void TrapDestroyed()
+    {
+        if(HasTrap)
+        {
+            HasTrap = false;
+        }
+        if(_placedTrap)
+        {
+            _placedTrap = null;
+        }
     }
 
     public void HighlightTrap(bool isHighlighted)

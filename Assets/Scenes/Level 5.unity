@@ -1852,10 +1852,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Spawner (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4194793885370203868, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8579678059924905130, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26
@@ -8707,6 +8703,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1186829100}
     - target: {fileID: 325450206568839983, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
+      propertyPath: _indicator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 325450206568839983, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: _waves.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -11062,10 +11062,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Spawner (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 4194793885370203868, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8579678059924905130, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.000004
@@ -12060,6 +12056,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 325450206568839983, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
+      propertyPath: _indicator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 325450206568839983, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: _activationIndex
       value: 1
       objectReference: {fileID: 0}
@@ -12798,10 +12798,6 @@ PrefabInstance:
     - target: {fileID: 4194793885370203868, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: m_Name
       value: Enemy Spawner (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4194793885370203868, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8579678059924905130, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17202,10 +17198,6 @@ PrefabInstance:
     - target: {fileID: 4194793885370203868, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: m_Name
       value: Enemy Spawner (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4194793885370203868, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8579678059924905130, guid: d4c70f489491ea04781460f8e4eec58b, type: 3}
       propertyPath: m_LocalPosition.x

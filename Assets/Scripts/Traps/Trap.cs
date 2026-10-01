@@ -30,6 +30,8 @@ public class Trap : MonoBehaviour
     [SerializeField] protected Animator _animator;
     [SerializeField] protected AudioSource _audioSource;
 
+    protected TrapSocket _trapSocket;
+
     protected virtual void Awake()
     {
         LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
@@ -40,9 +42,10 @@ public class Trap : MonoBehaviour
         LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
     }
 
-    public void Initialize(int price)
+    public void Initialize(int price, TrapSocket trapSocket)
     {
         SellPrice = price;
+        _trapSocket = trapSocket;
     }
 
     protected virtual void LevelManager_OnWaveStarted(){}
