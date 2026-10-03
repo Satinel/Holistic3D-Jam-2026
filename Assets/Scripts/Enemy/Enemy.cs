@@ -12,7 +12,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] int _drainDamage = 10, _ragdollResist = 0;
     [SerializeField] bool _isBoss = false;
     [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f, _destroyDelay = 3f; //_deceleration = 5f;
-    [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f;
+    [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f, _stuckCheckTime = 1f;
+    [SerializeField] LayerMask _trapLayerMask;
     [SerializeField] Health _health;
     [SerializeField] Collider _mainCollider;
     [SerializeField] Rigidbody _mainRigidbody;
@@ -33,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     bool _isRagdolled, _isCrushed, _isAttacking;
     float _currentMoveSpeed, _defaultMoveSpeed, _slowMoveSpeed;
-    float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY;
+    float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY, _stuckTimer;
     Transform _destination, _deferredDestination;
     BarricadeTrap _targetBarricade;
     Health _playerHealth;
@@ -154,6 +155,19 @@ public class Enemy : MonoBehaviour
         Vector3 accel = velocityDifference / Time.fixedDeltaTime;
         accel = Vector3.ClampMagnitude(accel, _acceleration);
         _mainRigidbody.AddForce(accel, ForceMode.Acceleration);
+
+        if(!_isRagdolled && !_isCrushed && !_isAttacking && _mainRigidbody.linearVelocity.sqrMagnitude < 0.25f)
+        {
+            _stuckTimer += Time.deltaTime;
+            if(_stuckTimer > _stuckCheckTime)
+            {
+                HandleStuck();
+            }
+        }
+        else
+        {
+            _stuckTimer = 0f;
+        }
     }
 
     void RotateTowardDestination(Transform destination)
@@ -177,6 +191,31 @@ public class Enemy : MonoBehaviour
 
         _rightBeam.position = (_rightHand.position + player.position) * 0.5f;
         _rightBeam.up = (player.position - _rightHand.position).normalized;
+    }
+
+    void HandleStuck()
+    {
+// Debug.Log("HandleStuck() called");
+        Collider[] colliders = new Collider[64];
+        Physics.OverlapSphereNonAlloc(_mainRigidbody.position, _navAgent.radius + 0.15f, colliders, _trapLayerMask, QueryTriggerInteraction.Collide);
+        foreach(Collider collider in colliders)
+        {
+            if(collider && collider.TryGetComponent(out BarricadeTrap barricade))
+            {
+                if(barricade)
+                {
+                    barricade.SufferAttack(this);
+                    _stuckTimer = 0;
+                    return;
+                }
+            }
+        }
+
+        _mainRigidbody.position = _navAgent.nextPosition;
+        _navAgent.nextPosition = _mainRigidbody.position;
+        _mainRigidbody.linearVelocity = Vector3.zero;
+        _mainRigidbody.angularVelocity = Vector3.zero;
+        _stuckTimer = 0;
     }
 
     void Ragdoll(ContactPoint contactPoint, Vector3 force)

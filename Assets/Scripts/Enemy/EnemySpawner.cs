@@ -193,10 +193,15 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SetEnemiesTarget(HashSet<Enemy> enemies, BarricadeTrap barricade, Transform attackPoint)
     {
-        foreach(Enemy enemy in enemies)
+        HashSet<Enemy> activeEnemies = new(enemies);
+
+        foreach(Enemy enemy in activeEnemies)
         {
-            enemy.SetTargetBarricade(barricade, attackPoint);
-            yield return null;
+            if(enemy)
+            {
+                enemy.SetTargetBarricade(barricade, attackPoint);
+                yield return null;
+            }
         }
 
         _enemyTargetingCoroutine = null;

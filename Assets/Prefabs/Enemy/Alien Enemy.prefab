@@ -9401,6 +9401,10 @@ MonoBehaviour:
   _destroyDelay: 3
   _ragdollRecoveryTime: 5
   _falloffFadeOut: 3
+  _stuckCheckTime: 1
+  _trapLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
   _health: {fileID: 4128515336638853484}
   _mainCollider: {fileID: 345493617949419171}
   _mainRigidbody: {fileID: 1177097325106653104}
