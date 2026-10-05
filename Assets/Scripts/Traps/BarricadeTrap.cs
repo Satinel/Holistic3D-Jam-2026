@@ -75,7 +75,10 @@ Debug.Log($"{name} has {_votesToDestroy} votes after lobbying not to be destroye
 
     public void SufferAttack(Enemy attacker)
     {
-        // TODO Handle this better (assuming any of this even works...)
+GameObject marker = GameObject.CreatePrimitive(PrimitiveType.Cube);
+marker.transform.position = transform.position;
+marker.GetComponent<Collider>().enabled = false;
+        // TODO Give Barricades a health value and have enemies destroy them after several attacks instead of instantly on contact
 Debug.Log("Destroyed by " + attacker.name);
         Destroy(gameObject);
     }
