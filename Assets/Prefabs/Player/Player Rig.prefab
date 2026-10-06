@@ -220,6 +220,62 @@ Transform:
   - {fileID: 5256735014566613614}
   m_Father: {fileID: 3850134672394645781}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &640943036576303625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4833179101875840291}
+  - component: {fileID: 1103867630575799907}
+  m_Layer: 0
+  m_Name: Boulder Trap Buyable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4833179101875840291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640943036576303625}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3731261836584538087}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1103867630575799907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640943036576303625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+  <IsTrap>k__BackingField: 1
+  <Cost>k__BackingField: 125
+  <Icon>k__BackingField: {fileID: 21300000, guid: 2587885b7a796ad4db97759df27ce4f6, type: 3}
+  <TrapPosition>k__BackingField: 1
+  <PreviewPrefab>k__BackingField: {fileID: 8481580008745412521, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _halfSize: {x: 1.8, y: 0.01, z: 1.8}
+  _trapPrefab: {fileID: 682871791018129253, guid: 0f62b7b276ef2aa48b1048be032a0a79, type: 3}
+  _requiredHorizontalSockets: 2
+  _requiredVerticalSockets: 2
 --- !u!1 &727712967167794444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,6 +1972,7 @@ Transform:
   - {fileID: 827512631339979137}
   - {fileID: 408720742180844048}
   - {fileID: 3929948620632029675}
+  - {fileID: 4833179101875840291}
   m_Father: {fileID: 7278810624925462545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4807773708274420016

@@ -39,8 +39,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _AngleOffset: 0
-    - _CellDensity: 30
-    - _Hardness: 0.06
+    - _CellDensity: 10
+    - _Hardness: -0.1
     - _NoiseIntensity: 2
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -48,7 +48,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 14.1870985, g: 4.1595683, b: 0, a: 1}
     - _ScrollSpeed: {r: 0, g: 0.01, b: 0, a: 0}
-    - _SecondaryScrollSpeed: {r: 0.1, g: 0, b: 0, a: 0}
+    - _SecondaryScrollSpeed: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &2609022112376456675

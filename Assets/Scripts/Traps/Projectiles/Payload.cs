@@ -23,4 +23,9 @@ public class Payload : MonoBehaviour
             _parentTrap.HitEnemy(detector.ThisEnemy);
         }
     }
+
+    public void Initialize(Trap parentTrap)
+    {
+        _parentTrap = parentTrap;
+    }
 }
