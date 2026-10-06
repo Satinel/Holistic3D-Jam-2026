@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BoulderTrap : Trap
 {
-    [SerializeField] float _forceMultiplyer = 50f, _enemyCrushScale = 0.15f, _crushDuration = 1.25f;
+    [SerializeField] float _boulderDestroyTime = 2.5f, _forceMultiplyer = 50f, _enemyCrushScale = 0.15f, _crushDuration = 1.25f;
     [SerializeField] Payload _boulderPrefab;
     [SerializeField] Transform _spawnPoint;
 
@@ -47,6 +47,7 @@ public class BoulderTrap : Trap
         Payload boulder = Instantiate(_boulderPrefab, _spawnPoint.position, _spawnPoint.rotation);
         boulder.Initialize(this);
         boulder.GetComponent<Rigidbody>().AddForce(boulder.transform.forward * _forceMultiplyer, ForceMode.VelocityChange);
+        Destroy(boulder.gameObject, _boulderDestroyTime);
     }
 
     public override void HitEnemy(Enemy enemy)
