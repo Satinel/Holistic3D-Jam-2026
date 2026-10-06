@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class TrapPreview : MonoBehaviour
 {
+    [field:SerializeField] public Transform[] SocketPoints { get; private set; }
     [SerializeField] MeshRenderer[] _renderers;
     [SerializeField] GameObject _rangeIndicator;
+
 
     static readonly int EMISSION_COLOR_ID = Shader.PropertyToID("_EmissionColor");
 

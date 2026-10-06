@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
     Item _activeItem;
     BuyableTrap _activeTrap;
     TrapSocket _activeSocket;
-    TrapPreview _previewModel;
 
     static readonly int DEATH_HASH = Animator.StringToHash("Death");
     static readonly int ATTACK_HASH = Animator.StringToHash("Attack");
@@ -256,7 +255,10 @@ public class PlayerController : MonoBehaviour
                 if(_activeSocket && _activeSocket != socket)
                 {
                     _activeSocket.HighlightTrap(false);
-                    RemoveTrapPreview();
+                    if(_activeTrap)
+                    {
+                        _activeTrap.DisableTrapPreview();
+                    }
                 }
                 _activeSocket = socket;
 
@@ -267,22 +269,15 @@ public class PlayerController : MonoBehaviour
                     OnCanSellTrap?.Invoke(_canSellTrap);
                     _canBuyTrap = _wallet.CanAfford(_activeTrap.Cost);
 
-                    if(_previewModel == null)
-                    {
-                        _previewModel = Instantiate(_activeTrap.PreviewPrefab.gameObject).GetComponent<TrapPreview>();
-                    }
-
-                    _previewModel.transform.SetPositionAndRotation(socket.transform.position, socket.transform.rotation);
-
                     if(_canBuyTrap)
                     {
-                        _previewModel.SetMaterials(_buyColor);
+                        _activeTrap.TrapPreview.SetMaterials(_buyColor);
                     }
                     else
                     {
-                        _previewModel.SetMaterials(_poorColor);
+                        _activeTrap.TrapPreview.SetMaterials(_poorColor);
                     }
-                    _previewModel.ShowRange(_canBuyTrap);
+                    _activeTrap.TrapPreview.ShowRange(_canBuyTrap);
                     return;
                 }
 
@@ -294,7 +289,10 @@ public class PlayerController : MonoBehaviour
                         return;
                     }
 
-                    RemoveTrapPreview();
+                    if(_activeTrap)
+                    {
+                        _activeTrap.DisableTrapPreview();
+                    }
                     _canBuyTrap = false;
                     _activeSocket.HighlightTrap(true);
                     _canSellTrap = true;
@@ -327,15 +325,9 @@ public class PlayerController : MonoBehaviour
             _activeSocket.HighlightTrap(false);
             _activeSocket = null;
         }
-        RemoveTrapPreview();
-    }
-
-    void RemoveTrapPreview()
-    {
-        if(_previewModel != null)
+        if(_activeTrap)
         {
-            Destroy(_previewModel.gameObject);
-            _previewModel = null;
+            _activeTrap.DisableTrapPreview();
         }
     }
 
