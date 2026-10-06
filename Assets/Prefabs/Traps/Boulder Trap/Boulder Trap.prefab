@@ -333,7 +333,7 @@ MonoBehaviour:
   _forceMultiplyer: 50
   _enemyCrushScale: 0.15
   _crushDuration: 1.25
-  _boulderPrefab: {fileID: 6221186468419395859, guid: e258f83250779ab438f5a9433b553ecc, type: 3}
+  _boulderPrefab: {fileID: 792485374998717890, guid: e258f83250779ab438f5a9433b553ecc, type: 3}
   _spawnPoint: {fileID: 6864667805901096075}
 --- !u!82 &6688649920984246854
 AudioSource:

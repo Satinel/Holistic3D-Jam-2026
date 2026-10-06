@@ -3,7 +3,7 @@ using UnityEngine;
 public class BoulderTrap : Trap
 {
     [SerializeField] float _boulderDestroyTime = 2.5f, _forceMultiplyer = 50f, _enemyCrushScale = 0.15f, _crushDuration = 1.25f;
-    [SerializeField] Payload _boulderPrefab;
+    [SerializeField] GameObject _boulderPrefab;
     [SerializeField] Transform _spawnPoint;
 
     bool _canFire = true;
@@ -44,10 +44,11 @@ public class BoulderTrap : Trap
     void Fire()
     {
         _audioSource.Play();
-        Payload boulder = Instantiate(_boulderPrefab, _spawnPoint.position, _spawnPoint.rotation);
-        boulder.Initialize(this);
+        GameObject boulder = Instantiate(_boulderPrefab, _spawnPoint.position, _spawnPoint.rotation);
+        Payload payload = boulder.GetComponentInChildren<Payload>();
+        payload.Initialize(this);
         boulder.GetComponent<Rigidbody>().AddForce(boulder.transform.forward * _forceMultiplyer, ForceMode.VelocityChange);
-        Destroy(boulder.gameObject, _boulderDestroyTime);
+        Destroy(boulder, _boulderDestroyTime);
     }
 
     public override void HitEnemy(Enemy enemy)
