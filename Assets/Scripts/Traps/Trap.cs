@@ -48,6 +48,14 @@ public class Trap : MonoBehaviour
         _trapSocket = trapSocket;
     }
 
+    public void ForceSale()
+    {
+        if(_trapSocket)
+        {
+            _trapSocket.SellTrap();
+        }
+    }
+
     protected virtual void LevelManager_OnWaveStarted(){}
     public virtual void HitEnemy(Enemy enemy){}
     public virtual void GetForceDirection(Vector3 direction){}

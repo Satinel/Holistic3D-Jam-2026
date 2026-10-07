@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 980076609426789216}
   - component: {fileID: 1547109651954395399}
   - component: {fileID: 3138223977771993596}
-  m_Layer: 8
+  m_Layer: 1
   m_Name: Floor Blocker (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5403e9937853505459db97babbc306a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SocketBlocker
+  <BlockingTrap>k__BackingField: {fileID: 0}
 --- !u!1 &6085974566647636632
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ GameObject:
   - component: {fileID: 6522120753201746489}
   - component: {fileID: 5077380679220571417}
   - component: {fileID: 8027926003439070143}
-  m_Layer: 8
+  m_Layer: 1
   m_Name: Floor Blocker (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5403e9937853505459db97babbc306a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SocketBlocker
+  <BlockingTrap>k__BackingField: {fileID: 0}
 --- !u!1 &9006471080114862993
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SocketBlocker : MonoBehaviour
 {
+    [field:SerializeField] public Trap BlockingTrap { get; private set; }
     TrapSocket _blockedSocket;
 
     void OnTriggerEnter(Collider other)
@@ -11,7 +12,7 @@ public class SocketBlocker : MonoBehaviour
         if(other.TryGetComponent(out TrapSocket socket))
         {
             _blockedSocket = socket;
-            _blockedSocket.Block();
+            _blockedSocket.Block(this);
         }
     }
 
@@ -19,7 +20,7 @@ public class SocketBlocker : MonoBehaviour
     {
         if(_blockedSocket)
         {
-            _blockedSocket.Unblock();
+            _blockedSocket.Unblock(this);
         }
     }
 }

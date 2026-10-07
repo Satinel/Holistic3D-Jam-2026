@@ -886,10 +886,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3138223977771993596, guid: 03b498918eaa1bb42887674e690dd4ae, type: 3}
+      propertyPath: <BlockingTrap>k__BackingField
+      value: 
+      objectReference: {fileID: 3840993093556309465}
     - target: {fileID: 3350959538482582697, guid: 03b498918eaa1bb42887674e690dd4ae, type: 3}
       propertyPath: m_Name
       value: Floor Blockers
       objectReference: {fileID: 0}
+    - target: {fileID: 8027926003439070143, guid: 03b498918eaa1bb42887674e690dd4ae, type: 3}
+      propertyPath: <BlockingTrap>k__BackingField
+      value: 
+      objectReference: {fileID: 3840993093556309465}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -281,7 +281,7 @@ public class PlayerController : MonoBehaviour
                     return;
                 }
 
-                if(_activeSocket.HasTrap)
+                if(_activeSocket.HasTrap || _activeSocket.IsBlocked)
                 {
                     if(!_inSellMode)
                     {
