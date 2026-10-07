@@ -267,9 +267,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <Cost>k__BackingField: 125
-  <Icon>k__BackingField: {fileID: 21300000, guid: 2587885b7a796ad4db97759df27ce4f6, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 94bb1f7a6e97de74e887ba924bc4461b, type: 3}
   <TrapPosition>k__BackingField: 1
-  <PreviewPrefab>k__BackingField: {fileID: 8481580008745412521, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
   <TrapPreview>k__BackingField: {fileID: 7606190215711388006}
   _socketLayer:
     serializedVersion: 2
@@ -612,7 +611,6 @@ MonoBehaviour:
   <Cost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: cdd15499457998444b18fe5dcc7e683d, type: 3}
   <TrapPosition>k__BackingField: 1
-  <PreviewPrefab>k__BackingField: {fileID: 3843553560958220383, guid: c62c37ff71c30d947a6d7f5bc6b01a20, type: 3}
   <TrapPreview>k__BackingField: {fileID: 6117198142484707995}
   _socketLayer:
     serializedVersion: 2
@@ -857,7 +855,6 @@ MonoBehaviour:
   <Cost>k__BackingField: 150
   <Icon>k__BackingField: {fileID: 21300000, guid: df83bace063cc6349986d79a27ddd541, type: 3}
   <TrapPosition>k__BackingField: 2
-  <PreviewPrefab>k__BackingField: {fileID: -6580914942362227244, guid: 02fade36c7428ab44bf56acd633e6712, type: 3}
   <TrapPreview>k__BackingField: {fileID: 1988872182997882006}
   _socketLayer:
     serializedVersion: 2
@@ -912,7 +909,6 @@ MonoBehaviour:
   <Cost>k__BackingField: 90
   <Icon>k__BackingField: {fileID: 21300000, guid: f9338bb18de8fa64ca01008b616ed5bc, type: 3}
   <TrapPosition>k__BackingField: 0
-  <PreviewPrefab>k__BackingField: {fileID: -7515853688993139911, guid: 948aaa44f4979ba4cbe9e8870cf67efb, type: 3}
   <TrapPreview>k__BackingField: {fileID: 7440579436406822001}
   _socketLayer:
     serializedVersion: 2
@@ -2419,7 +2415,6 @@ MonoBehaviour:
   <Cost>k__BackingField: 85
   <Icon>k__BackingField: {fileID: 21300000, guid: ddaba6aa939d9514a9a40ee1212af8dd, type: 3}
   <TrapPosition>k__BackingField: 1
-  <PreviewPrefab>k__BackingField: {fileID: -9049143495794857357, guid: 1727486c4f012fa4c9a7c6c87e035610, type: 3}
   <TrapPreview>k__BackingField: {fileID: 2003017229052535241}
   _socketLayer:
     serializedVersion: 2
@@ -2474,7 +2469,6 @@ MonoBehaviour:
   <Cost>k__BackingField: 200
   <Icon>k__BackingField: {fileID: 21300000, guid: e09c5347453630649b0ea10f97a2e3ac, type: 3}
   <TrapPosition>k__BackingField: 0
-  <PreviewPrefab>k__BackingField: {fileID: 7181421974874963660, guid: 90f5b95194e506246aa0f1f128c14c4f, type: 3}
   <TrapPreview>k__BackingField: {fileID: 7790637744555844135}
   _socketLayer:
     serializedVersion: 2
@@ -2595,7 +2589,6 @@ MonoBehaviour:
   <Cost>k__BackingField: 50
   <Icon>k__BackingField: {fileID: 21300000, guid: 226877fc4dc05e14fb198476d58ac811, type: 3}
   <TrapPosition>k__BackingField: 2
-  <PreviewPrefab>k__BackingField: {fileID: 8334759843522001892, guid: d1ad43448a008f7459e0dc95fdb2e8e6, type: 3}
   <TrapPreview>k__BackingField: {fileID: 316701611773134558}
   _socketLayer:
     serializedVersion: 2
@@ -2650,7 +2643,6 @@ MonoBehaviour:
   <Cost>k__BackingField: 125
   <Icon>k__BackingField: {fileID: 21300000, guid: 4d66630f23d47fc44bcde0dd98328fbb, type: 3}
   <TrapPosition>k__BackingField: 0
-  <PreviewPrefab>k__BackingField: {fileID: -7515853688993139911, guid: 06834154afadb964a895f8719f5fbac3, type: 3}
   <TrapPreview>k__BackingField: {fileID: 8121210001060808166}
   _socketLayer:
     serializedVersion: 2
@@ -3144,7 +3136,6 @@ MonoBehaviour:
   <Cost>k__BackingField: 95
   <Icon>k__BackingField: {fileID: 21300000, guid: 0db1b0f20d4d91445bca35a8ddd540e7, type: 3}
   <TrapPosition>k__BackingField: 2
-  <PreviewPrefab>k__BackingField: {fileID: 6698504682365999681, guid: 566d992b48df9f6439f36fbe6a6ce5b2, type: 3}
   <TrapPreview>k__BackingField: {fileID: 8595738988457357300}
   _socketLayer:
     serializedVersion: 2
