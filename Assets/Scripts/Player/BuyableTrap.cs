@@ -21,7 +21,7 @@ public class BuyableTrap : Item
 
         TrapPreview.gameObject.SetActive(true);
 
-        TrapPreview.transform.SetPositionAndRotation(activeSocket.transform.position, activeSocket.transform.rotation);
+        TrapPreview.transform.SetPositionAndRotation(activeSocket.transform.position, TrapPreview.GetRotation(activeSocket.transform.rotation));
 
         if(TrapPreview.SocketPoints.Length == 0) { return true; }
 
@@ -31,19 +31,19 @@ public class BuyableTrap : Item
             {
                 if(hitInfo.collider.TryGetComponent(out TrapSocket socket))
                 {
-                    if(socket.HasTrap) { DisableTrapPreview(); return false; }
-                    if(socket.IsBlocked) { DisableTrapPreview(); return false; }
-                    if(socket.SocketPosition != TrapPosition) { DisableTrapPreview(); return false; }
+                    if(socket.HasTrap) { TrapPreview.SetMaterials(false); return false; }
+                    if(socket.IsBlocked) { TrapPreview.SetMaterials(false); return false; }
+                    if(socket.SocketPosition != TrapPosition) { TrapPreview.SetMaterials(false); return false; }
                 }
                 else
                 {
-                    DisableTrapPreview();
+                    TrapPreview.SetMaterials(false);
                     return false;
                 }
             }
             else
             {
-                DisableTrapPreview();
+                TrapPreview.SetMaterials(false);
                 return false;
             }
         }
@@ -62,6 +62,12 @@ public class BuyableTrap : Item
     public void CompletePurchase(TrapSocket activeSocket)
     {
         DisableTrapPreview();
-        activeSocket.PlaceTrap(_trapPrefab, Cost);
+        activeSocket.PlaceTrap(_trapPrefab, Cost, TrapPreview.transform.rotation);
+    }
+
+    public override void SecondaryAction()
+    {
+        base.SecondaryAction();
+        TrapPreview.SetRotation();
     }
 }

@@ -88,6 +88,11 @@ MonoBehaviour:
   _renderers:
   - {fileID: 4999884411353797388}
   _rangeIndicator: {fileID: 1525557458557479484}
+  _buyColor: {r: 0, g: 1, b: 0, a: 1}
+  _poorColor: {r: 1, g: 0, b: 0, a: 1}
+  _rotations:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 1, z: 0, w: -0.00000004371139}
 --- !u!1 &1525557458557479484
 GameObject:
   m_ObjectHideFlags: 0

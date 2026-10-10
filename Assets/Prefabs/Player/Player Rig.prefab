@@ -1020,8 +1020,6 @@ MonoBehaviour:
   _socketLayer:
     serializedVersion: 2
     m_Bits: 4352
-  _buyColor: {r: 0, g: 1, b: 0, a: 1}
-  _poorColor: {r: 1, g: 0, b: 0, a: 1}
   _ballModel: {fileID: 3137276085842704938}
   _audioSource: {fileID: 3988781548349033303}
   _attackSFX: {fileID: 8300000, guid: 0bb73594864814e46929def58bd4cce5, type: 3}
@@ -2993,7 +2991,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 218938578057253077}
-  - {fileID: 659045328373355335}
   m_Father: {fileID: 3731261836584538087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6800991164446249515
@@ -3329,72 +3326,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0037829727, y: -0.18132493, z: 0.040796906}
     m_Extent: {x: 0.38248807, y: 1.034275, z: 0.5481986}
   m_DirtyAABB: 0
---- !u!1001 &590348052757626492
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 5999598103352603835}
-    m_Modifications:
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1079782282500255779, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_Name
-      value: Boulder Trap Preview
-      objectReference: {fileID: 0}
-    - target: {fileID: 1079782282500255779, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
---- !u!4 &659045328373355335 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 77740218473852219, guid: c3b717be4e26d464aab186eea6aa6e49, type: 3}
-  m_PrefabInstance: {fileID: 590348052757626492}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1131651436205792491
 PrefabInstance:
   m_ObjectHideFlags: 0

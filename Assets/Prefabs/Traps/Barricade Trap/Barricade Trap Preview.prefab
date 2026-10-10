@@ -230,3 +230,7 @@ MonoBehaviour:
   _renderers:
   - {fileID: 5508895346725891868}
   _rangeIndicator: {fileID: 906216955702648150}
+  _buyColor: {r: 0, g: 1, b: 0, a: 1}
+  _poorColor: {r: 1, g: 0, b: 0, a: 1}
+  _rotations:
+  - {x: 0, y: 0, z: 0, w: 0}

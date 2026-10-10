@@ -46,9 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf371dad68c98047b1d25bf69bc11e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrapPreview
+  <SocketPoints>k__BackingField: []
   _renderers:
   - {fileID: 7252956252067233496}
   _rangeIndicator: {fileID: 3995167944696150002}
+  _buyColor: {r: 0, g: 1, b: 0, a: 1}
+  _poorColor: {r: 1, g: 0, b: 0, a: 1}
+  _rotations:
+  - {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3995167944696150002
 GameObject:
   m_ObjectHideFlags: 0

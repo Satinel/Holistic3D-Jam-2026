@@ -14,12 +14,12 @@ public class TrapSocket : MonoBehaviour
     HashSet<SocketBlocker> _socketBlockers = new();
     public bool IsBlocked => _socketBlockers.Count > 0;
 
-    public void PlaceTrap(Trap trapPrefab, int trapPrice)
+    public void PlaceTrap(Trap trapPrefab, int trapPrice, Quaternion rotation)
     {
         if(HasTrap) { return; }
 
         HasTrap = true;
-        _placedTrap = Instantiate(trapPrefab, transform.position, transform.rotation, transform);
+        _placedTrap = Instantiate(trapPrefab, transform.position, rotation, transform);
         _placedTrap.Initialize(trapPrice, this);
     }
 

@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] Item[] _items;
     [SerializeField] LayerMask _socketLayer;
-    [SerializeField] Color _buyColor = Color.green, _poorColor = Color.red;
     [SerializeField] GameObject _ballModel;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioClip _attackSFX, _placeTrapSFX, _sellTrapSFX, _hurtSFX;
@@ -269,15 +268,8 @@ public class PlayerController : MonoBehaviour
                     OnCanSellTrap?.Invoke(_canSellTrap);
                     _canBuyTrap = _wallet.CanAfford(_activeTrap.Cost);
 
-                    if(_canBuyTrap)
-                    {
-                        _activeTrap.TrapPreview.SetMaterials(_buyColor);
-                    }
-                    else
-                    {
-                        _activeTrap.TrapPreview.SetMaterials(_poorColor);
-                    }
-                    _activeTrap.TrapPreview.ShowRange(_canBuyTrap);
+                    _activeTrap.TrapPreview.SetMaterials(_canBuyTrap);
+
                     return;
                 }
 
@@ -409,8 +401,8 @@ public class PlayerController : MonoBehaviour
         if(!_activeItem.IsTrap)
         {
             RotateModelInstantly();
-            _activeItem.SecondaryAction();
         }
+        _activeItem.SecondaryAction();
     }
 
     void InputManager_OnSprintHeld(bool isHeld)
