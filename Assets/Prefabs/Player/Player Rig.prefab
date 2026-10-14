@@ -1964,6 +1964,7 @@ Transform:
   - {fileID: 408720742180844048}
   - {fileID: 3929948620632029675}
   - {fileID: 4833179101875840291}
+  - {fileID: 6418179438609980062}
   m_Father: {fileID: 7278810624925462545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4807773708274420016
@@ -3108,6 +3109,60 @@ Transform:
   - {fileID: 6176633150666897755}
   m_Father: {fileID: 4416925110946384774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8722776579053008618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6418179438609980062}
+  - component: {fileID: 5922330571458616972}
+  m_Layer: 0
+  m_Name: Squish Trap Buyable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6418179438609980062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8722776579053008618}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 787962654554530757}
+  m_Father: {fileID: 3731261836584538087}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5922330571458616972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8722776579053008618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+  <IsTrap>k__BackingField: 1
+  <Cost>k__BackingField: 100
+  <Icon>k__BackingField: {fileID: 21300000, guid: 7c037eed7acb05845b58d1e4f220b6f8, type: 3}
+  <TrapPosition>k__BackingField: 0
+  <TrapPreview>k__BackingField: {fileID: 2589178795707372800}
+  _socketLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _trapPrefab: {fileID: 7378384239952339090, guid: d10156f13e825e347b4d68d860f9c80a, type: 3}
 --- !u!1 &8746708747369551633
 GameObject:
   m_ObjectHideFlags: 0
@@ -3627,6 +3682,83 @@ Transform:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6698504682365999681, guid: 566d992b48df9f6439f36fbe6a6ce5b2, type: 3}
   m_PrefabInstance: {fileID: 3152499492319573429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf371dad68c98047b1d25bf69bc11e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrapPreview
+--- !u!1001 &3773117664660923961
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6418179438609980062}
+    m_Modifications:
+    - target: {fileID: 4181882122987973882, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_Name
+      value: Squish Trap Preview
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181882122987973882, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+--- !u!4 &787962654554530757 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4518141057227195900, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+  m_PrefabInstance: {fileID: 3773117664660923961}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2589178795707372800 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7515853688993139911, guid: 917c57b3b4f49324db9199dd017686be, type: 3}
+  m_PrefabInstance: {fileID: 3773117664660923961}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
