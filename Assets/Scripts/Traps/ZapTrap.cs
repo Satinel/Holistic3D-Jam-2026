@@ -3,9 +3,14 @@ using UnityEngine;
 
 public class ZapTrap : Trap
 {
+    [SerializeField] MeshRenderer _modelRenderer;
+
+    [SerializeField][ColorUsage(showAlpha:true, hdr:true)] Color _activeColor = Color.cyan, _unpoweredColor = Color.black;
     readonly HashSet<Enemy> _enemies = new();
     float _timer;
-    bool _isActive = true;
+    bool _isActive = true, _isBright;
+
+    static readonly int EMISSION_COLOR_ID = Shader.PropertyToID("_EmissionColor");
 
     void OnEnable()
     {
@@ -55,24 +60,70 @@ public class ZapTrap : Trap
 
     void Update()
     {
-        if(!_isActive) { return; }
+        if(!_isActive)
+        {
+            if(_isBright)
+            {
+                SetCoilMaterial(false);
+            }
+            return;
+        }
+
         if(_timer < RechargeTime)
         {
             _timer += Time.deltaTime;
+            if(_isBright && _enemies.Count <= 0)
+            {
+                SetCoilMaterial(false);
+            }
         }
         else
         {
-            if(_enemies.Count <= 0) { return; }
+            if(_enemies.Count <= 0)
+            {
+                if(_isBright)
+                {
+                    SetCoilMaterial(false);
+                }
+                return;
+            }
 
             _timer -= RechargeTime;
-            foreach(Enemy enemy in _enemies)
-            {
-                if(!enemy || enemy.EnemyHealth.IsDead) { continue; }
+            bool hasTarget = false;
+            HashSet<Enemy> _currentEnemies = new(_enemies);
 
-                enemy.EnemyHealth.LoseHealth(Damage);
+            foreach(Enemy enemy in _currentEnemies)
+            {
+                if(!enemy || enemy.EnemyHealth.IsDead)
+                {
+                    _enemies.Remove(enemy);
+                }
+                else
+                {
+                    enemy.EnemyHealth.LoseHealth(Damage);
+                    hasTarget = true;
+                }
             }
-            _audioSource.Play();
+
+            if(hasTarget)
+            {
+                _audioSource.Play();
+            }
+            if(!_isBright && hasTarget)
+            {
+                SetCoilMaterial(true);
+            }
         }
+    }
+
+    public void SetCoilMaterial(bool isBright)
+    {
+        _isBright = isBright;
+        MaterialPropertyBlock mpb = new();
+        _modelRenderer.GetPropertyBlock(mpb, 2);
+        Color color = isBright ? _activeColor : _unpoweredColor;
+        mpb.SetColor(EMISSION_COLOR_ID, color);
+        _modelRenderer.SetPropertyBlock(mpb, 2);
     }
 
     void Enemy_OnAnyEnemyDestroyed(Enemy enemy)

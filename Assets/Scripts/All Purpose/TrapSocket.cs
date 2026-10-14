@@ -11,7 +11,7 @@ public class TrapSocket : MonoBehaviour
     public bool HasTrap { get; private set; }
     Trap _placedTrap = null;
     SocketBlocker _firstSocketBlocker = null;
-    HashSet<SocketBlocker> _socketBlockers = new();
+    readonly HashSet<SocketBlocker> _socketBlockers = new();
     public bool IsBlocked => _socketBlockers.Count > 0;
 
     public void PlaceTrap(Trap trapPrefab, int trapPrice, Quaternion rotation)
