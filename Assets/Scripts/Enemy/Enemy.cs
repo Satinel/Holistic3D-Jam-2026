@@ -32,9 +32,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] NavMeshAgent _navAgent;
     Vector3 _desiredVelocity = new();
 
-    bool _isRagdolled, _isCrushed, _isAttacking;
+    bool _isRagdolled, _isCrushed, _isSquished, _isAttacking;
     float _currentMoveSpeed, _defaultMoveSpeed, _slowMoveSpeed;
-    float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY, _stuckTimer;
+    float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY, _squishedTimer, _startingScaleX, _stuckTimer;
     Transform _destination, _deferredDestination;
     BarricadeTrap _targetBarricade;
     Health _playerHealth;
@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
         _currentMoveSpeed = _defaultMoveSpeed;
         _slowMoveSpeed = _moveSpeed * 0.5f;
         _startingScaleY = _ragdollModel.transform.localScale.y;
+        _startingScaleX = _ragdollModel.transform.localScale.x;
 
         _navAgent.updatePosition = false;
 
@@ -95,7 +96,7 @@ public class Enemy : MonoBehaviour
     {
         if(!_navAgent.enabled || !_navAgent.isOnNavMesh) { return; }
 
-        _navAgent.isStopped = _isRagdolled || _isCrushed || _isAttacking;
+        _navAgent.isStopped = _isRagdolled || _isCrushed || _isSquished || _isAttacking;
 
         Vector3 currentVelocity = _mainRigidbody.linearVelocity;
         currentVelocity.y = 0f;
@@ -128,6 +129,16 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        if(_isSquished)
+        {
+            _squishedTimer -= Time.deltaTime;
+
+            if(_squishedTimer <= 0)
+            {
+                RecoverFromSquished();
+            }
+        }
+
         if(_playerHealth && _isAttacking)
         {
             RotateTowardDestination(_playerHealth.AttackTargetPoint);
@@ -156,7 +167,7 @@ public class Enemy : MonoBehaviour
         accel = Vector3.ClampMagnitude(accel, _acceleration);
         _mainRigidbody.AddForce(accel, ForceMode.Acceleration);
 
-        if(!_isRagdolled && !_isCrushed && !_isAttacking && _mainRigidbody.linearVelocity.sqrMagnitude < 0.25f)
+        if(!_isRagdolled && !_isCrushed && !_isSquished && !_isAttacking && _mainRigidbody.linearVelocity.sqrMagnitude < 0.25f)
         {
             _stuckTimer += Time.deltaTime;
             if(_stuckTimer > _stuckCheckTime)
@@ -330,7 +341,7 @@ public class Enemy : MonoBehaviour
         _mainCollider.enabled = true;
         _mainRigidbody.isKinematic = false;
 
-        if(!_isCrushed)
+        if(!_isCrushed && !_isSquished)
         {
             _animator.enabled = true;
             _playerDetector.ToggleActive(true);
@@ -351,6 +362,7 @@ public class Enemy : MonoBehaviour
             {
                 BreakArmor();
             }
+            return;
         }
         if(_isAttacking)
         {
@@ -361,7 +373,7 @@ public class Enemy : MonoBehaviour
         if(_isRagdolled) { return; }
 
         _animator.enabled = false;
-        _crushedTimer = duration;
+        _crushedTimer = _crushedTimer < duration ? duration : _crushedTimer;
         _ragdollModel.transform.localScale = new(_ragdollModel.transform.localScale.x, newScaleY, _ragdollModel.transform.localScale.z);
         _isCrushed = true;
     }
@@ -372,7 +384,45 @@ public class Enemy : MonoBehaviour
         _ragdollModel.transform.localScale = new(_ragdollModel.transform.localScale.x, _startingScaleY, _ragdollModel.transform.localScale.z);
         // TODO : Maybe play Pop sound effect from 2D Princess here
         _isCrushed = false;
-        if(!_isRagdolled)
+        if(!_isRagdolled && !_isSquished)
+        {
+            _animator.enabled = true;
+            _playerDetector.ToggleActive(true);
+        }
+    }
+
+    public void Squish(float newScaleX, float duration)
+    {
+        if(_ragdollResist > 0)
+        {
+            _ragdollResist--;
+            if(_ragdollResist == 0)
+            {
+                BreakArmor();
+            }
+            return;
+        }
+        if(_isAttacking)
+        {
+            _playerDetector.ToggleActive(false);
+            StopAttack();
+        }
+
+        if(_isRagdolled) { return; }
+
+        _animator.enabled = false;
+        _squishedTimer = _squishedTimer < duration ? duration : _squishedTimer;
+        _ragdollModel.transform.localScale = new(newScaleX, _ragdollModel.transform.localScale.y, _ragdollModel.transform.localScale.z);
+        _isSquished = true;
+    }
+
+    void RecoverFromSquished()
+    {
+        RecoverFromSlow();
+        _ragdollModel.transform.localScale = new(_startingScaleX, _ragdollModel.transform.localScale.y, _ragdollModel.transform.localScale.z);
+        // TODO : Maybe play Pop sound effect from 2D Princess here
+        _isSquished = false;
+        if(!_isRagdolled && !_isCrushed)
         {
             _animator.enabled = true;
             _playerDetector.ToggleActive(true);
@@ -508,7 +558,7 @@ public class Enemy : MonoBehaviour
 
     public void StartAttack(Health playerHealth)
     {
-        if(_isRagdolled || _isCrushed || _isAttacking) { return; }
+        if(_isRagdolled || _isCrushed || _isSquished || _isAttacking) { return; }
 
         _navAgent.enabled = false;
         _playerHealth = playerHealth;
