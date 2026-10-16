@@ -3156,7 +3156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <Cost>k__BackingField: 35
-  <Icon>k__BackingField: {fileID: 21300000, guid: 7c037eed7acb05845b58d1e4f220b6f8, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: b973c70108cc38746b1a1ad251d9c1db, type: 3}
   <TrapPosition>k__BackingField: 0
   <TrapPreview>k__BackingField: {fileID: 2589178795707372800}
   _socketLayer:
