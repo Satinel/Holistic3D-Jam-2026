@@ -7,6 +7,7 @@ public class BuyableTrap : Item
     
     [SerializeField] LayerMask _socketLayer;
     [SerializeField] Trap _trapPrefab;
+    [SerializeField] float _maxRaycastDistance = 0.25f;
 
     void Awake()
     {
@@ -27,7 +28,7 @@ public class BuyableTrap : Item
 
         foreach(Transform point in TrapPreview.SocketPoints)
         {
-            if(Physics.Raycast(point.position, point.forward, out RaycastHit hitInfo, 0.5f, _socketLayer, QueryTriggerInteraction.Collide))
+            if(Physics.Raycast(point.position, point.forward, out RaycastHit hitInfo, _maxRaycastDistance, _socketLayer, QueryTriggerInteraction.Collide))
             {
                 if(hitInfo.collider.TryGetComponent(out TrapSocket socket))
                 {
