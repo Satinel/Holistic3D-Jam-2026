@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
     Vector3 _desiredVelocity = new();
 
     bool _isRagdolled, _isCrushed, _isSquished, _isAttacking;
+    int _waypointIndex = 0;
     float _currentMoveSpeed, _defaultMoveSpeed, _slowMoveSpeed;
     float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY, _squishedTimer, _startingScaleX, _stuckTimer;
     Transform _destination, _deferredDestination;
@@ -458,7 +459,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void SetDestination(Transform destination)
+    public void SetCore(Core core)
+    {
+        _core = core;
+    }
+
+    public void SetWaypointIndex(int index)
+    {
+        _waypointIndex = index;
+    }
+
+    public void SetWaypointDestination(Transform[] waypointPositions)
+    {
+        if(waypointPositions.Length <= 0) { return; }
+
+        int index = _waypointIndex % waypointPositions.Length;
+
+        SetDestination(waypointPositions[index]);
+    }
+
+    void SetDestination(Transform destination)
     {
         if(!destination) { return; }
 
@@ -473,11 +493,6 @@ public class Enemy : MonoBehaviour
         {
             _navAgent.destination = _destination.position;
         }
-    }
-
-    public void SetCore(Core core)
-    {
-        _core = core;
     }
 
     public void SetTargetBarricade(BarricadeTrap barricade, Transform attackPoint)

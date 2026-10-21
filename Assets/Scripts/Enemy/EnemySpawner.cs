@@ -94,6 +94,7 @@ public class EnemySpawner : MonoBehaviour
             Enemy enemy = Instantiate(_waves[_waveIndex].Enemies[_enemyIndex], _spawnPoints[Random.Range(0, _spawnPoints.Length)].position, transform.rotation, transform);
             _spawnedEnemies.Add(enemy);
             enemy.SetCore(_core);
+            enemy.SetWaypointIndex(_enemyIndex % _spawnPoints.Length);
             if(_targetBarricade && _barricadeAttackPoint)
             {
                 enemy.SetTargetBarricade(_targetBarricade, _barricadeAttackPoint);
