@@ -60,10 +60,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner Waypoint
       objectReference: {fileID: 0}
-    - target: {fileID: 6673769455904282922, guid: f83ca56b48c1a654abf9efeb60642861, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6879944862636332349, guid: f83ca56b48c1a654abf9efeb60642861, type: 3}
       propertyPath: m_Size.z
       value: 4

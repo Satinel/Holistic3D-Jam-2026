@@ -7,7 +7,7 @@ public class Core : MonoBehaviour
     public static event Action OnCoreValueLowered;
     public static event Action OnCoreDestroyed;
 
-    [SerializeField] int _maxCharge;
+    [SerializeField] int _maxCharge, _playerDeathPenalty = 5;
     [SerializeField] float _enemyDestructionDelay = 1.25f;
     [SerializeField] Collider _collider;
     [SerializeField] AudioSource _audioSource;
@@ -68,6 +68,6 @@ public class Core : MonoBehaviour
     {
         if(!health.IsPlayer) { return; }
 
-        LowerCoreCharge(5); // Note : 5 is arbitrary but probably fine, if the player even CAN die by jam time
+        LowerCoreCharge(_playerDeathPenalty);
     }
 }
