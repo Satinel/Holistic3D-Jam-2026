@@ -361,7 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   <LanePositions>k__BackingField:
   - {fileID: 2961588716900524736}
-  _nextWaypoint: {fileID: 3830734534381951863}
+  _nextWaypoint: {fileID: 0}
 --- !u!82 &1565645100680979073
 AudioSource:
   m_ObjectHideFlags: 0

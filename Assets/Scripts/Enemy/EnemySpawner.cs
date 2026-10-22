@@ -91,10 +91,11 @@ public class EnemySpawner : MonoBehaviour
 
         if(_enemyIndex < _waves[_waveIndex].Enemies.Length)
         {
-            Enemy enemy = Instantiate(_waves[_waveIndex].Enemies[_enemyIndex], _spawnPoints[Random.Range(0, _spawnPoints.Length)].position, transform.rotation, transform);
+            int index = _enemyIndex % _spawnPoints.Length;
+            Enemy enemy = Instantiate(_waves[_waveIndex].Enemies[_enemyIndex], _spawnPoints[index].position, transform.rotation, transform);
             _spawnedEnemies.Add(enemy);
             enemy.SetCore(_core);
-            enemy.SetWaypointIndex(_enemyIndex % _spawnPoints.Length);
+            enemy.SetWaypointIndex(index);
             if(_targetBarricade && _barricadeAttackPoint)
             {
                 enemy.SetTargetBarricade(_targetBarricade, _barricadeAttackPoint);
