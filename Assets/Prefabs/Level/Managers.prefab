@@ -597,7 +597,7 @@ MonoBehaviour:
   _spawners:
   - {fileID: 0}
   _waveRewards: f401000058020000ee02000020030000520300006b03000084030000
-  _newGamePlusSO: {fileID: 0}
+  _newGamePlusSO: {fileID: 11400000, guid: 9e93d00d3882cda49b30f969b4884297, type: 2}
 --- !u!1 &2528592373014503050
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,6 +1587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9400c3ebef839d34590149ac43356fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimescaleManager
+  _increasedTimeScale: 2
 --- !u!1 &7031008792414760926
 GameObject:
   m_ObjectHideFlags: 0

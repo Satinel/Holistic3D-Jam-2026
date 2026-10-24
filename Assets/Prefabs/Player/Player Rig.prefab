@@ -274,6 +274,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 682871791018129253, guid: 0f62b7b276ef2aa48b1048be032a0a79, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &727712967167794444
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +617,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 429749477939662534, guid: 21a2bd5cc6bc5e849b2f0f4988f64c8e, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &1700470819044464327
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +643,7 @@ Transform:
   m_GameObject: {fileID: 1700470819044464327}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0.25}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -860,6 +862,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 3154503559914260140, guid: a52a8c7651f41b242bc5704444ca7b9d, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &1947754627779257413
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +917,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 3840993093556309465, guid: bb1a40affdf0b1e45ad2cb4142c406cb, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &2020367325111526498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2107,7 +2111,7 @@ GameObject:
   - component: {fileID: 2264376328042916735}
   - component: {fileID: 5655566831911952000}
   m_Layer: 0
-  m_Name: Shove Item
+  m_Name: Shove Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2420,6 +2424,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 7374095726659422914, guid: 3fb0bd66527b9d542963219d82303ebe, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &6069965557136231489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,6 +2479,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 1156799813800213701, guid: 6b05fcdbf2d7d584ba22885e971a40ea, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &6203236494954808939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,6 +2600,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 6494159935889270551, guid: a54ecd689fa70ac469d947617a06acca, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &6422858976182278653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,6 +2655,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 4994454167024305095, guid: 2a7f49135c858bb428695c1e3653508e, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &6704816734405270306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3015,6 +3023,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 2729675723834400625, guid: 66476116611a59248a74e571912e6b2d, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &8345620480429685382
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,6 +3172,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 7378384239952339090, guid: d10156f13e825e347b4d68d860f9c80a, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &8746708747369551633
 GameObject:
   m_ObjectHideFlags: 0
@@ -3249,6 +3259,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _trapPrefab: {fileID: 9089455552382710355, guid: 329b38d4742d9654ba99ba0cd5236ed2, type: 3}
+  _maxRaycastDistance: 0.25
 --- !u!1 &8941446757197666240
 GameObject:
   m_ObjectHideFlags: 0

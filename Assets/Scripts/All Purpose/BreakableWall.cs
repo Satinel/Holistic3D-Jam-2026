@@ -13,7 +13,7 @@ public class BreakableWall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag(Trap.ENEMY_TAG) || collision.gameObject.CompareTag(RAGDOLL_TAG))
+        if(collision.gameObject.CompareTag(RAGDOLL_TAG))
         {
             _collider.enabled = false;
             _baseModel.SetActive(false);
