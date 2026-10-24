@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public static event Action<Enemy> OnAnyEnemySpawned, OnAnyEnemyDestroyed;
+    public static event Action<Enemy> OnAnyEnemySpawned, OnAnyEnemyDestroyed, OnAnyEnemyColliderDisabled;
     public static event Action OnBossSpawned;
 
     [field:SerializeField] public int CoreValue { get; private set; } = 1;
@@ -246,6 +246,7 @@ public class Enemy : MonoBehaviour
         _isRagdolled = true;
         _animator.enabled = false;
         _mainCollider.enabled = false;
+        OnAnyEnemyColliderDisabled?.Invoke(this);
         _mainRigidbody.isKinematic = true;
         _navAgent.enabled = false;
 
@@ -304,6 +305,7 @@ public class Enemy : MonoBehaviour
         _isRagdolled = true;
         _animator.enabled = false;
         _mainCollider.enabled = false;
+        OnAnyEnemyColliderDisabled?.Invoke(this);
         _mainRigidbody.isKinematic = true;
         _navAgent.enabled = false;
 
@@ -330,6 +332,7 @@ public class Enemy : MonoBehaviour
         {
             collider.enabled = false;
         }
+        OnAnyEnemyColliderDisabled?.Invoke(this);
         _mainRigidbody.position = ragdollPosition;
 
         _navAgent.enabled = true;

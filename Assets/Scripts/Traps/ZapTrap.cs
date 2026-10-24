@@ -7,7 +7,7 @@ public class ZapTrap : Trap
 
     [SerializeField][ColorUsage(showAlpha:true, hdr:true)] Color _activeColor = Color.cyan, _unpoweredColor = Color.black;
     readonly HashSet<Enemy> _enemies = new();
-    float _timer;
+    float _timer = Mathf.Infinity;
     bool _isActive = true, _isBright;
 
     static readonly int EMISSION_COLOR_ID = Shader.PropertyToID("_EmissionColor");
@@ -16,12 +16,14 @@ public class ZapTrap : Trap
     {
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
         Enemy.OnAnyEnemyDestroyed += Enemy_OnAnyEnemyDestroyed;
+        Enemy.OnAnyEnemyColliderDisabled += Enemy_OnAnyEnemyColliderDisabled;
     }
 
     void OnDisable()
     {
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
         Enemy.OnAnyEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
+        Enemy.OnAnyEnemyColliderDisabled -= Enemy_OnAnyEnemyColliderDisabled;
     }
 
     void OnTriggerEnter(Collider other)
@@ -60,35 +62,22 @@ public class ZapTrap : Trap
 
     void Update()
     {
-        if(!_isActive)
+        if(!_isActive) { return; }
+
+        if(_enemies.Count <= 0)
         {
             if(_isBright)
             {
                 SetCoilMaterial(false);
             }
-            return;
         }
 
         if(_timer < RechargeTime)
         {
             _timer += Time.deltaTime;
-            if(_isBright && _enemies.Count <= 0)
-            {
-                SetCoilMaterial(false);
-            }
         }
-        else
+        else if(_enemies.Count > 0)
         {
-            if(_enemies.Count <= 0)
-            {
-                if(_isBright)
-                {
-                    SetCoilMaterial(false);
-                }
-                return;
-            }
-
-            _timer -= RechargeTime;
             bool hasTarget = false;
             HashSet<Enemy> _currentEnemies = new(_enemies);
 
@@ -107,11 +96,11 @@ public class ZapTrap : Trap
 
             if(hasTarget)
             {
+                _timer = 0;
+
                 _audioSource.Play();
-            }
-            if(!_isBright && hasTarget)
-            {
-                SetCoilMaterial(true);
+
+                if(!_isBright) { SetCoilMaterial(true); }
             }
         }
     }
@@ -131,8 +120,14 @@ public class ZapTrap : Trap
         _enemies.Remove(enemy);
     }
 
+    void Enemy_OnAnyEnemyColliderDisabled(Enemy enemy)
+    {
+        _enemies.Remove(enemy);
+    }
+
     void LevelManager_OnWaveCompleted(int index, int rewards)
     {
+        if(_isBright) { SetCoilMaterial(false); }
         _isActive = false;
     }
 
