@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
-  <Cost>k__BackingField: 125
+  <Cost>k__BackingField: 150
   <Icon>k__BackingField: {fileID: 21300000, guid: 94bb1f7a6e97de74e887ba924bc4461b, type: 3}
   <TrapPosition>k__BackingField: 1
   <TrapPreview>k__BackingField: {fileID: 7606190215711388006}
@@ -854,7 +854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
-  <Cost>k__BackingField: 150
+  <Cost>k__BackingField: 175
   <Icon>k__BackingField: {fileID: 21300000, guid: df83bace063cc6349986d79a27ddd541, type: 3}
   <TrapPosition>k__BackingField: 2
   <TrapPreview>k__BackingField: {fileID: 1988872182997882006}
@@ -3015,7 +3015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
-  <Cost>k__BackingField: 275
+  <Cost>k__BackingField: 250
   <Icon>k__BackingField: {fileID: 21300000, guid: c093fd0707a9a0048a7a868935ef0bbe, type: 3}
   <TrapPosition>k__BackingField: 0
   <TrapPreview>k__BackingField: {fileID: 185545421809836792}
@@ -3251,7 +3251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
-  <Cost>k__BackingField: 95
+  <Cost>k__BackingField: 120
   <Icon>k__BackingField: {fileID: 21300000, guid: 0db1b0f20d4d91445bca35a8ddd540e7, type: 3}
   <TrapPosition>k__BackingField: 2
   <TrapPreview>k__BackingField: {fileID: 8595738988457357300}

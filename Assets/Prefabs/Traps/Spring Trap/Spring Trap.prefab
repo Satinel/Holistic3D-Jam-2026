@@ -827,11 +827,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a33f9c4139aa84f8984ef1cf46f7d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpringTrap
-  <SellPrice>k__BackingField: 100
   <RangeRenderer>k__BackingField: {fileID: 6266070007179462890}
   <HighlightModel>k__BackingField: {fileID: 2112606744153770705}
   <RechargeTime>k__BackingField: 3.15
-  <Damage>k__BackingField: 25
+  <Damage>k__BackingField: 22
   <RagdollDuration>k__BackingField: 1.75
   <ForceMode>k__BackingField: 1
   _animator: {fileID: 2961309112882066762}

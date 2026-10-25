@@ -373,11 +373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1920a4f4956712449adc8b80fe88c890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZapTrap
-  <SellPrice>k__BackingField: 95
   <RangeRenderer>k__BackingField: {fileID: 5069375447695423446}
   <HighlightModel>k__BackingField: {fileID: 1828664860852611912}
-  <RechargeTime>k__BackingField: 1.5
-  <Damage>k__BackingField: 15
+  <RechargeTime>k__BackingField: 1.05
+  <Damage>k__BackingField: 10
   <RagdollDuration>k__BackingField: 4.5
   <ForceMode>k__BackingField: 1
   _animator: {fileID: 0}

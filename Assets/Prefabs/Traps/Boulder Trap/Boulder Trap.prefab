@@ -320,11 +320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3646a3d3f5c7946a537962fdb52753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoulderTrap
-  <SellPrice>k__BackingField: 325
   <RangeRenderer>k__BackingField: {fileID: 5011474823631980354}
   <HighlightModel>k__BackingField: {fileID: 3021225003386773909}
   <RechargeTime>k__BackingField: 25
-  <Damage>k__BackingField: 50
+  <Damage>k__BackingField: 75
   <RagdollDuration>k__BackingField: 1.25
   <ForceMode>k__BackingField: 1
   _animator: {fileID: 6333505311747950256}
