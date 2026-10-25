@@ -790,6 +790,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor Tile (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2677525759887451793, guid: f98cdc4b66a67214aab763e95be29178, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2677525759887451793, guid: f98cdc4b66a67214aab763e95be29178, type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3282452494626590370, guid: f98cdc4b66a67214aab763e95be29178, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
