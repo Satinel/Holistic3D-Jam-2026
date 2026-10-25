@@ -3,11 +3,12 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] AudioClip _buildMusic, _waveMusic, _winMusic, _loseMusic, _bossMusic;
+    [SerializeField] AudioClip _buildMusic, _winMusic, _loseMusic;
+    [SerializeField] AudioClip[] _waveSongs;
     [SerializeField] float _clipStartPoint = 0f;
 
     int _clipPausePoint = 0;
-    bool _isPlayingBossMusic;
+    AudioClip _waveMusic;
 
     void Awake()
     {
@@ -18,7 +19,6 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnLevelFailed += LevelManager_OnLevelFailed;
         LevelManager.OnSceneChangeStarted += LevelManager_OnSceneChangeStarted;
         TimescaleManager.OnTimeScaleChanged += TimescaleManager_OnTimeScaleChanged;
-        Enemy.OnBossSpawned += Enemy_OnBossSpawned;
     }
 
     void OnDestroy()
@@ -30,7 +30,11 @@ public class MusicManager : MonoBehaviour
         LevelManager.OnLevelFailed -= LevelManager_OnLevelFailed;
         LevelManager.OnSceneChangeStarted -= LevelManager_OnSceneChangeStarted;
         TimescaleManager.OnTimeScaleChanged -= TimescaleManager_OnTimeScaleChanged;
-        Enemy.OnBossSpawned -= Enemy_OnBossSpawned;
+    }
+
+    void Start()
+    {
+        _waveMusic = _waveSongs[0];
     }
 
     void LevelManager_OnLevelStarted()
@@ -53,13 +57,18 @@ public class MusicManager : MonoBehaviour
         _audioSource.Play();
     }
 
-    void LevelManager_OnWaveCompleted(int obj, int _)
+    void LevelManager_OnWaveCompleted(int waveIndex, int waveRewards)
     {
         _audioSource.Stop();
         _audioSource.clip = _buildMusic;
         _audioSource.timeSamples = _clipPausePoint;
         _audioSource.loop = true;
         _audioSource.Play();
+
+        if(waveIndex < _waveSongs.Length - 1)
+        {
+            _waveMusic = _waveSongs[waveIndex];
+        }
     }
 
     void LevelManager_OnLevelCompleted()
@@ -84,16 +93,5 @@ public class MusicManager : MonoBehaviour
     void TimescaleManager_OnTimeScaleChanged(float speed)
     {
         _audioSource.pitch = speed > 0 ? speed : 1f;
-    }
-
-    void Enemy_OnBossSpawned()
-    {
-        if(_isPlayingBossMusic) { return; }
-
-        _isPlayingBossMusic = true;
-        _audioSource.Stop();
-        _audioSource.clip = _bossMusic;
-        _audioSource.loop = true;
-        _audioSource.Play();
     }
 }

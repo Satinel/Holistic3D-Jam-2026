@@ -5,12 +5,10 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public static event Action<Enemy> OnAnyEnemySpawned, OnAnyEnemyDestroyed, OnAnyEnemyColliderDisabled;
-    public static event Action OnBossSpawned;
 
     [field:SerializeField] public int CoreValue { get; private set; } = 1;
 
     [SerializeField] int _drainDamage = 10, _ragdollResist = 0;
-    [SerializeField] bool _isBoss = false;
     [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f, _destroyDelay = 3f; //_deceleration = 5f;
     [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f, _stuckCheckTime = 1f;
     [SerializeField] LayerMask _trapLayerMask;
@@ -74,11 +72,6 @@ public class Enemy : MonoBehaviour
 
         _navAgent.speed = _currentMoveSpeed;
         _navAgent.acceleration = _acceleration;
-
-        if(_isBoss)
-        {
-            OnBossSpawned?.Invoke();
-        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -576,7 +569,7 @@ public class Enemy : MonoBehaviour
 
     public void StartAttack(Health playerHealth)
     {
-        if(_isRagdolled || _isCrushed || _isSquished || _isAttacking) { return; }
+        if(_isRagdolled || _isCrushed || _isSquished || _isAttacking || _health.IsDead) { return; }
 
         _navAgent.enabled = false;
         _playerHealth = playerHealth;
@@ -596,11 +589,13 @@ public class Enemy : MonoBehaviour
     public void StopAttack()
     {
         _animator.SetBool(ATTACK_HASH, false);
-        _animator.Play(WALKING_NAME_HASH);
         _isAttacking = false;
         _leftBeam.gameObject.SetActive(false);
         _rightBeam.gameObject.SetActive(false);
 
+        if(_health.IsDead) { return; }
+
+        _animator.Play(WALKING_NAME_HASH);
         if(!_isRagdolled)
         {
             _navAgent.enabled = true;
@@ -619,6 +614,8 @@ public class Enemy : MonoBehaviour
 
     void OnDeath()
     {
+        StopAttack();
+
         if(!_isRagdolled && !_isCrushed)
         {
             _animator.SetTrigger(DEATH_HASH);
