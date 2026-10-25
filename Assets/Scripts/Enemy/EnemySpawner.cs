@@ -15,7 +15,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int _activationIndex = 0;
     [SerializeField] Wave[] _waves;
     [SerializeField] Transform[] _spawnPoints;
-    [SerializeField] float _minSpawnTime = 0.35f, _maxSpawnTime = 0.85f;
+    // [SerializeField] float _minSpawnTime = 0.35f, _maxSpawnTime = 0.85f;
+    [SerializeField] float _timeBetweenSpawns = 0.5f;
     [SerializeField] bool _isActive;
     [SerializeField] GameObject _visualsParent;
     [SerializeField] Path _path;
@@ -79,17 +80,11 @@ public class EnemySpawner : MonoBehaviour
         if(!_isActive) { return; }
         if(!_isSpawning) { return; }
 
-        if(_spawnTimer > 0)
+        if(_spawnTimer < _timeBetweenSpawns)
         {
-            _spawnTimer -= Time.deltaTime;
-            return;
+            _spawnTimer += Time.deltaTime;
         }
-        else
-        {
-            _spawnTimer = 0;
-        }
-
-        if(_enemyIndex < _waves[_waveIndex].Enemies.Length)
+        else if(_enemyIndex < _waves[_waveIndex].Enemies.Length)
         {
             int index = _enemyIndex % _spawnPoints.Length;
             Enemy enemy = Instantiate(_waves[_waveIndex].Enemies[_enemyIndex], _spawnPoints[index].position, transform.rotation, transform);
@@ -110,7 +105,7 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                _spawnTimer += Random.Range(_minSpawnTime, _maxSpawnTime);
+                _spawnTimer -= _timeBetweenSpawns;
             }
         }
     }

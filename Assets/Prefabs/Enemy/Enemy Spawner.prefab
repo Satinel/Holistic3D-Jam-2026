@@ -234,8 +234,7 @@ MonoBehaviour:
   - {fileID: 273575858358155153}
   - {fileID: 5327245957179508442}
   - {fileID: 6347672809404365264}
-  _minSpawnTime: 0.75
-  _maxSpawnTime: 1.85
+  _timeBetweenSpawns: 0.5
   _isActive: 1
   _visualsParent: {fileID: 1478145637794341941}
   _path: {fileID: 0}
