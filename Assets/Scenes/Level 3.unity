@@ -6319,13 +6319,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
       propertyPath: _items.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      propertyPath: '_items.Array.data[4]'
+      value: 
+      objectReference: {fileID: 527485788012095056}
+    - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      propertyPath: '_items.Array.data[5]'
+      value: 
+      objectReference: {fileID: 527485788012095055}
+    - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      propertyPath: '_items.Array.data[6]'
+      value: 
+      objectReference: {fileID: 527485788012095054}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+--- !u!114 &527485788012095054 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8178449417334588259, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+  m_PrefabInstance: {fileID: 527485788012095053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+--- !u!114 &527485788012095055 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7952293838711724501, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+  m_PrefabInstance: {fileID: 527485788012095053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
+--- !u!114 &527485788012095056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6800991164446249515, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+  m_PrefabInstance: {fileID: 527485788012095053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914823ec1325f504187a9b6a7b90a6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
 --- !u!1001 &2321929348235871396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7686,6 +7731,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6901256510182897706, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bec2b781220315643ad330d52fa5d736, type: 3}
     - target: {fileID: 7960775587992390462, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7694,6 +7743,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7977849308729031749, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9ad45951f6782b4479c20ced6cd2587d, type: 3}
     - target: {fileID: 7994821610619794618, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
       propertyPath: _waveMusic
       value: 
