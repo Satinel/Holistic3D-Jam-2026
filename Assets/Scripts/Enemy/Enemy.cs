@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [field:SerializeField] public int CoreValue { get; private set; } = 1;
 
     [SerializeField] int _drainDamage = 10, _ragdollResist = 0;
+    [SerializeField] int _waypointOverride = -1;
     [SerializeField] float _moveSpeed = 2.25f, _acceleration = 10f, _turnSpeed = 7.5f, _destroyDelay = 3f; //_deceleration = 5f;
     [SerializeField] float _ragdollRecoveryTime = 2.5f, _falloffFadeOut = 3f, _stuckCheckTime = 1f;
     [SerializeField] LayerMask _trapLayerMask;
@@ -462,7 +463,14 @@ public class Enemy : MonoBehaviour
 
     public void SetWaypointIndex(int index)
     {
-        _waypointIndex = index;
+        if(_waypointOverride > -1)
+        {
+            _waypointIndex = _waypointOverride;
+        }
+        else
+        {
+            _waypointIndex = index;
+        }
     }
 
     public void SetWaypointDestination(Transform[] waypointPositions)

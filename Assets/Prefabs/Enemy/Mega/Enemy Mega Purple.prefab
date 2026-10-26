@@ -190,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: _moveSpeed
-      value: 2
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: _turnSpeed
@@ -202,7 +202,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: _ragdollResist
-      value: 18
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
+      propertyPath: _waypointOverride
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609761779367920086, guid: 90fdd5aa7a927314295688639099b305, type: 3}
+      propertyPath: <CoreValue>k__BackingField
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1679835659061116429, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -462,7 +470,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 247b4dd5ede4aae47807cafb97dae0d5, type: 2}
     - target: {fileID: 4128515336638853484, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: _maxHealth
-      value: 750
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4128515336638853484, guid: 90fdd5aa7a927314295688639099b305, type: 3}
       propertyPath: <MoneyValue>k__BackingField
