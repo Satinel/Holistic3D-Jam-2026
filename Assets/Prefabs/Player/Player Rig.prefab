@@ -995,10 +995,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb020ac7ad5b504e9e412fba07dd259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _moveSpeed: 2.75
+  _moveSpeed: 6
   _backupPenalty: 1
   _rotateSpeed: 0.5
-  _sprintSpeed: 2.5
+  _sprintSpeed: 6.5
   _respawnDelay: 1.25
   _minLookAngle: -65
   _maxLookAngle: 65
