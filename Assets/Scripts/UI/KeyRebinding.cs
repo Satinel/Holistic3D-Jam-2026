@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class KeyRebinding : MonoBehaviour
 {
+    public static event Action OnKeybindsChanged;
+
     [SerializeField] InputActionAsset _inputActions;
     [SerializeField] Canvas _rebindCanvas;
     [SerializeField] RebindActionUI _rebindActionUIPrefab;
@@ -55,7 +57,7 @@ public class KeyRebinding : MonoBehaviour
 
     void InputManager_ReportRebindableActions(InputAction[] rebindableActions)
     {
-        for (int i = 0; i < rebindableActions.Length; i++)
+        for(int i = 0; i < rebindableActions.Length; i++)
         {
             RebindActionUI keyboardRebindUI = Instantiate(_rebindActionUIPrefab, _keyboardBindingsParent);
             keyboardRebindUI.Initialize(this, rebindableActions[i], 0, false);
@@ -250,6 +252,7 @@ public class KeyRebinding : MonoBehaviour
     {
         PlayerPrefs.SetString(OVERRIDES_STRING, _inputActions.SaveBindingOverridesAsJson());
         PlayerPrefs.Save();
+        OnKeybindsChanged?.Invoke();
     }
 
     void LoadOverrides()
@@ -259,6 +262,7 @@ public class KeyRebinding : MonoBehaviour
         if(!string.IsNullOrEmpty(savedOverrides))
         {
             _inputActions.LoadBindingOverridesFromJson(savedOverrides);
+            OnKeybindsChanged?.Invoke();
         }
     }
 

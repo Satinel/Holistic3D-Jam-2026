@@ -597,6 +597,8 @@ MonoBehaviour:
   _spawners:
   - {fileID: 0}
   _waveRewards: f401000058020000ee02000020030000520300006b03000084030000
+  _nextLevelText: {fileID: 1419760925247667534}
+  _restartText: {fileID: 5456030845532769611}
   _newGamePlusSO: {fileID: 11400000, guid: 9e93d00d3882cda49b30f969b4884297, type: 2}
 --- !u!1 &2528592373014503050
 GameObject:
@@ -1418,7 +1420,7 @@ GameObject:
   - component: {fileID: 7217806471698062710}
   - component: {fileID: 5456030845532769611}
   m_Layer: 5
-  m_Name: Next Level Text
+  m_Name: Restart Level Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

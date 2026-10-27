@@ -9,6 +9,7 @@ public class TrapPreview : MonoBehaviour
     [SerializeField] Quaternion[] _rotations;
 
     int _rotationIndex;
+    public bool CanRotate => _rotations.Length > 1;
 
     static readonly int EMISSION_COLOR_ID = Shader.PropertyToID("_EmissionColor");
 

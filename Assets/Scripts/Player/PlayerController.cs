@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public event Action<bool> OnCanSellTrap;
     public event Action<Item[]> ReportTotalItems;
-    public event Action<int> OnActiveItemChanged;
+    public event Action<int, bool> OnActiveItemChanged;
     public event Action OnTooTired;
 
     [SerializeField] float _moveSpeed = 2.5f, _backupPenalty = 1f, _rotateSpeed = 1.5f, _sprintSpeed = 2.5f, _respawnDelay = 1.25f;
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
             ReportTotalItems?.Invoke(_items);
             _activeItem = _items[_itemIndex];
             _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
-            OnActiveItemChanged?.Invoke(_itemIndex);
+            OnActiveItemChanged?.Invoke(_itemIndex, _activeTrap && _activeTrap.TrapPreview.CanRotate);
         }
 
         _inSellMode = true;
@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
         _itemIndex = index;
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
-        OnActiveItemChanged?.Invoke(_itemIndex);
+        OnActiveItemChanged?.Invoke(_itemIndex, _activeTrap && _activeTrap.TrapPreview.CanRotate);
     }
 
     void InputManager_OnMoveAction(Vector2 value)
@@ -459,7 +459,7 @@ public class PlayerController : MonoBehaviour
 
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
-        OnActiveItemChanged?.Invoke(_itemIndex);
+        OnActiveItemChanged?.Invoke(_itemIndex, _activeTrap && _activeTrap.TrapPreview.CanRotate);
     }
 
     void InputManager_OnNextPressed()
@@ -474,7 +474,7 @@ public class PlayerController : MonoBehaviour
 
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
-        OnActiveItemChanged?.Invoke(_itemIndex);
+        OnActiveItemChanged?.Invoke(_itemIndex, _activeTrap && _activeTrap.TrapPreview.CanRotate);
     }
 
     void _myHealth_OnLoseHealth()

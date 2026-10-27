@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
@@ -15,15 +16,18 @@ public class LevelManager : MonoBehaviour
     [SerializeField] Canvas _splashCanvas, _winCanvas, _loseCanvas, _loadCanvas;
     [SerializeField] EnemySpawner[] _spawners;
     [SerializeField] int[] _waveRewards;
+    [SerializeField] TextMeshProUGUI _nextLevelText, _restartText;
     [SerializeField] NewGamePlusSO _newGamePlusSO;
 
     bool _wavesActive, _levelWon, _levelLost, _isLoading = true, _hasStarted, _isInOptions;
     int _waveIndex;
     HashSet<Enemy> _activeEnemies = new();
     IDisposable _eventListener;
+    InputAction _unleashAction;
 
     void Awake()
     {
+        InputManager.ReportUnleashAction += InputManager_ReportUnleashAction;
         InputManager.OnUnleashPressed += InputManager_OnUnleashPressed;
         OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
         OptionsMenu.OnRestartRequested += OptionsMenu_OnRestartRequested;
@@ -34,6 +38,7 @@ public class LevelManager : MonoBehaviour
 
     void OnDestroy()
     {
+        InputManager.ReportUnleashAction -= InputManager_ReportUnleashAction;
         InputManager.OnUnleashPressed -= InputManager_OnUnleashPressed;
         OptionsMenu.OnOptionsCanvasToggled -= OptionsMenu_OnOptionsCanvasToggled;
         OptionsMenu.OnRestartRequested -= OptionsMenu_OnRestartRequested;
@@ -62,6 +67,20 @@ public class LevelManager : MonoBehaviour
         _hasStarted = true;
         _splashCanvas.enabled = false;
         OnLevelStarted?.Invoke();
+    }
+
+    void InputManager_ReportUnleashAction(InputAction unleashAction)
+    {
+        _unleashAction = unleashAction;
+        SetUnleashTexts();
+    }
+
+    void SetUnleashTexts()
+    {
+        int index = 0;  // TODO Set up determining which control scheme is used and set index appropriately (0 for keyboard/mouse and 1 for gamepad)
+        string unleashBind = _unleashAction.GetBindingDisplayString(index, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        _nextLevelText.text = $"Press {unleashBind} For Next Level";
+        _restartText.text = $"Press {unleashBind} To Restart";
     }
 
     void InputManager_OnUnleashPressed()
@@ -162,7 +181,8 @@ public class LevelManager : MonoBehaviour
 
         if(_waveIndex >= _totalWaves)
         {
-            OnLevelCompleted?.Invoke(); // TODO : SFX/Music
+            OnLevelCompleted?.Invoke();
+            SetUnleashTexts();
             _winCanvas.enabled = true;
             _levelWon = true;
         }
@@ -174,7 +194,8 @@ public class LevelManager : MonoBehaviour
 
     void Core_OnCoreDestroyed()
     {
-        OnLevelFailed?.Invoke();    // TODO : SFX/Music
+        OnLevelFailed?.Invoke();
+        SetUnleashTexts();
         _loseCanvas.enabled = true;
         _levelLost = true;
     }

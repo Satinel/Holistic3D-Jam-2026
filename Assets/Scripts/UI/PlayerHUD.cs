@@ -1,18 +1,20 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText, _coreText, _wavesText, _tiredText;
+    [SerializeField] TextMeshProUGUI _unleashText, _rotateText, _sellText;
     [SerializeField] Slider _healthSlider, _manaSlider;
     [SerializeField] PlayerController _player;
     [SerializeField] GameObject[] _icons;
     [SerializeField] Image[] _iconImages;
     [SerializeField] TextMeshProUGUI[] _iconCostTexts;
     [SerializeField] Image[] _iconHighlights;
-    [SerializeField] GameObject _nextWaveMessage, _canSellMessage, _tiredMessage, _newPortalMessage;
+    [SerializeField] GameObject _nextWaveMessage, _canRotateMessage, _canSellMessage, _tiredMessage, _newPortalMessage;
     [SerializeField] Color _trapColor, _baseColor;
     [SerializeField] Image _painVignette;
     [SerializeField] float _tiredAlphaDepletionRate = 0.05f, _painAlphaDepletionRate = 0.025f;
@@ -45,6 +47,7 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
         EnemySpawner.OnAnySpawnerActivated += EnemySpawner_OnAnySpawnerActivated;
+        InputManager.OnKeybindsChanged += InputManager_OnKeybindsChanged;
     }
 
     void OnDestroy()
@@ -62,6 +65,7 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
         EnemySpawner.OnAnySpawnerActivated -= EnemySpawner_OnAnySpawnerActivated;
+        InputManager.OnKeybindsChanged -= InputManager_OnKeybindsChanged;
     }
 
     void Start()
@@ -83,7 +87,7 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
-    void Player_OnActiveItemChanged(int index)
+    void Player_OnActiveItemChanged(int index, bool canRotate)
     {
         if(index >= _iconHighlights.Length) { return; }
 
@@ -93,6 +97,8 @@ public class PlayerHUD : MonoBehaviour
         }
 
         _iconHighlights[index].enabled = true;
+
+        _canRotateMessage.SetActive(canRotate);
     }
 
     void Player_OnCanSellTrap(bool canSell)
@@ -200,5 +206,16 @@ public class PlayerHUD : MonoBehaviour
     void EnemySpawner_OnAnySpawnerActivated()
     {
         _newPortalMessage.SetActive(true);
+    }
+
+    void InputManager_OnKeybindsChanged(InputAction unleashAction, InputAction secondaryAction, InputAction sellAction)
+    {
+        string unleashBind = unleashAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        string secondaryBind = secondaryAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        string sellBind = sellAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+
+        _unleashText.text = $"Press {unleashBind} to Start Wave";
+        _rotateText.text = $"Press {secondaryBind} To Rotate";
+        _sellText.text = $"Press {sellBind} To Sell";
     }
 }
