@@ -665,6 +665,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4708615251701641110}
     m_Modifications:
+    - target: {fileID: 1875393865556430757, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875393865556430757, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3738637742486998933, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
       propertyPath: m_Name
       value: Wall Corner Tile

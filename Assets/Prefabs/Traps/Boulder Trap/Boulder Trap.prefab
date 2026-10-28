@@ -322,8 +322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BoulderTrap
   <RangeRenderer>k__BackingField: {fileID: 5011474823631980354}
   <HighlightModel>k__BackingField: {fileID: 3021225003386773909}
-  <RechargeTime>k__BackingField: 25
-  <Damage>k__BackingField: 75
+  <RechargeTime>k__BackingField: 20
+  <Damage>k__BackingField: 80
   <RagdollDuration>k__BackingField: 1.25
   <ForceMode>k__BackingField: 1
   _animator: {fileID: 6333505311747950256}
@@ -331,7 +331,7 @@ MonoBehaviour:
   _boulderDestroyTime: 2.5
   _forceMultiplyer: 50
   _enemyCrushScale: 0.15
-  _crushDuration: 1.25
+  _crushDuration: 2
   _boulderPrefab: {fileID: 792485374998717890, guid: e258f83250779ab438f5a9433b553ecc, type: 3}
   _spawnPoint: {fileID: 6864667805901096075}
 --- !u!82 &6688649920984246854
