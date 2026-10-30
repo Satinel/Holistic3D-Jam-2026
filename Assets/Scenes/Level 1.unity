@@ -7855,11 +7855,27 @@ PrefabInstance:
     - target: {fileID: 7994821610619794618, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
       propertyPath: _buildMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 5115e6ae52a741e419d7a70a60dd7d52, type: 3}
+      objectReference: {fileID: 8300000, guid: fca181ea02f189243bbededd520b6f3f, type: 3}
     - target: {fileID: 7994821610619794618, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
       propertyPath: _clipStartPoint
-      value: 3.75
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7994821610619794618, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
+      propertyPath: '_waveSongs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a0f46960076998b488d3b772f1feaf9f, type: 3}
+    - target: {fileID: 7994821610619794618, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
+      propertyPath: '_waveSongs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a0f46960076998b488d3b772f1feaf9f, type: 3}
+    - target: {fileID: 7994821610619794618, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
+      propertyPath: '_waveSongs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bcd56cc4c10f41409fb715edc58e1fd, type: 3}
+    - target: {fileID: 7994821610619794618, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
+      propertyPath: '_waveSongs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bcd56cc4c10f41409fb715edc58e1fd, type: 3}
     - target: {fileID: 8626847380948017973, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
