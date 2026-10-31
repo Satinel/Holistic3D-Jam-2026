@@ -1017,10 +1017,13 @@ MonoBehaviour:
   - {fileID: 6391751865453023513}
   - {fileID: 8212515531238699994}
   - {fileID: 4075209143647908865}
-  - {fileID: 8178449417334588259}
+  - {fileID: 6800991164446249515}
   - {fileID: 7952293838711724501}
+  - {fileID: 8178449417334588259}
+  - {fileID: 1103867630575799907}
   - {fileID: 3945681393335931111}
   - {fileID: 5208355875650815327}
+  - {fileID: 1405225523646084951}
   _socketLayer:
     serializedVersion: 2
     m_Bits: 4352
@@ -1136,7 +1139,7 @@ Transform:
   m_GameObject: {fileID: 2470330770946953402}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1682353, y: 0.84979, z: 0.13137555}
+  m_LocalPosition: {x: 0.56000006, y: 1.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1964,8 +1967,8 @@ Transform:
   - {fileID: 5999598103352603835}
   - {fileID: 199585906568999915}
   - {fileID: 7467964109030972216}
-  - {fileID: 827512631339979137}
   - {fileID: 4833179101875840291}
+  - {fileID: 827512631339979137}
   - {fileID: 408720742180844048}
   - {fileID: 3929948620632029675}
   - {fileID: 6418179438609980062}

@@ -78,7 +78,7 @@ public class PlayerHUD : MonoBehaviour
 
     void Player_ReportTotalItems(Item[] items)
     {
-        for(int i = 0; i < items.Length; i++)
+        for(int i = 0; i < _icons.Length; i++)
         {
             _icons[i].SetActive(true);
             _iconImages[i].sprite = items[i].Icon;

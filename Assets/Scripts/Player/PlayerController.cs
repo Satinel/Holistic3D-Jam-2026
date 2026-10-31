@@ -120,6 +120,11 @@ public class PlayerController : MonoBehaviour
             _items = _itemsParent.GetComponentsInChildren<Item>();
         }
 
+        if(_items.Length > 10)
+        {
+            Array.Resize(ref _items, 10);
+        }
+
         if(_items.Length > 0)
         {
             ReportTotalItems?.Invoke(_items);
