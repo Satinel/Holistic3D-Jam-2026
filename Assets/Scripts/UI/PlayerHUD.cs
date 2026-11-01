@@ -34,7 +34,6 @@ public class PlayerHUD : MonoBehaviour
         _playerMana = _player.GetComponent<Mana>();
         _playerWallet = _player.GetComponent<Wallet>();
 
-        _player.ReportTotalItems += Player_ReportTotalItems;
         _player.OnActiveItemChanged += Player_OnActiveItemChanged;
         _player.OnCanSellTrap += Player_OnCanSellTrap;
         _player.OnTooTired += Player_OnTooTired;
@@ -48,11 +47,11 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
         EnemySpawner.OnAnySpawnerActivated += EnemySpawner_OnAnySpawnerActivated;
         InputManager.OnKeybindsChanged += InputManager_OnKeybindsChanged;
+        Inventory.OnLoadoutChanged += Inventory_OnLoadoutChanged;
     }
 
     void OnDestroy()
     {
-        _player.ReportTotalItems -= Player_ReportTotalItems;
         _player.OnActiveItemChanged -= Player_OnActiveItemChanged;
         _player.OnCanSellTrap -= Player_OnCanSellTrap;
         _player.OnTooTired -= Player_OnTooTired;
@@ -66,6 +65,8 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
         EnemySpawner.OnAnySpawnerActivated -= EnemySpawner_OnAnySpawnerActivated;
         InputManager.OnKeybindsChanged -= InputManager_OnKeybindsChanged;
+        Inventory.OnLoadoutChanged -= Inventory_OnLoadoutChanged;
+
     }
 
     void Start()
@@ -76,14 +77,23 @@ public class PlayerHUD : MonoBehaviour
         _painVignette.enabled = false;
     }
 
-    void Player_ReportTotalItems(Item[] items)
+    void Inventory_OnLoadoutChanged(Item[] items)
     {
         for(int i = 0; i < _icons.Length; i++)
         {
-            _icons[i].SetActive(true);
-            _iconImages[i].sprite = items[i].Icon;
-            _iconCostTexts[i].text = items[i].Cost <= 0 ? string.Empty : items[i].Cost.ToString();
-            _iconCostTexts[i].color = items[i].IsTrap ? _trapColor : _baseColor;
+            if(items.Length < i + 1)
+            {
+                _iconImages[i].enabled = false;
+                _iconCostTexts[i].text = string.Empty;
+            }
+            else
+            {
+                _icons[i].SetActive(true);
+                _iconImages[i].enabled = true;
+                _iconImages[i].sprite = items[i].Icon;
+                _iconCostTexts[i].text = items[i].Cost <= 0 ? string.Empty : items[i].Cost.ToString();
+                _iconCostTexts[i].color = items[i].IsTrap ? _trapColor : _baseColor;
+            }
         }
     }
 

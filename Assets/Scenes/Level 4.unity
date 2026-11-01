@@ -16660,6 +16660,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -6.7745285
       objectReference: {fileID: 0}
+    - target: {fileID: 79239246083065277, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
+      propertyPath: _itemSlots
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 231113293417019651, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -17131,10 +17135,6 @@ PrefabInstance:
     - target: {fileID: 8672045736702984706, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -22.180376
-      objectReference: {fileID: 0}
-    - target: {fileID: 8786054174648764059, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
-      propertyPath: _items.Array.size
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8833538193956930783, guid: 0e73838a49320e646a186bc9cf0c9cac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 325
   <Icon>k__BackingField: {fileID: 21300000, guid: 94bb1f7a6e97de74e887ba924bc4461b, type: 3}
   <TrapPosition>k__BackingField: 1
@@ -609,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: cdd15499457998444b18fe5dcc7e683d, type: 3}
   <TrapPosition>k__BackingField: 1
@@ -854,6 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 175
   <Icon>k__BackingField: {fileID: 21300000, guid: df83bace063cc6349986d79a27ddd541, type: 3}
   <TrapPosition>k__BackingField: 2
@@ -909,6 +912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 90
   <Icon>k__BackingField: {fileID: 21300000, guid: f9338bb18de8fa64ca01008b616ed5bc, type: 3}
   <TrapPosition>k__BackingField: 0
@@ -1012,18 +1016,6 @@ MonoBehaviour:
   _myMana: {fileID: 7547382341503483922}
   _wallet: {fileID: 836837881902065178}
   _animator: {fileID: 810511782938214969}
-  _items:
-  - {fileID: 5655566831911952000}
-  - {fileID: 6391751865453023513}
-  - {fileID: 8212515531238699994}
-  - {fileID: 4075209143647908865}
-  - {fileID: 6800991164446249515}
-  - {fileID: 7952293838711724501}
-  - {fileID: 8178449417334588259}
-  - {fileID: 1103867630575799907}
-  - {fileID: 3945681393335931111}
-  - {fileID: 5208355875650815327}
-  - {fileID: 1405225523646084951}
   _socketLayer:
     serializedVersion: 2
     m_Bits: 4352
@@ -1033,8 +1025,6 @@ MonoBehaviour:
   _placeTrapSFX: {fileID: 8300000, guid: a28f6225d763bb5458a77c1ed7e68d37, type: 3}
   _sellTrapSFX: {fileID: 8300000, guid: 261a05ce7528d1746b8db3ee17e8d43f, type: 3}
   _hurtSFX: {fileID: 8300000, guid: 6c9a9ea827fd9b0438200d51d2832164, type: 3}
-  _itemsParent: {fileID: 4787445760137352739}
-  _newGamePlusSO: {fileID: 11400000, guid: 9e93d00d3882cda49b30f969b4884297, type: 2}
 --- !u!114 &4957972843577305603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,6 +1263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7278810624925462545}
   - component: {fileID: 3867219756610821499}
+  - component: {fileID: 79239246083065277}
   m_Layer: 0
   m_Name: Player Rig
   m_TagString: Untagged
@@ -1319,6 +1310,34 @@ MonoBehaviour:
   _thirdPersonCameraOffset: {x: 0.8, y: -1, z: 0}
   _playerRenderer: {fileID: 5988567681370033383}
   _ballRenderer: {fileID: 7810642204065582890}
+--- !u!114 &79239246083065277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912779287998950981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdce54fdc65c52478035fc67168f955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  _itemSlots: 10
+  _loadoutSO: {fileID: 11400000, guid: 3856efa3900b9b240bd77e6ed6805cf0, type: 2}
+  _newGamePlusSO: {fileID: 11400000, guid: 9e93d00d3882cda49b30f969b4884297, type: 2}
+  _allItems:
+  - {fileID: 5655566831911952000}
+  - {fileID: 6391751865453023513}
+  - {fileID: 8212515531238699994}
+  - {fileID: 4075209143647908865}
+  - {fileID: 6800991164446249515}
+  - {fileID: 7952293838711724501}
+  - {fileID: 8178449417334588259}
+  - {fileID: 1103867630575799907}
+  - {fileID: 3945681393335931111}
+  - {fileID: 5208355875650815327}
+  - {fileID: 1405225523646084951}
+  - {fileID: 5922330571458616972}
 --- !u!1 &3137276085842704938
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,6 +2167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shove
   <IsTrap>k__BackingField: 0
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 10
   <Icon>k__BackingField: {fileID: 21300000, guid: a990247de269c5b4c9b0d656ec20d0ec, type: 3}
   _damage: 5
@@ -2419,6 +2439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 85
   <Icon>k__BackingField: {fileID: 21300000, guid: ddaba6aa939d9514a9a40ee1212af8dd, type: 3}
   <TrapPosition>k__BackingField: 1
@@ -2474,6 +2495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 200
   <Icon>k__BackingField: {fileID: 21300000, guid: e09c5347453630649b0ea10f97a2e3ac, type: 3}
   <TrapPosition>k__BackingField: 0
@@ -2595,6 +2617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 50
   <Icon>k__BackingField: {fileID: 21300000, guid: 226877fc4dc05e14fb198476d58ac811, type: 3}
   <TrapPosition>k__BackingField: 2
@@ -2650,6 +2673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 125
   <Icon>k__BackingField: {fileID: 21300000, guid: 4d66630f23d47fc44bcde0dd98328fbb, type: 3}
   <TrapPosition>k__BackingField: 0
@@ -3018,6 +3042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 250
   <Icon>k__BackingField: {fileID: 21300000, guid: c093fd0707a9a0048a7a868935ef0bbe, type: 3}
   <TrapPosition>k__BackingField: 0
@@ -3167,6 +3192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 0
   <Cost>k__BackingField: 35
   <Icon>k__BackingField: {fileID: 21300000, guid: b973c70108cc38746b1a1ad251d9c1db, type: 3}
   <TrapPosition>k__BackingField: 0
@@ -3254,6 +3280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
+  <IsUnlocked>k__BackingField: 1
   <Cost>k__BackingField: 120
   <Icon>k__BackingField: {fileID: 21300000, guid: 0db1b0f20d4d91445bca35a8ddd540e7, type: 3}
   <TrapPosition>k__BackingField: 2

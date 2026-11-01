@@ -5,7 +5,6 @@ using Unity.Cinemachine;
 public class PlayerController : MonoBehaviour
 {
     public event Action<bool> OnCanSellTrap;
-    public event Action<Item[]> ReportTotalItems;
     public event Action<int, bool> OnActiveItemChanged;
     public event Action OnTooTired;
 
@@ -19,14 +18,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Mana _myMana;
     [SerializeField] Wallet _wallet;
     [SerializeField] Animator _animator;
-    [SerializeField] Item[] _items;
     [SerializeField] LayerMask _socketLayer;
     [SerializeField] GameObject _ballModel;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioClip _attackSFX, _placeTrapSFX, _sellTrapSFX, _hurtSFX;
-    [SerializeField] GameObject _itemsParent;
-    [SerializeField] NewGamePlusSO _newGamePlusSO;
 
+    Item[] _items;
     Vector3 _respawnPosition = new();
     Vector2 _moveInputValue = Vector2.zero, _lookAccumulation = Vector2.zero;
     float _currentXAngle = 0f;
@@ -48,6 +45,7 @@ public class PlayerController : MonoBehaviour
         _myHealth.OnLoseHealth += _myHealth_OnLoseHealth;
         _myHealth.OnDeath += MyHealth_OnDeath;
 
+        Inventory.OnLoadoutChanged += Inventory_OnLoadoutChanged;
         LevelManager.OnWaveStarted += LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
         LevelManager.OnLevelCompleted += LevelManager_LevelOver;
@@ -59,6 +57,7 @@ public class PlayerController : MonoBehaviour
         _myHealth.OnLoseHealth += _myHealth_OnLoseHealth;
         _myHealth.OnDeath -= MyHealth_OnDeath;
 
+        Inventory.OnLoadoutChanged -= Inventory_OnLoadoutChanged;
         LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
         LevelManager.OnLevelCompleted -= LevelManager_LevelOver;
@@ -115,24 +114,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        if(_newGamePlusSO && _newGamePlusSO.IsNewGamePlus)
-        {
-            _items = _itemsParent.GetComponentsInChildren<Item>();
-        }
-
-        if(_items.Length > 10)
-        {
-            Array.Resize(ref _items, 10);
-        }
-
-        if(_items.Length > 0)
-        {
-            ReportTotalItems?.Invoke(_items);
-            _activeItem = _items[_itemIndex];
-            _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
-            OnActiveItemChanged?.Invoke(_itemIndex, _activeTrap && _activeTrap.TrapPreview.CanRotate);
-        }
-
         _inSellMode = true;
         _respawnPosition = transform.position;
     }
@@ -512,6 +493,16 @@ public class PlayerController : MonoBehaviour
         _myMana.ResetMana();
         _animator.SetTrigger(RESPAWN_HASH);
         _isDead = false;
+    }
+
+    void Inventory_OnLoadoutChanged(Item[] newLoadout)
+    {
+        CancelTrapCommerce();
+        _items = newLoadout;
+
+        _activeItem = _items[_itemIndex];
+        _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
+        OnActiveItemChanged?.Invoke(_itemIndex, _activeTrap && _activeTrap.TrapPreview.CanRotate);
     }
 
     void LevelManager_OnWaveStarted()
