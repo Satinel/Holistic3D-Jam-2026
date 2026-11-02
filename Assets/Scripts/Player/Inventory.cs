@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] InventoryItemUI _itemUIPrefab;
 
     readonly List<Item> _unlockedItems = new();
-    Item[] _selectedItems;
+    readonly List<Item> _selectedItems = new();
 
     void Awake()
     {
@@ -31,8 +31,17 @@ public class Inventory : MonoBehaviour
                 index++;
             }
         }
-        _selectedItems = _unlockedItems.ToArray();
-        // TODO : Use _loadoutSO data for previously arranged _selectedItems (also load saved data into _loadoutSO at game start)
+        // TODO : Use _loadoutSO data for previously arranged items and update their .Index (also load saved data into _loadoutSO at game start)
+    }
+
+    void OnEnable()
+    {
+        InventoryItemUI.OnAnyItemButtonPressed += InventoryItemUI_OnAnyItemButtonPressed;
+    }
+
+    void OnDisable()
+    {
+        InventoryItemUI.OnAnyItemButtonPressed -= InventoryItemUI_OnAnyItemButtonPressed;
     }
 
     void Start()
@@ -42,14 +51,53 @@ public class Inventory : MonoBehaviour
             _itemSlots = 10;
         }
 
-        if(_selectedItems.Length > _itemSlots)
+        _selectedItems.Clear();
+
+        for(int i = 0; i < _itemSlots; i++)
         {
-            Array.Resize(ref _selectedItems, _itemSlots);
+            _selectedItems.Insert(i, _unlockedItems[i]);
         }
 
-        if(_selectedItems.Length > 0)
+        if(_selectedItems.Count > 0)
         {
-            OnLoadoutChanged?.Invoke(_selectedItems);
+            OnLoadoutChanged?.Invoke(_selectedItems.ToArray());
         }
+    }
+
+    void InventoryItemUI_OnAnyItemButtonPressed(InventoryItemUI itemUI)
+    {
+        if(itemUI.Item.Index < 0)
+        {
+            // itemUI and Item would (somehow) not be initialized properly in this case
+            return;
+        }
+        if(!_selectedItems.Contains(itemUI.Item))
+        {
+            if(_selectedItems.Count >= _itemSlots)
+            {
+                // TODO : Play error sound because item can't be added to a filled hotbar
+                return;
+            }
+
+            itemUI.Item.SetIndex(_selectedItems.Count);   // This has to happen before the .Insert or else the new index will be off by one
+            _selectedItems.Insert(_selectedItems.Count, itemUI.Item);
+        }
+        else
+        {
+            if(itemUI.Item.WasUsed)
+            {
+                // TODO : Play error sound because item can't be removed after use
+                return;
+            }
+
+            int changedIndex = itemUI.Item.Index;
+
+            _selectedItems.RemoveAt(changedIndex);
+            for(int i = changedIndex; i < _selectedItems.Count; i++)
+            {
+                _selectedItems[i].SetIndex(i);
+            }
+        }
+        OnLoadoutChanged?.Invoke(_selectedItems.ToArray());
     }
 }

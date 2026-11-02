@@ -500,6 +500,8 @@ public class PlayerController : MonoBehaviour
         CancelTrapCommerce();
         _items = newLoadout;
 
+        _itemIndex = _items.Length > _itemIndex ? _itemIndex : 0;
+
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
         OnActiveItemChanged?.Invoke(_itemIndex, _activeTrap && _activeTrap.TrapPreview.CanRotate);

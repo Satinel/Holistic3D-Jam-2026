@@ -64,6 +64,7 @@ public class BuyableTrap : Item
     {
         DisableTrapPreview();
         activeSocket.PlaceTrap(_trapPrefab, Cost, TrapPreview.transform.rotation);
+        SetWasUsed(true);
     }
 
     public override void SecondaryAction()

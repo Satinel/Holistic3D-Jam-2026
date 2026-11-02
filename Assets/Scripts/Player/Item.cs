@@ -8,11 +8,24 @@ public class Item : MonoBehaviour
     [field:SerializeField] public Sprite Icon { get; protected set; }
     [field:SerializeField] public string ItemName { get; protected set; } = string.Empty;
 
+    public int Index { get; protected set; } = -1;
+    public bool WasUsed { get; protected set; }
+
     public virtual void PrimaryAction(Vector3 direction){}
     public virtual void SecondaryAction(){}
 
     public void Unlock(bool isUnlocked)
     {
         IsUnlocked = isUnlocked;
+    }
+
+    public void SetIndex(int newIndex)
+    {
+        Index = newIndex;
+    }
+
+    public void SetWasUsed(bool wasUsed)
+    {
+        WasUsed = wasUsed;
     }
 }
