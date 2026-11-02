@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f788283c88ed11f4098ccdc5485a26c2, type: 3}
   m_Name: CameraOptionsSO
   m_EditorClassIdentifier: Assembly-CSharp::CameraOptionsSO
-  <InvertY>k__BackingField: 1
+  <InvertY>k__BackingField: 0
   <IsFirstPerson>k__BackingField: 0
-  <SensitivityMultiplyer>k__BackingField: 1.0546468
+  <SensitivityMultiplyer>k__BackingField: 0.93257827
   <FieldOfView>k__BackingField: 70
-  <CameraSide>k__BackingField: 0.85221666
+  <CameraSide>k__BackingField: 0.79999995

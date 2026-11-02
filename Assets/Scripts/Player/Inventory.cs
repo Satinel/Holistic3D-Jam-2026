@@ -10,6 +10,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] LoadoutSO _loadoutSO;
     [SerializeField] NewGamePlusSO _newGamePlusSO;
     [SerializeField] Item[] _allItems;
+    [SerializeField] Canvas _inventoryCanvas;   // TODO : Input to enable/disable (and use TimeManager to pause/unpause game)
+    [SerializeField] Transform _layoutGroupUI;
+    [SerializeField] InventoryItemUI _itemUIPrefab;
 
     readonly List<Item> _unlockedItems = new();
     Item[] _selectedItems;
@@ -23,10 +26,13 @@ public class Inventory : MonoBehaviour
             if(_allItems[i].IsUnlocked)
             {
                 _unlockedItems.Insert(index, _allItems[i]);
+                InventoryItemUI itemUI = Instantiate(_itemUIPrefab, _layoutGroupUI);
+                itemUI.Initialize(_allItems[i], index);
                 index++;
             }
         }
         _selectedItems = _unlockedItems.ToArray();
+        // TODO : Use _loadoutSO data for previously arranged _selectedItems (also load saved data into _loadoutSO at game start)
     }
 
     void Start()
