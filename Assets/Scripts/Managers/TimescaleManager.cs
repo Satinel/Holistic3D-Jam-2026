@@ -8,13 +8,15 @@ public class TimescaleManager : MonoBehaviour
     [SerializeField] float _increasedTimeScale = 2f;
     readonly float _defaultTimeScale = 1f;
     float _currentTimeScale = 1f;
-    bool _levelStarted, _levelComplete, _gamePaused, _usingNormalSpeed = true;
+    bool _levelStarted, _levelOver, _optionsEnabled, _inventoryEnabled, _usingNormalSpeed = true;
 
     void OnEnable()
     {
         InputManager.OnTimeScalePressed += InputManager_OnTimeScalePressed;
         OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
+        Inventory.OnInventoryToggled += Inventory_OnInventoryToggled;
         LevelManager.OnLevelCompleted += LevelManager_OnLevelCompleted;
+        LevelManager.OnLevelFailed += LevelManager_OnLevelFailed;
         LevelManager.OnLevelStarted += LevelManager_OnLevelStarted;
     }
 
@@ -22,30 +24,32 @@ public class TimescaleManager : MonoBehaviour
     {
         InputManager.OnTimeScalePressed -= InputManager_OnTimeScalePressed;
         OptionsMenu.OnOptionsCanvasToggled -= OptionsMenu_OnOptionsCanvasToggled;
+        Inventory.OnInventoryToggled -= Inventory_OnInventoryToggled;
         LevelManager.OnLevelCompleted -= LevelManager_OnLevelCompleted;
+        LevelManager.OnLevelFailed -= LevelManager_OnLevelFailed;
         LevelManager.OnLevelStarted -= LevelManager_OnLevelStarted;
     }
 
     void InputManager_OnTimeScalePressed()
     {
         if(!_levelStarted) { return; }
-        if(_gamePaused) { return; }
-        if(_levelComplete) { return; }
+        if(_optionsEnabled || _inventoryEnabled) { return; }
+        if(_levelOver) { return; }
 
         Time.timeScale = _currentTimeScale = _usingNormalSpeed ? _increasedTimeScale : _defaultTimeScale;   // Unnecessarily fancy for the sake of learning
         _usingNormalSpeed = !_usingNormalSpeed;
         OnTimeScaleChanged?.Invoke(_currentTimeScale);
     }
 
-    void OptionsMenu_OnOptionsCanvasToggled(bool isEnabled)
+    void OptionsMenu_OnOptionsCanvasToggled(bool optionsEnabled)
     {
-        _gamePaused = isEnabled;
+        _optionsEnabled = optionsEnabled;
 
-        if(_gamePaused)
+        if(_optionsEnabled || _inventoryEnabled)
         {
             Time.timeScale = 0;
         }
-        else if(_levelStarted && !_levelComplete)
+        else if(_levelStarted && !_levelOver)
         {
             Time.timeScale = _currentTimeScale;
         }
@@ -53,10 +57,31 @@ public class TimescaleManager : MonoBehaviour
         OnTimeScaleChanged?.Invoke(Time.timeScale);
     }
 
+    void Inventory_OnInventoryToggled(bool inventoryEnabled)
+    {
+        _inventoryEnabled = inventoryEnabled;
+
+        if(_optionsEnabled || _inventoryEnabled)
+        {
+            Time.timeScale = 0;
+        }
+        else if(_levelStarted && !_levelOver)
+        {
+            Time.timeScale = _currentTimeScale;
+        }
+    }
+
     void LevelManager_OnLevelCompleted()
     {
-        _levelComplete = true;
+        _levelOver = true;
         Time.timeScale = 0;
+        OnTimeScaleChanged?.Invoke(Time.timeScale);
+    }
+
+    void LevelManager_OnLevelFailed()
+    {
+        _levelOver = true;
+        Time.timeScale = 1;
         OnTimeScaleChanged?.Invoke(Time.timeScale);
     }
 

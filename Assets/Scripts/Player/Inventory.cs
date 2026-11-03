@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
+    public static event Action<bool> OnInventoryToggled;
     public static event Action<Item[]> OnLoadoutChanged;
 
     [Range(3, 10)][SerializeField] int _itemSlots = 10;
@@ -17,8 +18,14 @@ public class Inventory : MonoBehaviour
     readonly List<Item> _unlockedItems = new();
     readonly List<Item> _selectedItems = new();
 
+    bool _optionsEnabled;
+
     void Awake()
     {
+        InputManager.OnInventoryPressed += ToggleInventoryCanvas;
+        InventoryItemUI.OnAnyItemButtonPressed += InventoryItemUI_OnAnyItemButtonPressed;
+        OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
+
         _unlockedItems.Clear();
         int index = 0;
         for(int i = 0; i < _allItems.Length; i++)
@@ -34,14 +41,11 @@ public class Inventory : MonoBehaviour
         // TODO : Use _loadoutSO data for previously arranged items and update their .Index (also load saved data into _loadoutSO at game start)
     }
 
-    void OnEnable()
+    void OnDestroy()
     {
-        InventoryItemUI.OnAnyItemButtonPressed += InventoryItemUI_OnAnyItemButtonPressed;
-    }
-
-    void OnDisable()
-    {
+        InputManager.OnInventoryPressed -= ToggleInventoryCanvas;
         InventoryItemUI.OnAnyItemButtonPressed -= InventoryItemUI_OnAnyItemButtonPressed;
+        OptionsMenu.OnOptionsCanvasToggled -= OptionsMenu_OnOptionsCanvasToggled;
     }
 
     void Start()
@@ -99,5 +103,18 @@ public class Inventory : MonoBehaviour
             }
         }
         OnLoadoutChanged?.Invoke(_selectedItems.ToArray());
+    }
+
+    void OptionsMenu_OnOptionsCanvasToggled(bool optionsEnabled)
+    {
+        _optionsEnabled = optionsEnabled;
+    }
+
+    public void ToggleInventoryCanvas()
+    {
+        if(_optionsEnabled) { return; }
+
+        _inventoryCanvas.enabled = !_inventoryCanvas.enabled;
+        OnInventoryToggled?.Invoke(_inventoryCanvas.enabled);
     }
 }

@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
     public static event Action<Vector2> OnLookAction;
     public static event Action OnMainPressed, OnSecondaryPressed;
     public static event Action<bool> OnSprintHeld;
-    public static event Action OnSellPressed, OnUnleashPressed, OnOptionsPressed;
+    public static event Action OnSellPressed, OnUnleashPressed, OnOptionsPressed, OnInventoryPressed;
     public static event Action<Vector2> OnScroll;
     public static event Action OnPreviousPressed, OnNextPressed, OnViewChangePressed, OnTimeScalePressed;
 
@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
 
     InputAction _moveAction, _lookAction;
     InputAction _mainAction, _secondaryAction, _sprintAction;
-    InputAction _sellAction, _unleashAction, _optionsAction;
+    InputAction _sellAction, _unleashAction, _optionsAction, _inventoryAction;
     InputAction _scrollAction, _previousAction, _nextAction;
     InputAction _viewChangeAction, _timeScaleAction;
 
@@ -44,6 +44,7 @@ public class InputManager : MonoBehaviour
         _sellAction = InputSystem.actions.FindAction("Sell");
         _unleashAction = InputSystem.actions.FindAction("Unleash");
         _optionsAction = InputSystem.actions.FindAction("Options");
+        _inventoryAction = InputSystem.actions.FindAction("Inventory");
         _scrollAction = InputSystem.actions.FindAction("Scroll");
         _previousAction = InputSystem.actions.FindAction("Previous");
         _nextAction = InputSystem.actions.FindAction("Next");
@@ -76,7 +77,7 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
-        _rebindableActions = new InputAction[] { _mainAction, _secondaryAction, _sprintAction, _sellAction, _unleashAction, _previousAction, _nextAction, _viewChangeAction, _timeScaleAction};
+        _rebindableActions = new InputAction[] { _mainAction, _secondaryAction, _sprintAction, _sellAction, _unleashAction, _inventoryAction, _previousAction, _nextAction, _viewChangeAction, _timeScaleAction};
         ReportMoveAction?.Invoke(_moveAction);
         ReportRebindableActions?.Invoke(_rebindableActions);
         ReportUnleashAction?.Invoke(_unleashAction);
@@ -119,6 +120,11 @@ public class InputManager : MonoBehaviour
         if(_optionsAction.WasPerformedThisFrame())
         {
             OnOptionsPressed?.Invoke();
+        }
+
+        if(_inventoryAction.WasPerformedThisFrame())
+        {
+            OnInventoryPressed?.Invoke();
         }
 
         OnScroll?.Invoke(_scrollAction.ReadValue<Vector2>());
