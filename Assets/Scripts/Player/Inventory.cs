@@ -18,13 +18,15 @@ public class Inventory : MonoBehaviour
     readonly List<Item> _unlockedItems = new();
     readonly List<Item> _selectedItems = new();
 
-    bool _optionsEnabled;
+    bool _optionsEnabled, _levelOver;
 
     void Awake()
     {
         InputManager.OnInventoryPressed += ToggleInventoryCanvas;
         InventoryItemUI.OnAnyItemButtonPressed += InventoryItemUI_OnAnyItemButtonPressed;
         OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
+        LevelManager.OnLevelCompleted += SetLevelOver;
+        LevelManager.OnLevelFailed += SetLevelOver;
 
         _unlockedItems.Clear();
         int index = 0;
@@ -46,6 +48,8 @@ public class Inventory : MonoBehaviour
         InputManager.OnInventoryPressed -= ToggleInventoryCanvas;
         InventoryItemUI.OnAnyItemButtonPressed -= InventoryItemUI_OnAnyItemButtonPressed;
         OptionsMenu.OnOptionsCanvasToggled -= OptionsMenu_OnOptionsCanvasToggled;
+        LevelManager.OnLevelCompleted -= SetLevelOver;
+        LevelManager.OnLevelFailed -= SetLevelOver;
     }
 
     void Start()
@@ -110,9 +114,14 @@ public class Inventory : MonoBehaviour
         _optionsEnabled = optionsEnabled;
     }
 
+    void SetLevelOver()
+    {
+        _levelOver = true;
+    }
+
     public void ToggleInventoryCanvas()
     {
-        if(_optionsEnabled) { return; }
+        if(_optionsEnabled || _levelOver) { return; }
 
         _inventoryCanvas.enabled = !_inventoryCanvas.enabled;
         OnInventoryToggled?.Invoke(_inventoryCanvas.enabled);

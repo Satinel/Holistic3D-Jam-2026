@@ -43,13 +43,15 @@ public class TimescaleManager : MonoBehaviour
 
     void OptionsMenu_OnOptionsCanvasToggled(bool optionsEnabled)
     {
+        if(_levelOver) { return; }
+
         _optionsEnabled = optionsEnabled;
 
         if(_optionsEnabled || _inventoryEnabled)
         {
             Time.timeScale = 0;
         }
-        else if(_levelStarted && !_levelOver)
+        else if(_levelStarted)
         {
             Time.timeScale = _currentTimeScale;
         }
@@ -59,13 +61,15 @@ public class TimescaleManager : MonoBehaviour
 
     void Inventory_OnInventoryToggled(bool inventoryEnabled)
     {
+        if(_levelOver) { return; }
+
         _inventoryEnabled = inventoryEnabled;
 
         if(_optionsEnabled || _inventoryEnabled)
         {
             Time.timeScale = 0;
         }
-        else if(_levelStarted && !_levelOver)
+        else if(_levelStarted)
         {
             Time.timeScale = _currentTimeScale;
         }

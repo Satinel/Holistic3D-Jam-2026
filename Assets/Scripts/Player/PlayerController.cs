@@ -488,7 +488,10 @@ public class PlayerController : MonoBehaviour
     {
         if(_isLevelOver) { return; }
 
+        _characterController.enabled = false;   // Holding down movement input while _isDead seemed to teleport the player, maybe this fixes that
         transform.position = _respawnPosition;
+        _characterController.enabled = true;
+        // Physics.SyncTransforms();            // This is an extra step to try if the disable/enable above doesn't fix the issue
         _myHealth.ResetHealth();
         _myMana.ResetMana();
         _animator.SetTrigger(RESPAWN_HASH);
