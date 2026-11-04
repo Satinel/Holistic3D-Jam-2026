@@ -1,6 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System;
 using System.Collections.Generic;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
@@ -11,19 +14,26 @@ public class Inventory : MonoBehaviour
     [SerializeField] LoadoutSO _loadoutSO;
     [SerializeField] NewGamePlusSO _newGamePlusSO;
     [SerializeField] Item[] _allItems;
-    [SerializeField] Canvas _inventoryCanvas;   // TODO : Input to enable/disable (and use TimeManager to pause/unpause game)
+    [SerializeField] Canvas _inventoryCanvas;
     [SerializeField] Transform _layoutGroupUI;
+    [SerializeField] TextMeshProUGUI _itemTitleText, _itemStatsText, _itemDescriptionText;
+    [SerializeField] Image _itemImage;
     [SerializeField] InventoryItemUI _itemUIPrefab;
 
     readonly List<Item> _unlockedItems = new();
     readonly List<Item> _selectedItems = new();
+    readonly List<InventoryItemUI> _itemUIs = new();
+    InventoryItemUI _lastSelectedItemUI;
 
     bool _optionsEnabled, _levelOver;
+    Item _selectedItem, _pointerItem;
 
     void Awake()
     {
         InputManager.OnInventoryPressed += ToggleInventoryCanvas;
         InventoryItemUI.OnAnyItemButtonPressed += InventoryItemUI_OnAnyItemButtonPressed;
+        InventoryItemUI.OnAnyItemButtonSelected += InventoryItemUI_OnAnyItemButtonSelected;
+        InventoryItemUI.OnAnyItemButtonPointedTo += InventoryItemUI_OnAnyItemButtonPointedTo;
         OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
         LevelManager.OnLevelCompleted += SetLevelOver;
         LevelManager.OnLevelFailed += SetLevelOver;
@@ -37,9 +47,11 @@ public class Inventory : MonoBehaviour
                 _unlockedItems.Insert(index, _allItems[i]);
                 InventoryItemUI itemUI = Instantiate(_itemUIPrefab, _layoutGroupUI);
                 itemUI.Initialize(_allItems[i], index);
+                _itemUIs.Insert(index, itemUI);
                 index++;
             }
         }
+        _lastSelectedItemUI = _itemUIs[0];
         // TODO : Use _loadoutSO data for previously arranged items and update their .Index (also load saved data into _loadoutSO at game start)
     }
 
@@ -47,6 +59,8 @@ public class Inventory : MonoBehaviour
     {
         InputManager.OnInventoryPressed -= ToggleInventoryCanvas;
         InventoryItemUI.OnAnyItemButtonPressed -= InventoryItemUI_OnAnyItemButtonPressed;
+        InventoryItemUI.OnAnyItemButtonSelected -= InventoryItemUI_OnAnyItemButtonSelected;
+        InventoryItemUI.OnAnyItemButtonPointedTo -= InventoryItemUI_OnAnyItemButtonPointedTo;
         OptionsMenu.OnOptionsCanvasToggled -= OptionsMenu_OnOptionsCanvasToggled;
         LevelManager.OnLevelCompleted -= SetLevelOver;
         LevelManager.OnLevelFailed -= SetLevelOver;
@@ -109,9 +123,52 @@ public class Inventory : MonoBehaviour
         OnLoadoutChanged?.Invoke(_selectedItems.ToArray());
     }
 
+    void InventoryItemUI_OnAnyItemButtonSelected(InventoryItemUI itemUI)
+    {
+        _lastSelectedItemUI = itemUI;
+        _selectedItem = itemUI.Item;
+        SetItemTexts(_selectedItem);
+    }
+
+    void InventoryItemUI_OnAnyItemButtonPointedTo(Item item, bool hasPointer)
+    {
+        _pointerItem = hasPointer ? item : null;
+        if(_pointerItem)
+        {
+            SetItemTexts(_pointerItem);
+        }
+        else
+        {
+            SetItemTexts(_selectedItem);
+        }
+    }
+
+    void SetItemTexts(Item item)
+    {
+        if(!item) { return; }
+
+        _itemImage.sprite = item.Icon;
+        _itemTitleText.text = item.ItemName;
+        _itemDescriptionText.text = item.Description;
+        if(item.IsTrap)
+        {
+            BuyableTrap trap = (BuyableTrap)item;
+            _itemStatsText.text = $"Damage : {trap.Trap.Damage}\nCost : {trap.Cost}";
+        }
+        else
+        {
+            _itemStatsText.text = $"Cost : {item.Cost}";
+        }
+    }
+
     void OptionsMenu_OnOptionsCanvasToggled(bool optionsEnabled)
     {
         _optionsEnabled = optionsEnabled;
+        if(!optionsEnabled && _inventoryCanvas.enabled)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_lastSelectedItemUI.gameObject);
+        }
     }
 
     void SetLevelOver()
@@ -124,6 +181,15 @@ public class Inventory : MonoBehaviour
         if(_optionsEnabled || _levelOver) { return; }
 
         _inventoryCanvas.enabled = !_inventoryCanvas.enabled;
+        if(_inventoryCanvas.enabled)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_lastSelectedItemUI.gameObject);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
         OnInventoryToggled?.Invoke(_inventoryCanvas.enabled);
     }
 }

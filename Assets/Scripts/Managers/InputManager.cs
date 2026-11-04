@@ -18,7 +18,7 @@ public class InputManager : MonoBehaviour
     public static event Action<InputAction> ReportMoveAction;
     public static event Action<InputAction[]> ReportRebindableActions;
     public static event Action<InputAction> ReportUnleashAction;
-    public static event Action<InputAction, InputAction, InputAction> OnKeybindsChanged;
+    public static event Action<InputAction, InputAction, InputAction, InputAction> OnKeybindsChanged;
 
     InputAction _moveAction, _lookAction;
     InputAction _mainAction, _secondaryAction, _sprintAction;
@@ -81,7 +81,7 @@ public class InputManager : MonoBehaviour
         ReportMoveAction?.Invoke(_moveAction);
         ReportRebindableActions?.Invoke(_rebindableActions);
         ReportUnleashAction?.Invoke(_unleashAction);
-        OnKeybindsChanged?.Invoke(_unleashAction, _secondaryAction, _sellAction);
+        OnKeybindsChanged?.Invoke(_unleashAction, _secondaryAction, _sellAction, _inventoryAction);
     }
 
     void Update()
@@ -193,7 +193,7 @@ public class InputManager : MonoBehaviour
 
     void KeyRebinding_OnKeybindsChanged()
     {
-        OnKeybindsChanged?.Invoke(_unleashAction, _secondaryAction, _sellAction);
+        OnKeybindsChanged?.Invoke(_unleashAction, _secondaryAction, _sellAction, _inventoryAction);
     }
 
     void LevelManager_OnLevelStarted()

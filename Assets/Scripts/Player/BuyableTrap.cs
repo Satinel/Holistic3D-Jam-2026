@@ -9,6 +9,8 @@ public class BuyableTrap : Item
     [SerializeField] Trap _trapPrefab;
     [SerializeField] float _maxRaycastDistance = 0.25f;
 
+    public Trap Trap => _trapPrefab;
+
     void Awake()
     {
         IsTrap = true;

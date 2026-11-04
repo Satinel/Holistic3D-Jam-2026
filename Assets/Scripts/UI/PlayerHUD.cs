@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText, _coreText, _wavesText, _tiredText;
-    [SerializeField] TextMeshProUGUI _unleashText, _rotateText, _sellText;
+    [SerializeField] TextMeshProUGUI _unleashText, _rotateText, _sellText, _inventoryText;
     [SerializeField] Slider _healthSlider, _manaSlider;
     [SerializeField] PlayerController _player;
     [SerializeField] GameObject[] _icons;
@@ -47,6 +47,7 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
         EnemySpawner.OnAnySpawnerActivated += EnemySpawner_OnAnySpawnerActivated;
         InputManager.OnKeybindsChanged += InputManager_OnKeybindsChanged;
+        Inventory.OnInventoryToggled += Inventory_OnInventoryToggled;
         Inventory.OnLoadoutChanged += Inventory_OnLoadoutChanged;
     }
 
@@ -65,6 +66,7 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
         EnemySpawner.OnAnySpawnerActivated -= EnemySpawner_OnAnySpawnerActivated;
         InputManager.OnKeybindsChanged -= InputManager_OnKeybindsChanged;
+        Inventory.OnInventoryToggled -= Inventory_OnInventoryToggled;
         Inventory.OnLoadoutChanged -= Inventory_OnLoadoutChanged;
 
     }
@@ -218,14 +220,25 @@ public class PlayerHUD : MonoBehaviour
         _newPortalMessage.SetActive(true);
     }
 
-    void InputManager_OnKeybindsChanged(InputAction unleashAction, InputAction secondaryAction, InputAction sellAction)
+    void InputManager_OnKeybindsChanged(InputAction unleashAction, InputAction secondaryAction, InputAction sellAction, InputAction invAction)
     {
         string unleashBind = unleashAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
         string secondaryBind = secondaryAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
         string sellBind = sellAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        string invBind = invAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
 
         _unleashText.text = $"Press {unleashBind} to Start Wave";
         _rotateText.text = $"Press {secondaryBind} To Rotate";
         _sellText.text = $"Press {sellBind} To Sell";
+        _inventoryText.text = $"Press {invBind} To Select Traps";
+    }
+
+
+    void Inventory_OnInventoryToggled(bool enabled)
+    {
+        if(enabled)
+        {
+            _inventoryText.gameObject.SetActive(false);
+        }
     }
 }

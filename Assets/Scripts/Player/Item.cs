@@ -7,6 +7,7 @@ public class Item : MonoBehaviour
     [field:SerializeField] public int Cost { get; protected set; } = 5;
     [field:SerializeField] public Sprite Icon { get; protected set; }
     [field:SerializeField] public string ItemName { get; protected set; } = string.Empty;
+    [field:SerializeField] public string Description { get; protected set; } = string.Empty;
 
     public int Index { get; protected set; } = -1;
     public bool WasUsed { get; protected set; }

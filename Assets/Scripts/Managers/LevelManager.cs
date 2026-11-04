@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _nextLevelText, _restartText;
     [SerializeField] NewGamePlusSO _newGamePlusSO;
 
-    bool _wavesActive, _levelWon, _levelLost, _isLoading = true, _hasStarted, _isInOptions;
+    bool _wavesActive, _levelWon, _levelLost, _isLoading = true, _hasStarted, _isInOptions, _isInInventory;
     int _waveIndex;
     HashSet<Enemy> _activeEnemies = new();
     IDisposable _eventListener;
@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
     {
         InputManager.ReportUnleashAction += InputManager_ReportUnleashAction;
         InputManager.OnUnleashPressed += InputManager_OnUnleashPressed;
+        Inventory.OnInventoryToggled += Inventory_OnInventoryToggled;
         OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
         OptionsMenu.OnRestartRequested += OptionsMenu_OnRestartRequested;
         Enemy.OnAnyEnemySpawned += Enemy_OnAnyEnemySpawned;
@@ -40,6 +41,7 @@ public class LevelManager : MonoBehaviour
     {
         InputManager.ReportUnleashAction -= InputManager_ReportUnleashAction;
         InputManager.OnUnleashPressed -= InputManager_OnUnleashPressed;
+        Inventory.OnInventoryToggled -= Inventory_OnInventoryToggled;
         OptionsMenu.OnOptionsCanvasToggled -= OptionsMenu_OnOptionsCanvasToggled;
         OptionsMenu.OnRestartRequested -= OptionsMenu_OnRestartRequested;
         Enemy.OnAnyEnemySpawned -= Enemy_OnAnyEnemySpawned;
@@ -87,7 +89,7 @@ public class LevelManager : MonoBehaviour
     {
         if(!_hasStarted) { return; }
         if(_isLoading) { return; }
-        if(_isInOptions) { return; }
+        if(_isInOptions || _isInInventory) { return; }
 
         if(_levelWon)
         {
@@ -112,6 +114,11 @@ public class LevelManager : MonoBehaviour
             }
         }
         OnWaveStarted?.Invoke();
+    }
+
+    void Inventory_OnInventoryToggled(bool isInInventory)
+    {
+        _isInInventory = isInInventory;
     }
 
     void OptionsMenu_OnOptionsCanvasToggled(bool isInOptions)

@@ -471,6 +471,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 325
   <Icon>k__BackingField: {fileID: 21300000, guid: 94bb1f7a6e97de74e887ba924bc4461b, type: 3}
   <ItemName>k__BackingField: Boulder
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 1
   <TrapPreview>k__BackingField: {fileID: 7606190215711388006}
   _socketLayer:
@@ -816,6 +817,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: cdd15499457998444b18fe5dcc7e683d, type: 3}
   <ItemName>k__BackingField: Cannon
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 1
   <TrapPreview>k__BackingField: {fileID: 6117198142484707995}
   _socketLayer:
@@ -1063,6 +1065,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 175
   <Icon>k__BackingField: {fileID: 21300000, guid: df83bace063cc6349986d79a27ddd541, type: 3}
   <ItemName>k__BackingField: 
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 2
   <TrapPreview>k__BackingField: {fileID: 1988872182997882006}
   _socketLayer:
@@ -1120,6 +1123,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 90
   <Icon>k__BackingField: {fileID: 21300000, guid: f9338bb18de8fa64ca01008b616ed5bc, type: 3}
   <ItemName>k__BackingField: Spring
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 0
   <TrapPreview>k__BackingField: {fileID: 7440579436406822001}
   _socketLayer:
@@ -1515,7 +1519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.14858475, b: 0.525, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1985,6 +1989,10 @@ MonoBehaviour:
   - {fileID: 5922330571458616972}
   _inventoryCanvas: {fileID: 6513757790864233663}
   _layoutGroupUI: {fileID: 7944223874341880222}
+  _itemTitleText: {fileID: 5680802377635124960}
+  _itemStatsText: {fileID: 4817857060550637828}
+  _itemDescriptionText: {fileID: 845051137780175104}
+  _itemImage: {fileID: 5011753654402282052}
   _itemUIPrefab: {fileID: 7366092081772517949, guid: 9ae7453a8304dce47ab57cd648086b9f, type: 3}
 --- !u!1 &3137276085842704938
 GameObject:
@@ -2978,6 +2986,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5418304392712955776}
   - {fileID: 2085126571908429992}
   m_Father: {fileID: 67476016196157920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3073,6 +3082,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 10
   <Icon>k__BackingField: {fileID: 21300000, guid: a990247de269c5b4c9b0d656ec20d0ec, type: 3}
   <ItemName>k__BackingField: 
+  <Description>k__BackingField: 
   _damage: 5
   _forceMultiplyer: 25
   _spawnPoint: {fileID: 1074038391351336449}
@@ -3346,6 +3356,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 85
   <Icon>k__BackingField: {fileID: 21300000, guid: ddaba6aa939d9514a9a40ee1212af8dd, type: 3}
   <ItemName>k__BackingField: 
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 1
   <TrapPreview>k__BackingField: {fileID: 2003017229052535241}
   _socketLayer:
@@ -3403,6 +3414,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 200
   <Icon>k__BackingField: {fileID: 21300000, guid: e09c5347453630649b0ea10f97a2e3ac, type: 3}
   <ItemName>k__BackingField: Mine
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 0
   <TrapPreview>k__BackingField: {fileID: 7790637744555844135}
   _socketLayer:
@@ -3526,6 +3538,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 50
   <Icon>k__BackingField: {fileID: 21300000, guid: 226877fc4dc05e14fb198476d58ac811, type: 3}
   <ItemName>k__BackingField: Slow Field
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 2
   <TrapPreview>k__BackingField: {fileID: 316701611773134558}
   _socketLayer:
@@ -3583,6 +3596,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 125
   <Icon>k__BackingField: {fileID: 21300000, guid: 4d66630f23d47fc44bcde0dd98328fbb, type: 3}
   <ItemName>k__BackingField: Barrier
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 0
   <TrapPreview>k__BackingField: {fileID: 8121210001060808166}
   _socketLayer:
@@ -4211,6 +4225,81 @@ Transform:
   - {fileID: 1507261346233108164}
   m_Father: {fileID: 8833538193956930783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7952880376618520877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5418304392712955776}
+  - component: {fileID: 6354239656006198684}
+  - component: {fileID: 5764004126482256238}
+  m_Layer: 5
+  m_Name: Icon Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5418304392712955776
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952880376618520877}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3295078957098284371}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -10, y: -10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6354239656006198684
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952880376618520877}
+  m_CullTransparentMesh: 1
+--- !u!114 &5764004126482256238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952880376618520877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.12156863, g: 0.12156863, b: 0.12156863, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8060282116570551063
 GameObject:
   m_ObjectHideFlags: 0
@@ -4462,6 +4551,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 250
   <Icon>k__BackingField: {fileID: 21300000, guid: c093fd0707a9a0048a7a868935ef0bbe, type: 3}
   <ItemName>k__BackingField: 
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 0
   <TrapPreview>k__BackingField: {fileID: 185545421809836792}
   _socketLayer:
@@ -4613,6 +4703,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 35
   <Icon>k__BackingField: {fileID: 21300000, guid: b973c70108cc38746b1a1ad251d9c1db, type: 3}
   <ItemName>k__BackingField: Squisher
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 0
   <TrapPreview>k__BackingField: {fileID: 2589178795707372800}
   _socketLayer:
@@ -4702,6 +4793,7 @@ MonoBehaviour:
   <Cost>k__BackingField: 120
   <Icon>k__BackingField: {fileID: 21300000, guid: 0db1b0f20d4d91445bca35a8ddd540e7, type: 3}
   <ItemName>k__BackingField: Crusher
+  <Description>k__BackingField: 
   <TrapPosition>k__BackingField: 2
   <TrapPreview>k__BackingField: {fileID: 8595738988457357300}
   _socketLayer:
