@@ -47,6 +47,7 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveCompleted += LevelManager_OnWaveCompleted;
         EnemySpawner.OnAnySpawnerActivated += EnemySpawner_OnAnySpawnerActivated;
         InputManager.OnKeybindsChanged += InputManager_OnKeybindsChanged;
+        Inventory.AnnounceItemSlotTotal += Inventory_AnnounceItemSlotTotal;
         Inventory.OnInventoryToggled += Inventory_OnInventoryToggled;
         Inventory.OnLoadoutChanged += Inventory_OnLoadoutChanged;
     }
@@ -66,6 +67,7 @@ public class PlayerHUD : MonoBehaviour
         LevelManager.OnWaveCompleted -= LevelManager_OnWaveCompleted;
         EnemySpawner.OnAnySpawnerActivated -= EnemySpawner_OnAnySpawnerActivated;
         InputManager.OnKeybindsChanged -= InputManager_OnKeybindsChanged;
+        Inventory.AnnounceItemSlotTotal -= Inventory_AnnounceItemSlotTotal;
         Inventory.OnInventoryToggled -= Inventory_OnInventoryToggled;
         Inventory.OnLoadoutChanged -= Inventory_OnLoadoutChanged;
 
@@ -77,6 +79,16 @@ public class PlayerHUD : MonoBehaviour
         _tiredStartColor = _tiredText.color;
         _vignetteStartColor = _painVignette.color;
         _painVignette.enabled = false;
+    }
+
+    void Inventory_AnnounceItemSlotTotal(int totalSlots)
+    {
+        for(int i = 0; i < totalSlots; i++)
+        {
+            if(totalSlots > _icons.Length) { return; }
+
+            _icons[i].SetActive(true);
+        }
     }
 
     void Inventory_OnLoadoutChanged(Item[] items)

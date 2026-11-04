@@ -14,13 +14,13 @@ public class TrapSocket : MonoBehaviour
     readonly HashSet<SocketBlocker> _socketBlockers = new();
     public bool IsBlocked => _socketBlockers.Count > 0;
 
-    public void PlaceTrap(Trap trapPrefab, int trapPrice, Quaternion rotation)
+    public void PlaceTrap(Trap trapPrefab, int damage, int trapPrice, Quaternion rotation)
     {
         if(HasTrap) { return; }
 
         HasTrap = true;
         _placedTrap = Instantiate(trapPrefab, transform.position, rotation, transform);
-        _placedTrap.Initialize(trapPrice, this);
+        _placedTrap.Initialize(damage, trapPrice, this);
     }
 
     public void SellTrap()

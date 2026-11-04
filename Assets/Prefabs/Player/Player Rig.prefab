@@ -124,7 +124,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1285, y: 600}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5757598630057790397
 MonoBehaviour:
@@ -139,11 +139,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
+  m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 150, y: 150}
@@ -468,6 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 80
   <Cost>k__BackingField: 325
   <Icon>k__BackingField: {fileID: 21300000, guid: 94bb1f7a6e97de74e887ba924bc4461b, type: 3}
   <ItemName>k__BackingField: Boulder
@@ -814,6 +815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 45
   <Cost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: cdd15499457998444b18fe5dcc7e683d, type: 3}
   <ItemName>k__BackingField: Cannon
@@ -1062,6 +1064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 40
   <Cost>k__BackingField: 175
   <Icon>k__BackingField: {fileID: 21300000, guid: df83bace063cc6349986d79a27ddd541, type: 3}
   <ItemName>k__BackingField: 
@@ -1120,6 +1123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 22
   <Cost>k__BackingField: 90
   <Icon>k__BackingField: {fileID: 21300000, guid: f9338bb18de8fa64ca01008b616ed5bc, type: 3}
   <ItemName>k__BackingField: Spring
@@ -3079,11 +3083,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Shove
   <IsTrap>k__BackingField: 0
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 5
   <Cost>k__BackingField: 10
   <Icon>k__BackingField: {fileID: 21300000, guid: a990247de269c5b4c9b0d656ec20d0ec, type: 3}
   <ItemName>k__BackingField: 
   <Description>k__BackingField: 
-  _damage: 5
   _forceMultiplyer: 25
   _spawnPoint: {fileID: 1074038391351336449}
   _cannonballPrefab: {fileID: -7536709174669590218, guid: c76c15b6e66801b4787fc258e628b894, type: 3}
@@ -3353,6 +3357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 25
   <Cost>k__BackingField: 85
   <Icon>k__BackingField: {fileID: 21300000, guid: ddaba6aa939d9514a9a40ee1212af8dd, type: 3}
   <ItemName>k__BackingField: 
@@ -3411,6 +3416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 125
   <Cost>k__BackingField: 200
   <Icon>k__BackingField: {fileID: 21300000, guid: e09c5347453630649b0ea10f97a2e3ac, type: 3}
   <ItemName>k__BackingField: Mine
@@ -3535,6 +3541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 0
   <Cost>k__BackingField: 50
   <Icon>k__BackingField: {fileID: 21300000, guid: 226877fc4dc05e14fb198476d58ac811, type: 3}
   <ItemName>k__BackingField: Slow Field
@@ -3593,6 +3600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 0
   <Cost>k__BackingField: 125
   <Icon>k__BackingField: {fileID: 21300000, guid: 4d66630f23d47fc44bcde0dd98328fbb, type: 3}
   <ItemName>k__BackingField: Barrier
@@ -4548,6 +4556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 10
   <Cost>k__BackingField: 250
   <Icon>k__BackingField: {fileID: 21300000, guid: c093fd0707a9a0048a7a868935ef0bbe, type: 3}
   <ItemName>k__BackingField: 
@@ -4700,6 +4709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 0
+  <Damage>k__BackingField: 25
   <Cost>k__BackingField: 35
   <Icon>k__BackingField: {fileID: 21300000, guid: b973c70108cc38746b1a1ad251d9c1db, type: 3}
   <ItemName>k__BackingField: Squisher
@@ -4790,6 +4800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuyableTrap
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
+  <Damage>k__BackingField: 50
   <Cost>k__BackingField: 120
   <Icon>k__BackingField: {fileID: 21300000, guid: 0db1b0f20d4d91445bca35a8ddd540e7, type: 3}
   <ItemName>k__BackingField: Crusher

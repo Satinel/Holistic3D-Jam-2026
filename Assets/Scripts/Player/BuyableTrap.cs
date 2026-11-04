@@ -65,7 +65,7 @@ public class BuyableTrap : Item
     public void CompletePurchase(TrapSocket activeSocket)
     {
         DisableTrapPreview();
-        activeSocket.PlaceTrap(_trapPrefab, Cost, TrapPreview.transform.rotation);
+        activeSocket.PlaceTrap(_trapPrefab, Damage, Cost, TrapPreview.transform.rotation);
         SetWasUsed(true);
     }
 

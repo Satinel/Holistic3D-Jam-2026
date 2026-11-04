@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2bf999060a74643b7c8fe7c51e8d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CannonTrap
-  <SellPrice>k__BackingField: 100
   <RangeRenderer>k__BackingField: {fileID: 4075499057506494555}
   <HighlightModel>k__BackingField: {fileID: 6044385724869839548}
   <RechargeTime>k__BackingField: 10

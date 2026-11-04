@@ -16,16 +16,13 @@ public class Trap : MonoBehaviour
 
     [field:SerializeField] public Renderer RangeRenderer { get; protected set; }
     [field:SerializeField] public GameObject HighlightModel { get; protected set; }
-
     [field:SerializeField] public float RechargeTime { get; protected set; } = 2.5f;
-    [field:SerializeField] public int Damage { get; protected set; } = 5;
     [field:SerializeField] public float RagdollDuration { get; protected set; } = 4.5f;
-
     [field:SerializeField] public ForceMode ForceMode { get; protected set; } = ForceMode.Impulse;
-
     [SerializeField] protected Animator _animator;
     [SerializeField] protected AudioSource _audioSource;
 
+    public int Damage { get; protected set; } = 5;
     protected TrapSocket _trapSocket;
 
     protected virtual void Awake()
@@ -38,8 +35,9 @@ public class Trap : MonoBehaviour
         LevelManager.OnWaveStarted -= LevelManager_OnWaveStarted;
     }
 
-    public void Initialize(int price, TrapSocket trapSocket)
+    public void Initialize(int damage, int price, TrapSocket trapSocket)
     {
+        Damage = damage;
         SellPrice = price;
         _trapSocket = trapSocket;
     }

@@ -7,6 +7,7 @@ using TMPro;
 
 public class Inventory : MonoBehaviour
 {
+    public static event Action<int> AnnounceItemSlotTotal;
     public static event Action<bool> OnInventoryToggled;
     public static event Action<Item[]> OnLoadoutChanged;
 
@@ -37,22 +38,6 @@ public class Inventory : MonoBehaviour
         OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
         LevelManager.OnLevelCompleted += SetLevelOver;
         LevelManager.OnLevelFailed += SetLevelOver;
-
-        _unlockedItems.Clear();
-        int index = 0;
-        for(int i = 0; i < _allItems.Length; i++)
-        {
-            if(_allItems[i].IsUnlocked)
-            {
-                _unlockedItems.Insert(index, _allItems[i]);
-                InventoryItemUI itemUI = Instantiate(_itemUIPrefab, _layoutGroupUI);
-                itemUI.Initialize(_allItems[i], index);
-                _itemUIs.Insert(index, itemUI);
-                index++;
-            }
-        }
-        _lastSelectedItemUI = _itemUIs[0];
-        // TODO : Use _loadoutSO data for previously arranged items and update their .Index (also load saved data into _loadoutSO at game start)
     }
 
     void OnDestroy()
@@ -68,20 +53,55 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
+        bool isNewGamePlus = false;
         if(_newGamePlusSO && _newGamePlusSO.IsNewGamePlus)
         {
+            isNewGamePlus = true;
             _itemSlots = 10;
+            foreach(Item item in _allItems)
+            {
+                item.Unlock(true);
+            }
         }
 
-        _selectedItems.Clear();
+        AnnounceItemSlotTotal?.Invoke(_itemSlots);
 
-        for(int i = 0; i < _itemSlots; i++)
+        _unlockedItems.Clear();
+        int index = 0;
+        for(int i = 0; i < _allItems.Length; i++)
         {
-            _selectedItems.Insert(i, _unlockedItems[i]);
+            if(_allItems[i].IsUnlocked)
+            {
+                _unlockedItems.Insert(index, _allItems[i]);
+                InventoryItemUI itemUI = Instantiate(_itemUIPrefab, _layoutGroupUI);
+                itemUI.Initialize(_allItems[i], index);
+                _itemUIs.Insert(index, itemUI);
+                index++;
+            }
         }
+        _lastSelectedItemUI = _itemUIs[0];
 
-        if(_selectedItems.Count > 0)
+        // TODO : Use _loadoutSO data for previously arranged items and update their .Index (also load saved data into _loadoutSO at game start)
+
+        if(isNewGamePlus)
         {
+            _selectedItems.Clear();
+
+            for(int i = 0; i < _itemSlots; i++)
+            {
+                if(i >= _unlockedItems.Count) { break; }
+                _selectedItems.Insert(i, _unlockedItems[i]);
+            }
+
+            if(_selectedItems.Count > 0)
+            {
+                OnLoadoutChanged?.Invoke(_selectedItems.ToArray());
+            }
+        }
+        else
+        {
+            _selectedItems.Clear();
+            _selectedItems.Insert(0, _unlockedItems[0]);
             OnLoadoutChanged?.Invoke(_selectedItems.ToArray());
         }
     }
@@ -150,15 +170,7 @@ public class Inventory : MonoBehaviour
         _itemImage.sprite = item.Icon;
         _itemTitleText.text = item.ItemName;
         _itemDescriptionText.text = item.Description;
-        if(item.IsTrap)
-        {
-            BuyableTrap trap = (BuyableTrap)item;
-            _itemStatsText.text = $"Damage : {trap.Trap.Damage}\nCost : {trap.Cost}";
-        }
-        else
-        {
-            _itemStatsText.text = $"Cost : {item.Cost}";
-        }
+        _itemStatsText.text = $"Damage : {item.Damage}\nCost : {item.Cost}";
     }
 
     void OptionsMenu_OnOptionsCanvasToggled(bool optionsEnabled)
