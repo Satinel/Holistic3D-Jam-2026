@@ -6,6 +6,7 @@ using TMPro;
 public class InventoryItemUI : MonoBehaviour
 {
     public static event Action<InventoryItemUI> OnAnyItemButtonPressed;
+    public static event Action<Item> OnAnyItemButtonSelected;
 
     [SerializeField] Image _icon, _highlight;
     [SerializeField] TextMeshProUGUI _nameText, _costText;

@@ -120,7 +120,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(_activeItem)
+        if(!_activeItem)
+        {
+            _ballModel.SetActive(false);
+        }
+        else
         {
             _ballModel.SetActive(!_activeItem.IsTrap);
         }
@@ -341,6 +345,7 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnMainPressed()
     {
+        if(!_activeItem) { return; }
         if(_isDead) { return; }
         if(Time.timeScale == 0) { return; }
 
@@ -380,6 +385,7 @@ public class PlayerController : MonoBehaviour
 
     void InputManager_OnSecondaryPressed()
     {
+        if(!_activeItem) { return; }
         if(_isAttacking) { return; }
         if(_isDead) { return; }
         if(Time.timeScale == 0) { return; }
@@ -504,6 +510,13 @@ public class PlayerController : MonoBehaviour
         _items = newLoadout;
 
         _itemIndex = _items.Length > _itemIndex ? _itemIndex : 0;
+
+        if(_items.Length <= 0)
+        {
+            _activeItem = null;
+            _activeTrap = null;
+            return;
+        }
 
         _activeItem = _items[_itemIndex];
         _activeTrap = _activeItem.IsTrap ? (BuyableTrap)_activeItem : null;
