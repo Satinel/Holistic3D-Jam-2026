@@ -19,6 +19,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] Transform _layoutGroupUI;
     [SerializeField] TextMeshProUGUI _itemTitleText, _itemStatsText, _itemDescriptionText;
     [SerializeField] Image _itemImage;
+    [SerializeField] Button _closeButton;
     [SerializeField] InventoryItemUI _itemUIPrefab;
 
     readonly List<Item> _unlockedItems = new();
@@ -53,15 +54,9 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        bool isNewGamePlus = false;
         if(_newGamePlusSO && _newGamePlusSO.IsNewGamePlus)
         {
-            isNewGamePlus = true;
-            _itemSlots = 10;
-            foreach(Item item in _allItems)
-            {
-                item.Unlock(true);
-            }
+            UnlockAll();
         }
 
         AnnounceItemSlotTotal?.Invoke(_itemSlots);
@@ -81,9 +76,11 @@ public class Inventory : MonoBehaviour
         }
         _lastSelectedItemUI = _itemUIs[0];
 
+        SetButtonNavigations();
+
         // TODO : Use _loadoutSO data for previously arranged items and update their .Index (also load saved data into _loadoutSO at game start)
 
-        if(isNewGamePlus)
+        if(_newGamePlusSO && _newGamePlusSO.IsNewGamePlus)
         {
             _selectedItems.Clear();
 
@@ -104,6 +101,40 @@ public class Inventory : MonoBehaviour
             _selectedItems.Insert(0, _unlockedItems[0]);
             OnLoadoutChanged?.Invoke(_selectedItems.ToArray());
         }
+    }
+
+    void UnlockAll()
+    {
+        _itemSlots = 10;
+        foreach(Item item in _allItems)
+        {
+            item.Unlock(true);
+        }
+    }
+
+    void SetButtonNavigations()
+    {
+        Button up = _closeButton;
+        Button down = _itemUIs.Count > 4 ? _itemUIs[4].Button : _closeButton;
+        _itemUIs[0].SetButtonNavigation(up, down, _itemUIs[^1].Button, _itemUIs[1].Button);
+
+        for(int i = 1; i < _itemUIs.Count - 1; i++)
+        {
+            down = _itemUIs.Count > i + 4 ? _itemUIs[i + 4].Button : _closeButton;
+            up = i > 3 ? _itemUIs[i - 4].Button : _closeButton;
+            _itemUIs[i].SetButtonNavigation(up, down, _itemUIs[i - 1].Button, _itemUIs[i + 1].Button);
+        }
+
+        up = _itemUIs.Count > 4 ? _itemUIs[^5].Button : _closeButton;
+        _itemUIs[^1].SetButtonNavigation(up, _closeButton, _itemUIs[^2].Button, _itemUIs[0].Button);
+
+        Navigation rebindNavigation = _closeButton.navigation;
+        rebindNavigation.mode = Navigation.Mode.Explicit;
+        rebindNavigation.selectOnUp = _itemUIs[^1].Button;
+        rebindNavigation.selectOnDown = _itemUIs[0].Button;
+        rebindNavigation.selectOnLeft = null;
+        rebindNavigation.selectOnRight = null;
+        _closeButton.navigation = rebindNavigation;
     }
 
     void InventoryItemUI_OnAnyItemButtonPressed(InventoryItemUI itemUI)

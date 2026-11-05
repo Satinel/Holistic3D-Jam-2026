@@ -10,6 +10,8 @@ public class InventoryItemUI : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     public static event Action<InventoryItemUI> OnAnyItemButtonSelected;
     public static event Action<Item, bool> OnAnyItemButtonPointedTo;
 
+    [field:SerializeField] public Button Button { get; private set; }
+
     [SerializeField] Image _icon, _highlight;
     [SerializeField] TextMeshProUGUI _nameText, _costText;
     [SerializeField] Color _trapColor, _baseColor;
@@ -31,6 +33,18 @@ public class InventoryItemUI : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         _nameText.text = _item.ItemName;
         _costText.text = _item.Cost <= 0 ? string.Empty : _item.Cost.ToString();
         _costText.color = _item.IsTrap ? _trapColor : _baseColor;
+    }
+
+    public void SetButtonNavigation(Button up, Button down, Button left, Button right)
+    {
+        Navigation rebindNavigation = Button.navigation;
+        rebindNavigation.mode = Navigation.Mode.Explicit;
+        rebindNavigation.selectOnUp = up;
+        rebindNavigation.selectOnDown = down;
+        rebindNavigation.selectOnLeft = left;
+        rebindNavigation.selectOnRight = right;
+
+        Button.navigation = rebindNavigation;
     }
 
     public void OnSelect(BaseEventData _)  // EventSystems ISelectHandler Interface
