@@ -33,6 +33,7 @@ public class Core : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if(!other.CompareTag(Trap.ENEMY_TAG)) { return; }
         if(_coreDestroyed) { return; }
 
         if(other.TryGetComponent(out Enemy enemy))

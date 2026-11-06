@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Socket PIvot (0)
       objectReference: {fileID: 0}
+    - target: {fileID: 1875393865556430757, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875393865556430757, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3738637742486998933, guid: b20c10887d9ac0e48b5c76774587bed0, type: 3}
       propertyPath: m_Name
       value: Wall Corner Tile (3)
@@ -840,7 +848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5238576022154706914, guid: f98cdc4b66a67214aab763e95be29178, type: 3}
       propertyPath: m_Name
-      value: 4x3 Corner Variant
+      value: 5x3 Corner Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6329921157846236608, guid: f98cdc4b66a67214aab763e95be29178, type: 3}
       propertyPath: m_LocalPosition.x

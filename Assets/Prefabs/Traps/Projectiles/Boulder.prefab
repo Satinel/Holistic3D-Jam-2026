@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8570537628615298523}
   - component: {fileID: 8537816170650173994}
   - component: {fileID: 1902491252070011444}
-  m_Layer: 4
+  m_Layer: 13
   m_Name: Boulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

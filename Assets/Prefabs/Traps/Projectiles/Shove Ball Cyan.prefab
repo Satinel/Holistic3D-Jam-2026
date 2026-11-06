@@ -103,7 +103,7 @@ SphereCollider:
   m_Material: {fileID: 13400000, guid: f028537db8da69c41a194d9fd92ba74a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8448
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -160,3 +160,4 @@ MonoBehaviour:
   _usePenetration: 1
   _destructionDelay: 5
   _particlesPrefab: {fileID: 7506962589691023094, guid: 418caf967a62cb34fa2d11fdc192d8c7, type: 3}
+  _hitSFX: []

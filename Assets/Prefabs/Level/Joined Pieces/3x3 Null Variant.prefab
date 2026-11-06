@@ -403,6 +403,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1341640542145195367, guid: 99535f3304b1b3f4f8268fa9792c934d, type: 3}
+      propertyPath: _objectsToEnable.Array.size
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341640542145195367, guid: 99535f3304b1b3f4f8268fa9792c934d, type: 3}
       propertyPath: '_objectsToEnable.Array.data[0]'
       value: 
       objectReference: {fileID: 7667904725914211393}
