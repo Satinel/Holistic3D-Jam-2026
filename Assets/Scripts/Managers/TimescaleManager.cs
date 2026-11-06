@@ -85,7 +85,7 @@ public class TimescaleManager : MonoBehaviour
     void LevelManager_OnLevelFailed()
     {
         _levelOver = true;
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         OnTimeScaleChanged?.Invoke(Time.timeScale);
     }
 

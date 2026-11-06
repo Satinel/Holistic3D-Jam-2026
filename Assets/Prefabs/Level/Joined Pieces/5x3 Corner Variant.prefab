@@ -854,6 +854,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6623400882602620607, guid: f98cdc4b66a67214aab763e95be29178, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9
+      objectReference: {fileID: 0}
     - target: {fileID: 6679576143062265676, guid: f98cdc4b66a67214aab763e95be29178, type: 3}
       propertyPath: m_Name
       value: 4x3 Ceiling

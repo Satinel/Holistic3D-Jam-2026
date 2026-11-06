@@ -9394,7 +9394,7 @@ MonoBehaviour:
   <CoreValue>k__BackingField: 1
   _drainDamage: 10
   _ragdollResist: 0
-  _isBoss: 0
+  _waypointOverride: -1
   _moveSpeed: 2.25
   _acceleration: 10
   _turnSpeed: 12
@@ -9529,7 +9529,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 3
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
