@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
     {
         if(_ragdollResist > 0) { return; }
         // if(_health.IsDead) { return; }                           // There's no reason not to ragdoll a dead enemy (except for performance but that seems fine)
-        if(!collision.gameObject.CompareTag("Trap")) { return; }
+        if(!collision.gameObject.CompareTag(Trap.TRAP_TAG)) { return; }
         if(collision.gameObject.GetComponent<Trap>()) { return; }   // This should only handle objects without attached Trap monobehaviours (like projectiles)
 
         float mass = collision.rigidbody ? collision.rigidbody.mass : 1;

@@ -11,6 +11,7 @@ public class Trap : MonoBehaviour
 {
     public static readonly int TRIGGER_HASH = Animator.StringToHash("Trigger");
     public static readonly string ENEMY_TAG = "Enemy";
+    public static readonly string TRAP_TAG = "Trap";
 
     public int SellPrice { get; protected set; } = 100;
 
