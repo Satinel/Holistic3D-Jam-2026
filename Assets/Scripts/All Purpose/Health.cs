@@ -4,8 +4,9 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public static event Action<Health> OnAnyHealthDeath;
+
     public event Action OnLoseHealth;
-    public event Action<Vector3, float> OnKnockBack;
+    // public event Action<Vector3, float> OnKnockBack;
     public event Action OnDeath;
     public event Action<int, int> OnHealthChanged;
 
@@ -15,15 +16,17 @@ public class Health : MonoBehaviour
     [field:SerializeField] public bool IsPlayer { get; private set; }
     [field:SerializeField] public int MoneyValue { get; private set; } = 10;
 
-    [SerializeField] int _maxHealth = 100, _healthPerSecond = 0;
+    [SerializeField] int _maxHealth = 100;
+    // [SerializeField] int _healthPerSecond = 0;
 
-    float _regenTimer;
+    // float _regenTimer;
     int _currentHealth;
-    bool _isDead, _isInvincible;
+    bool _isDead;
     public bool IsDead => _isDead;
-    public bool IsInvincible => _isInvincible;
-    public int CurrentHealth => _currentHealth;
-    public int MaxHealth => _maxHealth;
+    // bool _isInvincible;
+    // public bool IsInvincible => _isInvincible;
+    // public int CurrentHealth => _currentHealth;
+    // public int MaxHealth => _maxHealth;
 
     void Start()
     {
@@ -36,21 +39,21 @@ public class Health : MonoBehaviour
         OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 
-    void Update()
-    {
-        if(_isDead) { return; }
+    // void Update()
+    // {
+    //     if(_isDead) { return; }
 
-        if(_healthPerSecond > 0 && _currentHealth < _maxHealth)
-        {
-            _regenTimer += Time.deltaTime;
+    //     if(_healthPerSecond > 0 && _currentHealth < _maxHealth)
+    //     {
+    //         _regenTimer += Time.deltaTime;
 
-            if(_regenTimer > 1)
-            {
-                _regenTimer -= 1;
-                GainHealth(_healthPerSecond);
-            }
-        }
-    }
+    //         if(_regenTimer > 1)
+    //         {
+    //             _regenTimer -= 1;
+    //             GainHealth(_healthPerSecond);
+    //         }
+    //     }
+    // }
 
     public void LoseHealth(int lostAmount)
     {
@@ -68,34 +71,34 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void LoseHealthWithDisplay(int lostAmount, FloatingText floatingTextPrefab, Vector3 textPosition, Color textColor)
-    {
-        if(_isDead) { return; }
+    // public void LoseHealthWithDisplay(int lostAmount, FloatingText floatingTextPrefab, Vector3 textPosition, Color textColor)
+    // {
+    //     if(_isDead) { return; }
 
-        if(_isInvincible)
-        {
-            lostAmount = 0;
-        }
+    //     if(_isInvincible)
+    //     {
+    //         lostAmount = 0;
+    //     }
 
-        FloatingText floatingText = Instantiate(floatingTextPrefab, textPosition, Quaternion.identity);
-        floatingText.SetUpWithColor(lostAmount.ToString(), textColor);
+    //     FloatingText floatingText = Instantiate(floatingTextPrefab, textPosition, Quaternion.identity);
+    //     floatingText.SetUpWithColor(lostAmount.ToString(), textColor);
 
-        _currentHealth = Mathf.Max(_currentHealth - lostAmount, 0);
+    //     _currentHealth = Mathf.Max(_currentHealth - lostAmount, 0);
 
-        OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
+    //     OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
 
-        OnLoseHealth?.Invoke();
+    //     OnLoseHealth?.Invoke();
 
-        if(_currentHealth <= 0)
-        {
-            HandleDeath();
-        }
-    }
+    //     if(_currentHealth <= 0)
+    //     {
+    //         HandleDeath();
+    //     }
+    // }
 
-    public void KnockBack(Vector3 force, float duration)
-    {
-        OnKnockBack?.Invoke(force, duration);
-    }
+    // public void KnockBack(Vector3 force, float duration)
+    // {
+    //     OnKnockBack?.Invoke(force, duration);
+    // }
 
     public void GainHealth(int gainedAmount)
     {
@@ -120,10 +123,10 @@ public class Health : MonoBehaviour
         OnDeath?.Invoke();
     }
 
-    public void SetInvincibility(bool isInvincible)
-    {
-        _isInvincible = isInvincible;
-    }
+    // public void SetInvincibility(bool isInvincible)
+    // {
+    //     _isInvincible = isInvincible;
+    // }
 
     public void Kill()
     {

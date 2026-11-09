@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     float _ragddollTimer, _ragdollDuration, _crushedTimer, _startingScaleY, _squishedTimer, _startingScaleX, _stuckTimer;
     Transform _destination, _deferredDestination;
     BarricadeTrap _targetBarricade;
-    Health _playerHealth;
+    Health _attackTarget;
     Core _core;
 
     public Health EnemyHealth => _health;
@@ -134,10 +134,10 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if(_playerHealth && _isAttacking)
+        if(_attackTarget && _isAttacking)
         {
-            RotateTowardDestination(_playerHealth.AttackTargetPoint);
-            PositionBeams(_playerHealth.AttackTargetPoint);
+            RotateTowardDestination(_attackTarget.AttackTargetPoint);
+            PositionBeams(_attackTarget.AttackTargetPoint);
         }
         else
         {
@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour
             {
                 if(barricade)
                 {
-                    barricade.SufferAttack(this);
+                    StartAttack(barricade.Health);
                     _stuckTimer = 0;
                     return;
                 }
@@ -565,33 +565,30 @@ public class Enemy : MonoBehaviour
             _deferredDestination = _destination;
         }
         _targetBarricade = null;
-        SetDestination(attackPoint);
+        if(attackPoint != null) // Likely unnecessary precaution (this code is way too messy)
+        {
+            SetDestination(attackPoint);
+        }
         _targetBarricade = barricade;
     }
 
-    public void AttackBarricade(BarricadeTrap barricade)
-    {
-        // TODO Trigger animation and such
-        barricade.SufferAttack(this);
-    }
-
-    public void StartAttack(Health playerHealth)
+    public void StartAttack(Health target)
     {
         if(_isRagdolled || _isCrushed || _isSquished || _isAttacking || _health.IsDead) { return; }
 
         _navAgent.enabled = false;
-        _playerHealth = playerHealth;
+        _attackTarget = target;
         _isAttacking = true;
         _animator.SetBool(ATTACK_HASH, true);
     }
 
     public void DealDamage()
     {
-        if(!_playerHealth) { return; }
+        if(!_attackTarget) { return; }
 
         _leftBeam.gameObject.SetActive(true);
         _rightBeam.gameObject.SetActive(true);
-        _playerHealth.LoseHealth(_drainDamage);
+        _attackTarget.LoseHealth(_drainDamage);
     }
 
     public void StopAttack()
@@ -614,7 +611,7 @@ public class Enemy : MonoBehaviour
 
     void Health_OnAnyHealthDeath(Health health)
     {
-        if(_playerHealth && health == _playerHealth)
+        if(_attackTarget && health == _attackTarget)
         {
             StopAttack();
         }

@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: -5151416961225727800}
   - component: {fileID: 5320037039668316710}
   - component: {fileID: 4994454167024305095}
+  - component: {fileID: 6627324376663790025}
   m_Layer: 3
   m_Name: Barricade
   m_TagString: Trap
@@ -128,6 +129,7 @@ Transform:
   - {fileID: 5720508873903215774}
   - {fileID: 3684948479989301463}
   - {fileID: 699964791446769695}
+  - {fileID: 7793428166478392785}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3925305361766464066
@@ -206,11 +208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ae18b8fef02d044be1cd12f81bc031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarricadeTrap
-  <SellPrice>k__BackingField: 100
   <RangeRenderer>k__BackingField: {fileID: 8608627943440259535}
   <HighlightModel>k__BackingField: {fileID: 7873773693379943965}
   <RechargeTime>k__BackingField: 0
-  <Damage>k__BackingField: 0
   <RagdollDuration>k__BackingField: 0
   <ForceMode>k__BackingField: 1
   _animator: {fileID: 0}
@@ -220,6 +220,24 @@ MonoBehaviour:
   - {fileID: 5592132393192423957}
   - {fileID: 6684931012195034353}
   - {fileID: 2741014644651062615}
+  <Health>k__BackingField: {fileID: 6627324376663790025}
+--- !u!114 &6627324376663790025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528876823167001106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62bf296e6de2e12438fed4bf86619b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  <AttackTargetPoint>k__BackingField: {fileID: 7793428166478392785}
+  <IsPlayer>k__BackingField: 0
+  <MoneyValue>k__BackingField: 0
+  _maxHealth: 100
+  _healthPerSecond: 0
 --- !u!1 &2432030932001931255
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +268,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3684948479989301463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4313254291742269529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7793428166478392785}
+  m_Layer: 3
+  m_Name: Health Target Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7793428166478392785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4313254291742269529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4450654176597003183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4859185640136237852
 GameObject:

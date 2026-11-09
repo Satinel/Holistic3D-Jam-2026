@@ -163,9 +163,9 @@ public class EnemySpawner : MonoBehaviour
         _checkDelayCoroutine = StartCoroutine(BarricadePlacementDelayRoutine(newBarricade));
     }
 
-    void BarricadeTrap_OnAnyBarricadeDestroyed(BarricadeTrap newBarricade)
+    void BarricadeTrap_OnAnyBarricadeDestroyed(BarricadeTrap destroyedBarricade)
     {
-        if(_targetBarricade == newBarricade)
+        if(_targetBarricade == destroyedBarricade)
         {
             _targetBarricade = null;
             _barricadeAttackPoint = null;
@@ -176,7 +176,7 @@ public class EnemySpawner : MonoBehaviour
             StopCoroutine(_checkDelayCoroutine);
         }
 
-        _checkDelayCoroutine = StartCoroutine(BarricadePlacementDelayRoutine(newBarricade));
+        _checkDelayCoroutine = StartCoroutine(BarricadePlacementDelayRoutine(destroyedBarricade));
     }
 
     IEnumerator BarricadePlacementDelayRoutine(BarricadeTrap newBarricade)

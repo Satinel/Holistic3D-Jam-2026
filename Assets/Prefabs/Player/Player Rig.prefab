@@ -3602,7 +3602,7 @@ MonoBehaviour:
   <IsTrap>k__BackingField: 1
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 0
-  <Cost>k__BackingField: 125
+  <Cost>k__BackingField: 80
   <Icon>k__BackingField: {fileID: 21300000, guid: 4d66630f23d47fc44bcde0dd98328fbb, type: 3}
   <ItemName>k__BackingField: Barrier
   <Description>k__BackingField: 

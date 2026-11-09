@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        _myHealth.OnLoseHealth += _myHealth_OnLoseHealth;
+        _myHealth.OnLoseHealth += PlayerHealth_OnLoseHealth;
         _myHealth.OnDeath += MyHealth_OnDeath;
 
         Inventory.OnLoadoutChanged += Inventory_OnLoadoutChanged;
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     void OnDestroy()
     {
-        _myHealth.OnLoseHealth += _myHealth_OnLoseHealth;
+        _myHealth.OnLoseHealth -= PlayerHealth_OnLoseHealth;
         _myHealth.OnDeath -= MyHealth_OnDeath;
 
         Inventory.OnLoadoutChanged -= Inventory_OnLoadoutChanged;
@@ -469,7 +469,7 @@ public class PlayerController : MonoBehaviour
         OnActiveItemChanged?.Invoke(_itemIndex, _activeTrap && _activeTrap.TrapPreview.CanRotate);
     }
 
-    void _myHealth_OnLoseHealth()
+    void PlayerHealth_OnLoseHealth()
     {
         _audioSource.PlayOneShot(_hurtSFX);
     }
