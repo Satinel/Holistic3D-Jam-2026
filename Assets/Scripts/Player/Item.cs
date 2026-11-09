@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public event Action OnItemUsed;
+
     [field:SerializeField] public bool IsTrap { get; protected set; }
     [field:SerializeField] public bool IsUnlocked { get; protected set; }
     [field:SerializeField] public int Damage { get; protected set; } = 5;
@@ -29,5 +32,6 @@ public class Item : MonoBehaviour
     public void SetWasUsed(bool wasUsed)
     {
         WasUsed = wasUsed;
+        OnItemUsed?.Invoke();
     }
 }
