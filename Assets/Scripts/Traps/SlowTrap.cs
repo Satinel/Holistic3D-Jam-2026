@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class SlowTrap : Trap
+public class SlowTrap : Trap, ISapable
 {
     [SerializeField] GameObject _slowField;
 
-    float _timer = 0;
+    float _timer = 0, _sapTimer = 0;
+    bool _isDisabled;
 
     void OnTriggerEnter(Collider other)
     {
+        if(_isDisabled) { return; }
         if(!other.CompareTag(ENEMY_TAG)) { return; }
 
         Enemy detectedEnemy = null;
@@ -20,14 +22,12 @@ public class SlowTrap : Trap
         if(detectedEnemy == null || detectedEnemy.EnemyHealth.IsDead) { return; }
 
         _timer = 0;
-        _slowField.SetActive(true);
 
-        if(!_audioSource.isPlaying)
+        if(!_slowField.activeSelf)
         {
-            _audioSource.Stop();
+            _slowField.SetActive(true);
+            _audioSource.Play();
         }
-
-        _audioSource.Play();
 
         HitEnemy(detectedEnemy);
     }
@@ -50,6 +50,21 @@ public class SlowTrap : Trap
 
     void Update()
     {
+        if(_isDisabled)
+        {
+            _sapTimer += Time.deltaTime;
+
+            if(_sapTimer >= 0)
+            {
+                _sapTimer = 0;
+                _isDisabled = false;
+            }
+            else
+            {
+                return;
+            }
+        }
+
         if(_timer < RechargeTime)
         {
             _timer += Time.deltaTime;
@@ -69,5 +84,12 @@ public class SlowTrap : Trap
     void ReleaseEnemy(Enemy enemy)
     {
         enemy.RecoverFromSlow();
+    }
+
+    public void Sap(float duration)
+    {
+        _slowField.SetActive(false);
+        _isDisabled = true;
+        _sapTimer -= duration;
     }
 }

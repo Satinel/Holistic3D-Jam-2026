@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CannonTrap : Trap
+public class CannonTrap : Trap, ISapable
 {
     [SerializeField] float _forceMultiplyer = 50f;
     [SerializeField] Cannonball _cannonballPrefab;
@@ -57,5 +57,10 @@ public class CannonTrap : Trap
     protected override void LevelManager_OnWaveStarted()
     {
         _canFire = true;
+    }
+
+    public void Sap(float duration)
+    {
+        _timer -= duration;
     }
 }

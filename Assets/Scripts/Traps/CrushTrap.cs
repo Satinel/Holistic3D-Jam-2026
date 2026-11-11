@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CrushTrap : Trap
+public class CrushTrap : Trap, ISapable
 {
     [SerializeField] float _enemyCrushScale = 0.15f, _crushDuration = 1.75f;
     bool _isRecharging, _hasTriggered;
@@ -66,5 +66,11 @@ public class CrushTrap : Trap
     protected override void LevelManager_OnWaveStarted()
     {
         _timer = RechargeTime;
+    }
+
+    public void Sap(float duration)
+    {
+        _isRecharging = true;
+        _timer -= duration;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwingTrap : Trap
+public class SwingTrap : Trap, ISapable
 {
     [SerializeField] Transform _swing;
     [SerializeField] float _forceMultiplyer = 15f, _swingSpeed = 50f, _maxRotation = 270f, _minRotation = 90f, _sfxDelay = 0.9f;
@@ -72,5 +72,10 @@ public class SwingTrap : Trap
         {
             enemy.EnemyHealth.LoseHealth(Damage);
         }
+    }
+
+    public void Sap(float duration)
+    {
+        _timer -= duration;
     }
 }

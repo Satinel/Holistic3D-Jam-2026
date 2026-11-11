@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZapTrap : Trap
+public class ZapTrap : Trap, ISapable
 {
     [SerializeField] MeshRenderer _modelRenderer;
 
@@ -135,5 +135,10 @@ public class ZapTrap : Trap
     {
         _isActive = true;
         _timer = RechargeTime;
+    }
+
+    public void Sap(float duration)
+    {
+        _timer -= duration;
     }
 }

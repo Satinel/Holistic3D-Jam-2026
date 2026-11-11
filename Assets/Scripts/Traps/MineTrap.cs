@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MineTrap : Trap
+public class MineTrap : Trap, ISapable
 {
     [SerializeField] float _forceMultiplyer = 50f;
     [SerializeField] GameObject _mine;
@@ -73,5 +73,12 @@ public class MineTrap : Trap
     protected override void LevelManager_OnWaveStarted()
     {
         _timer = RechargeTime;
+    }
+
+    public void Sap(float duration)
+    {
+        _mainCollider.enabled = false;
+        _isRecharging = true;
+        _timer -= duration;
     }
 }

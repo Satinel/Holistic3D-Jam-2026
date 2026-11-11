@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpringTrap : Trap
+public class SpringTrap : Trap, ISapable
 {
     [SerializeField] float _forceMultiplyer;
 
@@ -73,5 +73,11 @@ public class SpringTrap : Trap
     protected override void LevelManager_OnWaveStarted()
     {
         _timer = RechargeTime;
+    }
+
+    public void Sap(float duration)
+    {
+        _isRecharging = true;
+        _timer -= duration;
     }
 }

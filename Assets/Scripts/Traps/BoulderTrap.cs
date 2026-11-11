@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BoulderTrap : Trap
+public class BoulderTrap : Trap, ISapable
 {
     [SerializeField] float _boulderDestroyTime = 2.5f, _forceMultiplyer = 50f, _enemyCrushScale = 0.15f, _crushDuration = 1.25f;
     [SerializeField] GameObject _boulderPrefab;
@@ -69,5 +69,10 @@ public class BoulderTrap : Trap
     protected override void LevelManager_OnWaveStarted()
     {
         _canFire = true;
+    }
+
+    public void Sap(float duration)
+    {
+        _timer -= duration;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SquishTrap : Trap
+public class SquishTrap : Trap, ISapable
 {
     [SerializeField] float _enemySquishScale = 0.15f, _squishDuration = 1.75f;
 
@@ -67,5 +67,11 @@ public class SquishTrap : Trap
     protected override void LevelManager_OnWaveStarted()
     {
         _timer = RechargeTime;
+    }
+
+    public void Sap(float duration)
+    {
+        _isRecharging = true;
+        _timer -= duration;
     }
 }
