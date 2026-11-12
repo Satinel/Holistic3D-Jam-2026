@@ -7,11 +7,6 @@ public enum TrapPosition
     Ceiling,
 }
 
-interface ISapable
-{
-    public void Sap(float duration);
-}
-
 public class Trap : MonoBehaviour
 {
     public static readonly int TRIGGER_HASH = Animator.StringToHash("Trigger");

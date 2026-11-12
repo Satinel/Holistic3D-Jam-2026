@@ -2,30 +2,31 @@ using UnityEngine;
 
 public class Sapper : MonoBehaviour
 {
-    [SerializeField] float _sapDuration = 3.75f;
-    [SerializeField] float _sapRadius = 10f;
-    [SerializeField] Health _myHealth;
+    [SerializeField] float _sapDuration = 3.75f, _maxSize = 10, _scaleRate = 4.5f;
 
-    void Awake()
+    void OnTriggerEnter(Collider collider)
     {
-        _myHealth.OnDeath += Health_OnDeath;
-    }
-
-    void OnDestroy()
-    {
-        _myHealth.OnDeath -= Health_OnDeath;
-    }
-
-    void Health_OnDeath()
-    {
-        Collider[] traps = Physics.OverlapSphere(transform.position, _sapRadius);   // TODO ? Replace with instantiating a sphere collider at transform.position which uses OnTriggerEnter (plus particle system)
-
-        foreach(Collider trap in traps)
+        if(collider.TryGetComponent(out ISapable sapable))
         {
-            if(trap.TryGetComponent(out ISapable sapable))
-            {
-                sapable.Sap(_sapDuration);
-            }
+            sapable.Sap(_sapDuration);
         }
+    }
+
+    void Update()
+    {
+        float size = Mathf.MoveTowards(transform.localScale.x, _maxSize, _scaleRate * Time.deltaTime);
+
+        transform.localScale = Vector3.one * size;
+
+        if(size >= _maxSize)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void Initialize(float duration, float radius)
+    {
+        _sapDuration = duration;
+        _maxSize = radius;
     }
 }

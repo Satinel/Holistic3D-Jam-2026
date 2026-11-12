@@ -7,7 +7,7 @@ public class SwingTrap : Trap, ISapable
     [SerializeField] AudioClip[] _hitSFX;
 
     float _timer, _sfxTimer;
-    bool _isIncreasing, _isPaused;
+    bool _isIncreasing, _isPaused, _isSapped;
     Vector3 _forceDirection = new();
 
     void Update()
@@ -15,6 +15,20 @@ public class SwingTrap : Trap, ISapable
         if(_sfxTimer > 0)
         {
             _sfxTimer = Mathf.Max(0, _sfxTimer - Time.deltaTime);
+        }
+
+        if(_isSapped)
+        {
+            _timer += Time.deltaTime;
+            if(_timer >= 0)
+            {
+                _timer = 0;
+                _isSapped = false;
+            }
+            else
+            {
+                return;
+            }
         }
 
         if(_isPaused)
@@ -61,6 +75,8 @@ public class SwingTrap : Trap, ISapable
 
     public override void HitEnemy(Enemy enemy)
     {
+        if(_isSapped) { return; }
+
         if(_sfxTimer <= 0)
         {
             _audioSource.PlayOneShot(_hitSFX[Random.Range(0, _hitSFX.Length)]);
@@ -76,6 +92,7 @@ public class SwingTrap : Trap, ISapable
 
     public void Sap(float duration)
     {
+        _isSapped = true;
         _timer -= duration;
     }
 }
