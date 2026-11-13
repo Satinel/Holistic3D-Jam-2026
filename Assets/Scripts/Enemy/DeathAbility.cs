@@ -20,6 +20,6 @@ public class DeathAbility : MonoBehaviour
     void Health_OnDeath()
     {
         Sapper sapper = Instantiate(_sapperPrefab, transform.position, Quaternion.identity);
-        sapper.Initialize(_sapDuration, _sapRadius);
+        sapper.Initialize(_sapDuration, _sapRadius, transform);
     }
 }

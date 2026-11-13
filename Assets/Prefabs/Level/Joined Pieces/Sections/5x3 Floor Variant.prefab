@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1723823936967980634, guid: 2fd3cfb621c4cd6489c01ace8fca8cf4, type: 3}
       propertyPath: m_Size.x
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1723823936967980634, guid: 2fd3cfb621c4cd6489c01ace8fca8cf4, type: 3}
       propertyPath: m_Center.x
@@ -135,7 +135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6560476124820848629, guid: 3445bc2f9db914b408f12284171fbf68, type: 3}
       propertyPath: m_Size.x
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6560476124820848629, guid: 3445bc2f9db914b408f12284171fbf68, type: 3}
       propertyPath: m_Center.x
@@ -231,7 +231,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1723823936967980634, guid: 2fd3cfb621c4cd6489c01ace8fca8cf4, type: 3}
       propertyPath: m_Size.x
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1723823936967980634, guid: 2fd3cfb621c4cd6489c01ace8fca8cf4, type: 3}
       propertyPath: m_Center.x
@@ -397,6 +397,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4358402011676540786, guid: ee1c0b974471add44b9d44820150281f, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4588466231529304826, guid: ee1c0b974471add44b9d44820150281f, type: 3}
       propertyPath: m_Name
       value: Floor Tile (4)
@@ -419,7 +423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7548307204497120574, guid: ee1c0b974471add44b9d44820150281f, type: 3}
       propertyPath: m_Name
-      value: 4x3 Floor Variant
+      value: 5x3 Floor Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7734176937818964828, guid: ee1c0b974471add44b9d44820150281f, type: 3}
       propertyPath: m_Name
