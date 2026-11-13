@@ -135,15 +135,15 @@ public class LevelManager : MonoBehaviour
     {
         if(_isLoading) { return; }
 
-        if(_newGamePlusSO)
+        _loadCanvas.enabled = true;
+        _isLoading = true;
+        OnSceneChangeStarted?.Invoke();
+        int nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
+
+        if(nextSceneIndex == 0 && _newGamePlusSO)
         {
             _newGamePlusSO.SetNewGamePlus();
         }
-
-        _loadCanvas.enabled = true;
-        OnSceneChangeStarted?.Invoke();
-        _isLoading = true;
-        int nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
 
         SceneManager.LoadScene(nextSceneIndex);
     }
@@ -152,8 +152,9 @@ public class LevelManager : MonoBehaviour
     {
         if(_isLoading) { return; }
 
-        OnSceneChangeStarted?.Invoke();
+        _splashCanvas.enabled = true;
         _isLoading = true;
+        OnSceneChangeStarted?.Invoke();
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

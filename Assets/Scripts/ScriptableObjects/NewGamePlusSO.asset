@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c9950032638ec45ac66472f753d603, type: 3}
   m_Name: NewGamePlusSO
   m_EditorClassIdentifier: Assembly-CSharp::NewGamePlusSO
-  <IsNewGamePlus>k__BackingField: 1
+  <IsNewGamePlus>k__BackingField: 0

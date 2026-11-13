@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: LoadoutSO
   m_EditorClassIdentifier: Assembly-CSharp::LoadoutSO
   <Slot0>k__BackingField: 0
-  <Slot1>k__BackingField: 1
-  <Slot2>k__BackingField: 2
-  <Slot3>k__BackingField: 3
-  <Slot4>k__BackingField: 4
-  <Slot5>k__BackingField: 5
-  <Slot6>k__BackingField: 6
-  <Slot7>k__BackingField: 7
-  <Slot8>k__BackingField: 8
-  <Slot9>k__BackingField: 9
+  <Slot1>k__BackingField: -1
+  <Slot2>k__BackingField: -1
+  <Slot3>k__BackingField: -1
+  <Slot4>k__BackingField: -1
+  <Slot5>k__BackingField: -1
+  <Slot6>k__BackingField: -1
+  <Slot7>k__BackingField: -1
+  <Slot8>k__BackingField: -1
+  <Slot9>k__BackingField: -1
+  <HasSavedData>k__BackingField: 0

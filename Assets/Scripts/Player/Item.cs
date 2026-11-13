@@ -14,6 +14,7 @@ public class Item : MonoBehaviour
     [field:SerializeField] public string Description { get; protected set; } = string.Empty;
 
     public int Index { get; protected set; } = -1;
+    public int Slot { get; protected set; } = -1;
     public bool WasUsed { get; protected set; }
 
     public virtual void PrimaryAction(Vector3 direction){}
@@ -27,6 +28,11 @@ public class Item : MonoBehaviour
     public void SetIndex(int newIndex)
     {
         Index = newIndex;
+    }
+
+    public void SetItemSlot(int newSlot)
+    {
+        Slot = newSlot;
     }
 
     public void SetWasUsed(bool wasUsed)

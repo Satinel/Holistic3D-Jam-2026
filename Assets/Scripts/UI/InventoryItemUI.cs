@@ -36,7 +36,7 @@ public class InventoryItemUI : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     public void Initialize(Item item, int index)
     {
         _item = item;
-        _item.SetIndex(index);
+        _item.SetItemSlot(index);
         _icon.sprite = _item.Icon;
         _nameText.text = _item.ItemName;
         _costText.text = _item.Cost <= 0 ? string.Empty : _item.Cost.ToString();

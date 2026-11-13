@@ -39,6 +39,7 @@ public class Inventory : MonoBehaviour
         OptionsMenu.OnOptionsCanvasToggled += OptionsMenu_OnOptionsCanvasToggled;
         LevelManager.OnLevelCompleted += SetLevelOver;
         LevelManager.OnLevelFailed += SetLevelOver;
+        LevelManager.OnSceneChangeStarted += LevelManager_OnSceneChangeStarted;
     }
 
     void OnDestroy()
@@ -50,6 +51,7 @@ public class Inventory : MonoBehaviour
         OptionsMenu.OnOptionsCanvasToggled -= OptionsMenu_OnOptionsCanvasToggled;
         LevelManager.OnLevelCompleted -= SetLevelOver;
         LevelManager.OnLevelFailed -= SetLevelOver;
+        LevelManager.OnSceneChangeStarted -= LevelManager_OnSceneChangeStarted;
     }
 
     void Start()
@@ -67,6 +69,7 @@ public class Inventory : MonoBehaviour
         {
             if(_allItems[i].IsUnlocked)
             {
+                _allItems[i].SetIndex(i);
                 _unlockedItems.Insert(index, _allItems[i]);
                 InventoryItemUI itemUI = Instantiate(_itemUIPrefab, _layoutGroupUI);
                 itemUI.Initialize(_allItems[i], index);
@@ -78,16 +81,20 @@ public class Inventory : MonoBehaviour
 
         SetButtonNavigations();
 
-        // TODO : Use _loadoutSO data for previously arranged items and update their .Index (also load saved data into _loadoutSO at game start)
-
-        if(_newGamePlusSO && _newGamePlusSO.IsNewGamePlus)
+        if(_loadoutSO && _loadoutSO.HasSavedData)
         {
             _selectedItems.Clear();
 
             for(int i = 0; i < _itemSlots; i++)
             {
                 if(i >= _unlockedItems.Count) { break; }
-                _selectedItems.Insert(i, _unlockedItems[i]);
+
+                int slotValue = _loadoutSO.GetSlotValue(i);
+
+                if(slotValue < 0 || slotValue > _allItems.Length) { break; }
+
+                _selectedItems.Insert(i, _allItems[slotValue]);
+                _selectedItems[i].SetItemSlot(i);
             }
 
             if(_selectedItems.Count > 0)
@@ -139,7 +146,7 @@ public class Inventory : MonoBehaviour
 
     void InventoryItemUI_OnAnyItemButtonPressed(InventoryItemUI itemUI)
     {
-        if(itemUI.Item.Index < 0)
+        if(itemUI.Item.Slot < 0)
         {
             // itemUI and Item would (somehow) not be initialized properly in this case
             return;
@@ -152,7 +159,7 @@ public class Inventory : MonoBehaviour
                 return;
             }
 
-            itemUI.Item.SetIndex(_selectedItems.Count);   // This has to happen before the .Insert or else the new index will be off by one
+            itemUI.Item.SetItemSlot(_selectedItems.Count);   // This has to happen before the .Insert or else the new ItemSlot will be off by one
             _selectedItems.Insert(_selectedItems.Count, itemUI.Item);
         }
         else
@@ -163,12 +170,12 @@ public class Inventory : MonoBehaviour
                 return;
             }
 
-            int changedIndex = itemUI.Item.Index;
+            int changedSlot = itemUI.Item.Slot;
 
-            _selectedItems.RemoveAt(changedIndex);
-            for(int i = changedIndex; i < _selectedItems.Count; i++)
+            _selectedItems.RemoveAt(changedSlot);
+            for(int i = changedSlot; i < _selectedItems.Count; i++)
             {
-                _selectedItems[i].SetIndex(i);
+                _selectedItems[i].SetItemSlot(i);
             }
         }
         OnLoadoutChanged?.Invoke(_selectedItems.ToArray());
@@ -217,6 +224,24 @@ public class Inventory : MonoBehaviour
     void SetLevelOver()
     {
         _levelOver = true;
+    }
+
+    void LevelManager_OnSceneChangeStarted()
+    {
+        if(_loadoutSO)
+        {
+            for(int i = 0; i < _itemSlots; i++)
+            {
+                if(i > _selectedItems.Count - 1)
+                {
+                    _loadoutSO.SetSlotValue(i, -1);
+                }
+                else
+                {
+                    _loadoutSO.SetSlotValue(i, _selectedItems[i].Index);
+                }
+            }
+        }
     }
 
     public void ToggleInventoryCanvas()

@@ -23,7 +23,7 @@ public class OptionsMenu : MonoBehaviour
     void Awake()
     {
         InputManager.OnOptionsPressed += ToggleOptionsCanvas;
-        LevelManager.OnSceneChangeStarted += LevelManager_OnScenChangeStarted;
+        LevelManager.OnSceneChangeStarted += LevelManager_OnSceneChangeStarted;
 
         LoadCameraOptionValues();
     }
@@ -31,7 +31,7 @@ public class OptionsMenu : MonoBehaviour
     void OnDestroy()
     {
         InputManager.OnOptionsPressed -= ToggleOptionsCanvas;
-        LevelManager.OnSceneChangeStarted -= LevelManager_OnScenChangeStarted;
+        LevelManager.OnSceneChangeStarted -= LevelManager_OnSceneChangeStarted;
     }
 
     void LoadCameraOptionValues()
@@ -189,9 +189,9 @@ public class OptionsMenu : MonoBehaviour
     {
         if(_sceneChanging) { return; }
 
-        DisableOptionsCanvas();
         _sceneChanging = true;
         OnRestartRequested?.Invoke();
+        DisableOptionsCanvas();
     }
 
     public void PromptQuit()
@@ -213,7 +213,7 @@ public class OptionsMenu : MonoBehaviour
         Application.Quit();
     }
 
-    void LevelManager_OnScenChangeStarted()
+    void LevelManager_OnSceneChangeStarted()
     {
         _sceneChanging = true;
     }

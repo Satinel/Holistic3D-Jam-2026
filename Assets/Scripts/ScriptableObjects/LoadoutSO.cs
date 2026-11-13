@@ -14,6 +14,8 @@ public class LoadoutSO : ScriptableObject
     [field:SerializeField] public int Slot8 { get; private set; }
     [field:SerializeField] public int Slot9 { get; private set; }
 
+    [field:SerializeField]public  bool HasSavedData { get; private set; }
+
     public void SetSlotValue(int slot, int value)
     {
         switch(slot)
@@ -51,6 +53,8 @@ public class LoadoutSO : ScriptableObject
             default:
                 break;
         }
+
+        HasSavedData = true;
     }
 
     public int GetSlotValue(int slot)
