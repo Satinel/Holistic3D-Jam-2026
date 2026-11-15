@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] EnemySpawner[] _spawners;
     [SerializeField] int[] _waveRewards;
     [SerializeField] TextMeshProUGUI _nextLevelText, _restartText;
+    [SerializeField] TextMeshProUGUI _nextLevelGamepadText, _restartGamepadText;
     [SerializeField] NewGamePlusSO _newGamePlusSO;
 
     bool _wavesActive, _levelWon, _levelLost, _isLoading = true, _hasStarted, _isInOptions, _isInInventory;
@@ -35,6 +36,7 @@ public class LevelManager : MonoBehaviour
         Enemy.OnAnyEnemySpawned += Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed += Enemy_OnAnyEnemyDestroyed;
         Core.OnCoreDestroyed += Core_OnCoreDestroyed;
+        DisplayKeybinds.OnInputDeviceChanged += DisplayKeybinds_OnInputDeviceChanged;
     }
 
     void OnDestroy()
@@ -47,6 +49,7 @@ public class LevelManager : MonoBehaviour
         Enemy.OnAnyEnemySpawned -= Enemy_OnAnyEnemySpawned;
         Enemy.OnAnyEnemyDestroyed -= Enemy_OnAnyEnemyDestroyed;
         Core.OnCoreDestroyed -= Core_OnCoreDestroyed;
+        DisplayKeybinds.OnInputDeviceChanged -= DisplayKeybinds_OnInputDeviceChanged;
 
         _eventListener?.Dispose();
         _eventListener = null;
@@ -79,10 +82,13 @@ public class LevelManager : MonoBehaviour
 
     void SetUnleashTexts()
     {
-        int index = 0;  // TODO Set up determining which control scheme is used and set index appropriately (0 for keyboard/mouse and 1 for gamepad)
-        string unleashBind = _unleashAction.GetBindingDisplayString(index, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        string unleashBind = _unleashAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
         _nextLevelText.text = $"Press {unleashBind} For Next Level";
         _restartText.text = $"Press {unleashBind} To Restart";
+
+        string unleashGamepadBind = _unleashAction.GetBindingDisplayString(1, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        _nextLevelGamepadText.text = $"Press {unleashGamepadBind} For Next Level";
+        _restartGamepadText.text = $"Press {unleashGamepadBind} To Restart";
     }
 
     void InputManager_OnUnleashPressed()
@@ -206,5 +212,14 @@ public class LevelManager : MonoBehaviour
         SetUnleashTexts();
         _loseCanvas.enabled = true;
         _levelLost = true;
+    }
+
+    void DisplayKeybinds_OnInputDeviceChanged(bool showKeyboard)
+    {
+        _nextLevelText.gameObject.SetActive(showKeyboard);
+        _restartText.gameObject.SetActive(showKeyboard);
+
+        _nextLevelGamepadText.gameObject.SetActive(!showKeyboard);
+        _restartGamepadText.gameObject.SetActive(!showKeyboard);
     }
 }

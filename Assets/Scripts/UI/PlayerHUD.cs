@@ -8,13 +8,14 @@ public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _healthText, _manaText, _moneyText, _coreText, _wavesText, _tiredText;
     [SerializeField] TextMeshProUGUI _unleashText, _rotateText, _sellText, _inventoryText;
+    [SerializeField] TextMeshProUGUI _unleashGamepadText, _rotateGamepadText, _sellGamepadText, _inventoryGamepadText;
     [SerializeField] Slider _healthSlider, _manaSlider;
     [SerializeField] PlayerController _player;
     [SerializeField] GameObject[] _icons;
     [SerializeField] Image[] _iconImages;
     [SerializeField] TextMeshProUGUI[] _iconCostTexts;
     [SerializeField] Image[] _iconHighlights;
-    [SerializeField] GameObject _nextWaveMessage, _canRotateMessage, _canSellMessage, _tiredMessage, _newPortalMessage;
+    [SerializeField] GameObject _nextWaveMessage, _canRotateMessage, _canSellMessage, _tiredMessage, _newPortalMessage, _inventoryMessage;
     [SerializeField] Color _trapColor, _baseColor;
     [SerializeField] Image _painVignette;
     [SerializeField] float _tiredAlphaDepletionRate = 0.05f, _painAlphaDepletionRate = 0.025f;
@@ -243,6 +244,16 @@ public class PlayerHUD : MonoBehaviour
         _rotateText.text = $"Press {secondaryBind} To Rotate";
         _sellText.text = $"Press {sellBind} To Sell";
         _inventoryText.text = $"Press {invBind} To Select Traps";
+
+        string unleashGamepad = unleashAction.GetBindingDisplayString(1, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        string secondaryGamepad = secondaryAction.GetBindingDisplayString(1, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        string sellGamepad = sellAction.GetBindingDisplayString(1, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        string invGamepad = invAction.GetBindingDisplayString(1, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+
+        _unleashGamepadText.text = $"Press {unleashGamepad} to Start Wave";
+        _rotateGamepadText.text = $"Press {secondaryGamepad} To Rotate";
+        _sellGamepadText.text = $"Press {sellGamepad} To Sell";
+        _inventoryGamepadText.text = $"Press {invGamepad} To Select Traps";
     }
 
 
@@ -250,7 +261,7 @@ public class PlayerHUD : MonoBehaviour
     {
         if(enabled)
         {
-            _inventoryText.gameObject.SetActive(false);
+            _inventoryMessage.SetActive(false);
         }
     }
 }
