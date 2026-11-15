@@ -208,7 +208,8 @@ public class Inventory : MonoBehaviour
         _itemImage.sprite = item.Icon;
         _itemTitleText.text = item.ItemName;
         _itemDescriptionText.text = item.Description;
-        _itemStatsText.text = $"Damage : {item.Damage}\nCost : {item.Cost}";
+        // _itemStatsText.text = $"Damage : {item.Damage}\nCost : {item.Cost}";
+        _itemStatsText.SetText("Damage : {0}\nCost : {1}", item.Damage, item.Cost);    // Supposedly this is better because garbage collection or something
     }
 
     void OptionsMenu_OnOptionsCanvasToggled(bool optionsEnabled)
