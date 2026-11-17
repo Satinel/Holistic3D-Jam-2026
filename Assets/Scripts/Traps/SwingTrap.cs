@@ -3,6 +3,7 @@ using UnityEngine;
 public class SwingTrap : Trap, ISapable
 {
     [SerializeField] Transform _swing;
+    [SerializeField] GameObject _sappedSwing;
     [SerializeField] float _forceMultiplyer = 15f, _swingSpeed = 50f, _maxRotation = 270f, _minRotation = 90f, _sfxDelay = 0.9f;
     [SerializeField] AudioClip[] _hitSFX;
 
@@ -24,6 +25,7 @@ public class SwingTrap : Trap, ISapable
             {
                 _timer = 0;
                 _isSapped = false;
+                _sappedSwing.SetActive(false);
             }
             else
             {
@@ -94,5 +96,6 @@ public class SwingTrap : Trap, ISapable
     {
         _isSapped = true;
         _timer -= duration;
+        _sappedSwing.SetActive(true);
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class MineTrap : Trap, ISapable
 {
     [SerializeField] float _forceMultiplyer = 50f;
-    [SerializeField] GameObject _mine;
+    [SerializeField] GameObject _mine, _sappedMine;
     [SerializeField] Payload _explosionRadius;
     [SerializeField] Collider _mainCollider;
 
@@ -80,5 +80,6 @@ public class MineTrap : Trap, ISapable
         _mainCollider.enabled = false;
         _isRecharging = true;
         _timer -= duration;
+        _sappedMine.SetActive(_mine.activeSelf);
     }
 }
