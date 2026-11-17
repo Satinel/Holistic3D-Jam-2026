@@ -237,7 +237,6 @@ MonoBehaviour:
   <IsPlayer>k__BackingField: 0
   <MoneyValue>k__BackingField: 0
   _maxHealth: 100
-  _healthPerSecond: 0
 --- !u!1 &2432030932001931255
 GameObject:
   m_ObjectHideFlags: 0

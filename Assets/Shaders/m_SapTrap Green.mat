@@ -46,7 +46,7 @@ Material:
     - _QueueOffset: 0
     - _SecondaryScale: 1
     m_Colors:
-    - _BaseColor: {r: 7.0935483, g: 0, b: 6.2689095, a: 1}
+    - _BaseColor: {r: 0.034837723, g: 7.0935483, b: 0, a: 1}
     - _ScrollSpeed: {r: -0.01, g: 0, b: 0, a: 0}
     - _SecondaryScrollSpeed: {r: 0.5, g: -0.75, b: 0, a: 0}
   m_BuildTextureStacks: []
