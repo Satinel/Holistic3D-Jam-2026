@@ -9350,6 +9350,7 @@ GameObject:
   - component: {fileID: 7632778766244252874}
   - component: {fileID: 1609761779367920086}
   - component: {fileID: 4128515336638853484}
+  - component: {fileID: 8880150833346629148}
   - component: {fileID: 345493617949419171}
   - component: {fileID: 1177097325106653104}
   - component: {fileID: -7608267294133637357}
@@ -9460,7 +9461,22 @@ MonoBehaviour:
   <IsPlayer>k__BackingField: 0
   <MoneyValue>k__BackingField: 10
   _maxHealth: 100
-  _healthPerSecond: 0
+--- !u!114 &8880150833346629148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064142015798586965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e66a5c2b6b65849a9225a0c1e5da24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeshDissolver
+  _skinnedMeshRenderer: {fileID: 3482421716214000638}
+  _dissolveShader: {fileID: 4800000, guid: 5cd62b0978e959c4e8122ea7e3c07fca, type: 3}
+  _dissolveRate: 0.25
+  _health: {fileID: 4128515336638853484}
 --- !u!136 &345493617949419171
 CapsuleCollider:
   m_ObjectHideFlags: 0

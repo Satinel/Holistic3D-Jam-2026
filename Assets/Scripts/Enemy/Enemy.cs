@@ -626,7 +626,6 @@ public class Enemy : MonoBehaviour
             _animator.SetTrigger(DEATH_HASH);
         }
 
-        // TODO ? A really fancy shader should make the model disintegrate or something!!!
         FloatingText floatingText = Instantiate(_floatingTextPrefab, _ragdoll.position, Quaternion.identity);
         floatingText.SetUp(_health.MoneyValue.ToString());
         _navAgent.enabled = false;
