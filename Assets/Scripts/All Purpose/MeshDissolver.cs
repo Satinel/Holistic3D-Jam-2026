@@ -4,6 +4,7 @@ public class MeshDissolver : MonoBehaviour
 {
     [SerializeField] SkinnedMeshRenderer _skinnedMeshRenderer;
     [SerializeField] Shader _dissolveShader;
+    [SerializeField] [ColorUsage(true, true)] Color _color = new(4f, 1.4f, 0.3f, 1f);
     [SerializeField] float _dissolveRate = 0.25f;
     [SerializeField] Health _health;
 
@@ -11,7 +12,7 @@ public class MeshDissolver : MonoBehaviour
     float _dissolveAmount = 0;
     Material _material;
 
-    const string DISSOLVE_STRING = "_Dissolve";
+    const string DISSOLVE_STRING = "_Dissolve", COLOR_STRING = "_EdgeColor";
 
     void Awake()
     {
@@ -46,6 +47,7 @@ public class MeshDissolver : MonoBehaviour
 
         _material = _skinnedMeshRenderer.material;
         _material.shader = _dissolveShader;
+        _material.SetColor(COLOR_STRING, _color);
 
         foreach(SkinnedMeshRenderer renderer in GetComponentsInChildren<SkinnedMeshRenderer>())
         {

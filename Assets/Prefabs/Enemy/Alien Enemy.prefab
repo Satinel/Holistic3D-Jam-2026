@@ -9475,6 +9475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeshDissolver
   _skinnedMeshRenderer: {fileID: 3482421716214000638}
   _dissolveShader: {fileID: 4800000, guid: 5cd62b0978e959c4e8122ea7e3c07fca, type: 3}
+  _color: {r: 0, g: 3.5629578, b: 0, a: 1}
   _dissolveRate: 0.25
   _health: {fileID: 4128515336638853484}
 --- !u!136 &345493617949419171
