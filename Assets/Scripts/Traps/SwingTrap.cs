@@ -13,6 +13,8 @@ public class SwingTrap : Trap, ISapable
 
     void Update()
     {
+        if(!_hasSpawned) { return; }
+
         if(_sfxTimer > 0)
         {
             _sfxTimer = Mathf.Max(0, _sfxTimer - Time.deltaTime);

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MeshClipper : MonoBehaviour
 {
+    [SerializeField] Trap _thisTrap;
     [SerializeField][Range(0.5f, 5f)] float _clipRate = 2f;
     [SerializeField] GameObject[] _baseModels = System.Array.Empty<GameObject>(), _clippedModels = System.Array.Empty<GameObject>();
 
@@ -14,7 +15,17 @@ public class MeshClipper : MonoBehaviour
 
     void Awake()
     {
-        if(_clippedModels == null || _clippedModels.Length == 0) { return; }
+        if(!_thisTrap)
+        {
+            _thisTrap = GetComponent<Trap>();
+        }
+
+        if(_clippedModels == null || _clippedModels.Length == 0)
+        {
+            _thisTrap.SetHasSpawned(true);
+            enabled = false;
+            return;
+        }
 
         foreach(GameObject gameObj in _baseModels)
         {
@@ -63,6 +74,7 @@ public class MeshClipper : MonoBehaviour
         else
         {
             _hasFinished = true;
+            _thisTrap.SetHasSpawned(true);
 
             foreach(GameObject gameObj in _baseModels)
             {

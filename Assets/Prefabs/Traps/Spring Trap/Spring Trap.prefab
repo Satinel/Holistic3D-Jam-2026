@@ -1279,6 +1279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b52610caf9ce714a9eb548788574bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeshClipper
+  _thisTrap: {fileID: 3840993093556309465}
   _clipRate: 2
   _baseModels:
   - {fileID: 8313863608529396162}

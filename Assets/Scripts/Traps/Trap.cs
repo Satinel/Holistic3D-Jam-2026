@@ -25,6 +25,7 @@ public class Trap : MonoBehaviour
 
     public int Damage { get; protected set; } = 5;
     protected TrapSocket _trapSocket;
+    protected bool _hasSpawned;
 
     protected virtual void Awake()
     {
@@ -49,6 +50,11 @@ public class Trap : MonoBehaviour
         {
             _trapSocket.SellTrap();
         }
+    }
+
+    public void SetHasSpawned(bool hasSpawned)
+    {
+        _hasSpawned = hasSpawned;
     }
 
     protected virtual void LevelManager_OnWaveStarted(){}
