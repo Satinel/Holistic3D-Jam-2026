@@ -39,14 +39,6 @@ public class Mana : MonoBehaviour
         OnManaChanged?.Invoke(_currentMana, _maxMana);
     }
 
-    public bool CanAfford(int amount)
-    {
-        if(_currentMana < amount) { return false; }
-
-        SpendMana(amount);
-        return true;
-    }
-
     public void GainMana(int gainedAmount)
     {
         _currentMana = Mathf.Min(_currentMana + gainedAmount, _maxMana);

@@ -470,6 +470,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 80
   <Cost>k__BackingField: 325
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: 94bb1f7a6e97de74e887ba924bc4461b, type: 3}
   <ItemName>k__BackingField: Boulder
   <Description>k__BackingField: Rolls boulders down corridors
@@ -817,6 +818,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 45
   <Cost>k__BackingField: 100
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: cdd15499457998444b18fe5dcc7e683d, type: 3}
   <ItemName>k__BackingField: Cannon
   <Description>k__BackingField: Shoots heavy cannonballs
@@ -1066,6 +1068,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 40
   <Cost>k__BackingField: 175
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: df83bace063cc6349986d79a27ddd541, type: 3}
   <ItemName>k__BackingField: Pendulum
   <Description>k__BackingField: Swings in a continuous arc
@@ -1125,6 +1128,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 22
   <Cost>k__BackingField: 90
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: f9338bb18de8fa64ca01008b616ed5bc, type: 3}
   <ItemName>k__BackingField: Spring
   <Description>k__BackingField: Flings enemies upwards\nHighly effective with glass
@@ -3086,12 +3090,16 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 5
   <Cost>k__BackingField: 10
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: a990247de269c5b4c9b0d656ec20d0ec, type: 3}
   <ItemName>k__BackingField: Kinetic Blast
   <Description>k__BackingField: Pushes enemies\nDeals low damage
   _forceMultiplyer: 25
+  _secondaryforceMult: 50
   _spawnPoint: {fileID: 1074038391351336449}
+  _aimPositionMarker: {fileID: 789783013123403271}
   _cannonballPrefab: {fileID: -7536709174669590218, guid: c76c15b6e66801b4787fc258e628b894, type: 3}
+  _shoveWavePrefab: {fileID: -1364587544869533994, guid: 86c0ba8ef0b581a489fb7b5b4cb23540, type: 3}
 --- !u!1 &5629153430889510049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,6 +3368,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 25
   <Cost>k__BackingField: 85
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: ddaba6aa939d9514a9a40ee1212af8dd, type: 3}
   <ItemName>k__BackingField: Push Panel
   <Description>k__BackingField: Shoves enemies horizontally
@@ -3419,6 +3428,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 125
   <Cost>k__BackingField: 200
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: e09c5347453630649b0ea10f97a2e3ac, type: 3}
   <ItemName>k__BackingField: Mine
   <Description>k__BackingField: Mines explode in a wide area for high damage
@@ -3544,6 +3554,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 0
   <Cost>k__BackingField: 50
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: 226877fc4dc05e14fb198476d58ac811, type: 3}
   <ItemName>k__BackingField: Slow Field
   <Description>k__BackingField: Continuously slows all enemies beneath it
@@ -3603,6 +3614,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 0
   <Cost>k__BackingField: 80
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: 4d66630f23d47fc44bcde0dd98328fbb, type: 3}
   <ItemName>k__BackingField: Barrier
   <Description>k__BackingField: Blocks enemy paths\nEnemies will destroy them if
@@ -4561,6 +4573,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 10
   <Cost>k__BackingField: 250
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: c093fd0707a9a0048a7a868935ef0bbe, type: 3}
   <ItemName>k__BackingField: Zapper
   <Description>k__BackingField: Zaps all enemies walking over it
@@ -4714,6 +4727,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 0
   <Damage>k__BackingField: 25
   <Cost>k__BackingField: 35
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: b973c70108cc38746b1a1ad251d9c1db, type: 3}
   <ItemName>k__BackingField: Smasher
   <Description>k__BackingField: Squishes enemies paper thin
@@ -4805,6 +4819,7 @@ MonoBehaviour:
   <IsUnlocked>k__BackingField: 1
   <Damage>k__BackingField: 50
   <Cost>k__BackingField: 120
+  <SecondaryCost>k__BackingField: 100
   <Icon>k__BackingField: {fileID: 21300000, guid: 0db1b0f20d4d91445bca35a8ddd540e7, type: 3}
   <ItemName>k__BackingField: Crusher
   <Description>k__BackingField: Flattens enemies into pancakes

@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
     [field:SerializeField] public bool IsUnlocked { get; protected set; }
     [field:SerializeField] public int Damage { get; protected set; } = 5;
     [field:SerializeField] public int Cost { get; protected set; } = 5;
+    [field:SerializeField] public int SecondaryCost { get; protected set; } = 100;
     [field:SerializeField] public Sprite Icon { get; protected set; }
     [field:SerializeField] public string ItemName { get; protected set; } = string.Empty;
     [field:SerializeField] public string Description { get; protected set; } = string.Empty;
@@ -17,7 +18,7 @@ public class Item : MonoBehaviour
     public int Slot { get; protected set; } = -1;
     public bool WasUsed { get; protected set; }
 
-    public virtual void PrimaryAction(Vector3 direction){}
+    public virtual void PrimaryAction(){}
     public virtual void SecondaryAction(){}
 
     public void Unlock(bool isUnlocked)

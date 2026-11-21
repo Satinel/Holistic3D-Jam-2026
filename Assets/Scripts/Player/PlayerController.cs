@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
     static readonly int DEATH_HASH = Animator.StringToHash("Death");
     static readonly int ATTACK_HASH = Animator.StringToHash("Attack");
+    static readonly int SECONDARY_HASH = Animator.StringToHash("Secondary");
     static readonly int MOVE_HASH = Animator.StringToHash("IsMoving");
     static readonly int BACKUP_HASH = Animator.StringToHash("IsBackingUp");
     static readonly int SPRINT_HASH = Animator.StringToHash("IsSprinting");
@@ -378,7 +379,7 @@ public class PlayerController : MonoBehaviour
     {
         _audioSource.PlayOneShot(_attackSFX);
         RotateModelInstantly();
-        _activeItem.PrimaryAction(_aimPositionMarker.position);
+        _activeItem.PrimaryAction();
         _myMana.SpendMana(_activeItem.Cost);
         _isAttacking = false;
     }
@@ -392,9 +393,32 @@ public class PlayerController : MonoBehaviour
 
         if(!_activeItem.IsTrap)
         {
+            if(_isAttacking) { return; }
+
+            if(_myMana.CurrentMana < _activeItem.SecondaryCost)
+            {
+                OnTooTired?.Invoke();
+                return;
+            }
             RotateModelInstantly();
+
+            _animator.SetTrigger(SECONDARY_HASH);
+
+            _isAttacking = true;
         }
+        else
+        {
+            _activeItem.SecondaryAction();
+        }
+    }
+
+    public void SecondaryAttack()
+    {
+        _audioSource.PlayOneShot(_attackSFX);
+        RotateModelInstantly();
         _activeItem.SecondaryAction();
+        _myMana.SpendMana(_activeItem.SecondaryCost);
+        _isAttacking = false;
     }
 
     void InputManager_OnSprintHeld(bool isHeld)

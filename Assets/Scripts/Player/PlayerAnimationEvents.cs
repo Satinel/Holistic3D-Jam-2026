@@ -12,6 +12,11 @@ public class PlayerAnimationEvents : MonoBehaviour
         _playerController.Attack();
     }
 
+    void SecondaryAnimationEvent()
+    {
+        _playerController.SecondaryAttack();
+    }
+
     void FootstepAnimationEvent()
     {
         _audioSource.PlayOneShot(_footstepsSFX[Random.Range(0, _footstepsSFX.Length)], _footstepVolume);
