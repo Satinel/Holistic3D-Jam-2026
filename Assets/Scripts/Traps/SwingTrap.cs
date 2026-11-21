@@ -72,9 +72,9 @@ public class SwingTrap : Trap, ISapable
         }
     }
 
-    public override void GetForceDirection(Vector3 direction)
+    public override void GetForceDirection(Vector3 _)
     {
-        _forceDirection = direction;
+        _forceDirection = _isIncreasing ? -transform.right : transform.right;
     }
 
     public override void HitEnemy(Enemy enemy)
