@@ -637,7 +637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeshClipper
   _thisTrap: {fileID: 3154503559914260140}
-  _clipRate: 2
+  _clipRate: 0.8
   _baseModels:
   - {fileID: 4611659377331799846}
   - {fileID: 7776020108011143067}
