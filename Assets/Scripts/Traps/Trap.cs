@@ -52,7 +52,7 @@ public class Trap : MonoBehaviour
         }
     }
 
-    public void SetHasSpawned(bool hasSpawned)
+    public virtual void SetHasSpawned(bool hasSpawned)
     {
         _hasSpawned = hasSpawned;
     }

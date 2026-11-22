@@ -26,7 +26,7 @@ public class CannonTrap : Trap, ISapable
 
     void Update()
     {
-        if(_canFire)
+        if(_canFire && _hasSpawned)
         {
             if(_timer < RechargeTime)
             {

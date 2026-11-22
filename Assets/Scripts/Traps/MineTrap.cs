@@ -75,6 +75,12 @@ public class MineTrap : Trap, ISapable
         _timer = RechargeTime;
     }
 
+    public override void SetHasSpawned(bool hasSpawned)
+    {
+        base.SetHasSpawned(hasSpawned);
+        _mainCollider.enabled = true;
+    }
+
     public void Sap(float duration)
     {
         _mainCollider.enabled = false;
