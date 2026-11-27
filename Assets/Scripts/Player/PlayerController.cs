@@ -381,6 +381,10 @@ public class PlayerController : MonoBehaviour
         RotateModelInstantly();
         _activeItem.PrimaryAction();
         _myMana.SpendMana(_activeItem.Cost);
+    }
+
+    public void SetIsAttackingFalse()
+    {
         _isAttacking = false;
     }
 
@@ -418,7 +422,6 @@ public class PlayerController : MonoBehaviour
         RotateModelInstantly();
         _activeItem.SecondaryAction();
         _myMana.SpendMana(_activeItem.SecondaryCost);
-        _isAttacking = false;
     }
 
     void InputManager_OnSprintHeld(bool isHeld)
