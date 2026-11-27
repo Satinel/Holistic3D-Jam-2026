@@ -7850,7 +7850,7 @@ PrefabInstance:
     - target: {fileID: 7977849308729031749, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9ad45951f6782b4479c20ced6cd2587d, type: 3}
+      objectReference: {fileID: 21300000, guid: bfe720f40fbbc9344b6197159ec732ee, type: 3}
     - target: {fileID: 7994821610619794618, guid: 8bcd220bb6588ad43848e86709217d38, type: 3}
       propertyPath: _waveMusic
       value: 

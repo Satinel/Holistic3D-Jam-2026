@@ -82,12 +82,29 @@ public class LevelManager : MonoBehaviour
 
     void SetUnleashTexts()
     {
+        int nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
+
         string unleashBind = _unleashAction.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
-        _nextLevelText.text = $"Press {unleashBind} For Next Level";
+
+        if(nextSceneIndex > 0)
+        {
+            _nextLevelText.text = $"Press {unleashBind} For Next Level";
+        }
+        else
+        {
+            _nextLevelText.text = $"Press {unleashBind} To Start Over";
+        }
         _restartText.text = $"Press {unleashBind} To Restart";
 
         string unleashGamepadBind = _unleashAction.GetBindingDisplayString(1, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
-        _nextLevelGamepadText.text = $"Press {unleashGamepadBind} For Next Level";
+        if(nextSceneIndex > 0)
+        {
+            _nextLevelGamepadText.text = $"Press {unleashGamepadBind} For Next Level";
+        }
+        else
+        {
+            _nextLevelGamepadText.text = $"Press {unleashGamepadBind} To Start Over";
+        }
         _restartGamepadText.text = $"Press {unleashGamepadBind} To Restart";
     }
 
